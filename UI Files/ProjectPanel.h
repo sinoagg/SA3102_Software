@@ -25,10 +25,10 @@
 #define  PROPANEL_SPLITTER                2       /* control type: splitter, callback function: (none) */
 #define  PROPANEL_STRING                  3       /* control type: string, callback function: (none) */
 #define  PROPANEL_SEARCH                  4       /* control type: command, callback function: SearchCallback */
-#define  PROPANEL_PIC_EXIT                5       /* control type: picture, callback function: PIC_ExitPrjCallback */
-#define  PROPANEL_TXT_EXIT                6       /* control type: textMsg, callback function: PIC_ExitPrjCallback */
+#define  PROPANEL_TXT_EXIT                5       /* control type: textMsg, callback function: PIC_ExitPrjCallback */
+#define  PROPANEL_PIC_OPENPRJ             6       /* control type: picture, callback function: TXT_OpenPrjCallback */
 #define  PROPANEL_TXT_OPENPRJ             7       /* control type: textMsg, callback function: TXT_OpenPrjCallback */
-#define  PROPANEL_PIC_OPENPRJ             8       /* control type: picture, callback function: TXT_OpenPrjCallback */
+#define  PROPANEL_PIC_EXIT                8       /* control type: picture, callback function: PIC_ExitPrjCallback */
 
 
      /* Control Arrays: */
