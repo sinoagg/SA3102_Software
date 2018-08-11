@@ -1,0 +1,16 @@
+[main]
+Class="Function"
+Prototype="int main(int argc, char **argv);"
+
+[Getxy]
+Class="Function"
+Prototype="void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef *RxData1, RxDataTypeDef *RxData2);"
+
+[ComCallback]
+Class="Function"
+Prototype="void ComCallback(int portNumber, int eventMask, void *callbackData);"
+
+[ComCallbackCGS]
+Class="Function"
+Prototype="void ComCallbackCGS(int portNumber, int eventMask, void *callbackData);"
+

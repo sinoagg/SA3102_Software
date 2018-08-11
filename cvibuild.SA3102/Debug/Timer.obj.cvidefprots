@@ -1,0 +1,8 @@
+[PlotCurve1]
+Class="Function"
+Prototype="int PlotCurve1(Graph_TypeDef *pGraph, int graphDispPanel, int control);"
+
+[TimerCallback]
+Class="Function"
+Prototype="int TimerCallback(int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2);"
+
