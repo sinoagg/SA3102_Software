@@ -51,7 +51,7 @@ TestParaTypeDef TestPara1;
 TestParaTypeDef TestPara2;
 
 unsigned char select_Addr1 = 0X01;   //ÓÉÓÃ»§Ñ¡ÔñÊÇ·ñÊ¹ÓÃ´Ë Ô´±í 1 	  Ä¬ÈÏ	0x01 Îª Ñ¡ÖĞ£¬0x00Îª²»Ñ¡ÖĞ£¬²»Ê¹ÓÃÔ´±í 1 ½øĞĞ²âÁ¿
-unsigned char select_Addr2 = 0X02;   //ÓÉÓÃ»§Ñ¡ÔñÊÇ·ñÊ¹ÓÃ´Ë Ô´±í 2	  Ä¬ÈÏ	0x02 Îª Ñ¡ÖĞ£¬0x00Îª²»Ñ¡ÖĞ£¬²»Ê¹ÓÃÔ´±í 2 ½øĞĞ²âÁ¿
+unsigned char select_Addr2 = 0X00;   //ÓÉÓÃ»§Ñ¡ÔñÊÇ·ñÊ¹ÓÃ´Ë Ô´±í 2	  Ä¬ÈÏ	0x02 Îª Ñ¡ÖĞ£¬0x00Îª²»Ñ¡ÖĞ£¬²»Ê¹ÓÃÔ´±í 2 ½øĞĞ²âÁ¿
 
 
 
@@ -62,11 +62,6 @@ unsigned char select_Addr2 = 0X02;   //ÓÉÓÃ»§Ñ¡ÔñÊÇ·ñÊ¹ÓÃ´Ë Ô´±í 2	  Ä¬ÈÏ	0x02 Î
 /// HIFN  What does your function do?
 /// HIPAR x/What inputs does your function expect?
 /// HIRET What does your function return
-
-
-
-
-
 
 static unsigned char GetXorCheckVal(unsigned char* pUartBuf, unsigned char lenth)//¼ÆËãĞ£ÑéÖµ
 {

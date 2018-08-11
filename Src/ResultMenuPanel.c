@@ -254,6 +254,10 @@ int CVICALLBACK SaveGraph1Callback (int panel, int control, int event,
 		case EVENT_COMMIT:
 		if(graph1SavePath[0]=='\0')
 		{
+			
+		}
+		else
+		{
 			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
 			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_LEFT, &rc.left);
 			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_HEIGHT, &rc.height);
@@ -278,6 +282,10 @@ int CVICALLBACK SaveGraph2Callback (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 		if(graph2SavePath[0]=='\0') 
+		{
+
+		}
+		else
 		{
 			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
 			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
@@ -307,6 +315,11 @@ int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			if(sheetSavePath[0]=='\0')
+			{
+
+			
+			}
+			else
 			{
 				Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
 				// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
@@ -339,32 +352,41 @@ int CVICALLBACK SaveAllCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_COMMIT:
-			Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
-			// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
-			Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
-			Excel_WorkbooksAdd (ExcelWorkbooksHandle, NULL, CA_DEFAULT_VAL,&ExcelWorkbookHandle);
-			Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
-			Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
-			Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
-			ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, "A1:D100", tablePanel, TABLE_TABLE1);	//write data from table control
-			ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
-			Excel_AppQuit (ExcelAppHandle, NULL);
+			
+			if((sheetSavePath[0]=='\0')||(graph2SavePath[0]=='\0')||(graph1SavePath[0]=='\0'))
+			{
+				
+			}
+			else
+			{
+				Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
+				// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
+				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
+				Excel_WorkbooksAdd (ExcelWorkbooksHandle, NULL, CA_DEFAULT_VAL,&ExcelWorkbookHandle);
+				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
+				Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
+				Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
+				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, "A1:D100", tablePanel, TABLE_TABLE1);	//write data from table control
+				ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
+				Excel_AppQuit (ExcelAppHandle, NULL);
 		
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_HEIGHT, &rc.height);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_WIDTH, &rc.width);
-			GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
-			SaveBitmapToJPEGFile (nBitmapID, graph2SavePath, JPEG_INTERLACE, 100);
-			DiscardBitmap (nBitmapID);
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_HEIGHT, &rc.height);
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_WIDTH, &rc.width);
+				GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
+				SaveBitmapToJPEGFile (nBitmapID, graph2SavePath, JPEG_INTERLACE, 100);
+				DiscardBitmap (nBitmapID);
 		
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_LEFT, &rc.left);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_HEIGHT, &rc.height);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_WIDTH, &rc.width);
-			GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
-			SaveBitmapToJPEGFile (nBitmapID, graph1SavePath, JPEG_INTERLACE, 100);
-			DiscardBitmap (nBitmapID);
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_LEFT, &rc.left);
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_HEIGHT, &rc.height);
+				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_WIDTH, &rc.width);
+				GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
+				SaveBitmapToJPEGFile (nBitmapID, graph1SavePath, JPEG_INTERLACE, 100);
+				DiscardBitmap (nBitmapID);
+			
+			}
 		break;
 	}
 	return 0;

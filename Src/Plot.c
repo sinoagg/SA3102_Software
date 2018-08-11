@@ -38,7 +38,6 @@ int graph2humclr;
 int graph2preclr; 
 //==============================================================================
 // Global functions
-
 int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 {
 	int numOfDotsToPlot=pGraph->pCurveArray->numOfDotsToPlot;							//防止中断端去写入这个数据 
@@ -55,7 +54,6 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 				pGraph->pCurveArray->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
 				pGraph->pCurveArray->numOfDotsToPlot-=numOfDotsToPlot;		//防止中断端在画图期间接收到新的数据.
 			}
-	
     }
 	else //画第一个点
 	{

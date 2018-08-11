@@ -101,27 +101,27 @@ int CVICALLBACK COMMANDBUTTON_Back (int panel, int control, int event,
 }
 
 
-int CVICALLBACK COMMANDBUTTON_2_Callback (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_LEFT_CLICK_UP:
-			
-			
-						    int row;
-   	                  		InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
-							GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
-						    SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ), 100.0);
-							SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ), 200.0); 
-							SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (3,row ), 300.0); 
-							SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (4,row ), 400.0); 
-			
+//int CVICALLBACK COMMANDBUTTON_2_Callback (int panel, int control, int event,
+//		void *callbackData, int eventData1, int eventData2)
+//{
+//	switch (event)
+//	{
+//		case EVENT_LEFT_CLICK_UP:
+//			
+//			
+//						    int row;
+//   	                  		InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
+//							GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
+//						    SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ), 100.0);
+//							SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ), 200.0); 
+//							SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (3,row ), 300.0); 
+//							SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (4,row ), 400.0); 
+//			
 
-			break;
-	}
-	return 0;
-}			
+//			break;
+//	}
+//	return 0;
+//}			
 /*
 
 
@@ -168,19 +168,19 @@ int CVICALLBACK CHECKBOX_Callback (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK COMMANDBUTTON_3_Callback (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_LEFT_CLICK_UP:
-			
-			DeleteTabble_Row_Columns();
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON_2, ATTR_DIMMED,1);       
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON,  ATTR_DIMMED,0);          
-			
+//int CVICALLBACK COMMANDBUTTON_3_Callback (int panel, int control, int event,
+//		void *callbackData, int eventData1, int eventData2)
+//{
+//	switch (event)
+//	{
+//		case EVENT_LEFT_CLICK_UP:
+//			
+//			DeleteTabble_Row_Columns();
+//			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON_2, ATTR_DIMMED,1);       
+//			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON,  ATTR_DIMMED,0);          
+//			
 
-			break;
-	}
-	return 0;
-}
+//			break;
+//	}
+//	return 0;
+//}

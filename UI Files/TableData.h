@@ -15,10 +15,7 @@
 
 #define  TABLE                            1
 #define  TABLE_TABLE1                     2       /* control type: table, callback function: (none) */
-#define  TABLE_COMMANDBUTTON              3       /* control type: command, callback function: COMMANDBUTTON_Back */
-#define  TABLE_COMMANDBUTTON_2            4       /* control type: command, callback function: COMMANDBUTTON_2_Callback */
-#define  TABLE_CHECKBOX                   5       /* control type: radioButton, callback function: CHECKBOX_Callback */
-#define  TABLE_COMMANDBUTTON_3            6       /* control type: command, callback function: COMMANDBUTTON_3_Callback */
+#define  TABLE_CHECKBOX                   3       /* control type: radioButton, callback function: CHECKBOX_Callback */
 
 
      /* Control Arrays: */
@@ -34,9 +31,6 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK CHECKBOX_Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK COMMANDBUTTON_2_Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK COMMANDBUTTON_3_Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK COMMANDBUTTON_Back(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

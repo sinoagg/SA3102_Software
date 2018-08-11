@@ -139,17 +139,17 @@ static char GetPanelIndex(int panel)
 	}
 	return 0;
 }
-int CVICALLBACK PIC_ExitPrjCallback (int panel, int control, int event,
-									 void *callbackData, int eventData1, int eventData2)
-{
-	if(event==EVENT_LEFT_CLICK)
-	{
-		DiscardAllPrjPanel(SingleProject);
-		RemovePopup (proPanel);  
-	}
+//int CVICALLBACK PIC_ExitPrjCallback (int panel, int control, int event,
+//									 void *callbackData, int eventData1, int eventData2)
+//{
+//	if(event==EVENT_LEFT_CLICK)
+//	{
+//		DiscardAllPrjPanel(SingleProject);
+//		RemovePopup (proPanel);  
+//	}
 
-	return 0;
-}
+//	return 0;
+//}
 
 int CVICALLBACK SearchCallback (int panel, int control, int event,
 								void *callbackData, int eventData1, int eventData2)
@@ -170,3 +170,26 @@ int CVICALLBACK SearchCallback (int panel, int control, int event,
 }
 
 
+int CVICALLBACK PIC_ExitPrjCallback2 (int panel, int control, int event,
+									  void *callbackData, int eventData1, int eventData2)
+{
+	if(event==EVENT_LEFT_CLICK)
+	{
+		DiscardAllPrjPanel(SingleProject);
+		RemovePopup (proPanel);  
+	}
+	return 0;
+}
+
+int CVICALLBACK PIC_ExitPrjCallback (int panel, int event, void *callbackData,
+									 int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK:
+				DiscardAllPrjPanel(SingleProject);
+				RemovePopup (proPanel);  
+			break;
+	}
+	return 0;
+}

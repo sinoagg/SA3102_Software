@@ -223,8 +223,6 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			Table_ATTR.column = 4 ;   		//列数
 			Table_ATTR.column_width = 300;  //列宽
 			Table_init(Table_title_IV, Table_ATTR.column, Table_ATTR.column_width );
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON_2, ATTR_DIMMED,0);       
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON,  ATTR_DIMMED,1);
 			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
@@ -241,8 +239,6 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			Table_ATTR.column = 4 ;   		//列数
 			Table_ATTR.column_width = 300;  //列宽
 			Table_init(Table_title_VI, Table_ATTR.column, Table_ATTR.column_width );
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON_2, ATTR_DIMMED,0);       
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON,  ATTR_DIMMED,1);
 			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
@@ -261,8 +257,6 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			Table_ATTR.column = 4 ;   		//列数
 			Table_ATTR.column_width = 300;  //列宽
 			Table_init(Table_title_IT, Table_ATTR.column, Table_ATTR.column_width );
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON_2, ATTR_DIMMED,0);       
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON,  ATTR_DIMMED,1);
 			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
@@ -280,9 +274,6 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			Table_ATTR.column = 4 ;   		//列数
 			Table_ATTR.column_width = 300;  //列宽
 			Table_init(Table_title_RT, Table_ATTR.column, Table_ATTR.column_width );
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON_2, ATTR_DIMMED,0);       
-			SetCtrlAttribute (tablePanel, TABLE_COMMANDBUTTON,  ATTR_DIMMED,1);          
-			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
