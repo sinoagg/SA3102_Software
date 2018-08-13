@@ -46,7 +46,7 @@
 #define  SETTINGS_DECORATION              3       /* control type: deco, callback function: (none) */
 #define  SETTINGS_ABOUTBTN                4       /* control type: textMsg, callback function: AboutBtnCallback */
 #define  SETTINGS_GRAPHBTN                5       /* control type: textMsg, callback function: GraphBtnCallback */
-#define  SETTINGS_ENVBTN                  6       /* control type: textMsg, callback function: EnvBtnCallback */
+#define  SETTINGS_PRJBTN                  6       /* control type: textMsg, callback function: PrjBtnCallback */
 
 
      /* Control Arrays: */
@@ -62,11 +62,11 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK AboutBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK EnvBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Graph2clr1CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Graph2clr2CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Graph2clr3CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK GraphBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK PrjBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ProCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SettingsCB(int panel, int event, void *callbackData, int eventData1, int eventData2);
 

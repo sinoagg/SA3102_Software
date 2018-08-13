@@ -58,10 +58,10 @@ FileLableTypeDef *pFileLable[64];									//´æËùÓÐFileLableµÄÖ¸Õë£¬×î¶àÖ»ÄÜ¼ÓÔØÒ
 PrjHandleTypeDef SingleProject[64];									
 Graph_TypeDef Graph;
 char ABC[11][20] ={"A","B","C","D","E","F","G","H","I","J","K"};
-char Table_title_IV[11][20] ={"Current(A)","Voltage(V)","Current(A)","Voltage(V)"};
-char Table_title_VI[11][20] ={"Voltage(V)","Current(A)","Voltage(V)","Current(A)"}; 
+char Table_title_IV[11][20] ={"Current(A)","Voltage(mV)","Current(A)","Voltage(mV)"};
+char Table_title_VI[11][20] ={"Voltage(mV)","Current(A)","Voltage(mV)","Current(A)"}; 
 char Table_title_IT[11][20] ={"Current(A)","Time(S)","Current(A)","Time(S)"};
-char Table_title_RT[11][20] ={"Resistance(A)","Time(S)","Resistance(A)","Time(S)"};
+char Table_title_RT[11][20] ={"Resistance(¦¸)","Time(S)","Resistance(¦¸)","Time(S)"};
 
 //==============================================================================
 // Global functions
@@ -536,8 +536,8 @@ int CVICALLBACK SettingsCallback (int panel, int control, int event,
 			SetPanelSize(ENVTPanel, 380, 660);
 			DisplayPanel(ENVTPanel);
 			
-			SetCtrlAttribute (setPanel, SETTINGS_ENVBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG_PRESSED);   //environment±³¾°É«
-	     	SetCtrlAttribute (setPanel, SETTINGS_ENVBTN, ATTR_TEXT_COLOR, VAL_WHITE);              //environmentÎÄ±¾ÑÕÉ«
+			SetCtrlAttribute (setPanel, SETTINGS_PRJBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG_PRESSED);   //project±³¾°É«
+	     	SetCtrlAttribute (setPanel, SETTINGS_PRJBTN, ATTR_TEXT_COLOR, VAL_WHITE);              //projectÎÄ±¾ÑÕÉ«
 			
 			SetCtrlAttribute (setPanel, SETTINGS_GRAPHBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);         //graph±³¾°É«
 	     	SetCtrlAttribute (setPanel, SETTINGS_GRAPHBTN, ATTR_TEXT_COLOR, VAL_BLACK);            //graphÎÄ±¾ÑÕÉ«

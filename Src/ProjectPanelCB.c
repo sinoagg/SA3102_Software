@@ -20,7 +20,7 @@
 #define CHANGECOLOR 	0x94CEFF //浅蓝
 #define BGCOLOR 		0xFFFFFF
 #define COLOR  			0x065279 //深蓝
-#define SEARCHCOLOR 	0xA8BFCB //不可用颜色
+#define SEARCHCOLOR 	0xb2c9d5 //不可用颜色
 //==============================================================================
 // Types
 
@@ -186,10 +186,20 @@ int CVICALLBACK PIC_ExitPrjCallback (int panel, int event, void *callbackData,
 {
 	switch (event)
 	{
-		case EVENT_LEFT_CLICK:
+			
+		case EVENT_GOT_FOCUS:
+
+			break;
+		case EVENT_LOST_FOCUS:
+
+			break;
+		case EVENT_CLOSE:
+
 				DiscardAllPrjPanel(SingleProject);
 				RemovePopup (proPanel);  
+			
 			break;
+			
 	}
 	return 0;
 }
