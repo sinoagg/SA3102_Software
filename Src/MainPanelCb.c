@@ -547,13 +547,13 @@ int CVICALLBACK SettingsCallback (int panel, int control, int event,
 static int LoadAndDispPrj(FileLableTypeDef *pFileLable, char index)						//index为prj所在位置排序
 {
 	int hSinglePrjPanel;
-	if ((hSinglePrjPanel = LoadPanel (proPanel, "ProjectPanel.uir", DEFPANEL)) < 0)		//load projects panel
+	if ((hSinglePrjPanel = LoadPanel (projectPanel, "ProjectPanel.uir", DEFPANEL)) < 0)		//load projects panel
 		return -1;
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_NAME, pFileLable->FileName);
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_DATE, pFileLable->FileDate);
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_TIME, pFileLable->FileTime);
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_DESC, pFileLable->FileDesc);
-	SetPanelPos(hSinglePrjPanel, 90+index*117, -10);
+	SetPanelPos(hSinglePrjPanel, index*117, -10);
 	SetPanelSize(hSinglePrjPanel, 115, 1300);
 	DisplayPanel(hSinglePrjPanel);
 	return hSinglePrjPanel;
@@ -595,6 +595,9 @@ int CVICALLBACK ProjectCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			InstallPopup (proPanel);
+			SetPanelPos(projectPanel, 85, 0);
+			SetPanelSize(projectPanel, 380, 1250);
+			DisplayPanel(projectPanel);
 			LoadAllProject(ProjectSavePath);
 		break;
 	}	 

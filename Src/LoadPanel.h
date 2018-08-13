@@ -64,7 +64,7 @@ extern int defPanel;
 extern int chPanel;          //chose panel
 extern int hEnvResultPanel;
 extern int hAdvanceSamplePanel; 
-
+extern int projectPanel;
 
 
 //==============================================================================

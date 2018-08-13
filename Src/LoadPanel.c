@@ -59,7 +59,7 @@ int defPanel;
 int hEnvResultPanel;
 int hResultDispPanel;
 int hAdvanceSamplePanel;  
-
+int projectPanel;
 //==============================================================================
 // Global functions
 
@@ -134,8 +134,10 @@ int LoadInitPanel (void)
 	if ((proPanel = LoadPanel (mainPanel, "ProjectPanel.uir", PROPANEL)) < 0)		//load projects panel
 		return -1;
 	
-	if ((defPanel = LoadPanel (proPanel, "ProjectPanel.uir", DEFPANEL)) < 0)		//load projects panel
+	if ((projectPanel = LoadPanel (proPanel, "ProjectPanel.uir", PROJECT)) < 0)		//load projects panel
 		return -1;
+	/*if ((defPanel = LoadPanel (proPanel, "ProjectPanel.uir", DEFPANEL)) < 0)		//load projects panel
+		return -1;*/
 
 	DisplayPanel (mainPanel);
 	SetPanelPos(expListPanel, 105, 3);  //¼ÓÔØÃæ°åÎ»ÖÃ (,top,left)
