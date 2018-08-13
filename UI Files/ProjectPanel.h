@@ -21,14 +21,17 @@
 #define  DEFPANEL_DATE                    6       /* control type: textMsg, callback function: (none) */
 #define  DEFPANEL_TIME                    7       /* control type: textMsg, callback function: (none) */
 
-#define  PROPANEL                         2       /* callback function: PIC_ExitPrjCallback */
-#define  PROPANEL_SPLITTER                2       /* control type: splitter, callback function: (none) */
-#define  PROPANEL_STRING                  3       /* control type: string, callback function: (none) */
-#define  PROPANEL_SEARCH                  4       /* control type: command, callback function: SearchCallback */
-#define  PROPANEL_PIC_EXIT                5       /* control type: picture, callback function: PIC_ExitPrjCallback2 */
-#define  PROPANEL_TXT_EXIT                6       /* control type: textMsg, callback function: PIC_ExitPrjCallback2 */
-#define  PROPANEL_TXT_OPENPRJ             7       /* control type: textMsg, callback function: TXT_OpenPrjCallback */
-#define  PROPANEL_PIC_OPENPRJ             8       /* control type: picture, callback function: TXT_OpenPrjCallback */
+#define  PROJECT                          2
+
+#define  PROPANEL                         3       /* callback function: PIC_ExitPrjCallback */
+#define  PROPANEL_STRING                  2       /* control type: string, callback function: (none) */
+#define  PROPANEL_SEARCH                  3       /* control type: command, callback function: SearchCallback */
+#define  PROPANEL_PIC_EXIT                4       /* control type: picture, callback function: PIC_ExitPrjCallback2 */
+#define  PROPANEL_TXT_EXIT                5       /* control type: textMsg, callback function: PIC_ExitPrjCallback2 */
+#define  PROPANEL_TXT_OPENPRJ             6       /* control type: textMsg, callback function: TXT_OpenPrjCallback */
+#define  PROPANEL_PIC_OPENPRJ             7       /* control type: picture, callback function: TXT_OpenPrjCallback */
+#define  PROPANEL_CANVAS_2                8       /* control type: canvas, callback function: (none) */
+#define  PROPANEL_CANVAS                  9       /* control type: canvas, callback function: (none) */
 
 
      /* Control Arrays: */

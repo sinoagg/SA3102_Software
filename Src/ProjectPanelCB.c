@@ -107,7 +107,7 @@ static char GetPanelIndex(int panel)
 {
 	int top;
 	GetPanelAttribute(panel, ATTR_TOP, &top);
-	return (char)((top-90)/117);								//减去偏置，除以单个高度
+	return (char)((top)/117);								//减去偏置，除以单个高度
 }
 
  int CVICALLBACK PrjSelectCallback (int panel, int event, void *callbackData,
@@ -157,10 +157,10 @@ int CVICALLBACK SearchCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			SetPanelAttribute(defPanel, ATTR_BACKCOLOR, BGCOLOR);
+			/*SetPanelAttribute(defPanel, ATTR_BACKCOLOR, BGCOLOR);
 			SetCtrlAttribute (defPanel, DEFPANEL_CANVAS, ATTR_PICT_BGCOLOR, BGCOLOR);
 			SetCtrlAttribute (defPanel, DEFPANEL_NAME, ATTR_TEXT_BGCOLOR, BGCOLOR);
-			SetCtrlAttribute (defPanel, DEFPANEL_DESC, ATTR_TEXT_BGCOLOR, BGCOLOR);
+			SetCtrlAttribute (defPanel, DEFPANEL_DESC, ATTR_TEXT_BGCOLOR, BGCOLOR);*/
 			SetCtrlAttribute (proPanel,PROPANEL_PIC_OPENPRJ , ATTR_DIMMED, 1);
 			SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_TEXT_BGCOLOR,SEARCHCOLOR );
 			SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_DIMMED, 1); 
