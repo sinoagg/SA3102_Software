@@ -121,7 +121,7 @@ void Explist()
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "mV");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I2");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "mA");
-		}
+	}
 	else if(index==EXP_V_I)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "I(mA)");
@@ -204,14 +204,13 @@ void Runkeyaction()//运行按钮按下后产生的一系列动作
 	DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
 	DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure.ico"); 
 	DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze_pressed.ico");
+	
+	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH1,-1 , VAL_IMMEDIATE_DRAW); //清空曲线图上的所有曲线
+	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH2,-1 , VAL_IMMEDIATE_DRAW); //清空曲线图上的所有曲线 
+	DeleteTableRows (tablePanel, TABLE_TABLE1, 1, -1);							//清除表格 
+	DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);		
+	
 }
-
-/*
-
-	1，得到用户设置的参数
-
-
-*/
 void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2)
 {
 	int graphIndex=1;
@@ -235,14 +234,12 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			
 			break;
 		case NO_SWEEP_VI:
-			
 			Table_ATTR.column = 4 ;   		//列数
 			Table_ATTR.column_width = 300;  //列宽
 			Table_init(Table_title_VI, Table_ATTR.column, Table_ATTR.column_width );
 			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
-			
 			
 			numOfDots = abs(TestPara1.Voltage_Start - TestPara1.Voltage_Stop)/TestPara2.Voltage_Stop;
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
@@ -312,10 +309,6 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			
 			Explist();
 			Runkeyaction();																//运行按钮按下后产生的一系列动作
-			DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH1,-1 , VAL_IMMEDIATE_DRAW); //清空曲线图上的所有曲线
-			DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH2,-1 , VAL_IMMEDIATE_DRAW); //清空曲线图上的所有曲线 
-			DeleteTableRows (tablePanel, TABLE_TABLE1, 1, -1);							//清除表格 
-			DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);		
 		
 			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
 				return -1;
@@ -323,7 +316,7 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			TestPara2.testMode = expType; //源表 1 测试类型
 			ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
-			Delay(1); //延时
+			Delay(2); //延时
 			TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer)  
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器 
@@ -341,14 +334,17 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-		  	 SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
-		     SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
-			 SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
-			 X1 = 0;  
-			 X2 = 0;
-			 //SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
-			 ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
-			 DiscardAsyncTimer(TimerID);//关闭异步定时器  停止曲线显示
+			SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
+			SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
+			SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
+			X1 = 0;  
+			X2 = 0;
+			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
+			ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
+			DiscardAsyncTimer(TimerID);//关闭异步定时器  停止曲线显示
+			GraphDeinit(&Graph);												//内存释放在画图之后
+			GraphDeinit(&Graph_Temp);
+			 
 			break;
 	}
 	return 0;
