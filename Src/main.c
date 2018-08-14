@@ -49,7 +49,7 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
-	comSelect = 5;
+	comSelect = 6;
 	CGS_comSelect = 1;
 	LoadInitPanel(); 
 	CheckPortStatus(comSelect, 20, ComCallback);
@@ -69,7 +69,9 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 		if(TestPara1.testMode == NO_SWEEP_IV ) //根据不同模式 选择不同的X 轴数据
 		{
 			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_voltaget;
-			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data  
+			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		if(TestPara1.testMode == NO_SWEEP_VI )
 		{
@@ -97,19 +99,19 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 	if(*measUartRxBuf  == 0x02) //判断是否是 02 地址传来 的数据
 	{
 		if(TestPara2.testMode == NO_SWEEP_IV )
-				*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_voltaget;
+			*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_voltaget;
 		
 		if(TestPara2.testMode == NO_SWEEP_VI )
-				*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_current;
+			*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_current;
 		
 		if(TestPara2.testMode == NO_SWEEP_IT )
 				*((Graph.pCurveArray + 1)->pDotX++) = X2++;
 		
 		//if(TestPara2.testMode == NO_SWEEP_VT )
-		//		*(Graph.pCurveArray->pDotX++) = RxData2.rx_Theory_voltaget;
+		//	*(Graph.pCurveArray->pDotX++) = RxData2.rx_Theory_voltaget;
 		
 		if(TestPara2.testMode == NO_SWEEP_RT )
-				*((Graph.pCurveArray + 1)->pDotX++) = X2++;
+			*((Graph.pCurveArray + 1)->pDotX++) = X2++;
 		
 		*((Graph.pCurveArray+1)->pDotY++) = RxData2->rx_current.num_float;
 		(Graph.pCurveArray+1)->numOfDotsToPlot++;				 					//number of dots to plot increase
@@ -131,12 +133,17 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 		 Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);						//从串口传来的数据中取出  X与Y轴 的数据
 		 rxNum -=UART_RX_LEN;
 		 i++; 
-		 if(RxData1.rxStopSign == 0x01)													//if complete the test, stop the timer
-		 DiscardAsyncTimer(TimerID);
+		 if(RxData1.rxStopSign == 0x01)//if complete the test, stop the timer
+			 //Graph.pCurveArray->numOfPlotDots == 
+		 {
+		 	DiscardAsyncTimer(TimerID);
+			
+		 }
 	}
 	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图
 	if(RxData1.rxStopSign==0x01)
 	{
+		ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令  
 		GraphDeinit(&Graph);												//内存释放在画图之后
 		GraphDeinit(&Graph_Temp);
 		SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
@@ -173,7 +180,7 @@ void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackDa
 		rxNum -=14; 
 		i++; 
 	}
-		PlotCurve_Temp(&Graph_Temp, graphDispPanel, GRAPHDISP_GRAPH2);//画曲线图*/
+	PlotCurve_Temp(&Graph_Temp, graphDispPanel, GRAPHDISP_GRAPH2);//画曲线图*/
 }
 
 

@@ -205,11 +205,13 @@ void Runkeyaction()//运行按钮按下后产生的一系列动作
 	DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure.ico"); 
 	DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze_pressed.ico");
 	
-	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH1,-1 , VAL_IMMEDIATE_DRAW); //清空曲线图上的所有曲线
-	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH2,-1 , VAL_IMMEDIATE_DRAW); //清空曲线图上的所有曲线 
-	DeleteTableRows (tablePanel, TABLE_TABLE1, 1, -1);							//清除表格 
-	DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);		
+	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH1, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
+	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH2, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
 	
+	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH1,-1 , VAL_IMMEDIATE_DRAW); 		//清空曲线图上的所有曲线
+	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH2,-1 , VAL_IMMEDIATE_DRAW); 		//清空曲线图上的所有曲线 
+	DeleteTableRows (tablePanel, TABLE_TABLE1, 1, -1);									//清除表格 
+	DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);		
 }
 void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2)
 {
@@ -219,14 +221,14 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	switch((enum ExpType)expType)
 	{
 		case NO_SWEEP_IV:
-			Table_ATTR.column = 4 ;   		//列数
-			Table_ATTR.column_width = 300;  //列宽
+			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column_width = 300;  		//列宽
 			Table_init(Table_title_IV, Table_ATTR.column, Table_ATTR.column_width );
 			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
-			numOfDots = abs(TestPara1.Current_Start - TestPara1.Current_Stop)/TestPara1.Current_Step;
+			numOfDots = abs(TestPara1.Current_Start - TestPara1.Current_Stop)/TestPara1.Current_Step +1;
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pGraphAttr->xAxisHead = TestPara1.Current_Start;
 			Graph.pGraphAttr->xAxisTail = TestPara1.Current_Stop;
@@ -234,8 +236,8 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			
 			break;
 		case NO_SWEEP_VI:
-			Table_ATTR.column = 4 ;   		//列数
-			Table_ATTR.column_width = 300;  //列宽
+			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column_width = 300;  		//列宽
 			Table_init(Table_title_VI, Table_ATTR.column, Table_ATTR.column_width );
 			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
@@ -251,14 +253,14 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 		case NO_SWEEP_IT:
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
-			Table_ATTR.column = 4 ;   		//列数
-			Table_ATTR.column_width = 300;  //列宽
+			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column_width = 300;			//列宽
 			Table_init(Table_title_IT, Table_ATTR.column, Table_ATTR.column_width );
 			
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
-			numOfDots =TestPara1.runTime/TestPara1.timeStep; 
+			numOfDots = (TestPara1.runTime*1000)/TestPara1.timeStep; 
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			
 			//SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
@@ -268,8 +270,8 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 		case NO_SWEEP_RT:
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
-			Table_ATTR.column = 4 ;   		//列数
-			Table_ATTR.column_width = 300;  //列宽
+			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column_width = 300;  		//列宽
 			Table_init(Table_title_RT, Table_ATTR.column, Table_ATTR.column_width );
 			GetTestPara(&II_T_Panel, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
@@ -300,12 +302,14 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH1, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
-			SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH2, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
-			
 			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2tempclr);				//得到温度湿度压力三条曲线的颜色
 			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, &graph2humclr);
 			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2preclr);
+			
+			X1 = 0;  
+			X2 = 0;
+			GraphDeinit(&Graph);													//内存释放在画图之后
+			GraphDeinit(&Graph_Temp);
 			
 			Explist();
 			Runkeyaction();																//运行按钮按下后产生的一系列动作
@@ -316,8 +320,8 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			TestPara2.testMode = expType; //源表 1 测试类型
 			ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
-			Delay(2); //延时
-			TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer)  
+			Delay(2);//延时
+			TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer)  
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器 
 			break;
@@ -334,17 +338,18 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
+			
+			DiscardAsyncTimer(TimerID);//关闭异步定时器  停止曲线显示
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
-			X1 = 0;  
-			X2 = 0;
+			//X1 = 0;  
+			//X2 = 0;
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
 			ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
-			DiscardAsyncTimer(TimerID);//关闭异步定时器  停止曲线显示
-			GraphDeinit(&Graph);												//内存释放在画图之后
-			GraphDeinit(&Graph_Temp);
-			 
+		
+			//GraphDeinit(&Graph);													//内存释放在画图之后
+			//GraphDeinit(&Graph_Temp);
 			break;
 	}
 	return 0;
@@ -409,7 +414,6 @@ int CVICALLBACK SelectCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:			    //当Select被鼠标左键点击时,Select图标改变，其它两个正常状态 
-			
 			DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select_pressed.ico");
 			DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure.ico"); 
 			DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze.ico");
@@ -461,7 +465,6 @@ int CVICALLBACK ConfigureCallback (int panel, int control, int event,
 				}
 				else if(index==EXP_ID_VGS)
 				{
-				
 					SetPanelPos(IdVgPanel, 105, 305);
 					SetPanelSize(IdVgPanel, 900, 1293);
 					DisplayPanel(IdVgPanel);
@@ -594,11 +597,11 @@ int CVICALLBACK ProjectCallback (int panel, int control, int event,
 	switch(event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			InstallPopup (proPanel);
-			SetPanelPos(projectPanel, 85, 0);
-			SetPanelSize(projectPanel, 380, 1250);
-			DisplayPanel(projectPanel);
-			LoadAllProject(ProjectSavePath);
+				InstallPopup (proPanel);
+				SetPanelPos(projectPanel, 85, 0);
+				SetPanelSize(projectPanel, 380, 1250);
+				DisplayPanel(projectPanel);
+				LoadAllProject(ProjectSavePath);
 		break;
 	}	 
 	return 0;
