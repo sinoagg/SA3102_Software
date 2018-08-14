@@ -6,8 +6,8 @@
 // Title:		Environment.c
 // Purpose:		A short description of the implementation.
 //
-// Created on:	2018/7/26 at 15:46:52 by 斌 何.
-// Copyright:	内蒙古民族大学. All Rights Reserved.
+// Created on:	2018/7/26 at 15:46:52 by .
+// Copyright:	. All Rights Reserved.
 //
 //==============================================================================
 

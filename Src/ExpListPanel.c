@@ -61,6 +61,21 @@ static void DispRuntime(int display)
 	SetCtrlAttribute (hBasicSamplePanel, SAMPLE_CFG_RUNTIME, ATTR_VISIBLE, display); 
 	SetCtrlAttribute (hBasicSamplePanel, SAMPLE_CFG_TXT_S, ATTR_VISIBLE, display);
 }
+static void ExpList(int display)  
+{
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,display);         //禁用 开始按钮
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,display);
+	
+	SetPanelPos(hBasicSamplePanel, 105, 1600);
+	SetPanelSize(hBasicSamplePanel, 449, 300);
+	SetPanelAttribute (hBasicSamplePanel, ATTR_VISIBLE, !(display));
+	
+	SetPanelPos(hEnvCfgPanel, 556, 1600);
+	SetPanelSize(hEnvCfgPanel, 449, 300);
+	SetPanelAttribute (hEnvCfgPanel, ATTR_VISIBLE, !(display));
+	HidePanel(hEnvResultPanel);
+	HidePanel(hResultDispPanel);
+}
 int CVICALLBACK ExpListCallback (int panel, int control, int event,
 								 void *callbackData, int eventData1, int eventData2)
 {
@@ -68,57 +83,66 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			SetPanelPos(hBasicSamplePanel, 105, 1600);
-			SetPanelSize(hBasicSamplePanel, 449, 300);
-			DisplayPanel(hBasicSamplePanel);
-			SetPanelPos(hEnvCfgPanel, 556, 1600);
-			SetPanelSize(hEnvCfgPanel, 449, 300);
-			DisplayPanel(hEnvCfgPanel);
+			
 			DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
 			DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure_pressed.ico"); 
 			DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze.ico");
+			
 			GetCtrlIndex(expListPanel, EXP_LIST_EXPLIST, &index);
-			if(index==EXP_I_T)
+			if(index==TWO_TERMINAL)
 			{
-				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-				DisplayPanel(II_T_Panel.panelHandle);
-				DispRuntime(1);
-			}
-			else if(index==EXP_V_T)
-			{
-				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-				DisplayPanel(II_T_Panel.panelHandle);
-				DispRuntime(1);
-			}
-			else if(index==EXP_R_T)
-
-			{
-				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-				DisplayPanel(II_T_Panel.panelHandle);
-				DispRuntime(1);
+				SetPanelPos(TwoTerminalPanel, 105, 305);		
+				SetPanelSize(TwoTerminalPanel, 900, 1293);
+				DisplayPanel(TwoTerminalPanel);
+				HidePanel(hAdvanceSamplePanel);
+				ExpList(1);
 			}
 			else if(index==EXP_I_V)
 			{
-				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-				DisplayPanel(II_T_Panel.panelHandle);
+				SetPanelPos(IVPanel, 105, 305);
+				SetPanelSize(IVPanel, 900, 1293);
+				DisplayPanel(IVPanel);
+				ExpList(0);
 				DispRuntime(0); 
 			}
 			else if(index==EXP_V_I)
 			{
+				SetPanelPos(VIPanel, 105, 305);
+				SetPanelSize(VIPanel, 900, 1293);
+				DisplayPanel(VIPanel);
+				ExpList(0);
+				DispRuntime(0); 
+			}
+			else if(index==EXP_I_T)
+			{
 				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
 				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
 				DisplayPanel(II_T_Panel.panelHandle);
-				DispRuntime(0); 
+				ExpList(0); 
+				DispRuntime(1);
+			}
+			else if(index==EXP_V_T)
+			{
+				SetPanelPos(VTPanel, 105, 305);
+				SetPanelSize(VTPanel, 900, 1293);
+				DisplayPanel(VTPanel);
+				ExpList(0);
+				DispRuntime(1);
+			}
+			else if(index==EXP_R_T)
+			{
+				SetPanelPos(RTPanel, 105, 305);
+				SetPanelSize(RTPanel, 900, 1293);
+				DisplayPanel(RTPanel);
+				ExpList(0);
+				DispRuntime(1);
 			}
 			else if(index==EXP_ID_VDS)
 			{
 				SetPanelPos(IdVdPanel, 105, 305);
 				SetPanelSize(IdVdPanel, 900, 1293);
 				DisplayPanel(IdVdPanel);
+				ExpList(0);
 				DispRuntime(1);
 			}
 			else if(index==EXP_ID_VGS)
@@ -126,10 +150,12 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 				SetPanelPos(IdVgPanel, 105, 305);
 				SetPanelSize(IdVgPanel, 900, 1293);
 				DisplayPanel(IdVgPanel);
+				ExpList(0);
 				DispRuntime(1);
 			}
 			else
 			{
+				ExpList(0);
 				DispRuntime(1);
 			}
 			break;

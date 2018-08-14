@@ -105,7 +105,7 @@ static void InitSingleProject(PrjHandleTypeDef *pSingleProject)
 	}
 }
 
-void Explist()
+void Dispgraph()
 {
 	int index;
 	GetCtrlIndex(expListPanel, EXP_LIST_EXPLIST, &index);
@@ -211,7 +211,7 @@ void Runkeyaction()//运行按钮按下后产生的一系列动作
 	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH1,-1 , VAL_IMMEDIATE_DRAW); 		//清空曲线图上的所有曲线
 	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH2,-1 , VAL_IMMEDIATE_DRAW); 		//清空曲线图上的所有曲线 
 	DeleteTableRows (tablePanel, TABLE_TABLE1, 1, -1);									//清除表格 
-	DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);		
+	DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);
 }
 void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2)
 {
@@ -311,7 +311,7 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			GraphDeinit(&Graph);													//内存释放在画图之后
 			GraphDeinit(&Graph_Temp);
 			
-			Explist();
+			Dispgraph();
 			Runkeyaction();																//运行按钮按下后产生的一系列动作
 		
 			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
@@ -417,9 +417,9 @@ int CVICALLBACK SelectCallback (int panel, int control, int event,
 			DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select_pressed.ico");
 			DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure.ico"); 
 			DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze.ico");
-			HidePanel( hBasicSamplePanel);		
-			HidePanel( hResultDispPanel);
-			HidePanel( hEnvCfgPanel);
+			HidePanel(hBasicSamplePanel);		
+			HidePanel(hResultDispPanel);
+			HidePanel(hEnvCfgPanel);
 			HidePanel(hEnvResultPanel);
 			HidePanel(hAdvanceSamplePanel);
 			break;
@@ -429,63 +429,108 @@ int CVICALLBACK SelectCallback (int panel, int control, int event,
 //===================================================
 //   Configure_Callback
 
-int CVICALLBACK ConfigureCallback (int panel, int control, int event,
-									void *callbackData, int eventData1, int eventData2)
-{   
-	int index;
-	switch (event)
-	{
- 		case EVENT_LEFT_CLICK_UP:			    //当Configure被鼠标左键点击时,Configure图标改变，其它两个正常状态 
-				DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
-				DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure_pressed.ico"); 
-				DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze.ico");
-			break;
-		case EVENT_LEFT_CLICK:
-				GetCtrlIndex(expListPanel, EXP_LIST_EXPLIST, &index);
-				if(index==EXP_I_T||index==EXP_V_T||index==EXP_R_T)
-				{
-					SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-					SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-					DisplayPanel(II_T_Panel.panelHandle);
-					DispRuntime(1);
-				}
-				else if(index==EXP_I_V||index==EXP_V_I)
-				{
-					SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-					SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-					DisplayPanel(II_T_Panel.panelHandle);
-					DispRuntime(0); 
-				}
-				else if(index==EXP_ID_VDS)
-				{
-					SetPanelPos(IdVdPanel, 105, 305);
-					SetPanelSize(IdVdPanel, 900, 1293);
-					DisplayPanel(IdVdPanel);
-					DispRuntime(1);
-				}
-				else if(index==EXP_ID_VGS)
-				{
-					SetPanelPos(IdVgPanel, 105, 305);
-					SetPanelSize(IdVgPanel, 900, 1293);
-					DisplayPanel(IdVgPanel);
-					DispRuntime(1);
-				}
-				else
-				{
-					DispRuntime(1);
-					//TODO  
-				}
-				SetPanelPos(hBasicSamplePanel, 105, 1600);
-				SetPanelSize(hBasicSamplePanel, 449, 300);
-				DisplayPanel(hBasicSamplePanel);
-				
-				SetPanelPos(hEnvCfgPanel, 556, 1600);
-				SetPanelSize(hEnvCfgPanel, 449, 300);
-				DisplayPanel(hEnvCfgPanel);
-			break;
-	}
-	return 0;
-}
+//int CVICALLBACK ConfigureCallback (int panel, int control, int event,
+//									void *callbackData, int eventData1, int eventData2)
+//{   
+//	int index;
+//	switch (event)
+//	{
+// 		case EVENT_LEFT_CLICK_UP:			    //当Configure被鼠标左键点击时,Configure图标改变，其它两个正常状态 
+//				DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
+//				DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure_pressed.ico"); 
+//				DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze.ico");
+//			break;
+//		case EVENT_LEFT_CLICK:
+//			GetCtrlIndex(expListPanel, EXP_LIST_EXPLIST, &index);
+//			if(index==TWO_TERMINAL)
+//			{
+//				SetPanelPos(TwoTerminalPanel, 105, 305);		
+//				SetPanelSize(TwoTerminalPanel, 900, 1293);
+//				DisplayPanel(TwoTerminalPanel);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,1);         //禁用 开始按钮
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1);
+//			}
+//			else if(index==EXP_I_T)
+//			{
+//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
+//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
+//				DisplayPanel(II_T_Panel.panelHandle);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);  
+//				DispRuntime(1);
+//			}
+//			else if(index==EXP_V_T)
+//			{
+//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
+//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
+//				DisplayPanel(II_T_Panel.panelHandle);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
+//				DispRuntime(1);
+//			}
+//			else if(index==EXP_R_T)
+
+//			{
+//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
+//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
+//				DisplayPanel(II_T_Panel.panelHandle);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
+//				DispRuntime(1);
+//			}
+//			else if(index==EXP_I_V)
+//			{
+//				SetPanelPos(IVPanel, 105, 305);
+//				SetPanelSize(IVPanel, 900, 1293);
+//				DisplayPanel(IVPanel);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
+//				DispRuntime(0); 
+//			}
+//			else if(index==EXP_V_I)
+//			{
+//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
+//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
+//				DisplayPanel(II_T_Panel.panelHandle);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
+//				DispRuntime(0); 
+//			}
+//			else if(index==EXP_ID_VDS)
+//			{
+//				SetPanelPos(IdVdPanel, 105, 305);
+//				SetPanelSize(IdVdPanel, 900, 1293);
+//				DisplayPanel(IdVdPanel);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
+//				DispRuntime(1);
+//			}
+//			else if(index==EXP_ID_VGS)
+//			{
+//				SetPanelPos(IdVgPanel, 105, 305);
+//				SetPanelSize(IdVgPanel, 900, 1293);
+//				DisplayPanel(IdVgPanel);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
+//				DispRuntime(1);
+//			}
+//			else
+//			{
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
+//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
+//				DispRuntime(1);
+//			}
+//				SetPanelPos(hBasicSamplePanel, 105, 1600);
+//				SetPanelSize(hBasicSamplePanel, 449, 300);
+//				DisplayPanel(hBasicSamplePanel);
+//				
+//				SetPanelPos(hEnvCfgPanel, 556, 1600);
+//				SetPanelSize(hEnvCfgPanel, 449, 300);
+//				DisplayPanel(hEnvCfgPanel);
+//			break;
+//	}
+//	return 0;
+//}
 
 //===================================================
 //   Analyze_Callback
@@ -496,7 +541,7 @@ int CVICALLBACK AnalyzeCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK:
-			Explist();
+			Dispgraph();
 			SetPanelPos(resultPanel, 105, 305);  
 		    SetPanelSize(resultPanel, 65, 1293);      
 	 		DisplayPanel(resultPanel);  
@@ -557,7 +602,7 @@ static int LoadAndDispPrj(FileLableTypeDef *pFileLable, char index)						//index
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_TIME, pFileLable->FileTime);
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_DESC, pFileLable->FileDesc);
 	SetPanelPos(hSinglePrjPanel, index*117, -10);
-	SetPanelSize(hSinglePrjPanel, 115, 1300);
+	SetPanelSize(hSinglePrjPanel, 115, 1250);
 	DisplayPanel(hSinglePrjPanel);
 	return hSinglePrjPanel;
 }

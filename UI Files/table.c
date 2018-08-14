@@ -11,8 +11,8 @@
 // Title:		Table.c
 // Purpose:		A short description of the implementation.
 //
-// Created on:	2018/7/19 at 22:18:03 by 斌 何.
-// Copyright:	内蒙古民族大学. All Rights Reserved.
+// Created on:	2018/7/19 at 22:18:03 by .
+// Copyright:	. All Rights Reserved.
 //
 //==============================================================================
 

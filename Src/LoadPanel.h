@@ -23,7 +23,12 @@
 #include "Experiment List.h"
 #include "Id-Vds Configuration.h"
 #include "Id-Vgs Configuration.h"
+#include "Two Terminal.h" 
 #include "I-T Configuration.h"
+#include "I-V Configuration.h"
+#include "V-I Configuration.h"
+#include "V-T Configuration.h"
+#include "R-T Configuration.h"
 #include "Sample Configuration.h"
 #include "GraphDisp.h"
 #include "EnvironmentDisp.h"
@@ -43,8 +48,14 @@
 // External variables
 extern int mainPanel;
 extern int expListPanel;
+extern int TwoTerminalPanel;
 extern int IdVdPanel;
 extern int IdVgPanel;
+extern int IVPanel;
+extern int VIPanel;
+extern int VTPanel;
+extern int RTPanel;
+
 extern int hBasicSamplePanel;
 extern int hResultDispPanel;
 extern int graphDispPanel;

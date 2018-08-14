@@ -3,8 +3,8 @@
 // Title:		I_T_Panel.c
 // Purpose:		A short description of the implementation.
 //
-// Created on:	2018/7/14 at 10:17:00 by 斌 何.
-// Copyright:	内蒙古民族大学. All Rights Reserved.
+// Created on:	2018/7/14 at 10:17:00 by.
+// Copyright:	. All Rights Reserved.
 //
 //==============================================================================
 
@@ -34,38 +34,38 @@
 // Global variables
 //ITCfg_TypeDef ITCfg1; 
 ITCfg_TypeDef ITCfg2;
-ExpPanelTypeDef II_T_Panel={0, PANEL_I_T_START1, PANEL_I_T_STOP1, PANEL_I_T_GAP1, PANEL_I_T_START1, PANEL_I_T_STOP1, PANEL_I_T_GAP1};
-ExpPanelTypeDef II_T_Panel2={0, PANEL_I_T_START2, PANEL_I_T_STOP2, PANEL_I_T_GAP2, PANEL_I_T_START2, PANEL_I_T_STOP2, PANEL_I_T_GAP2};
+ExpPanelTypeDef II_T_Panel={0, PANEL_I_T_START1, PANEL_V_I_STOP1, PANEL_V_I_GAP1, PANEL_I_T_START1, PANEL_V_I_STOP1, PANEL_V_I_GAP1};
+ExpPanelTypeDef II_T_Panel2={0, PANEL_I_T_START2, PANEL_V_I_STOP2, PANEL_V_I_GAP2, PANEL_I_T_START2, PANEL_V_I_STOP2, PANEL_V_I_GAP2};
 //==============================================================================
 // Global functions
 
 /// HIFN  What does your function do?
 /// HIPAR x/What inputs does your function expect?
 /// HIRET What does your function return?
-static void SetSMU1Disp(int panel, char focus)
+static void ITSetSMU1Disp(int panel, char focus)
 {
 	if(focus==FOCUS)
 	{
-		DisplayImageFile (panel, PANEL_I_T_PIC_SMU1, "Resource\\background_Pressed.png");// change picture 
+		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
 		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
-		DisplayImageFile (panel, PANEL_I_T_PIC_SMU1, "Resource\\background.png");// change picture 
+		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG); 
 		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 
-static void SetSMU2Disp(int panel, char focus)
+static void ITSetSMU2Disp(int panel, char focus)
 {
 	if(focus==FOCUS)
 	{
-		DisplayImageFile (panel, PANEL_I_T_PIC_SMU2, "Resource\\background_Pressed.png");// change picture 
+		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
 		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
-		DisplayImageFile (panel, PANEL_I_T_PIC_SMU2, "Resource\\background.png");// change picture 
+		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
 		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
@@ -75,8 +75,8 @@ int CVICALLBACK SMU1DecoCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			 SetSMU1Disp(panel, FOCUS);
-			 SetSMU2Disp(panel, UNFOCUS);
+			 ITSetSMU1Disp(panel, FOCUS);
+			 ITSetSMU2Disp(panel, UNFOCUS);
 			break;
 	}
 	return 0;
@@ -88,13 +88,13 @@ int CVICALLBACK SMU2DecoCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			 SetSMU1Disp(panel, UNFOCUS);
-			 SetSMU2Disp(panel, FOCUS);
+			 ITSetSMU1Disp(panel, UNFOCUS);
+			 ITSetSMU2Disp(panel, FOCUS);
 			break;
 	}
 	return 0;
 }
-int CVICALLBACK SMU1ModeCallback (int panel, int control, int event,
+/*int CVICALLBACK SMU1ModeCallback (int panel, int control, int event,
 								  void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -180,7 +180,7 @@ int CVICALLBACK Gap2Callback (int panel, int control, int event,
 	     SetSMU2Disp(panel, FOCUS);
 	}
 	return 0;
-}
+}*/
 static void GetTestPara(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara) //得到面板中用户设置的参数
 {
 	GetCtrlVal(pExpPanel->panelHandle, pExpPanel->VdStartID,&(pTestPara->Voltage_Start));
