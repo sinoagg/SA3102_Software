@@ -133,19 +133,19 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 		 Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);						//从串口传来的数据中取出  X与Y轴 的数据
 		 rxNum -=UART_RX_LEN;
 		 i++; 
-		 if(RxData1.rxStopSign == 0x01)//if complete the test, stop the timer
-			 //Graph.pCurveArray->numOfPlotDots == 
+		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
 		 {
 		 	DiscardAsyncTimer(TimerID);
 			
 		 }
 	}
 	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图
-	if(RxData1.rxStopSign==0x01)
+	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))
 	{
+		DiscardAsyncTimer(TimerID);
 		ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令  
-		GraphDeinit(&Graph);												//内存释放在画图之后
-		GraphDeinit(&Graph_Temp);
+		//GraphDeinit(&Graph);												//内存释放在画图之后
+		//GraphDeinit(&Graph_Temp);
 		SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
 	    SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
 		SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮

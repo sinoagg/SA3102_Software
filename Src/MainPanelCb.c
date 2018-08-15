@@ -229,7 +229,9 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			GetTestPara(&II_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
 			numOfDots = abs(TestPara1.Current_Start - TestPara1.Current_Stop)/TestPara1.Current_Step +1;
+			
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
+			Graph.pCurveArray->numOfTotalDots = numOfDots; 
 			Graph.pGraphAttr->xAxisHead = TestPara1.Current_Start;
 			Graph.pGraphAttr->xAxisTail = TestPara1.Current_Stop;
 			SetAxisScalingMode(graphDispPanel,GRAPHDISP_GRAPH1,VAL_BOTTOM_XAXIS,VAL_MANUAL,Graph.pGraphAttr->xAxisHead,Graph.pGraphAttr->xAxisTail);
@@ -263,7 +265,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			numOfDots = (TestPara1.runTime*1000)/TestPara1.timeStep; 
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			
-			//SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
+			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//设置 X 轴的范围
 			
 			break;
