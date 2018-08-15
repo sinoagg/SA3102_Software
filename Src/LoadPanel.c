@@ -177,7 +177,7 @@ int LoadInitPanel (void)
 	SetPanelSize(TwoTerminalPanel, 900, 1293);
 	DisplayPanel(TwoTerminalPanel);
 	
-	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,1);         //禁用 开始按钮
+	//SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,1);         //禁用 开始按钮
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1); 
 
 	return 0;

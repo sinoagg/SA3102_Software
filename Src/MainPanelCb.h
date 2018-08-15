@@ -46,6 +46,7 @@ extern float X2;
 //==============================================================================
 // Global functions
 static int SaveConfigToFile(char* pConfigSavePath);
+
 #ifdef __cplusplus
     }
 #endif

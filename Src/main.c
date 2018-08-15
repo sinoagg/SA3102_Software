@@ -49,8 +49,8 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
-	comSelect = 6;
-	CGS_comSelect = 7;
+	comSelect = 5;
+	CGS_comSelect = 1;
 	LoadInitPanel(); 
 	CheckPortStatus(comSelect, 20, ComCallback);
 	CheckPortStatus(CGS_comSelect, 14, ComCallbackCGS);

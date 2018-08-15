@@ -45,7 +45,7 @@ unsigned char meas_CGS_UartRxBuf[500];
 //
 void Read_CGS_Value(unsigned char comSelect)
 {
-	ComWrt(comSelect, (const char*)meas_CGS_UartTxBuf, 8);
+	 ComWrt(comSelect, (const char*)meas_CGS_UartTxBuf, 8);
 	
 }
 void ProtocolGet_CGS_Data(unsigned char* meas_CGS_UartRxBuf, Rx_CGS_DataTypeDef* Rx_CGS_Data)	//Get data from UART Rx Buffer
