@@ -16,10 +16,10 @@ Project 0001 = "SA3102.prj"
 Project 0001 Folder Resource Collapsed = True
 Project 0001 FolderId 3 Collapsed = True
 Drag Bar Left = 312
-Window Top = -24
-Window Left = 1934
-Window Bottom = 778
-Window Right = 3464
+Window Top = -65
+Window Left = 1947
+Window Bottom = 968
+Window Right = 3801
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -33,7 +33,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 9
+Number of Opened Files = 4
 Window Confinement Region Enabled = True
 MainColumnWidth = 295
 FileDateColumnWidth = 70
@@ -77,7 +77,7 @@ Window Width = 718
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
 Path Line0002 = "Experiment List.uir"
 File Type = "User Interface Resource"
-Disk Date = 3617143765
+Disk Date = 3617157576
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
@@ -88,20 +88,24 @@ Window Width = 718
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
 Path Line0002 = "GraphDisp.uir"
 File Type = "User Interface Resource"
-Disk Date = 3617003226
+Disk Date = 3617174016
 In Projects = "1,"
+Window Top = 92
+Window Left = 42
+Window Height = 323
+Window Width = 541
+Window Z-Order = 4
 
 [File 0006]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
 Path Line0002 = "I-T Configuration.uir"
 File Type = "User Interface Resource"
-Disk Date = 3617143765
+Disk Date = 3617163025
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Window Height = 323
 Window Width = 703
-Window Z-Order = 4
 
 [File 0007]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
@@ -167,6 +171,10 @@ Path Line0002 = "Result Menu.uir"
 File Type = "User Interface Resource"
 Disk Date = 3616804832
 In Projects = "1,"
+Window Top = 62
+Window Left = 26
+Window Height = 323
+Window Width = 547
 
 [File 0014]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
@@ -174,13 +182,21 @@ Path Line0002 = "Sample Analyze.uir"
 File Type = "User Interface Resource"
 Disk Date = 3616625952
 In Projects = "1,"
+Window Top = 92
+Window Left = 42
+Window Height = 323
+Window Width = 547
 
 [File 0015]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
 Path Line0002 = "Sample Configuration.uir"
 File Type = "User Interface Resource"
-Disk Date = 3616625952
+Disk Date = 3617170670
 In Projects = "1,"
+Window Top = 122
+Window Left = 58
+Window Height = 323
+Window Width = 547
 
 [File 0016]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
@@ -241,11 +257,11 @@ Window Width = 718
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Cgs_m"
 Path Line0002 = "t.c"
 File Type = "CSource"
-Disk Date = 3617083401
+Disk Date = 3617166615
 In Projects = "1,"
-Window Top = 212
-Window Left = 106
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,47,4,323,541,1,0,"
+Window Top = 62
+Window Left = 18
+Source Window State = "1,54,54,54,31,38,38,1,0,80,0,0,0,0,0,25,33,0,59,33,323,541,1,0,"
 
 [File 0022]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Envir"
@@ -271,22 +287,21 @@ Source Window State = "1,29,36,36,0,8160,21,1,0,83,0,0,0,0,0,25,5,0,20,13,323,55
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/I_T_P"
 Path Line0002 = "anel.c"
 File Type = "CSource"
-Disk Date = 3617147035
+Disk Date = 3617170581
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Window Z-Order = 9
-Source Window State = "1,114,114,114,12,25,25,1,3,83,0,0,0,0,0,25,88,0,114,12,323,559,1,0,"
+Source Window State = "1,34,35,35,2,23,22,1,3,83,0,0,0,0,0,25,23,0,34,2,323,559,1,0,"
 
 [File 0025]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/I_V_P"
 Path Line0002 = "anel.c"
 File Type = "CSource"
-Disk Date = 3617143765
+Disk Date = 3617170581
 In Projects = "1,"
 Window Top = 302
 Window Left = 154
-Source Window State = "1,14,14,14,0,23,23,1,0,110,0,0,0,0,0,33,3,0,37,43,427,718,1,0,"
+Source Window State = "1,36,36,36,16,22,22,1,0,110,0,0,0,0,0,33,20,0,36,19,427,718,1,0,"
 
 [File 0026]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/IdVds"
@@ -320,12 +335,12 @@ Source Window State = "1,133,133,133,4,14,14,1,3,111,0,0,0,0,0,25,121,0,133,4,32
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/MainP"
 Path Line0002 = "anelCb.c"
 File Type = "CSource"
-Disk Date = 3617147060
+Disk Date = 3617174884
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 5
-Source Window State = "1,261,261,261,12,23,23,1,0,83,0,0,0,0,0,25,225,0,261,25,323,559,1,0,"
+Window Z-Order = 2
+Source Window State = "1,327,327,327,36,62,62,1,0,83,0,0,0,0,0,25,289,0,311,29,323,559,1,0,"
 
 [File 0030]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Proje"
@@ -341,11 +356,11 @@ Source Window State = "1,57,57,57,21,31,31,1,3,83,0,0,0,0,0,25,45,0,57,21,323,55
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/R_T_P"
 Path Line0002 = "anel.c"
 File Type = "CSource"
-Disk Date = 3617143765
+Disk Date = 3617170581
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Source Window State = "1,46,46,46,12,25,25,0,3,0,0,0,0,0,0,0,0,0,46,12,427,718,1,0,"
+Source Window State = "1,36,36,36,2,23,23,1,3,110,0,0,0,0,0,33,20,0,36,2,427,718,1,0,"
 
 [File 0032]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Resul"
@@ -355,7 +370,7 @@ Disk Date = 3616815111
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Source Window State = "1,320,321,321,0,8160,14,1,0,0,0,0,0,0,0,0,0,0,261,12,323,697,1,0,"
+Source Window State = "1,320,321,321,0,8160,14,1,0,106,0,0,0,0,0,25,0,0,261,12,323,697,0,0,"
 
 [File 0033]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Sampl"
@@ -387,21 +402,21 @@ Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/V_I_P"
 Path Line0002 = "anel.c"
 File Type = "CSource"
-Disk Date = 3617143765
+Disk Date = 3617170581
 In Projects = "1,"
 Window Top = 212
 Window Left = 106
-Source Window State = "1,6,6,6,16,30,30,0,0,0,0,0,0,0,0,0,0,0,6,16,427,718,1,0,"
+Source Window State = "1,35,36,36,0,23,22,1,3,110,0,0,0,0,0,33,20,0,35,0,427,718,1,0,"
 
 [File 0037]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/V_T_P"
 Path Line0002 = "anel.c"
 File Type = "CSource"
-Disk Date = 3617143765
+Disk Date = 3617170581
 In Projects = "1,"
 Window Top = 332
 Window Left = 170
-Source Window State = "1,6,6,6,16,30,30,0,0,0,0,0,0,0,0,0,0,0,28,63,427,718,1,0,"
+Source Window State = "1,35,36,36,0,23,23,1,0,110,0,0,0,0,0,33,20,0,36,10,427,718,1,0,"
 
 [File 0038]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Instrumen"
@@ -447,12 +462,12 @@ Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,323,559,1,0,"
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/main."
 Path Line0002 = "c"
 File Type = "CSource"
-Disk Date = 3617149287
+Disk Date = 3617174734
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Window Z-Order = 1
-Source Window State = "1,52,52,52,20,21,21,1,0,205,0,0,0,0,0,51,64,0,64,14,323,727,1,0,"
+Source Window State = "1,72,73,73,0,108,105,1,0,258,0,0,0,0,0,70,104,0,155,157,323,727,1,0,"
 
 [File 0043]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Plot."
@@ -462,29 +477,28 @@ Disk Date = 3616813400
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,55,13,323,727,1,0,"
+Source Window State = "1,0,0,0,0,0,0,0,0,111,0,0,0,0,0,25,152,0,102,28,323,727,1,0,"
 
 [File 0044]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Proto"
 Path Line0002 = "col.c"
 File Type = "CSource"
-Disk Date = 3616820608
+Disk Date = 3617166701
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
-Window Z-Order = 3
-Source Window State = "1,288,288,288,18,28,28,1,0,80,0,0,0,0,0,25,223,0,235,8,323,541,1,0,"
+Source Window State = "1,299,299,299,27,34,34,1,0,80,0,0,0,0,0,25,274,0,299,34,323,541,1,0,"
 
 [File 0045]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Timer"
 Path Line0002 = ".c"
 File Type = "CSource"
-Disk Date = 3617149222
+Disk Date = 3617174734
 In Projects = "1,"
-Window Top = 212
-Window Left = 106
-Window Z-Order = 2
-Source Window State = "1,0,0,0,0,0,0,0,0,83,0,0,0,0,0,25,25,0,52,4,323,559,1,0,"
+Window Top = 452
+Window Left = 234
+Window Z-Order = 3
+Source Window State = "1,46,50,50,0,8160,9,1,0,86,0,0,0,0,0,25,0,0,46,0,323,577,1,0,"
 
 [File 0046]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Resource/"
@@ -773,12 +787,11 @@ Source Window State = "1,35,35,35,11,18,18,1,0,111,0,0,0,0,0,25,0,0,37,30,323,72
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/I_T_P"
 Path Line0002 = "anel.h"
 File Type = "Include"
-Disk Date = 3617147035
+Disk Date = 3617170581
 In Projects = "1,"
 Window Top = 182
 Window Left = 90
-Window Z-Order = 7
-Source Window State = "1,72,72,72,0,7,7,1,0,83,0,0,0,0,0,25,27,0,72,18,323,559,1,0,"
+Source Window State = "1,49,50,50,2,30,29,1,3,83,0,0,0,0,0,25,27,0,49,2,323,559,1,0,"
 
 [File 0087]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/IdVds"
@@ -816,7 +829,6 @@ Disk Date = 3616801932
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 6
 Source Window State = "1,41,42,42,0,8160,37,1,0,111,0,0,0,0,0,25,14,0,20,16,323,727,1,0,"
 
 [File 0091]
@@ -931,7 +943,7 @@ Disk Date = 3616820845
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Source Window State = "1,122,123,123,0,8160,68,1,0,0,0,0,0,0,0,0,67,0,119,43,323,583,1,0,"
+Source Window State = "1,53,53,53,4,15,15,1,0,87,0,0,0,0,0,25,28,0,50,54,323,583,1,0,"
 
 [File 0104]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/SetPa"
@@ -953,36 +965,15 @@ Window Top = 62
 Window Left = 26
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,4,323,727,1,0,"
 
-[File 0106]
-Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
-Path Line0002 = "I-V Configuration.h"
-File Type = "Include"
-Disk Date = 3617143765
-In Projects = ""
-Window Top = 62
-Window Left = 26
-Window Z-Order = 8
-Source Window State = "1,20,20,20,0,117,117,1,0,107,0,0,0,0,0,25,0,0,20,31,323,703,1,0,"
-
 [Tab Order]
-Tab 0001 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
-Tab 0001 Line0002 = "I-V Configuration.h"
-Tab 0002 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/I_T_P"
-Tab 0002 Line0002 = "anel.c"
-Tab 0003 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/I_T_P"
-Tab 0003 Line0002 = "anel.h"
-Tab 0004 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/MainP"
-Tab 0004 Line0002 = "anelCb.h"
-Tab 0005 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/MainP"
-Tab 0005 Line0002 = "anelCb.c"
-Tab 0006 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
-Tab 0006 Line0002 = "I-T Configuration.uir"
-Tab 0007 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Proto"
-Tab 0007 Line0002 = "col.c"
-Tab 0008 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Timer"
-Tab 0008 Line0002 = ".c"
-Tab 0009 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/main."
-Tab 0009 Line0002 = "c"
+Tab 0001 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/main."
+Tab 0001 Line0002 = "c"
+Tab 0002 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/UI Files/"
+Tab 0002 Line0002 = "GraphDisp.uir"
+Tab 0003 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/MainP"
+Tab 0003 Line0002 = "anelCb.c"
+Tab 0004 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/SA3102_Software/Src/Timer"
+Tab 0004 Line0002 = ".c"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True

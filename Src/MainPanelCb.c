@@ -111,41 +111,41 @@ void Dispgraph()
 	if(index==EXP_I_V)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "V(mV)");		  //graph1坐标轴
-		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "I(mA)");
+		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "I(A)");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "V1");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "mV");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "I1");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "mA");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "A");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "V2");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "mV");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I2");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "mA");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "A");
 	}
 	else if(index==EXP_V_I)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "I(mA)");
-		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "V(mV)");		//graph1坐标轴
+		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "V(V)");		//graph1坐标轴
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "I1");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "mA");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "A");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "V1");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "mV");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "I2");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "mA");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "A");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "V2");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "mV");
 	}
 	else if(index==EXP_I_T)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "T(ms)");
-		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "I(mA)");		   //graph1坐标轴
+		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "I(A)");		   //graph1坐标轴
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T1");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "ms");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "I1");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "mA");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "A");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T2");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "ms");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I2");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "mA");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "A");
 	}
 	else if(index==EXP_V_T)
 	{
@@ -220,7 +220,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	switch((enum ExpType)expType)
 	{
 		case NO_SWEEP_IV:
-			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column = 2 ;   				//列数
 			Table_ATTR.column_width = 300;  		//列宽
 			Table_init(Table_title_IV, Table_ATTR.column, Table_ATTR.column_width );
 			
@@ -237,12 +237,12 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			
 			break;
 		case NO_SWEEP_VI:
-			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column = 2 ;   				//列数
 			Table_ATTR.column_width = 300;  		//列宽
 			Table_init(Table_title_VI, Table_ATTR.column, Table_ATTR.column_width );
 			
-			GetTestPara(&I_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
-			GetTestPara(&I_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
+			GetTestPara(&V_I_Panel1, &TestPara1);  //得到源表 1 用户设置参数
+			GetTestPara(&V_I_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
 			numOfDots = abs(TestPara1.Voltage_Start - TestPara1.Voltage_Stop)/TestPara2.Voltage_Stop;
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
@@ -254,15 +254,16 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 		case NO_SWEEP_IT:
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
-			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column = 2 ;   				//列数
 			Table_ATTR.column_width = 300;			//列宽
 			Table_init(Table_title_IT, Table_ATTR.column, Table_ATTR.column_width );
 			
-			GetTestPara_T(&I_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
-			GetTestPara_T(&I_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
+			GetTestPara(&I_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
+			GetTestPara(&I_T_Panel2, &TestPara2);  //得到源表 2 用户设置参数
 			
 			numOfDots = (TestPara1.runTime*1000)/TestPara1.timeStep; 
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
+			Graph.pCurveArray->numOfTotalDots = numOfDots;
 			
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//设置 X 轴的范围
@@ -271,20 +272,21 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 		case NO_SWEEP_RT:
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
-			Table_ATTR.column = 4 ;   				//列数
+			Table_ATTR.column = 2 ;   				//列数
 			Table_ATTR.column_width = 300;  		//列宽
 			Table_init(Table_title_RT, Table_ATTR.column, Table_ATTR.column_width );
-			GetTestPara(&I_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
-			GetTestPara(&I_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
+			GetTestPara(&R_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
+			GetTestPara(&R_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
-			numOfDots =TestPara1.runTime/TestPara1.timeStep; 
-			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
+			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep;
+			graphInit(graphIndex, numOfCurve, numOfDots+5, &Graph);
+			Graph.pCurveArray->numOfTotalDots = numOfDots;
 			
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//设置 X 轴的范围
 			break;
 	}
-	graphInit(graphIndex, 3, numOfDots, &Graph_Temp);
+	graphInit(graphIndex, 3, numOfDots + 5, &Graph_Temp);
 	PrepareCfgTxData(&TestPara1, &TestPara2, devAddr1, devAddr2, expType, pmeasUartTxBuf1,pmeasUartTxBuf2); //分别向  源表1  源表2 存储区中 放入用户输入的 设置命令 
 	if(devAddr1 == 0x01)	//判断是否为源表 1 地址，为真则发送 源表 1 设置命令
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN); 
@@ -322,7 +324,8 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
 			Delay(2);//延时
-			TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer)  
+			//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
+			TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器 
 			break;

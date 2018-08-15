@@ -52,7 +52,7 @@ void ProtocolGet_CGS_Data(unsigned char* meas_CGS_UartRxBuf, Rx_CGS_DataTypeDef*
 {
 	Rx_CGS_Data->rxDevAddr = *meas_CGS_UartRxBuf;	   																						//地址
 	Rx_CGS_Data->pressure = pow(10, (0.778*( ((*(meas_CGS_UartRxBuf+3) << 8)|(*(meas_CGS_UartRxBuf+4))) /1000.0 - 3.575)));  				//压力值
-	if(*(meas_CGS_UartRxBuf+5) == 0xff)
+	if(*(meas_CGS_UartRxBuf+5) >= 0xf0)
 	{
 		Rx_CGS_Data->heating_stage_temp = ((int)(*(meas_CGS_UartRxBuf+5) << 8)|(*(meas_CGS_UartRxBuf+6))) - 65536; 							//热台温度  
 	}
@@ -63,7 +63,7 @@ void ProtocolGet_CGS_Data(unsigned char* meas_CGS_UartRxBuf, Rx_CGS_DataTypeDef*
 	Rx_CGS_Data->Evaporation_temp = (unsigned int)(*(meas_CGS_UartRxBuf+7) << 8)|(*(meas_CGS_UartRxBuf+8)); 								//蒸发温度
 	
 	Rx_CGS_Data->environmental_humidity = (unsigned int)(*(meas_CGS_UartRxBuf+9) << 8)|(*(meas_CGS_UartRxBuf+10));  						//环境湿度
-	if(*(meas_CGS_UartRxBuf+11) == 0xff)
+	if(*(meas_CGS_UartRxBuf+11) >= 0xff)
 	{
 		Rx_CGS_Data->environmental_temp = (int)(*(meas_CGS_UartRxBuf+11) << 8)|(*(meas_CGS_UartRxBuf+12)) - 65536;							//环境温度 	
 	}

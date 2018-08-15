@@ -34,9 +34,9 @@
 // Global variables
 //ITCfg_TypeDef ITCfg1;
 
-ITCfg_TypeDef ITCfg2;
-ExpPanelTypeDef R_T_Panel1={0, PANEL_R_T_START1, PANEL_V_I_STOP1, PANEL_V_I_GAP1, PANEL_R_T_START1, PANEL_V_I_STOP1, PANEL_V_I_GAP1};
-ExpPanelTypeDef R_T_Panel2={0, PANEL_R_T_START2, PANEL_V_I_STOP2, PANEL_V_I_GAP2, PANEL_R_T_START2, PANEL_V_I_STOP2, PANEL_V_I_GAP2};
+//ITCfg_TypeDef ITCfg2;
+ExpPanelTypeDef R_T_Panel1={0, PANEL_R_T_START1, PANEL_R_T_START1, PANEL_R_T_START1, PANEL_R_T_START1, PANEL_R_T_START1, PANEL_R_T_START1};
+ExpPanelTypeDef R_T_Panel2={0, PANEL_R_T_START2, PANEL_R_T_START2, PANEL_R_T_START2, PANEL_R_T_START2, PANEL_R_T_START2, PANEL_R_T_START2};
 
 //==============================================================================
 // Global functions

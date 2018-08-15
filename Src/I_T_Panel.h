@@ -47,8 +47,8 @@ typedef struct
 }ITCfg_TypeDef;
 //==============================================================================
 // External variables
-extern ITCfg_TypeDef ITCfg1;
-extern ITCfg_TypeDef ITCfg2;
+//extern ITCfg_TypeDef ITCfg1;
+//extern ITCfg_TypeDef ITCfg2;
 
 extern ExpPanelTypeDef I_T_Panel1;
 extern ExpPanelTypeDef I_T_Panel2;

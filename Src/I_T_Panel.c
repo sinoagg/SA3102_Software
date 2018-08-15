@@ -32,10 +32,10 @@
 
 //==============================================================================
 // Global variables
-//ITCfg_TypeDef ITCfg1; 
-ITCfg_TypeDef ITCfg2;
-ExpPanelTypeDef I_T_Panel1={0, PANEL_I_T_START1, PANEL_V_I_STOP1, PANEL_V_I_GAP1, PANEL_I_T_START1, PANEL_V_I_STOP1, PANEL_V_I_GAP1};
-ExpPanelTypeDef I_T_Panel2={0, PANEL_I_T_START2, PANEL_V_I_STOP2, PANEL_V_I_GAP2, PANEL_I_T_START2, PANEL_V_I_STOP2, PANEL_V_I_GAP2};
+////ITCfg_TypeDef ITCfg1; 
+//ITCfg_TypeDef ITCfg2;
+ExpPanelTypeDef I_T_Panel1={0, PANEL_I_T_START1, PANEL_I_T_START1, PANEL_I_T_START1, PANEL_I_T_START1, PANEL_I_T_START1, PANEL_I_T_START1};
+ExpPanelTypeDef I_T_Panel2={0, PANEL_I_T_START2, PANEL_I_T_START2, PANEL_I_T_START2, PANEL_I_T_START2, PANEL_I_T_START2, PANEL_I_T_START2};
 //==============================================================================
 // Global functions
 
@@ -112,24 +112,6 @@ static void GetTestPara(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara) 
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_SAMPLENUMBER, &(pTestPara->sampleNumber));
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_RANGESETTING, &(pTestPara->rangeMode));
 }
-static void GetTestPara_T(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara) //得到面板中用户设置的参数
-{
-	GetCtrlVal(pExpPanel->panelHandle, pExpPanel->VdStartID,&(pTestPara->Voltage_Start));
-	//GetCtrlVal(pExpPanel->panelHandle, pExpPanel->VdStopID, &(pTestPara->Voltage_Stop));
-	//GetCtrlVal(pExpPanel->panelHandle, pExpPanel->VdStepID, &(pTestPara->Voltage_Step));
-	
-	GetCtrlVal(pExpPanel->panelHandle, pExpPanel->VgStartID, &(pTestPara->Current_Start));
-	//GetCtrlVal(pExpPanel->panelHandle, pExpPanel->VgStopID, &(pTestPara->Current_Stop));
-	//GetCtrlVal(pExpPanel->panelHandle, pExpPanel->VgStepID, &(pTestPara->Current_Step));
-
-	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_QUIETTIME, &(pTestPara->quietTime));   //所有采样配置都是兼容的
-	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_TIMESTEP, &(pTestPara->timeStep));
-	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_RUNTIME, &(pTestPara->runTime));
-	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_SAMPLERATE, &(pTestPara->sampleRate));
-	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_SAMPLENUMBER, &(pTestPara->sampleNumber));
-	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_RANGESETTING, &(pTestPara->rangeMode));
-}									  
-
 
 /////*
 

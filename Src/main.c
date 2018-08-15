@@ -63,15 +63,15 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 	int row;
 	if( *measUartRxBuf  == 0x01) //判断是否是 01 地址传来 的数据
 	{
-        InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
-		GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
+        //InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
+		//GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
 		
 		if(TestPara1.testMode == NO_SWEEP_IV ) //根据不同模式 选择不同的X 轴数据
 		{
 			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_voltaget;
 			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
+			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
+			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		if(TestPara1.testMode == NO_SWEEP_VI )
 		{
@@ -133,7 +133,7 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 		 Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);						//从串口传来的数据中取出  X与Y轴 的数据
 		 rxNum -=UART_RX_LEN;
 		 i++; 
-		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
+		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots >= Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
 		 {
 		 	DiscardAsyncTimer(TimerID);
 			
@@ -165,9 +165,9 @@ void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackDa
 	while(rxNum>=14)
 	{
 		ProtocolGet_CGS_Data(meas_CGS_UartRxBuf, &Rx_CGS_Data);							// 从 串口中取出 环境测量参数
-		*(Graph_Temp.pCurveArray->pDotX++) = a++;
-		*((Graph_Temp.pCurveArray + 1)->pDotX++) = a-1; 
-		*((Graph_Temp.pCurveArray + 2)->pDotX++) = a-1; 
+		*(Graph_Temp.pCurveArray->pDotX++) = X1-1;
+		*((Graph_Temp.pCurveArray + 1)->pDotX++) = X1-1; 
+		*((Graph_Temp.pCurveArray + 2)->pDotX++) = X1-1; 
 	    *(Graph_Temp.pCurveArray->pDotY++) = Rx_CGS_Data.environmental_humidity; 		 //环境湿度
 		*((Graph_Temp.pCurveArray + 1)->pDotY++) = Rx_CGS_Data.environmental_temp;		 //环境温度
 		*((Graph_Temp.pCurveArray + 2)->pDotY++) = Rx_CGS_Data.pressure * 0.001;		 //环境压强
