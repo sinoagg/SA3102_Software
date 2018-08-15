@@ -33,9 +33,14 @@
 // Global variables
 int mainPanel;
 int expListPanel;
+int TwoTerminalPanel;
 int IdVdPanel;
 int IdVgPanel;
 int ITPanel;
+int IVPanel;
+int VIPanel;
+int VTPanel;
+int RTPanel;
 
 int hBasicSamplePanel;
 int graphDispPanel;
@@ -124,10 +129,34 @@ int LoadInitPanel (void)
 	if ((tablePanel = LoadPanel (mainPanel, "TableData.uir", TABLE)) < 0)		//load TABLE panel
 		return -1;
 
-	if ((II_T_Panel.panelHandle = LoadPanel (mainPanel, "I-T Configuration.uir", PANEL_I_T)) < 0)
+	if ((ITPanel = LoadPanel (mainPanel, "I-T Configuration.uir", PANEL_I_T)) < 0)
 		return -1;
-		II_T_Panel2.panelHandle = II_T_Panel.panelHandle;
-
+	I_T_Panel1.panelHandle = ITPanel;
+	I_T_Panel2.panelHandle = ITPanel;
+		
+	if ((TwoTerminalPanel = LoadPanel (mainPanel, "Two Terminal.uir", TWO_TRML)) < 0)		//load middle panel
+		return -1;
+	
+	if ((IVPanel = LoadPanel (mainPanel, "I-V Configuration.uir", PANEL_I_V)) < 0)		//load middle panel
+		return -1;
+	I_V_Panel1.panelHandle = IVPanel;
+	I_V_Panel2.panelHandle = IVPanel;
+	
+	if ((VIPanel = LoadPanel (mainPanel, "V-I Configuration.uir", PANEL_V_I)) < 0)		//load middle panel
+		return -1;
+	V_I_Panel1.panelHandle = VIPanel;
+	V_I_Panel2.panelHandle = VIPanel;
+	
+	if ((VTPanel = LoadPanel (mainPanel, "V-T Configuration.uir", PANEL_V_T)) < 0)		//load middle panel
+		return -1;
+	V_T_Panel1.panelHandle = VTPanel;
+	V_T_Panel2.panelHandle = VTPanel;
+	
+	if ((RTPanel = LoadPanel (mainPanel, "R-T Configuration.uir", PANEL_R_T)) < 0)		//load middle panel
+		return -1;
+	R_T_Panel1.panelHandle = RTPanel;
+	R_T_Panel2.panelHandle = RTPanel;
+	
 	if ((chPanel = LoadPanel (mainPanel, "Result Menu.uir", CHPANEL)) < 0)		//load chPanel panel
 		return -1;
 		//弹出projects		
@@ -144,9 +173,12 @@ int LoadInitPanel (void)
 	SetPanelSize(expListPanel, 900, 300);//加载面板大小  (,height，width)
 	DisplayPanel(expListPanel);
 
-	SetPanelPos(II_T_Panel.panelHandle, 105, 305);		   //加载I-T面板
-	SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-	DisplayPanel(II_T_Panel.panelHandle);
+	SetPanelPos(TwoTerminalPanel, 105, 305);		
+	SetPanelSize(TwoTerminalPanel, 900, 1293);
+	DisplayPanel(TwoTerminalPanel);
+	
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,1);         //禁用 开始按钮
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1); 
 
 	return 0;
 }

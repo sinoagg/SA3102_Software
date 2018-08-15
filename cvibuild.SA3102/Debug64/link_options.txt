@@ -20,6 +20,7 @@
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\File.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\Graph.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\I_T_Panel.obj
+-in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\I_V_Panel.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\IdVdsPanel.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\IdVgsPanel.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\LoadPanel.obj
@@ -28,11 +29,14 @@
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\Plot.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\ProjectPanelCB.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\Protocol.obj
+-in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\R_T_Panel.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\ResultMenuPanel.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\SampleCfgPanel.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\SetPanelCB.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\table.obj
 -in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\Timer.obj
+-in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\V_I_Panel.obj
+-in:e:\hebin\company\16_SA3102\Source_Code\SA3102_Software\SA3102_Software\cvibuild.SA3102\Debug64\V_T_Panel.obj
 -more:c:\program files (x86)\national instruments\cvi2017\bin\msvc64\cvistart.lib
 -more:c:\program files (x86)\national instruments\cvi2017\bin\msvc64\cvi.lib
 -more:C:\Program Files (x86)\Windows Kits\8.1\Lib\winv6.3\um\x64\advapi32.lib

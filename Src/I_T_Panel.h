@@ -50,12 +50,27 @@ typedef struct
 extern ITCfg_TypeDef ITCfg1;
 extern ITCfg_TypeDef ITCfg2;
 
-extern ExpPanelTypeDef II_T_Panel;
-extern ExpPanelTypeDef II_T_Panel2;
+extern ExpPanelTypeDef I_T_Panel1;
+extern ExpPanelTypeDef I_T_Panel2;
+
+extern ExpPanelTypeDef I_V_Panel1;
+extern ExpPanelTypeDef I_V_Panel2;
+
+extern ExpPanelTypeDef V_I_Panel1;
+extern ExpPanelTypeDef V_I_Panel2;
+
+extern ExpPanelTypeDef R_T_Panel1;
+extern ExpPanelTypeDef R_T_Panel2;
+
+extern ExpPanelTypeDef V_T_Panel1;
+extern ExpPanelTypeDef V_T_Panel2;
+
+
 //==============================================================================
 // Global functions
 int Get_IT_Cfg (int panelHandle);  
-void GetTestPara(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara); //得到面板中用户设置的参数 
+void GetTestPara(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara); //得到面板中用户设置的参数
+void GetTestPara_T(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara); //得到面板中用户设置的参数  
 #ifdef __cplusplus
     }
 #endif

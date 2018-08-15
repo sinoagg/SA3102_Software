@@ -15,6 +15,7 @@
 #include "LoadPanel.h"
 #include "Result Menu.h"
 #include "MainPanelCb.h"
+#include "I_T_Panel.h"
 //==============================================================================
 // Constants
 #define CHANGECOLOR 	0x94CEFF //浅蓝
@@ -54,7 +55,7 @@ static void DiscardAllPrjPanel(PrjHandleTypeDef *pSingleProject)
 
 static int RecallAllPanelState(char* pConfigSavePath)
 {
-	RecallPanelState(II_T_Panel.panelHandle, pConfigSavePath, 1); //IT面板的值					
+	RecallPanelState(I_T_Panel1.panelHandle, pConfigSavePath, 1); //IT面板的值					
 	//RecallPanelState(IdVgPanel.panelHandle, pConfigSavePath, 2);						
 	//RecallPanelState(hIT_Panel, pConfigSavePath, 3);
 	//RecallPanelState(hRT_Panel, pConfigSavePath, 4);
