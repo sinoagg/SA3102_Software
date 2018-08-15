@@ -1,8 +1,8 @@
-[SMU1DecoCallback]
+[ITSMU1DecoCallback]
 Class="Function"
-Prototype="int SMU1DecoCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+Prototype="int ITSMU1DecoCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 
-[SMU2DecoCallback]
+[ITSMU2DecoCallback]
 Class="Function"
-Prototype="int SMU2DecoCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+Prototype="int ITSMU2DecoCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 

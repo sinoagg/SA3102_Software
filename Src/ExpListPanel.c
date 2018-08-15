@@ -1,3 +1,4 @@
+#include <ansi_c.h>
 #include <userint.h>
 #include "Experiment List.h"
 
@@ -20,6 +21,7 @@
 #include "I-T Configuration.h"
 #include "I_T_Panel.h"
 #include "MainPanel.h"
+#include "MainPanelCb.h" 
 #include "EnvironmentDisp.h"
 #include "Sample Configuration.h"
 #include "GraphDisp.h"  
@@ -61,10 +63,9 @@ static void DispRuntime(int display)
 	SetCtrlAttribute (hBasicSamplePanel, SAMPLE_CFG_RUNTIME, ATTR_VISIBLE, display); 
 	SetCtrlAttribute (hBasicSamplePanel, SAMPLE_CFG_TXT_S, ATTR_VISIBLE, display);
 }
-static void ExpList(int display)  
+static void ExpList(int display)
 {
-	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,display);         //禁用 开始按钮
-	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,display);
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,display);	   //禁用analyze
 	
 	SetPanelPos(hBasicSamplePanel, 105, 1600);
 	SetPanelSize(hBasicSamplePanel, 449, 300);
@@ -73,9 +74,12 @@ static void ExpList(int display)
 	SetPanelPos(hEnvCfgPanel, 556, 1600);
 	SetPanelSize(hEnvCfgPanel, 449, 300);
 	SetPanelAttribute (hEnvCfgPanel, ATTR_VISIBLE, !(display));
+	
 	HidePanel(hEnvResultPanel);
 	HidePanel(hResultDispPanel);
+	HidePanel(hAdvanceSamplePanel);  
 }
+
 int CVICALLBACK ExpListCallback (int panel, int control, int event,
 								 void *callbackData, int eventData1, int eventData2)
 {
@@ -94,7 +98,6 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 				SetPanelPos(TwoTerminalPanel, 105, 305);		
 				SetPanelSize(TwoTerminalPanel, 900, 1293);
 				DisplayPanel(TwoTerminalPanel);
-				HidePanel(hAdvanceSamplePanel);
 				ExpList(1);
 			}
 			else if(index==EXP_I_V)
@@ -103,7 +106,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 				SetPanelSize(IVPanel, 900, 1293);
 				DisplayPanel(IVPanel);
 				ExpList(0);
-				DispRuntime(0); 
+				DispRuntime(0);
 			}
 			else if(index==EXP_V_I)
 			{
@@ -111,7 +114,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 				SetPanelSize(VIPanel, 900, 1293);
 				DisplayPanel(VIPanel);
 				ExpList(0);
-				DispRuntime(0); 
+				DispRuntime(0);
 			}
 			else if(index==EXP_I_T)
 			{

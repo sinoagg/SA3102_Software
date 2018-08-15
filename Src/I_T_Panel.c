@@ -69,7 +69,7 @@ static void ITSetSMU2Disp(int panel, char focus)
 		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
-int CVICALLBACK SMU1DecoCallback (int panel, int control, int event,
+int CVICALLBACK ITSMU1DecoCallback (int panel, int control, int event,
 								  void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
@@ -82,7 +82,7 @@ int CVICALLBACK SMU1DecoCallback (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK SMU2DecoCallback (int panel, int control, int event,
+int CVICALLBACK ITSMU2DecoCallback (int panel, int control, int event,
 								  void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
