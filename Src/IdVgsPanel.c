@@ -50,14 +50,14 @@ int GetIdVgCfg (int panelHandle)
 	
 	
 		int temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS, &temp)<0)
+	/*if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS, &temp)<0)
 		return -1;
 	IdVgCfg.cfgVdstart=temp;
 	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_COMPL_2, &temp)<0)
 		return -1;
 	IdVgCfg.cfgVdstop=temp;
 	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS_2, &temp)<0)
-		return -1;
+		return -1;*/
 	IdVgCfg.cfgVdstep=temp;
 	
 	
@@ -78,19 +78,4 @@ int GetIdVgCfg (int panelHandle)
 }
 
 
-//----------------------------------------------------------------
-int CVICALLBACK GateCallback (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
-{
-//	int IdVgPanel;
-	
-	   switch(event){
-		   case EVENT_LEFT_CLICK_UP:
-			      DisplayImageFile (panel, IDVGS_CFG_PIC_GATE, "Resource\\bg.ico");
-				 
-			   break;
-	   
-	   }
-	return 0;
-}
 
