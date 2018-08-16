@@ -1,6 +1,3 @@
-#include <rs232.h>
-#include "MainPanel.h"
-
 //==============================================================================
 //
 // Title:		MainPanel.c
@@ -28,6 +25,8 @@
 #include "table.h"
 #include "SetPanelCB.h"
 #include "File.h"
+#include <rs232.h>
+#include "MainPanel.h"
 //==============================================================================
 // Constants
 #define TWO_TERMINAL 0
@@ -204,6 +203,7 @@ void Runkeyaction()//运行按钮按下后产生的一系列动作
 	DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
 	DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure.ico"); 
 	DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze_pressed.ico");
+	DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph_pressed.ico"); 
 	
 	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH1, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
 	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH2, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
@@ -310,7 +310,7 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 		case EVENT_LEFT_CLICK_UP:
 			if(index==TWO_TERMINAL)
 			{
-				MessagePopup ("", "please select a experiment!");
+				MessagePopup ("", "Please select a experiment!");
 			}
 			else
 			{
@@ -322,11 +322,11 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				X2 = 0;
 				GraphDeinit(&Graph);													//内存释放在画图之后
 				GraphDeinit(&Graph_Temp);
-			
 	
 				Dispgraph();
 				Runkeyaction();																//运行按钮按下后产生的一系列动作
 		
+<<<<<<< HEAD
 
 			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
 				return -1;
@@ -340,6 +340,20 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
 			//Delay(2);
+=======
+				if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
+					return -1;
+				TestPara1.testMode = expType; //源表 1 测试类型
+				TestPara2.testMode = expType; //源表 1 测试类型
+				ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
+				//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
+				Delay(2);//延时
+				//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
+				TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);
+				ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
+				//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
+				Delay(2);
+>>>>>>> 6eb4526ea151053300fd91284dc3e33ade3df96a
 			}
 			break;
 	}
@@ -444,111 +458,7 @@ int CVICALLBACK SelectCallback (int panel, int control, int event,
 	}
 	return 0;
 }
-//===================================================
-//   Configure_Callback
 
-//int CVICALLBACK ConfigureCallback (int panel, int control, int event,
-//									void *callbackData, int eventData1, int eventData2)
-//{   
-//	int index;
-//	switch (event)
-//	{
-// 		case EVENT_LEFT_CLICK_UP:			    //当Configure被鼠标左键点击时,Configure图标改变，其它两个正常状态 
-//				DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
-//				DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure_pressed.ico"); 
-//				DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze.ico");
-//			break;
-//		case EVENT_LEFT_CLICK:
-//			GetCtrlIndex(expListPanel, EXP_LIST_EXPLIST, &index);
-//			if(index==TWO_TERMINAL)
-//			{
-//				SetPanelPos(TwoTerminalPanel, 105, 305);		
-//				SetPanelSize(TwoTerminalPanel, 900, 1293);
-//				DisplayPanel(TwoTerminalPanel);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,1);         //禁用 开始按钮
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1);
-//			}
-//			else if(index==EXP_I_T)
-//			{
-//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-//				DisplayPanel(II_T_Panel.panelHandle);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);  
-//				DispRuntime(1);
-//			}
-//			else if(index==EXP_V_T)
-//			{
-//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-//				DisplayPanel(II_T_Panel.panelHandle);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
-//				DispRuntime(1);
-//			}
-//			else if(index==EXP_R_T)
-
-//			{
-//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-//				DisplayPanel(II_T_Panel.panelHandle);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
-//				DispRuntime(1);
-//			}
-//			else if(index==EXP_I_V)
-//			{
-//				SetPanelPos(IVPanel, 105, 305);
-//				SetPanelSize(IVPanel, 900, 1293);
-//				DisplayPanel(IVPanel);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
-//				DispRuntime(0); 
-//			}
-//			else if(index==EXP_V_I)
-//			{
-//				SetPanelPos(II_T_Panel.panelHandle, 105, 305);
-//				SetPanelSize(II_T_Panel.panelHandle, 900, 1293);
-//				DisplayPanel(II_T_Panel.panelHandle);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
-//				DispRuntime(0); 
-//			}
-//			else if(index==EXP_ID_VDS)
-//			{
-//				SetPanelPos(IdVdPanel, 105, 305);
-//				SetPanelSize(IdVdPanel, 900, 1293);
-//				DisplayPanel(IdVdPanel);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
-//				DispRuntime(1);
-//			}
-//			else if(index==EXP_ID_VGS)
-//			{
-//				SetPanelPos(IdVgPanel, 105, 305);
-//				SetPanelSize(IdVgPanel, 900, 1293);
-//				DisplayPanel(IdVgPanel);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
-//				DispRuntime(1);
-//			}
-//			else
-//			{
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,0);
-//				SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,0);
-//				DispRuntime(1);
-//			}
-//				SetPanelPos(hBasicSamplePanel, 105, 1600);
-//				SetPanelSize(hBasicSamplePanel, 449, 300);
-//				DisplayPanel(hBasicSamplePanel);
-//				
-//				SetPanelPos(hEnvCfgPanel, 556, 1600);
-//				SetPanelSize(hEnvCfgPanel, 449, 300);
-//				DisplayPanel(hEnvCfgPanel);
-//			break;
-//	}
-//	return 0;
-//}
 
 //===================================================
 //   Analyze_Callback
@@ -560,13 +470,15 @@ int CVICALLBACK AnalyzeCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 		
+<<<<<<< HEAD
 			//Dispgraph();
+=======
+			DispResultTableGraph();
+>>>>>>> 6eb4526ea151053300fd91284dc3e33ade3df96a
 			
 			SetPanelPos(resultPanel, 105, 305);  
 		    SetPanelSize(resultPanel, 65, 1293);      
 	 		DisplayPanel(resultPanel);  
-
-			DispResultTableGraph();
 			
 			SetPanelPos(hResultDispPanel, 105, 1600);
 			SetPanelSize(hResultDispPanel, 449, 300);
@@ -591,6 +503,7 @@ int CVICALLBACK SettingsCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
+			
 			InstallPopup (setPanel);  //弹出settingsPanel
 			HidePanel (hSettingsGraphPanel);
 			HidePanel (aboutPanel);
@@ -660,11 +573,11 @@ int CVICALLBACK ProjectCallback (int panel, int control, int event,
 	switch(event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-				InstallPopup (proPanel);
-				SetPanelPos(projectPanel, 85, 0);
-				SetPanelSize(projectPanel, 380, 1250);
-				DisplayPanel(projectPanel);
-				LoadAllProject(ProjectSavePath);
+			InstallPopup (proPanel);
+			SetPanelPos(projectPanel, 85, 0);
+			SetPanelSize(projectPanel, 380, 1250);
+			DisplayPanel(projectPanel);
+			LoadAllProject(ProjectSavePath);
 		break;
 	}	 
 	return 0;
