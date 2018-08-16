@@ -327,7 +327,7 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				Dispgraph();
 				Runkeyaction();																//运行按钮按下后产生的一系列动作
 		
-<<<<<<< HEAD
+
 			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
 				return -1;
 			TestPara1.testMode = expType; //源表 1 测试类型
@@ -338,21 +338,9 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
 			TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
-			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器 
-=======
-				if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
-					return -1;
-				TestPara1.testMode = expType; //源表 1 测试类型
-				TestPara2.testMode = expType; //源表 1 测试类型
-				ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
-				//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
-				Delay(2);//延时
-				TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer)  
-				ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
-				//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器 
+			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
+			Delay(2);
 			}
-			
->>>>>>> 69465412a2871bc10f2d18fc1ed2d3a96caacae5
 			break;
 	}
 	return 0;

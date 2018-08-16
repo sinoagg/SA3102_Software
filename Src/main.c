@@ -49,7 +49,7 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
-	comSelect = 5;
+	comSelect = 6;
 	CGS_comSelect = 1;
 	LoadInitPanel(); 
 	CheckPortStatus(comSelect, 20, ComCallback);
@@ -82,8 +82,8 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 		{
 			*(Graph.pCurveArray->pDotX++) = X1++;
 			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
+			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
+			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		//if(TestPara1.testMode == NO_SWEEP_VT )
 		//		*(Graph.pCurveArray->pDotX++) = RxData1.rx_Theory_voltaget;
