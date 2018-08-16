@@ -126,9 +126,10 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 	RxData1.rxStopSign=0x00; 
 	rxNum = GetInQLen(comSelect);  												//读取串口中发送来的数据数量
 	if(rxNum>500) rxNum=500;													//防止超过内存范围
-	status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum);					//Read UART Buffer to local buffer at one time  
+	status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum);            
 	while(rxNum>=UART_RX_LEN)
-	{
+	{	 
+	    				
 	     ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
 		 Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);						//从串口传来的数据中取出  X与Y轴 的数据
 		 rxNum -=UART_RX_LEN;
@@ -139,7 +140,8 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 			
 		 }
 	}
-	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图
+	rxNum = GetInQLen(comSelect); 
+	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图 
 	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))
 	{
 		DiscardAsyncTimer(TimerID);

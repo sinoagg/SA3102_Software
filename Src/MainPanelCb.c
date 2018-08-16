@@ -336,10 +336,10 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
 			Delay(2);//延时
 			//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
-			TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);
+			TimerID = NewAsyncTimer(0.5,-1, 1, TimerCallback, 0);
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
-			Delay(2);
+			//Delay(2);
 			}
 			break;
 	}
@@ -560,7 +560,7 @@ int CVICALLBACK AnalyzeCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 		
-			Dispgraph();
+			//Dispgraph();
 			
 			SetPanelPos(resultPanel, 105, 305);  
 		    SetPanelSize(resultPanel, 65, 1293);      
