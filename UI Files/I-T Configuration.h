@@ -18,21 +18,21 @@
 #define  PANEL_I_T_SMU2MODE               3       /* control type: ring, callback function: ITSMU2DecoCallback */
 #define  PANEL_I_T_START1                 4       /* control type: numeric, callback function: ITSMU1DecoCallback */
 #define  PANEL_I_T_SMU1MODE               5       /* control type: ring, callback function: ITSMU1DecoCallback */
-#define  PANEL_I_T_START_1                6       /* control type: textMsg, callback function: (none) */
+#define  PANEL_I_T_START_1                6       /* control type: textMsg, callback function: ITSMU1DecoCallback */
 #define  PANEL_I_T_PICTURE_4              7       /* control type: picture, callback function: (none) */
 #define  PANEL_I_T_PICTURE_2              8       /* control type: picture, callback function: (none) */
-#define  PANEL_I_T_ST_TEXT_3              9       /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_T_PICTURE_5              10      /* control type: picture, callback function: (none) */
-#define  PANEL_I_T_PICTURE                11      /* control type: picture, callback function: (none) */
-#define  PANEL_I_T_ST_TEXT_1              12      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_T_START_2                13      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_T_DECORATION_SMU1        14      /* control type: deco, callback function: ITSMU1DecoCallback */
-#define  PANEL_I_T_DECORATION_SMU2        15      /* control type: deco, callback function: ITSMU2DecoCallback */
-#define  PANEL_I_T_TXT_SMU2               16      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_T_TXT_SMU1               17      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_T_BG_SMU2                18      /* control type: canvas, callback function: (none) */
-#define  PANEL_I_T_TEXTMSG                19      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_T_BG_SMU1                20      /* control type: canvas, callback function: (none) */
+#define  PANEL_I_T_ST_TEXT_3              9       /* control type: textMsg, callback function: ITSMU2DecoCallback */
+#define  PANEL_I_T_ST_TEXT_1              10      /* control type: textMsg, callback function: ITSMU1DecoCallback */
+#define  PANEL_I_T_START_2                11      /* control type: textMsg, callback function: ITSMU2DecoCallback */
+#define  PANEL_I_T_DECORATION_SMU1        12      /* control type: deco, callback function: ITSMU1DecoCallback */
+#define  PANEL_I_T_DECORATION_SMU2        13      /* control type: deco, callback function: ITSMU2DecoCallback */
+#define  PANEL_I_T_TXT_SMU2               14      /* control type: textMsg, callback function: ITSMU2DecoCallback */
+#define  PANEL_I_T_TXT_SMU1               15      /* control type: textMsg, callback function: ITSMU1DecoCallback */
+#define  PANEL_I_T_BG_SMU2                16      /* control type: canvas, callback function: ITSMU2DecoCallback */
+#define  PANEL_I_T_TEXTMSG                17      /* control type: textMsg, callback function: (none) */
+#define  PANEL_I_T_BG_SMU1                18      /* control type: canvas, callback function: ITSMU1DecoCallback */
+#define  PANEL_I_T_PICTURE                19      /* control type: picture, callback function: (none) */
+#define  PANEL_I_T_PICTURE_6              20      /* control type: picture, callback function: (none) */
 
 
      /* Control Arrays: */

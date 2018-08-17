@@ -27,19 +27,19 @@
 #define  PANEL_V_I_START_1                12      /* control type: textMsg, callback function: (none) */
 #define  PANEL_V_I_PICTURE_4              13      /* control type: picture, callback function: (none) */
 #define  PANEL_V_I_PICTURE_2              14      /* control type: picture, callback function: (none) */
-#define  PANEL_V_I_ST_TEXT_3              15      /* control type: textMsg, callback function: (none) */
-#define  PANEL_V_I_PICTURE_5              16      /* control type: picture, callback function: (none) */
-#define  PANEL_V_I_PICTURE                17      /* control type: picture, callback function: (none) */
-#define  PANEL_V_I_ST_TEXT_1              18      /* control type: textMsg, callback function: (none) */
-#define  PANEL_V_I_START_2                19      /* control type: textMsg, callback function: (none) */
-#define  PANEL_V_I_STOP_2                 20      /* control type: textMsg, callback function: (none) */
-#define  PANEL_V_I_DECORATION_SMU2        21      /* control type: deco, callback function: VISMU2DecoCallback */
-#define  PANEL_V_I_TXT_SMU2               22      /* control type: textMsg, callback function: (none) */
-#define  PANEL_V_I_TXT_SMU1               23      /* control type: textMsg, callback function: (none) */
-#define  PANEL_V_I_BG_SMU1                24      /* control type: canvas, callback function: (none) */
-#define  PANEL_V_I_DECORATION_SMU1        25      /* control type: deco, callback function: VISMU1DecoCallback */
-#define  PANEL_V_I_BG_SMU2                26      /* control type: canvas, callback function: (none) */
-#define  PANEL_V_I_TEXTMSG                27      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_ST_TEXT_2              15      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_ST_TEXT_1              16      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_START_2                17      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_STOP_2                 18      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_DECORATION_SMU2        19      /* control type: deco, callback function: VISMU2DecoCallback */
+#define  PANEL_V_I_TXT_SMU2               20      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_TXT_SMU1               21      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_BG_SMU1                22      /* control type: canvas, callback function: (none) */
+#define  PANEL_V_I_DECORATION_SMU1        23      /* control type: deco, callback function: VISMU1DecoCallback */
+#define  PANEL_V_I_BG_SMU2                24      /* control type: canvas, callback function: (none) */
+#define  PANEL_V_I_TEXTMSG                25      /* control type: textMsg, callback function: (none) */
+#define  PANEL_V_I_PICTURE_7              26      /* control type: picture, callback function: (none) */
+#define  PANEL_V_I_PICTURE_6              27      /* control type: picture, callback function: (none) */
 #define  PANEL_V_I_STEP_2                 28      /* control type: textMsg, callback function: (none) */
 
 

@@ -16,15 +16,15 @@
 #define  TWO_TRML                         1
 #define  TWO_TRML_PICTURE_4               2       /* control type: picture, callback function: (none) */
 #define  TWO_TRML_PICTURE_2               3       /* control type: picture, callback function: (none) */
-#define  TWO_TRML_PICTURE_5               4       /* control type: picture, callback function: (none) */
-#define  TWO_TRML_PICTURE                 5       /* control type: picture, callback function: (none) */
-#define  TWO_TRML_DECORATION_SMU1         6       /* control type: deco, callback function: (none) */
-#define  TWO_TRML_DECORATION_SMU2         7       /* control type: deco, callback function: (none) */
-#define  TWO_TRML_TXT_SMU2                8       /* control type: textMsg, callback function: (none) */
-#define  TWO_TRML_TXT_SMU1                9       /* control type: textMsg, callback function: (none) */
+#define  TWO_TRML_DECORATION_SMU1         4       /* control type: deco, callback function: (none) */
+#define  TWO_TRML_DECORATION_SMU2         5       /* control type: deco, callback function: (none) */
+#define  TWO_TRML_TXT_SMU2                6       /* control type: textMsg, callback function: (none) */
+#define  TWO_TRML_TXT_SMU1                7       /* control type: textMsg, callback function: (none) */
+#define  TWO_TRML_BG_SMU2                 8       /* control type: canvas, callback function: (none) */
+#define  TWO_TRML_TEXTMSG                 9       /* control type: textMsg, callback function: (none) */
 #define  TWO_TRML_BG_SMU1                 10      /* control type: canvas, callback function: (none) */
-#define  TWO_TRML_BG_SMU2                 11      /* control type: canvas, callback function: (none) */
-#define  TWO_TRML_TEXTMSG                 12      /* control type: textMsg, callback function: (none) */
+#define  TWO_TRML_PICTURE                 11      /* control type: picture, callback function: (none) */
+#define  TWO_TRML_PICTURE_6               12      /* control type: picture, callback function: (none) */
 
 
      /* Control Arrays: */

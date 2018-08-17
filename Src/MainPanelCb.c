@@ -85,13 +85,12 @@ int CVICALLBACK MAIN_PANEL_Callback (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-
-		if(CGS_comSelect>0)
-		CloseCom(CGS_comSelect);
-		if(comSelect>0)
-		CloseCom(comSelect);
-		QuitUserInterface(0); 
-			break;
+			if(CGS_comSelect>0)
+			CloseCom(CGS_comSelect);
+			if(comSelect>0)
+			CloseCom(comSelect);
+			QuitUserInterface(0); 
+		break;
 	}
 	return 0;
 }
@@ -183,6 +182,7 @@ void Runkeyaction()//运行按钮按下后产生的一系列动作
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,1);         //禁用 开始按钮      
     SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED, 0);       //恢复 停止按钮
     SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED,1);        //禁用 保存按钮
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_SETTINGS, ATTR_DIMMED,1);        //禁用 保存按钮  
 	
 	SetPanelPos(resultPanel, 105, 305);  
     SetPanelSize(resultPanel, 65, 1293);      
@@ -326,21 +326,6 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				Dispgraph();
 				Runkeyaction();																//运行按钮按下后产生的一系列动作
 		
-<<<<<<< HEAD
-
-			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
-				return -1;
-			TestPara1.testMode = expType; //源表 1 测试类型
-			TestPara2.testMode = expType; //源表 1 测试类型
-			ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
-			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
-			Delay(2);//延时
-			//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
-			TimerID = NewAsyncTimer(0.5,-1, 1, TimerCallback, 0);
-			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
-			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
-			//Delay(2);
-=======
 				if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
 					return -1;
 				TestPara1.testMode = expType; //源表 1 测试类型
@@ -349,11 +334,11 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
 				Delay(2);//延时
 				//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
-				TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);
+				TimerID = NewAsyncTimer(0.5,-1, 1, TimerCallback, 0);
 				ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
 				//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
-				Delay(2);
->>>>>>> 6eb4526ea151053300fd91284dc3e33ade3df96a
+				//Delay(2);
+
 			}
 			break;
 	}
@@ -407,7 +392,11 @@ int CVICALLBACK SaveCallback (int panel, int control, int event,void *callbackDa
 }
 static int SaveAllPanelState(char* pConfigSavePath)
 {
-	SavePanelState(I_T_Panel1.panelHandle, pConfigSavePath, 1); //IT面板的值					
+	SavePanelState(IVPanel, pConfigSavePath, 1);
+	SavePanelState(VIPanel, pConfigSavePath, 2);
+	SavePanelState(I_T_Panel1.panelHandle, pConfigSavePath, 3); //IT面板的值  
+	SavePanelState(VTPanel, pConfigSavePath, 4);
+	SavePanelState(RTPanel, pConfigSavePath, 5);
 	SavePanelState(hBasicSamplePanel, pConfigSavePath, 10);	   //用户设置 配置值
 	SavePanelState(hAdvanceSamplePanel, pConfigSavePath, 11);  //高级设置面板值
 	SavePanelState(hEnvCfgPanel, pConfigSavePath, 14);
@@ -470,11 +459,9 @@ int CVICALLBACK AnalyzeCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 		
-<<<<<<< HEAD
-			//Dispgraph();
-=======
+
 			DispResultTableGraph();
->>>>>>> 6eb4526ea151053300fd91284dc3e33ade3df96a
+
 			
 			SetPanelPos(resultPanel, 105, 305);  
 		    SetPanelSize(resultPanel, 65, 1293);      
