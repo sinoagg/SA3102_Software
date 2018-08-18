@@ -1,3 +1,5 @@
+#include <ansi_c.h>
+#include "V-I Configuration.h"
 #include "SetPanel.h"
 
 //==============================================================================
@@ -24,13 +26,15 @@
 
 //==============================================================================
 // Static global variables
-
+static int graph2Color1Old;
+static int graph2Color2Old;
+static int graph2Color3Old;
 //==============================================================================
 // Static functions
 
 //==============================================================================
 // Global variables
-char ProjectSavePath[512]="C:\\Sinoagg\\SA6101\\Users\\";	   //本地工作目录Dir 
+char ProjectSavePath[512]="C:\\Sinoagg\\SA3102\\Users\\";	   //本地工作目录Dir 
 //==============================================================================
 // Global functions
 
@@ -43,12 +47,6 @@ int CVICALLBACK SettingsCB (int panel, int event, void *callbackData,
 {
 	switch (event)
 	{
-		case EVENT_GOT_FOCUS:
-
-			break;
-		case EVENT_LOST_FOCUS:
-
-			break;
 		case EVENT_CLOSE:
 			RemovePopup(setPanel);
 
@@ -110,7 +108,11 @@ switch (event)
 			
 			SetCtrlAttribute (panel, SETTINGS_ABOUTBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);           //about背景色
 	     	SetCtrlAttribute (panel, SETTINGS_ABOUTBTN, ATTR_TEXT_COLOR, VAL_BLACK);              //about文本颜色
-
+		
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2Color1Old);
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, &graph2Color2Old);
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2Color3Old);
+			
 			break;
 
 	}
@@ -169,47 +171,31 @@ int CVICALLBACK ProCallback (int panel, int control, int event,
 }
 
 
-int CVICALLBACK Graph2clr1CB (int panel, int control, int event,
-							  void *callbackData, int eventData1, int eventData2)
+
+int CVICALLBACK CancelCallback (int panel, int control, int event,
+								void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
-		
 		case EVENT_LEFT_CLICK_UP:
-
+			RemovePopup(setPanel); 
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, graph2Color1Old); 
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, graph2Color2Old); 
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, graph2Color3Old);
+			RemovePopup(setPanel);  
 			break;
-		default:
 
-			break;
 	}
 	return 0;
 }
 
-int CVICALLBACK Graph2clr2CB (int panel, int control, int event,
-							  void *callbackData, int eventData1, int eventData2)
+int CVICALLBACK OkCallback (int panel, int control, int event,
+							void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-
-			break;
-		default:
-
-			break;
-	}
-	return 0;
-}
-
-int CVICALLBACK Graph2clr3CB (int panel, int control, int event,
-							  void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_LEFT_CLICK_UP:
-
-			break;
-		default:
-
+			RemovePopup(setPanel); 
 			break;
 	}
 	return 0;

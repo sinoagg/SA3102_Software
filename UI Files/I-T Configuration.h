@@ -33,6 +33,8 @@
 #define  PANEL_I_T_BG_SMU1                18      /* control type: canvas, callback function: ITSMU1DecoCallback */
 #define  PANEL_I_T_PICTURE                19      /* control type: picture, callback function: (none) */
 #define  PANEL_I_T_PICTURE_6              20      /* control type: picture, callback function: (none) */
+#define  PANEL_I_T_TEXTMSG_2              21      /* control type: textMsg, callback function: ITSMU1DecoCallback */
+#define  PANEL_I_T_TEXTMSG_3              22      /* control type: textMsg, callback function: ITSMU2DecoCallback */
 
 
      /* Control Arrays: */

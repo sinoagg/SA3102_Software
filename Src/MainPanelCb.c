@@ -506,6 +506,7 @@ int CVICALLBACK SettingsCallback (int panel, int control, int event,
 			
 			SetCtrlAttribute (setPanel, SETTINGS_ABOUTBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);         //about背景色
 	     	SetCtrlAttribute (setPanel, SETTINGS_ABOUTBTN, ATTR_TEXT_COLOR, VAL_BLACK);            //about文本颜色
+			
 		break;
 	}
 	return 0;

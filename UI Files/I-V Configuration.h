@@ -33,14 +33,20 @@
 #define  PANEL_I_V_TXT_SMU2               18      /* control type: textMsg, callback function: (none) */
 #define  PANEL_I_V_TXT_SMU1               19      /* control type: textMsg, callback function: (none) */
 #define  PANEL_I_V_BG_SMU1                20      /* control type: canvas, callback function: (none) */
-#define  PANEL_I_V_TEXTMSG                21      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_V_BG_SMU2                22      /* control type: canvas, callback function: (none) */
-#define  PANEL_I_V_STEP_3                 23      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_V_DECORATION_SMU1        24      /* control type: deco, callback function: IVSMU1DecoCallback */
-#define  PANEL_I_V_DECORATION_SMU2        25      /* control type: deco, callback function: IVSMU2DecoCallback */
-#define  PANEL_I_V_STEP_1                 26      /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_V_PICTURE                27      /* control type: picture, callback function: (none) */
-#define  PANEL_I_V_PICTURE_6              28      /* control type: picture, callback function: (none) */
+#define  PANEL_I_V_TEXTMSG_7              21      /* control type: textMsg, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_TEXTMSG_6              22      /* control type: textMsg, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_TEXTMSG_5              23      /* control type: textMsg, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_TEXTMSG_4              24      /* control type: textMsg, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_TEXTMSG_3              25      /* control type: textMsg, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_TEXTMSG_2              26      /* control type: textMsg, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_TEXTMSG                27      /* control type: textMsg, callback function: (none) */
+#define  PANEL_I_V_BG_SMU2                28      /* control type: canvas, callback function: (none) */
+#define  PANEL_I_V_STEP_3                 29      /* control type: textMsg, callback function: (none) */
+#define  PANEL_I_V_DECORATION_SMU1        30      /* control type: deco, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_DECORATION_SMU2        31      /* control type: deco, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_STEP_1                 32      /* control type: textMsg, callback function: (none) */
+#define  PANEL_I_V_PICTURE                33      /* control type: picture, callback function: (none) */
+#define  PANEL_I_V_PICTURE_6              34      /* control type: picture, callback function: (none) */
 
 
      /* Control Arrays: */

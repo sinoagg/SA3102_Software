@@ -18,15 +18,11 @@ Prototype="int AboutBtnCallback(int panel, int control, int event, void *callbac
 Class="Function"
 Prototype="int ProCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 
-[Graph2clr1CB]
+[CancelCallback]
 Class="Function"
-Prototype="int Graph2clr1CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+Prototype="int CancelCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 
-[Graph2clr2CB]
+[OkCallback]
 Class="Function"
-Prototype="int Graph2clr2CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
-
-[Graph2clr3CB]
-Class="Function"
-Prototype="int Graph2clr3CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+Prototype="int OkCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 
