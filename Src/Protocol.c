@@ -288,7 +288,7 @@ void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataT
 		pRxData1->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
 		pRxData1->rxStopSign=*(pUartRxBuf+1);
 		
-		if(*(pUartRxBuf+2) >= 0xf0 )
+		if(*(pUartRxBuf+2) & 0x80 )
 		{
 			pRxData1->rx_Theory_voltaget = (((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3)) - 65536;
 		}
@@ -297,7 +297,7 @@ void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataT
 			pRxData1->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3); 
 		}
 	
-		if(*(pUartRxBuf+4) >= 0xf0 ) 
+		if(*(pUartRxBuf+4) & 0x80 ) 
 		{
 			pRxData1->rx_Theory_current =  (((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5)) - 65536;   
 		}

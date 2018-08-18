@@ -60,8 +60,8 @@ Graph_TypeDef Graph;
 char ABC[11][20] ={"A","B","C","D","E","F","G","H","I","J","K"};
 char Table_title_IV[11][20] ={"Current(A)","Voltage(mV)","Current(A)","Voltage(mV)"};
 char Table_title_VI[11][20] ={"Voltage(mV)","Current(A)","Voltage(mV)","Current(A)"}; 
-char Table_title_IT[11][20] ={"Current(A)","Time(S)","Current(A)","Time(S)"};
-char Table_title_RT[11][20] ={"Resistance(Ω)","Time(S)","Resistance(Ω)","Time(S)"};
+char Table_title_IT[11][20] ={"Time(S)","Current(A)","Time(S)","Current(A)"};
+char Table_title_RT[11][20] ={"Time(S)","Resistance(Ω)","Time(S)","Resistance(Ω)"};
 
 //==============================================================================
 // Global functions
@@ -336,10 +336,13 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_INTERVAL, TestPara1.timeStep * 0.001);  //设置同步回调函数定时值 定时发送查询命令
 			Delay(2);//延时
 			//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
-			TimerID = NewAsyncTimer(1,-1, 1, TimerCallback, 0);
+			
+			double temp=(double)TestPara1.timeStep * 0.001;
+			if(temp<0.03) temp=0.03;													//如果查询时间过快，会造成数据混乱，下位机响应中断过多
+			TimerID = NewAsyncTimer(temp,-1, 1, TimerCallback, 0);
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
-			Delay(2);
+			//Delay(2);
 			}
 			break;
 	}
@@ -360,14 +363,12 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
-		
-			//X1 = 0;  
-			//X2 = 0;
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
 			ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
 		
-			//GraphDeinit(&Graph);													//内存释放在画图之后
-			//GraphDeinit(&Graph_Temp);
+			FlushInQ(6);	   														//Clear input and output buffer
+			FlushOutQ(6);
+			
 			break;
 	}
 	return 0;
@@ -560,7 +561,7 @@ int CVICALLBACK AnalyzeCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 		
-			Dispgraph();
+			//Dispgraph();
 			
 			SetPanelPos(resultPanel, 105, 305);  
 		    SetPanelSize(resultPanel, 65, 1293);      

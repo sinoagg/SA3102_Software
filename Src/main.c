@@ -63,15 +63,15 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 	int row;
 	if( *measUartRxBuf  == 0x01) //判断是否是 01 地址传来 的数据
 	{
-        //InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
-		//GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
+        InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
+		GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
 		
 		if(TestPara1.testMode == NO_SWEEP_IV ) //根据不同模式 选择不同的X 轴数据
 		{
 			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_voltaget;
 			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
-			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
-			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		if(TestPara1.testMode == NO_SWEEP_VI )
 		{
@@ -82,8 +82,8 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 		{
 			*(Graph.pCurveArray->pDotX++) = X1++;
 			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
-			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
-			//SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		//if(TestPara1.testMode == NO_SWEEP_VT )
 		//		*(Graph.pCurveArray->pDotX++) = RxData1.rx_Theory_voltaget;
@@ -91,8 +91,8 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 		{
 			*(Graph.pCurveArray->pDotX++) = X1++;		
 			*(Graph.pCurveArray->pDotY++) = (TestPara1.Voltage_Start*0.001)/RxData1->rx_current.num_float;				//get y, set pointer to the next data
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row ),*(Graph.pCurveArray->pDotY-1)); 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		Graph.pCurveArray->numOfDotsToPlot++;				 						//number of dots to plot increase 
 	}
@@ -126,20 +126,22 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 	RxData1.rxStopSign=0x00; 
 	rxNum = GetInQLen(comSelect);  												//读取串口中发送来的数据数量
 	if(rxNum>500) rxNum=500;													//防止超过内存范围
-	status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum);					//Read UART Buffer to local buffer at one time  
+	//status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum);            
 	while(rxNum>=UART_RX_LEN)
-	{
+	{	 
+	     status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
 	     ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
 		 Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);						//从串口传来的数据中取出  X与Y轴 的数据
 		 rxNum -=UART_RX_LEN;
-		 i++; 
+		 //i++; 
 		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots >= Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
 		 {
 		 	DiscardAsyncTimer(TimerID);
 			
 		 }
 	}
-	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图
+	rxNum = GetInQLen(comSelect); 
+	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图 
 	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))
 	{
 		DiscardAsyncTimer(TimerID);
@@ -157,7 +159,7 @@ void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackDa
 	int status;
 	int rxNum;																							  
 	int i=0;
-	static a = 0;
+	//static a = 0;
 	Rx_CGS_DataTypeDef Rx_CGS_Data;
 	rxNum = GetInQLen(CGS_comSelect);  													//读取串口中发送来的数据数量
 	if(rxNum>500) rxNum=500;															//防止超过内存范围
