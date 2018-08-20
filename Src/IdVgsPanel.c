@@ -1,3 +1,4 @@
+#include "Id-Vds Configuration.h"
 #include <userint.h>
 //==============================================================================
 //
@@ -16,7 +17,10 @@
 #include "Id-Vgs Configuration.h"
 //==============================================================================
 // Constants
-
+#define VAL_BG                        0xA9A9A9L    //未被选中时的背景色
+#define VAL_BG_Pressed                0xA5B8D2L    //被选中时的背景色
+#define FOCUS	0
+#define UNFOCUS 1
 //==============================================================================
 // Types
 
@@ -50,19 +54,15 @@ int GetIdVgCfg (int panelHandle)
 	
 	
 		int temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS, &temp)<0)
+	/*if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS, &temp)<0)
 		return -1;
 	IdVgCfg.cfgVdstart=temp;
 	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_COMPL_2, &temp)<0)
 		return -1;
 	IdVgCfg.cfgVdstop=temp;
 	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS_2, &temp)<0)
-		return -1;
+		return -1;*/
 	IdVgCfg.cfgVdstep=temp;
-	
-	
-	
-	
 	
 	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_START, &temp)<0)
 		return -1;
@@ -77,20 +77,58 @@ int GetIdVgCfg (int panelHandle)
 	return 0;
 }
 
-
-//----------------------------------------------------------------
-int CVICALLBACK GateCallback (int panel, int control, int event,
-		void *callbackData, int eventData1, int eventData2)
+static void IdVgSetGATEDisp(int panel, char focus)
 {
-//	int IdVgPanel;
-	
-	   switch(event){
-		   case EVENT_LEFT_CLICK_UP:
-			      DisplayImageFile (panel, IDVGS_CFG_PIC_GATE, "Resource\\bg.ico");
-				 
-			   break;
-	   
-	   }
+	if(focus==FOCUS)
+	{
+		SetCtrlAttribute (panel, IDVGS_CFG_BG_GATE, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
+		SetCtrlAttribute (panel, IDVGS_CFG_TXT_GATE, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed); // change text bgcolor together with picture
+	}
+	else
+	{
+		SetCtrlAttribute (panel, IDVGS_CFG_BG_GATE, ATTR_PICT_BGCOLOR, VAL_BG); 
+		SetCtrlAttribute (panel, IDVGS_CFG_TXT_GATE, ATTR_TEXT_BGCOLOR, VAL_BG); // change text bgcolor together with picture
+	}
+}
+static void IdVgSetDRAINDisp(int panel, char focus)
+{
+	if(focus==FOCUS)
+	{
+		SetCtrlAttribute (panel, IDVGS_CFG_BG_DRAIN, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
+		SetCtrlAttribute (panel, IDVGS_CFG_TXT_DRAIN, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed); // change text bgcolor together with picture
+	}
+	else
+	{
+		SetCtrlAttribute (panel, IDVGS_CFG_BG_DRAIN, ATTR_PICT_BGCOLOR, VAL_BG); 
+		SetCtrlAttribute (panel, IDVGS_CFG_TXT_DRAIN, ATTR_TEXT_BGCOLOR, VAL_BG); // change text bgcolor together with picture
+	}
+}
+
+int CVICALLBACK IdVgGATEDecoCB (int panel, int control, int event,
+								void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+			IdVgSetGATEDisp(panel,FOCUS);
+			IdVgSetDRAINDisp(panel,UNFOCUS); 
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK IdVgDRAINDecoCB (int panel, int control, int event,
+								 void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+			IdVgSetGATEDisp(panel,UNFOCUS);
+			IdVgSetDRAINDisp(panel,FOCUS); 
+
+			break;
+
+	}
 	return 0;
 }
 

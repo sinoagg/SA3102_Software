@@ -49,7 +49,7 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
-	comSelect = 6;
+	comSelect = 5;
 	CGS_comSelect = 1;
 	LoadInitPanel(); 
 	CheckPortStatus(comSelect, 20, ComCallback);
@@ -126,10 +126,17 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 	RxData1.rxStopSign=0x00; 
 	rxNum = GetInQLen(comSelect);  												//读取串口中发送来的数据数量
 	if(rxNum>500) rxNum=500;													//防止超过内存范围
+<<<<<<< HEAD
 	//status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum);            
 	while(rxNum>=UART_RX_LEN)
 	{	 
 	     status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
+=======
+	status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum);            
+	while(rxNum>=UART_RX_LEN)
+	{	 
+	    				
+>>>>>>> 3021f8394d9e662584f1538c858e984ed15252ce
 	     ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
 		 Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);						//从串口传来的数据中取出  X与Y轴 的数据
 		 rxNum -=UART_RX_LEN;

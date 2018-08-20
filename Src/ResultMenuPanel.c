@@ -122,16 +122,15 @@ int CVICALLBACK TableCallback (int panel, int control, int event,
 {
 	
 	//点击table图标切换到table面板
-	switch(event){
+	switch(event)
+	{
 		case EVENT_LEFT_CLICK_UP:
-				DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table_pressed.ico"); 
-				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph.ico"); 
-				DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData.ico");
-				resultDispSelect=DISP_TABLE;
-			    DispResultTableGraph();
+			DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table_pressed.ico"); 
+			DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph.ico"); 
+			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData.ico");
+			resultDispSelect=DISP_TABLE;
+			DispResultTableGraph();
 			break;
-
-	
 	}
 	return 0;
 }
@@ -139,8 +138,8 @@ int CVICALLBACK TableCallback (int panel, int control, int event,
 int CVICALLBACK GraphCallback (int panel, int control, int event,
 							   void *callbackData, int eventData1, int eventData2)
 {
-		//点击graph图标切换到graph面板
-	switch(event){
+	switch(event)			   //点击graph图标切换到graph面板
+	{
 		case EVENT_LEFT_CLICK_UP:
 			
 			DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph_pressed.ico");
@@ -174,16 +173,15 @@ int CVICALLBACK SaveDataCallback (int panel, int control, int event,
 								  void *callbackData, int eventData1, int eventData2)
 
 {
-	   switch(event)
-	   {
+	switch(event)
+	{
 		case EVENT_LEFT_CLICK_UP:
-			
-				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph.ico");
-				DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table.ico"); 
-				DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData_pressed.ico"); 
-			    InstallPopup(saveDataPanel);		//弹出savedata面板 
+			DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph.ico");
+			DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table.ico"); 
+			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData_pressed.ico"); 
+			InstallPopup(saveDataPanel);		//弹出savedata面板 
 			break;
-	  }	
+	}	
 	return 0;
 }
 //======================Exit=================================  
@@ -191,11 +189,21 @@ int CVICALLBACK ExitCallback (int panel, int control, int event,
 							  void *callbackData, int eventData1, int eventData2)
 {
 		if (event == EVENT_COMMIT)
-				{
-	    		//移除、关闭savedata面板
-				RemovePopup (saveDataPanel);
-				DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData.ico");
-		        }
+		{
+			RemovePopup (saveDataPanel);	 //移除、关闭savedata面板  
+			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData.ico");
+			if(resultDispSelect==DISP_TABLE)
+			{
+				DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table_pressed.ico");
+			}
+			else
+			{
+			  	if(graphDispSelect==DISP_SINGLE_GRAPH) 
+				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph_pressed.ico");
+				else if(graphDispSelect==DISP_DOUBLE_GRAPH)
+				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\DoubleGraph.ico"); 
+			}
+		}
 			return 0;
 }
 
@@ -246,7 +254,6 @@ int CVICALLBACK BrowseGraph2Callback (int panel, int control, int event,
 int CVICALLBACK SaveGraph1Callback (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)
 {
-	
 	Rect rc;
 	int nBitmapID;
 	switch (event)
@@ -399,7 +406,6 @@ int CVICALLBACK ChoseCallback (int panel, int control, int event,
 
 	if( event == EVENT_VAL_CHANGED)
 		{
-			
 			HidePanel(chPanel); 
 			int val;
 		  	GetCtrlVal(chPanel, CHPANEL_CHECKBOX, &val);

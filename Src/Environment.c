@@ -53,20 +53,20 @@ int CVICALLBACK MesaureCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-				GetCtrlVal(panel,control,&CheckValue);//Measure 多选 
-				if(CheckValue)
-				{
-					SetCtrlVal(panel,ENVIRONMEN_TEMPTER,CheckValue);
-					SetCtrlVal(panel,ENVIRONMEN_HUMIDITY,CheckValue);
-					SetCtrlVal(panel,ENVIRONMEN_PRESSURE,CheckValue);
-				} 
-				else
-				{
-					SetCtrlVal(panel,ENVIRONMEN_TEMPTER,0);
-					SetCtrlVal(panel,ENVIRONMEN_HUMIDITY,0);
-					SetCtrlVal(panel,ENVIRONMEN_PRESSURE,0);
-				}
-			break;
+			GetCtrlVal(panel,control,&CheckValue);//Measure 多选 
+			if(CheckValue)
+			{
+				SetCtrlVal(panel,ENVIRONMEN_TEMPTER,CheckValue);
+				SetCtrlVal(panel,ENVIRONMEN_HUMIDITY,CheckValue);
+				SetCtrlVal(panel,ENVIRONMEN_PRESSURE,CheckValue);
+			} 
+			else
+			{
+				SetCtrlVal(panel,ENVIRONMEN_TEMPTER,0);
+				SetCtrlVal(panel,ENVIRONMEN_HUMIDITY,0);
+				SetCtrlVal(panel,ENVIRONMEN_PRESSURE,0);
+			}
+		break;
 	}
 	return 0;
 }
@@ -78,7 +78,7 @@ int CVICALLBACK Humidity_displayCB (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
-				temp_hum_pre_display();
+			temp_hum_pre_display();
 
 			break;
 	}
@@ -92,7 +92,7 @@ int CVICALLBACK Temp_displayCB (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
-				temp_hum_pre_display();
+			temp_hum_pre_display();
 
 			break;
 	}
@@ -106,7 +106,7 @@ int CVICALLBACK Pressure_displayCB (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
-				temp_hum_pre_display();
+			temp_hum_pre_display();
 			
 			break;
 	}
