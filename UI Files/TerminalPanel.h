@@ -13,7 +13,15 @@
 
      /* Panels and Controls: */
 
-#define  TWO_TRML                         1
+#define  FOUR_TRML                        1
+#define  FOUR_TRML_TEXTMSG                2       /* control type: textMsg, callback function: (none) */
+#define  FOUR_TRML_PICTURE                3       /* control type: picture, callback function: (none) */
+#define  FOUR_TRML_TEXTMSG_5              4       /* control type: textMsg, callback function: (none) */
+#define  FOUR_TRML_TEXTMSG_4              5       /* control type: textMsg, callback function: (none) */
+#define  FOUR_TRML_TEXTMSG_3              6       /* control type: textMsg, callback function: (none) */
+#define  FOUR_TRML_TEXTMSG_2              7       /* control type: textMsg, callback function: (none) */
+
+#define  TWO_TRML                         2
 #define  TWO_TRML_PICTURE_4               2       /* control type: picture, callback function: (none) */
 #define  TWO_TRML_PICTURE_2               3       /* control type: picture, callback function: (none) */
 #define  TWO_TRML_DECORATION_SMU1         4       /* control type: deco, callback function: (none) */

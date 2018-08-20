@@ -96,7 +96,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			if(index==TWO_TERMINAL)
 			{
 				SetPanelPos(TwoTerminalPanel, 105, 305);		
-				SetPanelSize(TwoTerminalPanel, 900, 1293);
+				SetPanelSize(TwoTerminalPanel, 900, 1293);																								
 				DisplayPanel(TwoTerminalPanel);
 				ExpList(1);
 			}
@@ -155,6 +155,13 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 				DisplayPanel(IdVgPanel);
 				ExpList(0);
 				DispRuntime(1);
+			}
+			else if(index==FOUR_TERMINAL)
+			{
+				SetPanelPos(FourTerminalPanel, 105, 305);
+				SetPanelSize(FourTerminalPanel, 900, 1293);
+				DisplayPanel(FourTerminalPanel);
+				ExpList(1); 
 			}
 			else
 			{

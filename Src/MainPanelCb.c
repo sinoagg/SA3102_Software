@@ -1,3 +1,5 @@
+#include "Tools.h"
+
 //==============================================================================
 //
 // Title:		MainPanel.c
@@ -308,7 +310,7 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			if(index==TWO_TERMINAL)
+			if(index==TWO_TERMINAL||index==FOUR_TERMINAL)
 			{
 				MessagePopup ("", "Please select a experiment!");
 			}
@@ -361,6 +363,7 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
+			SetCtrlAttribute (mainPanel, MAIN_PANEL_SETTINGS, ATTR_DIMMED,0); 
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
 			ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
 		
@@ -459,10 +462,6 @@ int CVICALLBACK AnalyzeCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 		
-//<<<<<<< HEAD
-//			//Dispgraph();
-//=======
-
 			DispResultTableGraph();
 			
 			SetPanelPos(resultPanel, 105, 305);  
@@ -572,3 +571,17 @@ int CVICALLBACK ProjectCallback (int panel, int control, int event,
 	}	 
 	return 0;
 }
+
+int CVICALLBACK ToolsCallback (int panel, int control, int event,
+							   void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+			InstallPopup (hToolsPanel); 
+			break;
+	}
+	return 0;
+}
+
+

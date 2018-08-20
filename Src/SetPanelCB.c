@@ -49,7 +49,9 @@ int CVICALLBACK SettingsCB (int panel, int event, void *callbackData,
 	{
 		case EVENT_CLOSE:
 			RemovePopup(setPanel);
-
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, graph2Color1Old); 
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, graph2Color2Old); 
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, graph2Color3Old);
 			break;
 	}
 	return 0;
@@ -69,7 +71,6 @@ int CVICALLBACK PrjBtnCallback (int panel, int control, int event,
 			HidePanel (hSettingsGraphPanel);
 			HidePanel (aboutPanel); 
 
-			
 			SetCtrlAttribute (panel, SETTINGS_PRJBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG_PRESSED);   //project背景色
 	     	SetCtrlAttribute (panel, SETTINGS_PRJBTN, ATTR_TEXT_COLOR, VAL_WHITE);              //project文本颜色
 			
@@ -99,7 +100,6 @@ switch (event)
 			HidePanel (ENVTPanel); 
 			HidePanel (aboutPanel);
 
-			
 			SetCtrlAttribute (panel, SETTINGS_GRAPHBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG_PRESSED);   //graph背景色
 	     	SetCtrlAttribute (panel, SETTINGS_GRAPHBTN, ATTR_TEXT_COLOR, VAL_WHITE);              //graph文本颜色
 			
@@ -135,8 +135,6 @@ switch (event)
 		    HidePanel (ENVTPanel); 
 			HidePanel (hSettingsGraphPanel);
 
-		
-			
 			SetCtrlAttribute (panel, SETTINGS_ABOUTBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG_PRESSED);   //about背景色
 	     	SetCtrlAttribute (panel, SETTINGS_ABOUTBTN, ATTR_TEXT_COLOR, VAL_WHITE);              //about文本颜色
 			
@@ -182,7 +180,6 @@ int CVICALLBACK CancelCallback (int panel, int control, int event,
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, graph2Color1Old); 
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, graph2Color2Old); 
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, graph2Color3Old);
-			RemovePopup(setPanel);  
 			break;
 
 	}

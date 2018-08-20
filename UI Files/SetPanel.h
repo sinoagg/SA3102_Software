@@ -49,8 +49,8 @@
 #define  SETTINGS_PRJBTN                  6       /* control type: textMsg, callback function: PrjBtnCallback */
 #define  SETTINGS_TEXTMSG                 7       /* control type: textMsg, callback function: OkCallback */
 #define  SETTINGS_Cancel                  8       /* control type: textMsg, callback function: CancelCallback */
-#define  SETTINGS_PICTURE                 9       /* control type: picture, callback function: OkCallback */
-#define  SETTINGS_PICTURE_2               10      /* control type: picture, callback function: CancelCallback */
+#define  SETTINGS_OK_PIC                  9       /* control type: picture, callback function: OkCallback */
+#define  SETTINGS_CANCEL_PIC              10      /* control type: picture, callback function: CancelCallback */
 
 
      /* Control Arrays: */

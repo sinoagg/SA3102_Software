@@ -20,7 +20,7 @@
 // Constants
 #define CHANGECOLOR 	0x94CEFF //浅蓝
 #define COLOR  			0x065279 //深蓝
-#define SEARCHCOLOR 	0xb2c9d5 //不可用颜色
+#define SEARCHCOLOR 	0xB2C9D5 //不可用颜色
 //==============================================================================
 // Types
 
