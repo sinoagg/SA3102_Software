@@ -209,7 +209,7 @@ void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char
 			*(measUartTxBuf1+29) = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
 			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
 	}
-	Delay(0.2);
+	Delay(0.01);
 	if(devAddr2 == 0x02)
 	{
 		*measUartTxBuf2 = devAddr2;

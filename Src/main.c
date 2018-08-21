@@ -13,7 +13,7 @@
 #include "Graph.h"
 #include "Cgs_mt.h"
 #include  "Plot.h"
-unsigned char comSelect;				//Serial Com Number
+unsigned char comSelect;					//Serial Com Number
 unsigned char CGS_comSelect;				//Serial Com Number
 unsigned char measUartTxBuf1[32]={0};
 unsigned char measUartRxBuf1[500]={0};
@@ -25,8 +25,21 @@ float X2 = 0;
 void CVICALLBACK ComCallback(int portNumber ,int eventMask, void * callbackData);
 void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackData); 
 int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2);
-Graph_TypeDef Graph_Temp;
+int CheckPortStatus(unsigned char portNumber, unsigned char uartRxLen, void (*pFunc)(int, int, void*));
 
+int main (int argc, char *argv[])
+{
+	if (InitCVIRTE (0, argv, 0) == 0)
+		return -1;	/* out of memory */
+	comSelect = 6;
+	CGS_comSelect = 1;
+	LoadInitPanel(); 
+	CheckPortStatus(comSelect, 20, ComCallback);
+	CheckPortStatus(CGS_comSelect, 14, ComCallbackCGS);
+	RunUserInterface ();
+	DiscardPanel (mainPanel);
+	return 0;
+}
 static int CheckPortStatus(unsigned char portNumber, unsigned char uartRxLen, void (*pFunc)(int, int, void*))
 {
 	int status;
@@ -45,19 +58,7 @@ static int CheckPortStatus(unsigned char portNumber, unsigned char uartRxLen, vo
 		return 0;
 	}
 }
-int main (int argc, char *argv[])
-{
-	if (InitCVIRTE (0, argv, 0) == 0)
-		return -1;	/* out of memory */
-	comSelect = 6;
-	CGS_comSelect = 1;
-	LoadInitPanel(); 
-	CheckPortStatus(comSelect, 20, ComCallback);
-	CheckPortStatus(CGS_comSelect, 14, ComCallbackCGS);
-	RunUserInterface ();
-	DiscardPanel (mainPanel);
-	return 0;
-}
+
 void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* RxData2) //判断接收源表1 源表2的数据
 {
 	int row;
@@ -126,22 +127,32 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 	RxData1.rxStopSign=0x00; 
 	rxNum = GetInQLen(comSelect);  												//读取串口中发送来的数据数量
 	if(rxNum>500) rxNum=500;													//防止超过内存范围
-	//status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum);            
+	//status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum); 	
+	          
 	while(rxNum>=UART_RX_LEN)
 	{	 
-	     status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
-	     ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
-		 Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);						//从串口传来的数据中取出  X与Y轴 的数据
-		 rxNum -=UART_RX_LEN;
-		 //i++; 
-		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots >= Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
+		
+		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
 		 {
 		 	DiscardAsyncTimer(TimerID);
-			
+			rxNum =0;
 		 }
+		 else
+		 {
+			status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
+			ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
+			Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
+			rxNum -=UART_RX_LEN;
+		 }
+		
+	     //status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
+	     //ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
+		 //Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
+		 //rxNum -=UART_RX_LEN;
+		 //i++; 
 	}
 	rxNum = GetInQLen(comSelect); 
-	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图 
+	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图  
 	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))
 	{
 		DiscardAsyncTimer(TimerID);

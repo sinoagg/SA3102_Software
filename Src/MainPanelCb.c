@@ -57,6 +57,7 @@ char configSavePath[512]={0};
 FileLableTypeDef *pFileLable[64];									//存所有FileLable的指针，最多只能加载一个文件夹下的64个文件
 PrjHandleTypeDef SingleProject[64];									
 Graph_TypeDef Graph;
+Graph_TypeDef Graph_Temp;
 char ABC[11][20] ={"A","B","C","D","E","F","G","H","I","J","K"};
 char Table_title_IV[11][20] ={"Current(A)","Voltage(mV)","Current(A)","Voltage(mV)"};
 char Table_title_VI[11][20] ={"Voltage(mV)","Current(A)","Voltage(mV)","Current(A)"}; 
@@ -218,6 +219,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	int graphIndex=1;
 	int numOfCurve=2;
 	int numOfDots=100;
+	Table_TypeDef Table_ATTR;
 	switch((enum ExpType)expType)
 	{
 		case NO_SWEEP_IV:
@@ -262,7 +264,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			GetTestPara(&I_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&I_T_Panel2, &TestPara2);  //得到源表 2 用户设置参数
 			
-			numOfDots = (TestPara1.runTime*1000)/TestPara1.timeStep; 
+			numOfDots = (TestPara1.runTime*1000)/TestPara1.timeStep + 1; 
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots;
 			
@@ -320,6 +322,9 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			
 				X1 = 0;  
 				X2 = 0;
+				FlushInQ(6);	   														//Clear input and output buffer
+				FlushOutQ(6);
+				
 				GraphDeinit(&Graph);													//内存释放在画图之后
 				GraphDeinit(&Graph_Temp);
 			
