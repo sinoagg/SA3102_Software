@@ -58,7 +58,23 @@ static int CheckPortStatus(unsigned char portNumber, unsigned char uartRxLen, vo
 		return 0;
 	}
 }
+<<<<<<< HEAD
 
+=======
+int main (int argc, char *argv[])
+{
+	if (InitCVIRTE (0, argv, 0) == 0)
+		return -1;	/* out of memory */
+	comSelect = 5;
+	CGS_comSelect = 1;
+	LoadInitPanel(); 
+	CheckPortStatus(comSelect, 20, ComCallback);
+	CheckPortStatus(CGS_comSelect, 14, ComCallbackCGS);
+	RunUserInterface ();
+	DiscardPanel (mainPanel);
+	return 0;
+}
+>>>>>>> d99e239211be39e241285aeda87b3d544d9932e7
 void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* RxData2) //判断接收源表1 源表2的数据
 {
 	int row;

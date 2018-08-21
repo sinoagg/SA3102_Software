@@ -23,9 +23,9 @@
 #define  SETGRAPH                         3
 #define  SETGRAPH_RING                    2       /* control type: ring, callback function: (none) */
 #define  SETGRAPH_RING_2                  3       /* control type: ring, callback function: (none) */
-#define  SETGRAPH_GRAPH2CLR3              4       /* control type: color, callback function: Graph2clr3CB */
-#define  SETGRAPH_GRAPH2CLR2              5       /* control type: color, callback function: Graph2clr2CB */
-#define  SETGRAPH_GRAPH2CLR1              6       /* control type: color, callback function: Graph2clr1CB */
+#define  SETGRAPH_GRAPH2CLR3              4       /* control type: color, callback function: (none) */
+#define  SETGRAPH_GRAPH2CLR2              5       /* control type: color, callback function: (none) */
+#define  SETGRAPH_GRAPH2CLR1              6       /* control type: color, callback function: (none) */
 #define  SETGRAPH_GRAPH1CLR3              7       /* control type: color, callback function: (none) */
 #define  SETGRAPH_GRAPH1CLR2              8       /* control type: color, callback function: (none) */
 #define  SETGRAPH_GRAPH1CLR1              9       /* control type: color, callback function: (none) */
@@ -47,6 +47,10 @@
 #define  SETTINGS_ABOUTBTN                4       /* control type: textMsg, callback function: AboutBtnCallback */
 #define  SETTINGS_GRAPHBTN                5       /* control type: textMsg, callback function: GraphBtnCallback */
 #define  SETTINGS_PRJBTN                  6       /* control type: textMsg, callback function: PrjBtnCallback */
+#define  SETTINGS_TEXTMSG                 7       /* control type: textMsg, callback function: OkCallback */
+#define  SETTINGS_Cancel                  8       /* control type: textMsg, callback function: CancelCallback */
+#define  SETTINGS_OK_PIC                  9       /* control type: picture, callback function: OkCallback */
+#define  SETTINGS_CANCEL_PIC              10      /* control type: picture, callback function: CancelCallback */
 
 
      /* Control Arrays: */
@@ -62,10 +66,9 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK AboutBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Graph2clr1CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Graph2clr2CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK Graph2clr3CB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK CancelCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK GraphBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK OkCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK PrjBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ProCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SettingsCB(int panel, int event, void *callbackData, int eventData1, int eventData2);

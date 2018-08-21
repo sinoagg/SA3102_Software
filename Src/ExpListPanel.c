@@ -75,7 +75,7 @@ static void ExpList(int display)
 	SetPanelSize(hEnvCfgPanel, 449, 300);
 	SetPanelAttribute (hEnvCfgPanel, ATTR_VISIBLE, !(display));
 	
-	HidePanel(hEnvResultPanel);
+	HidePanel(hEnvResultPanel);						//Òþ²ØanalyzeÏÂµÄÃæ°å
 	HidePanel(hResultDispPanel);
 	HidePanel(hAdvanceSamplePanel);  
 }
@@ -96,7 +96,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			if(index==TWO_TERMINAL)
 			{
 				SetPanelPos(TwoTerminalPanel, 105, 305);		
-				SetPanelSize(TwoTerminalPanel, 900, 1293);
+				SetPanelSize(TwoTerminalPanel, 900, 1293);																								
 				DisplayPanel(TwoTerminalPanel);
 				ExpList(1);
 			}
@@ -118,9 +118,9 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			}
 			else if(index==EXP_I_T)
 			{
-				SetPanelPos(I_T_Panel1.panelHandle, 105, 305);
-				SetPanelSize(I_T_Panel1.panelHandle, 900, 1293);
-				DisplayPanel(I_T_Panel1.panelHandle);
+				SetPanelPos(ITPanel, 105, 305);
+				SetPanelSize(ITPanel, 900, 1293);
+				DisplayPanel(ITPanel);
 				ExpList(0); 
 				DispRuntime(1);
 			}
@@ -155,6 +155,13 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 				DisplayPanel(IdVgPanel);
 				ExpList(0);
 				DispRuntime(1);
+			}
+			else if(index==FOUR_TERMINAL)
+			{
+				SetPanelPos(FourTerminalPanel, 105, 305);
+				SetPanelSize(FourTerminalPanel, 900, 1293);
+				DisplayPanel(FourTerminalPanel);
+				ExpList(1); 
 			}
 			else
 			{

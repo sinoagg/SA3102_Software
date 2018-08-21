@@ -47,7 +47,7 @@ int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callb
 	ProtocolQuery( comSelect, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
 	//Read_CGS_Value(CGS_comSelect);
 	
-	////判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
+	//判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
 	//if(Graph.X_Axis_Max < Graph.pCurveArray->numOfPlotDots)
 	//{
 	//	Graph.X_Axis_Max = Graph.X_Axis_Max + 100; 			//将图中的 X 轴坐标最大值范围扩大100
