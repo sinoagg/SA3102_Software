@@ -39,43 +39,43 @@ IdVgCfg_TypeDef IdVgCfg;
 /// HIFN  What does your function do?
 /// HIPAR x/What inputs does your function expect?
 /// HIRET What does your function return?
-int GetIdVgCfg (int panelHandle)
-{
-	/*int temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VD_START, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVdstart=temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VD_STOP, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVdstop=temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VD_STEP, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVdstep=temp;*/
-	
-	
-		int temp;
-	/*if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVdstart=temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_COMPL_2, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVdstop=temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS_2, &temp)<0)
-		return -1;*/
-	IdVgCfg.cfgVdstep=temp;
-	
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_START, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVgstart=temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_STOP, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVgstop=temp;
-	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_STEP, &temp)<0)
-		return -1;
-	IdVgCfg.cfgVgstep=temp;
-	
-	return 0;
-}
+//int GetIdVgCfg (int panelHandle)
+//{
+//	/*int temp;
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VD_START, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVdstart=temp;
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VD_STOP, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVdstop=temp;
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VD_STEP, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVdstep=temp;*/
+//	
+//	
+//		int temp;
+//	/*if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVdstart=temp;
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_COMPL_2, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVdstop=temp;
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_BIAS_2, &temp)<0)
+//		return -1;*/
+//	IdVgCfg.cfgVdstep=temp;
+//	
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_START, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVgstart=temp;
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_STOP, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVgstop=temp;
+//	if(GetCtrlVal(panelHandle, IDVGS_CFG_VG_STEP, &temp)<0)
+//		return -1;
+//	IdVgCfg.cfgVgstep=temp;
+//	
+//	return 0;
+//}
 
 static void IdVgSetGATEDisp(int panel, char focus)
 {
