@@ -1,7 +1,3 @@
-#include "excelreport.h"
-#include "excel2000.h"
-#include "GraphDisp.h"
-
 //==============================================================================
 //
 // Title:		LoadPanel.c
@@ -13,7 +9,10 @@
 //==============================================================================
 
 //==============================================================================
-// Include files
+// Include files 
+#include "excelreport.h"
+#include "excel2000.h"
+#include "GraphDisp.h"
 #include <userint.h>
 #include "toolbox.h"   
 #include "ResultMenuPanel.h"
@@ -65,8 +64,6 @@ static void DispSingleGraph(void)
 	SetCtrlAttribute (hEnvResultPanel, ENVIRPANEL_LEGENDCHECK, ATTR_VISIBLE, 0);
 	SetCtrlAttribute (hEnvResultPanel, ENVIRPANEL_TXT_LEGEND, ATTR_VISIBLE, 0);
 	SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_VISIBLE, 0);  
-	//HidePanel(chPanel);
-    //HidePanel(tablePanel);												  
 }
 
 static void DispDoubleGraph(void)
@@ -90,7 +87,6 @@ static void DispDoubleGraph(void)
 
 static void DispGraphSelectCheckBox(void)
 {
-	//int val=0;
 	if(graphDispSelect==DISP_SINGLE_GRAPH)
 	{
 		SetCtrlVal(chPanel, CHPANEL_CHECKBOX, 0);
@@ -160,7 +156,7 @@ int CVICALLBACK GraphCallback (int panel, int control, int event,
 	  	    GetCtrlVal(chPanel, CHPANEL_CHECKBOX, &val);
 			if(val)
 				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\DoubleGraph.ico");
-			 else
+			else
 				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph_pressed.ico");
 				
 			break;
@@ -176,8 +172,7 @@ int CVICALLBACK SaveDataCallback (int panel, int control, int event,
 	switch(event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph.ico");
-			DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table.ico"); 
+ 
 			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData_pressed.ico"); 
 			InstallPopup(saveDataPanel);		//弹出savedata面板 
 			break;
@@ -192,17 +187,7 @@ int CVICALLBACK ExitCallback (int panel, int control, int event,
 		{
 			RemovePopup (saveDataPanel);	 //移除、关闭savedata面板  
 			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData.ico");
-			if(resultDispSelect==DISP_TABLE)
-			{
-				DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table_pressed.ico");
-			}
-			else
-			{
-			  	if(graphDispSelect==DISP_SINGLE_GRAPH) 
-				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph_pressed.ico");
-				else if(graphDispSelect==DISP_DOUBLE_GRAPH)
-				DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\DoubleGraph.ico"); 
-			}
+			
 		}
 			return 0;
 }

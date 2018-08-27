@@ -1,4 +1,3 @@
-#include <userint.h>
 //==============================================================================
 //
 // Title:		IdVdsPanel.c
@@ -11,7 +10,8 @@
 
 //==============================================================================
 // Include files
-
+#include <userint.h>  
+#include "LoadPanel.h" 
 #include "IdVdsPanel.h"
 #include "Id-Vds Configuration.h"
 //==============================================================================
@@ -138,7 +138,43 @@ int CVICALLBACK IdVdDRAINDecoCB (int panel, int control, int event,
 	return 0;
 }
 
-
+int CVICALLBACK IdVdGateModeCB (int panel, int control, int event,
+								void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+			IdVdSetGATEDisp(panel,FOCUS);
+			IdVdSetDRAINDisp(panel,UNFOCUS); 
+			break;
+		case EVENT_VAL_CHANGED:
+		    int val;
+		    GetCtrlVal(IdVdPanel,IDVDS_CFG_GATEMODE,&val);
+			if(val==0)
+			{
+				DisplayImageFile (IdVdPanel, IDVDS_CFG_PIC_GATE, "Resource\\V_Step.ico");
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_STOP, ATTR_VISIBLE, 1);
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_VG_STOP, ATTR_VISIBLE, 1); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_MV, ATTR_VISIBLE, 1); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_STEP, ATTR_VISIBLE, 1); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_VG_STEP, ATTR_VISIBLE, 1); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_MV2, ATTR_VISIBLE, 1); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_DECORATION_Gate, ATTR_HEIGHT, 250); 
+			}
+			else if(val==1)
+			{
+				DisplayImageFile (IdVdPanel, IDVDS_CFG_PIC_GATE, "Resource\\V_Bias.ico");
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_STOP, ATTR_VISIBLE, 0);
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_VG_STOP, ATTR_VISIBLE, 0); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_MV, ATTR_VISIBLE, 0); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_STEP, ATTR_VISIBLE, 0); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_VG_STEP, ATTR_VISIBLE, 0); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_TXT_MV2, ATTR_VISIBLE, 0); 
+				SetCtrlAttribute (IdVdPanel, IDVDS_CFG_DECORATION_Gate, ATTR_HEIGHT, 160);
+			}
+	}
+	return 0;
+}
 
 
 

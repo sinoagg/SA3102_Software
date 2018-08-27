@@ -28,18 +28,23 @@
 #define  SETGRAPH_GRAPH2CLR1              6       /* control type: color, callback function: (none) */
 #define  SETGRAPH_GRAPH1CLR3              7       /* control type: color, callback function: (none) */
 #define  SETGRAPH_GRAPH1CLR2              8       /* control type: color, callback function: (none) */
-#define  SETGRAPH_GRAPH1CLR1              9       /* control type: color, callback function: (none) */
-#define  SETGRAPH_CHECKBOX                10      /* control type: radioButton, callback function: (none) */
-#define  SETGRAPH_TEXTMSG                 11      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_3               12      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_4               13      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_5               14      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_2               15      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_RING_3                  16      /* control type: ring, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_7               17      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TXT_PLOT_STYLE          18      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_8               19      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_6               20      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_SMU1CLR                 9       /* control type: color, callback function: (none) */
+#define  SETGRAPH_SMU2CLR                 10      /* control type: color, callback function: (none) */
+#define  SETGRAPH_GRAPH1CLR1              11      /* control type: color, callback function: (none) */
+#define  SETGRAPH_CHECKBOX                12      /* control type: radioButton, callback function: (none) */
+#define  SETGRAPH_TEXTMSG                 13      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_10              14      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_9               15      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_3               16      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_4               17      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_5               18      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_2               19      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_RING_3                  20      /* control type: ring, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_7               21      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TXT_PLOT_STYLE          22      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_8               23      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_6               24      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_11              25      /* control type: textMsg, callback function: (none) */
 
 #define  SETTINGS                         4       /* callback function: SettingsCB */
 #define  SETTINGS_CANVAS                  2       /* control type: canvas, callback function: (none) */

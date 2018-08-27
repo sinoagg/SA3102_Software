@@ -1,7 +1,3 @@
-#include <ansi_c.h>
-#include "V-I Configuration.h"
-#include "SetPanel.h"
-
 //==============================================================================
 //
 //==============================================================================
@@ -14,7 +10,9 @@
 #include "MainPanel.h"
 #include "LoadPanel.h"
 #include "SetPanelCB.h"
-
+#include <ansi_c.h>
+#include "V-I Configuration.h"
+#include "SetPanel.h"
 //==============================================================================
 // Constants
 
@@ -26,9 +24,11 @@
 
 //==============================================================================
 // Static global variables
-static int graph2Color1Old;
-static int graph2Color2Old;
-static int graph2Color3Old;
+int graph2Color1Old;
+int graph2Color2Old;
+int graph2Color3Old;
+int smu1ClrOld;
+int smu2ClrOld;
 //==============================================================================
 // Static functions
 
@@ -49,6 +49,8 @@ int CVICALLBACK SettingsCB (int panel, int event, void *callbackData,
 	{
 		case EVENT_CLOSE:
 			RemovePopup(setPanel);
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU1CLR, smu1ClrOld);
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU2CLR, smu2ClrOld);
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, graph2Color1Old); 
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, graph2Color2Old); 
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, graph2Color3Old);
@@ -65,7 +67,6 @@ int CVICALLBACK PrjBtnCallback (int panel, int control, int event,
 		case EVENT_LEFT_CLICK_UP:
 			
 			SetPanelPos(ENVTPanel, 5 , 160);
-			SetPanelSize(ENVTPanel, 380, 660);
 			DisplayPanel(ENVTPanel); 
 			
 			HidePanel (hSettingsGraphPanel);
@@ -94,7 +95,6 @@ switch (event)
 		case EVENT_LEFT_CLICK_UP:
 			
 			SetPanelPos(hSettingsGraphPanel, 5, 160);
-			SetPanelSize(hSettingsGraphPanel, 380, 660);
 			DisplayPanel(hSettingsGraphPanel);
 			
 			HidePanel (ENVTPanel); 
@@ -108,10 +108,6 @@ switch (event)
 			
 			SetCtrlAttribute (panel, SETTINGS_ABOUTBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);           //about背景色
 	     	SetCtrlAttribute (panel, SETTINGS_ABOUTBTN, ATTR_TEXT_COLOR, VAL_BLACK);              //about文本颜色
-		
-			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2Color1Old);
-			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, &graph2Color2Old);
-			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2Color3Old);
 			
 			break;
 
@@ -129,7 +125,6 @@ switch (event)
 		case EVENT_LEFT_CLICK_UP:
 			 
 			SetPanelPos(aboutPanel, 5, 160);
-			SetPanelSize(aboutPanel, 380, 660);
 			DisplayPanel(aboutPanel);
 			
 		    HidePanel (ENVTPanel); 
@@ -177,6 +172,8 @@ int CVICALLBACK CancelCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			RemovePopup(setPanel); 
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU1CLR, smu1ClrOld);
+			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU2CLR, smu2ClrOld);
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, graph2Color1Old); 
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, graph2Color2Old); 
 			SetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, graph2Color3Old);

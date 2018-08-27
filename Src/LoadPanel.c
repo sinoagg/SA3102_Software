@@ -176,16 +176,16 @@ int LoadInitPanel (void)
 		return -1;*/
 	if ((hToolsPanel = LoadPanel(mainPanel,"Tools.uir",TOOLSPANEL))<0)
 		return -1;
-	if((hCalibrationPanel = LoadPanel(hToolsPanel,"Tools.uir",CALPANEL))<0)  
+	if((hCalibrationPanel = LoadPanel(hToolsPanel,"Tools.uir",CALIPANEL))<0)  
 		return -1;
 	
 	DisplayPanel (mainPanel);
 	SetPanelPos(expListPanel, 105, 3);  //加载面板位置 (,top,left)
-	SetPanelSize(expListPanel, 900, 300);//加载面板大小  (,height，width)
+	//SetPanelSize(expListPanel, 900, 300);
 	DisplayPanel(expListPanel);
 
 	SetPanelPos(TwoTerminalPanel, 105, 305);		
-	SetPanelSize(TwoTerminalPanel, 900, 1293);
+	//SetPanelSize(TwoTerminalPanel, 900, 1293);
 	DisplayPanel(TwoTerminalPanel);
 	
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1); 

@@ -15,7 +15,7 @@
 
 #define  IDVDS_CFG                        1
 #define  IDVDS_CFG_PIC_IDVD_DRAIN         2       /* control type: picture, callback function: (none) */
-#define  IDVDS_CFG_PIC_IDVD_SOURCE_2      3       /* control type: picture, callback function: (none) */
+#define  IDVDS_CFG_PIC_GATE               3       /* control type: picture, callback function: (none) */
 #define  IDVDS_CFG_PIC_IDVD_BLUK_2        4       /* control type: picture, callback function: (none) */
 #define  IDVDS_CFG_PIC_IDVD_BLUK          5       /* control type: picture, callback function: (none) */
 #define  IDVDS_CFG_PIC_FET                6       /* control type: picture, callback function: (none) */
@@ -37,14 +37,14 @@
 #define  IDVDS_CFG_VG_STEP                22      /* control type: numeric, callback function: IdVdGATEDecoCB */
 #define  IDVDS_CFG_VG_STOP                23      /* control type: numeric, callback function: IdVdGATEDecoCB */
 #define  IDVDS_CFG_VG_START               24      /* control type: numeric, callback function: IdVdGATEDecoCB */
-#define  IDVDS_CFG_RING_5                 25      /* control type: ring, callback function: IdVdGATEDecoCB */
+#define  IDVDS_CFG_GATEMODE               25      /* control type: ring, callback function: IdVdGateModeCB */
 #define  IDVDS_CFG_TEXTMSG_24             26      /* control type: textMsg, callback function: IdVdGATEDecoCB */
 #define  IDVDS_CFG_TEXTMSG_25             27      /* control type: textMsg, callback function: IdVdGATEDecoCB */
 #define  IDVDS_CFG_TEXTMSG_26             28      /* control type: textMsg, callback function: IdVdGATEDecoCB */
-#define  IDVDS_CFG_TEXTMSG_27             29      /* control type: textMsg, callback function: IdVdGATEDecoCB */
-#define  IDVDS_CFG_TEXTMSG_28             30      /* control type: textMsg, callback function: IdVdGATEDecoCB */
-#define  IDVDS_CFG_TEXTMSG_29             31      /* control type: textMsg, callback function: IdVdGATEDecoCB */
-#define  IDVDS_CFG_TEXTMSG_30             32      /* control type: textMsg, callback function: IdVdGATEDecoCB */
+#define  IDVDS_CFG_TXT_STOP               29      /* control type: textMsg, callback function: IdVdGATEDecoCB */
+#define  IDVDS_CFG_TXT_MV                 30      /* control type: textMsg, callback function: IdVdGATEDecoCB */
+#define  IDVDS_CFG_TXT_STEP               31      /* control type: textMsg, callback function: IdVdGATEDecoCB */
+#define  IDVDS_CFG_TXT_MV2                32      /* control type: textMsg, callback function: IdVdGATEDecoCB */
 #define  IDVDS_CFG_TXT_GATE               33      /* control type: textMsg, callback function: IdVdGATEDecoCB */
 #define  IDVDS_CFG_BG_GATE                34      /* control type: canvas, callback function: IdVdGATEDecoCB */
 #define  IDVDS_CFG_DECORATION_Gate        35      /* control type: deco, callback function: IdVdGATEDecoCB */
@@ -64,6 +64,7 @@
 
 int  CVICALLBACK IdVdDRAINDecoCB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK IdVdGATEDecoCB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK IdVdGateModeCB(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
