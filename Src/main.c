@@ -76,7 +76,8 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 		if(TestPara1.testMode == NO_SWEEP_VI )
 		{
 			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_current;
-			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data  
+			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data
+		
 		}
 		if(TestPara1.testMode == NO_SWEEP_IT )
 		{
@@ -85,8 +86,13 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
 			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
 		}
-		//if(TestPara1.testMode == NO_SWEEP_VT )
-		//		*(Graph.pCurveArray->pDotX++) = RxData1.rx_Theory_voltaget;
+		if(TestPara1.testMode == NO_SWEEP_VT )
+		{
+			*(Graph.pCurveArray->pDotX++) = X1++;
+			*(Graph.pCurveArray->pDotY++) = RxData1->rx_voltage.num_float;				//get y, set pointer to the next data 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
+		}
 		if(TestPara1.testMode == NO_SWEEP_RT )
 		{
 			*(Graph.pCurveArray->pDotX++) = X1++;		
@@ -151,7 +157,10 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 		 //i++; 
 	}
 	rxNum = GetInQLen(comSelect); 
-	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//»­ÇúÏßÍ¼  
+	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//»­ÇúÏßÍ¼ 
+	
+	PlotCurve1(&Graph, graphDispPanel, GRAPHDISP_GRAPH1, 0); 
+	
 	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))
 	{
 		DiscardAsyncTimer(TimerID);

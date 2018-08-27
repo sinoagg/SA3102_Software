@@ -33,6 +33,7 @@
 #define  PANEL_V_T_BG_SMU1                18      /* control type: canvas, callback function: VTSMU1DecoCallback */
 #define  PANEL_V_T_PICTURE_6              19      /* control type: picture, callback function: (none) */
 #define  PANEL_V_T_PICTURE_7              20      /* control type: picture, callback function: (none) */
+#define  PANEL_V_T_VTSTART1UNIT           21      /* control type: ring, callback function: VTSMU1DecoCallback */
 
 
      /* Control Arrays: */

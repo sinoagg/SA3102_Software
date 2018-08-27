@@ -60,7 +60,7 @@ PrjHandleTypeDef SingleProject[64];
 Graph_TypeDef Graph;
 Graph_TypeDef Graph_Temp;
 char ABC[11][20] ={"A","B","C","D","E","F","G","H","I","J","K"};
-char Table_title_IV[11][20] ={"Current(A)","Voltage(mV)","Current(A)","Voltage(mV)"};
+char Table_title_IV[11][20] ={"Voltage(mV)","Current(A)","Voltage(mV)","Current(A)"};
 char Table_title_VI[11][20] ={"Voltage(mV)","Current(A)","Voltage(mV)","Current(A)"}; 
 char Table_title_IT[11][20] ={"Time(S)","Current(A)","Time(S)","Current(A)"};
 char Table_title_RT[11][20] ={"Time(S)","Resistance(Ω)","Time(S)","Resistance(Ω)"};
@@ -221,6 +221,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	int graphIndex=1;
 	int numOfCurve=2;
 	int numOfDots=100;
+	int temp = 0;
 	Table_TypeDef Table_ATTR;
 	switch((enum ExpType)expType)
 	{
@@ -249,7 +250,10 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			GetTestPara(&V_I_Panel1, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&V_I_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
-			numOfDots = abs(TestPara1.Voltage_Start - TestPara1.Voltage_Stop)/TestPara2.Voltage_Stop;
+			GetCtrlVal(VIPanel,PANEL_V_I_START1UNIT,&(temp));
+			TestPara1.rangeMode = (temp<<4)|TestPara1.rangeMode; 
+			
+			numOfDots = abs(TestPara1.Voltage_Start - TestPara1.Voltage_Stop)/TestPara1.Voltage_Step + 1;
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pGraphAttr->xAxisHead = TestPara1.Voltage_Start;   
 			Graph.pGraphAttr->xAxisTail = TestPara1.Voltage_Stop;
@@ -275,6 +279,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			
 			break;
 		case NO_SWEEP_RT:
+			expType = 3;
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
 			Table_ATTR.column = 2 ;   				//列数
@@ -283,8 +288,29 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			GetTestPara(&R_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
 			GetTestPara(&R_T_Panel2, &TestPara2); //得到源表 2 用户设置参数
 			
-			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep;
-			graphInit(graphIndex, numOfCurve, numOfDots+5, &Graph);
+			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
+			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
+			Graph.pCurveArray->numOfTotalDots = numOfDots;
+			
+			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
+			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//设置 X 轴的范围
+			
+		case NO_SWEEP_VT:
+			expType = 4;	//测试类型
+			Graph.X_Axis_Max = 100;
+			Graph_Temp.X_Axis_Max=100;
+			Table_ATTR.column = 2 ;   				//列数
+			Table_ATTR.column_width = 300;  		//列宽
+			Table_init(Table_title_RT, Table_ATTR.column, Table_ATTR.column_width );
+			
+			GetTestPara(&V_T_Panel1, &TestPara1);  //得到源表 1 用户设置参数
+			GetTestPara(&V_T_Panel2, &TestPara2);  //得到源表 2 用户设置参数
+			
+			GetCtrlVal(VTPanel,PANEL_V_T_VTSTART1UNIT,&(temp));
+			TestPara1.rangeMode = (temp<<4)|TestPara1.rangeMode; 
+			
+			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
+			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots;
 			
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
@@ -295,7 +321,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	PrepareCfgTxData(&TestPara1, &TestPara2, devAddr1, devAddr2, expType, pmeasUartTxBuf1,pmeasUartTxBuf2); //分别向  源表1  源表2 存储区中 放入用户输入的 设置命令 
 	if(devAddr1 == 0x01)	//判断是否为源表 1 地址，为真则发送 源表 1 设置命令
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN); 
-	Delay(0.2);
+	Delay(0.02);
 	if(devAddr2 == 0x02)	//判断是否为源表 2 地址，为真则发送 源表 2 设置命令  
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf2, SA31_UART_TX_LEN);
 }
@@ -324,8 +350,8 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			
 				X1 = 0;  
 				X2 = 0;
-				FlushInQ(6);	   														//Clear input and output buffer
-				FlushOutQ(6);
+				FlushInQ(comSelect);	   														//Clear input and output buffer
+				FlushOutQ(comSelect);
 				
 				GraphDeinit(&Graph);													//内存释放在画图之后
 				GraphDeinit(&Graph_Temp);
@@ -372,8 +398,8 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
 			ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
 		
-			FlushInQ(6);	   														//Clear input and output buffer
-			FlushOutQ(6);
+			FlushInQ(comSelect);	   														//Clear input and output buffer
+			FlushOutQ(comSelect);
 			
 			break;
 	}

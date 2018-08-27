@@ -51,7 +51,8 @@ enum TestMode
 	NO_SWEEP_IV=1,
 	NO_SWEEP_VI=2,
 	NO_SWEEP_IT=3,
-	NO_SWEEP_RT=4
+	NO_SWEEP_RT=4,
+	NO_SWEEP_VT=5 
 };
 typedef struct
 {

@@ -111,6 +111,10 @@ static void GetTestPara(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara) 
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_SAMPLERATE, &(pTestPara->sampleRate));
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_SAMPLENUMBER, &(pTestPara->sampleNumber));
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_RANGESETTING, &(pTestPara->rangeMode));
+	
+	GetCtrlVal(hAdvanceSamplePanel, SAMPLE_ADV_MAXRANGE, &(pTestPara->maxRange));
+	GetCtrlVal(hAdvanceSamplePanel, SAMPLE_ADV_MINRANGE, &(pTestPara->minRange));
+
 }
 
 /////*

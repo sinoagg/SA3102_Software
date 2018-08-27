@@ -32,6 +32,7 @@
 
 //==============================================================================
 // Global functions
+int PlotCurve1(Graph_TypeDef* pGraph, int graphDispPanel, int control, int indexCurveArray);
 int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control);
 int PlotCurve_Temp(Graph_TypeDef* pGraph_Temp, int graphDispPanel, int control);
 void temp_hum_pre_display();

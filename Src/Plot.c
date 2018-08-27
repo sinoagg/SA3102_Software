@@ -38,9 +38,36 @@ int graph2humclr;
 int graph2preclr; 
 //==============================================================================
 // Global functions
+int PlotCurve1(Graph_TypeDef* pGraph, int graphDispPanel, int control, int indexCurveArray) 
+{
+	int numOfDotsToPlot=(pGraph->pCurveArray + indexCurveArray)->numOfDotsToPlot;		//防止中断端去写入这个数据 
+	if(numOfDotsToPlot>0)
+	{
+		if(pGraph->pCurveArray->numOfPlotDots >= 1)	//如果有需要画图的点
+		{
+			
+			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1) );
+			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot-1, pGraph->pCurveArray->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, VAL_BLUE);  
+		}
+		else
+		{
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot, pGraph->pCurveArray->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, VAL_BLUE); 
+		}
+	(pGraph->pCurveArray + indexCurveArray)->numOfPlotDots+=numOfDotsToPlot;		//画图总点数递增
+	(pGraph->pCurveArray + indexCurveArray)->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
+	(pGraph->pCurveArray + indexCurveArray)->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
+	(pGraph->pCurveArray + indexCurveArray)->numOfDotsToPlot-=numOfDotsToPlot;		//防止中断端在画图期间接收到新的数据.
+	}
+	if(pGraph->plotHandle<0)
+		return -1;
+	else
+		return 0;
+}
+
 int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 {
-	int numOfDotsToPlot=pGraph->pCurveArray->numOfDotsToPlot;							//防止中断端去写入这个数据 
+	int numOfDotsToPlot=pGraph->pCurveArray->numOfDotsToPlot;									//防止中断端去写入这个数据 
 	int numOfDotsToPlot2=(pGraph->pCurveArray + 1)->numOfDotsToPlot;							//防止中断端去写入这个数据  
 	if(Graph.pCurveArray->numOfPlotDots >=1 )//画 第二个 点
 	{
