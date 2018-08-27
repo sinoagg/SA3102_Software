@@ -13,7 +13,6 @@
 #include <userint.h>   
 #include "Tools.h"
 #include "LoadPanel.h"
-#include "ToolsPanel.h"
 #include "Protocol.h"
 #include "main.h"
 

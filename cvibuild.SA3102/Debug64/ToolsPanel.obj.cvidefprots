@@ -10,10 +10,6 @@ Prototype="int CalibrationCallback(int panel, int control, int event, void *call
 Class="Function"
 Prototype="int CaliPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);"
 
-[CalOkCallback]
-Class="Function"
-Prototype="int CalOkCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
-
 [OutputVoltageCaliCallback]
 Class="Function"
 Prototype="int OutputVoltageCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"

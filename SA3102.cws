@@ -1,6 +1,6 @@
 [Workspace Header]
 Version = 1700
-Pathname = "/e/SA3102/SA3102_Software/SA3102.cws"
+Pathname = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/SA3102.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2017"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2017"
@@ -14,7 +14,6 @@ Active Project = 1
 Project 0001 = "SA3102.prj"
 Project 0001 Folder Resource Collapsed = True
 Project 0001 FolderId 3 Collapsed = True
-<<<<<<< HEAD
 Project 0001 Folder Instrument Files Collapsed = True
 Project 0001 FolderId 6 Collapsed = True
 Drag Bar Left = 312
@@ -22,17 +21,6 @@ Window Top = -55
 Window Left = 1949
 Window Bottom = 737
 Window Right = 3487
-=======
-Project 0001 Folder Include Files Collapsed = True
-Project 0001 FolderId 4 Collapsed = True
-Project 0001 Folder Instrument Files Collapsed = True
-Project 0001 FolderId 6 Collapsed = True
-Drag Bar Left = 340
-Window Top = 208
-Window Left = 468
-Window Bottom = 907
-Window Right = 1682
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -46,13 +34,9 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-<<<<<<< HEAD
-Number of Opened Files = 6
-=======
-Number of Opened Files = 5
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
+Number of Opened Files = 10
 Window Confinement Region Enabled = True
-MainColumnWidth = 323
+MainColumnWidth = 295
 FileDateColumnWidth = 70
 FileSizeColumnWidth = 70
 
@@ -66,27 +50,28 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/e/SA3102/SA3102_Software/Instrument Files/asynctmr.fp"
+Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Instrument Files/a"
+Path Line0002 = "synctmr.fp"
 File Type = "Function Panel"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
 [File 0002]
-Path = "/e/SA3102/SA3102_Software/Instrument Files/excelreport.fp"
+Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Instrument Files/e"
+Path Line0002 = "xcelreport.fp"
 File Type = "Function Panel"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
 [File 0003]
-Path = "/e/SA3102/SA3102_Software/Src/MainPanelCb.c"
+Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/main.c"
 File Type = "CSource"
-<<<<<<< HEAD
-Disk Date = 3618191859
+Disk Date = 3618193596
 In Projects = "1,"
 Window Top = 212
 Window Left = 106
-Window Z-Order = 1
-Source Window State = "1,95,95,95,0,76,76,1,0,205,0,0,0,0,0,48,59,0,94,9,323,703,1,0,"
+Window Z-Order = 7
+Source Window State = "1,95,95,95,0,76,76,1,0,107,0,0,0,0,0,25,59,0,94,9,323,703,1,0,"
 
 [File 0004]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/I_T_Panel.c"
@@ -95,18 +80,18 @@ Disk Date = 3617868973
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 5
+Window Z-Order = 10
 Source Window State = "1,37,37,37,31,47,47,1,3,80,0,0,0,0,0,25,1,0,37,31,323,541,1,0,"
 
 [File 0005]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/LoadPanel.c"
 File Type = "CSource"
-Disk Date = 3617658734
+Disk Date = 3618193804
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
-Window Z-Order = 4
-Source Window State = "1,26,26,26,6,7,6,1,3,83,0,0,0,0,0,25,126,0,26,7,323,559,1,0,"
+Window Z-Order = 3
+Source Window State = "1,178,178,178,38,49,49,1,0,83,0,0,0,0,0,25,166,0,178,66,323,559,1,0,"
 
 [File 0006]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Protocol.h"
@@ -115,13 +100,13 @@ Disk Date = 3618185430
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 2
+Window Z-Order = 8
 Source Window State = "1,86,86,86,21,31,31,1,0,107,0,0,0,0,0,25,63,0,88,94,323,703,1,0,"
 
 [File 0007]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/MainPanelCb.c"
 File Type = "CSource"
-Disk Date = 3618191056
+Disk Date = 3618193601
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
@@ -154,12 +139,13 @@ Window Width = 703
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/MainPanel"
 Path Line0002 = ".uir"
 File Type = "User Interface Resource"
-Disk Date = 3618140486
+Disk Date = 3618193955
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
 Window Height = 323
 Window Width = 559
+Window Z-Order = 1
 
 [File 0011]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/V-T Confi"
@@ -186,85 +172,41 @@ Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/U
 Path Line0002 = "ntDisp.uir"
 File Type = "User Interface Resource"
 Disk Date = 3617658734
-=======
-Disk Date = 3618193131
-In Projects = "1,"
-Window Top = 152
-Window Left = 74
-Window Z-Order = 1
-Source Window State = "1,375,376,375,12,25,12,0,0,188,0,351,0,0,0,48,390,0,387,65,427,718,1,0,"
-
-[File 0004]
-Path = "/e/SA3102/SA3102_Software/Src/SetPanelCB.c"
-File Type = "CSource"
-Disk Date = 3617859015
-In Projects = "1,"
-Window Top = 272
-Window Left = 138
-Source Window State = "1,111,113,113,0,80,80,0,0,80,0,156,0,0,0,25,0,0,24,126,427,718,1,0,"
-
-[File 0005]
-Path = "/e/SA3102/SA3102_Software/Src/main.c"
-File Type = "CSource"
-Disk Date = 3618193128
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-In Projects = "1,"
-Window Top = 62
-Window Left = 26
-Window Z-Order = 2
-Source Window State = "1,33,33,33,16,17,16,0,0,58,0,129,0,0,0,18,3,0,33,17,323,541,1,0,"
-
-<<<<<<< HEAD
-[File 0014]
-Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Experimen"
-Path Line0002 = "t List.uir"
-File Type = "User Interface Resource"
-Disk Date = 3618185430
-In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Window Height = 323
-Window Width = 541
-
-[File 0015]
-Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/GraphDisp"
-Path Line0002 = ".uir"
-File Type = "User Interface Resource"
-Disk Date = 3617863144
-=======
-[File 0006]
-Path = "/e/SA3102/SA3102_Software/UI Files/TerminalPanel.uir"
-File Type = "User Interface Resource"
-Disk Date = 3618021862
-In Projects = "1,"
-Window Top = 62
-Window Left = 26
-Window Height = 427
-Window Width = 718
-
-[File 0007]
-Path = "/e/SA3102/SA3102_Software/UI Files/EnvironmentDisp.uir"
-File Type = "User Interface Resource"
-Disk Date = 3617659663
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Window Height = 427
 Window Width = 718
 
-<<<<<<< HEAD
+[File 0014]
+Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Experimen"
+Path Line0002 = "t List.uir"
+File Type = "User Interface Resource"
+Disk Date = 3618194067
+In Projects = "1,"
+Window Top = 32
+Window Left = 10
+Window Height = 323
+Window Width = 541
+Window Z-Order = 2
+
+[File 0015]
+Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/GraphDisp"
+Path Line0002 = ".uir"
+File Type = "User Interface Resource"
+Disk Date = 3617863144
+In Projects = "1,"
+Window Top = 32
+Window Left = 10
+Window Height = 323
+Window Width = 703
+
 [File 0016]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/I-T Confi"
 Path Line0002 = "guration.uir"
-=======
-[File 0008]
-Path = "/e/SA3102/SA3102_Software/UI Files/Experiment List.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "User Interface Resource"
-Disk Date = 3618022362
+Disk Date = 3617658734
 In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 242
 Window Left = 122
 Window Height = 323
@@ -273,71 +215,23 @@ Window Width = 577
 [File 0017]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Id-Vds Co"
 Path Line0002 = "nfiguration.uir"
-=======
-Window Top = 212
-Window Left = 106
-Window Height = 427
-Window Width = 718
-
-[File 0009]
-Path = "/e/SA3102/SA3102_Software/UI Files/GraphDisp.uir"
 File Type = "User Interface Resource"
-Disk Date = 3617678782
+Disk Date = 3617658734
 In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Window Height = 323
-Window Width = 703
 
-[File 0010]
-Path = "/e/SA3102/SA3102_Software/UI Files/I-T Configuration.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-File Type = "User Interface Resource"
-Disk Date = 3617659663
-In Projects = "1,"
-Window Top = 332
-Window Left = 170
-Window Height = 427
-Window Width = 718
-
-<<<<<<< HEAD
 [File 0018]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Id-Vgs Co"
 Path Line0002 = "nfiguration.uir"
-=======
-[File 0011]
-Path = "/e/SA3102/SA3102_Software/UI Files/I-V Configuration.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "User Interface Resource"
-Disk Date = 3617659663
+Disk Date = 3617658734
 In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Window Height = 323
-Window Width = 559
 
-<<<<<<< HEAD
 [File 0019]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/ProjectPa"
 Path Line0002 = "nel.uir"
-=======
-[File 0012]
-Path = "/e/SA3102/SA3102_Software/UI Files/Id-Vds Configuration.uir"
 File Type = "User Interface Resource"
-Disk Date = 3617845592
+Disk Date = 3617658734
 In Projects = "1,"
-Window Top = 152
-Window Left = 74
-Window Height = 427
-Window Width = 718
-
-[File 0013]
-Path = "/e/SA3102/SA3102_Software/UI Files/Id-Vgs Configuration.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-File Type = "User Interface Resource"
-Disk Date = 3617755234
-In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 242
 Window Left = 122
 Window Height = 323
@@ -346,35 +240,16 @@ Window Width = 541
 [File 0020]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/R-T Confi"
 Path Line0002 = "guration.uir"
-=======
-Window Top = 122
-Window Left = 58
-Window Height = 427
-Window Width = 718
-
-[File 0014]
-Path = "/e/SA3102/SA3102_Software/UI Files/MainPanel.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "User Interface Resource"
-Disk Date = 3617870310
+Disk Date = 3617658734
 In Projects = "1,"
-Window Top = 122
-Window Left = 58
-Window Height = 427
-Window Width = 718
 
-<<<<<<< HEAD
 [File 0021]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Result Me"
 Path Line0002 = "nu.uir"
-=======
-[File 0015]
-Path = "/e/SA3102/SA3102_Software/UI Files/ProjectPanel.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "User Interface Resource"
-Disk Date = 3617686208
+Disk Date = 3617658734
 In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 482
 Window Left = 250
 Window Height = 323
@@ -383,19 +258,9 @@ Window Width = 703
 [File 0022]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Sample An"
 Path Line0002 = "alyze.uir"
-=======
-Window Top = 182
-Window Left = 90
-Window Height = 427
-Window Width = 718
-
-[File 0016]
-Path = "/e/SA3102/SA3102_Software/UI Files/R-T Configuration.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "User Interface Resource"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 512
 Window Left = 266
 Window Height = 323
@@ -426,29 +291,9 @@ Window Width = 727
 [File 0025]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/TableData"
 Path Line0002 = ".uir"
-=======
-Window Top = 212
-Window Left = 106
-Window Height = 427
-Window Width = 718
-
-[File 0017]
-Path = "/e/SA3102/SA3102_Software/UI Files/Result Menu.uir"
 File Type = "User Interface Resource"
-Disk Date = 3617659663
+Disk Date = 3617574372
 In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Window Height = 427
-Window Width = 718
-
-[File 0018]
-Path = "/e/SA3102/SA3102_Software/UI Files/Sample Analyze.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-File Type = "User Interface Resource"
-Disk Date = 3617745679
-In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 212
 Window Left = 106
 Window Height = 323
@@ -457,19 +302,9 @@ Window Width = 577
 [File 0026]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/TerminalP"
 Path Line0002 = "anel.uir"
-=======
-Window Top = 182
-Window Left = 90
-Window Height = 427
-Window Width = 718
-
-[File 0019]
-Path = "/e/SA3102/SA3102_Software/UI Files/Sample Configuration.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "User Interface Resource"
-Disk Date = 3617659663
+Disk Date = 3617658734
 In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 182
 Window Left = 90
 Window Height = 323
@@ -477,130 +312,57 @@ Window Width = 577
 
 [File 0027]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Tools.uir"
-=======
-Window Top = 32
-Window Left = 10
-Window Height = 427
-Window Width = 718
-
-[File 0020]
-Path = "/e/SA3102/SA3102_Software/UI Files/SetPanel.uir"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "User Interface Resource"
-Disk Date = 3617768331
+Disk Date = 3618193482
 In Projects = "1,"
-Window Top = 122
-Window Left = 58
+Window Top = 62
+Window Left = 26
 Window Height = 323
-Window Width = 727
+Window Width = 559
+Window Z-Order = 5
 
-<<<<<<< HEAD
 [File 0028]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Cgs_mt.c"
 File Type = "CSource"
 Disk Date = 3617425508
-=======
-[File 0021]
-Path = "/e/SA3102/SA3102_Software/UI Files/TableData.uir"
-File Type = "User Interface Resource"
-Disk Date = 3617659663
 In Projects = "1,"
-Window Top = 92
-Window Left = 42
-Window Height = 427
-Window Width = 718
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0022]
-Path = "/e/SA3102/SA3102_Software/UI Files/Tools.uir"
-File Type = "User Interface Resource"
-Disk Date = 3618193079
-In Projects = "1,"
-Window Top = 302
-Window Left = 154
-Window Height = 427
-Window Width = 718
-Window Z-Order = 4
-
-[File 0023]
-Path = "/e/SA3102/SA3102_Software/UI Files/V-I Configuration.uir"
-File Type = "User Interface Resource"
-Disk Date = 3617659663
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-In Projects = "1,"
-
-<<<<<<< HEAD
 [File 0029]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Environment.c"
 File Type = "CSource"
 Disk Date = 3617658734
-=======
-[File 0024]
-Path = "/e/SA3102/SA3102_Software/UI Files/V-T Configuration.uir"
-File Type = "User Interface Resource"
-Disk Date = 3617659663
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-In Projects = "1,"
-
-<<<<<<< HEAD
-[File 0030]
-Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ExpListPanel.c"
-=======
-[File 0025]
-Path = "/e/SA3102/SA3102_Software/Src/Cgs_mt.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-File Type = "CSource"
-Disk Date = 3617659663
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
+[File 0030]
+Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ExpListPanel.c"
+File Type = "CSource"
+Disk Date = 3617658734
+In Projects = "1,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
+
 [File 0031]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/I_V_Panel.c"
-=======
-[File 0026]
-Path = "/e/SA3102/SA3102_Software/Src/Environment.c"
 File Type = "CSource"
-Disk Date = 3617659663
-In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Source Window State = "1,17,17,17,9,22,22,0,3,0,0,0,0,0,0,0,0,0,17,9,427,718,1,0,"
-
-[File 0027]
-Path = "/e/SA3102/SA3102_Software/Src/ExpListPanel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Source Window State = "1,38,41,38,0,8160,135,1,0,0,0,0,0,0,0,0,102,0,48,99,323,703,1,0,"
 
-<<<<<<< HEAD
 [File 0032]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/IdVdsPanel.c"
-=======
-[File 0028]
-Path = "/e/SA3102/SA3102_Software/Src/I_T_Panel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3618193482
 In Projects = "1,"
-Window Top = 242
-Window Left = 122
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,85,0,113,0,427,718,1,0,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0033]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/IdVgsPanel.c"
-=======
-[File 0029]
-Path = "/e/SA3102/SA3102_Software/Src/I_V_Panel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3618193482
 In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 32
 Window Left = 10
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,541,1,0,"
@@ -608,205 +370,107 @@ Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,541,1,0,"
 [File 0034]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ProjectPanelCB"
 Path Line0002 = ".c"
-=======
+File Type = "CSource"
+Disk Date = 3617658734
+In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-[File 0030]
-Path = "/e/SA3102/SA3102_Software/Src/IdVdsPanel.c"
-File Type = "CSource"
-Disk Date = 3617760517
-In Projects = "1,"
-Window Top = 92
-Window Left = 42
-Source Window State = "1,165,165,165,59,64,59,0,0,0,0,0,0,0,0,0,132,0,165,63,427,718,1,0,"
-
-[File 0031]
-Path = "/e/SA3102/SA3102_Software/Src/IdVgsPanel.c"
-File Type = "CSource"
-Disk Date = 3617760488
-In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Source Window State = "1,144,168,144,8,14,8,0,3,0,0,0,0,0,0,0,130,0,168,14,427,718,1,0,"
-
-[File 0032]
-Path = "/e/SA3102/SA3102_Software/Src/LoadPanel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-File Type = "CSource"
-Disk Date = 3618183591
-In Projects = "1,"
-Window Top = 242
-Window Left = 122
-Window Z-Order = 5
-Source Window State = "1,183,183,183,43,78,43,0,0,80,0,0,0,0,0,25,139,0,178,66,427,718,1,0,"
-
-<<<<<<< HEAD
 [File 0035]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/R_T_Panel.c"
-=======
-[File 0033]
-Path = "/e/SA3102/SA3102_Software/Src/ProjectPanelCB.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0036]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ResultMenuPane"
 Path Line0002 = "l.c"
-=======
-[File 0034]
-Path = "/e/SA3102/SA3102_Software/Src/R_T_Panel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3618193482
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,703,0,0,"
 
-<<<<<<< HEAD
 [File 0037]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/SampleCfgPanel"
 Path Line0002 = ".c"
-=======
-[File 0035]
-Path = "/e/SA3102/SA3102_Software/Src/ResultMenuPanel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617834423
+Disk Date = 3617425508
 In Projects = "1,"
-Window Top = 92
-Window Left = 42
-Source Window State = "1,12,15,12,17,23,17,0,0,0,0,0,0,0,0,0,88,0,113,0,427,718,1,0,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0038]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/SetPanelCB.c"
-=======
-[File 0036]
-Path = "/e/SA3102/SA3102_Software/Src/SampleCfgPanel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3618193482
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
 Source Window State = "1,0,0,0,0,0,0,0,0,107,0,0,0,0,0,25,92,0,126,39,323,703,1,0,"
 
-<<<<<<< HEAD
 [File 0039]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/table.c"
-=======
-[File 0037]
-Path = "/e/SA3102/SA3102_Software/UI Files/table.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3617592836
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,54,0,80,0,323,559,1,0,"
+Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,559,1,0,"
 
-<<<<<<< HEAD
 [File 0040]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ToolsPanel.c"
-=======
-[File 0038]
-Path = "/e/SA3102/SA3102_Software/Src/ToolsPanel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3618193076
+Disk Date = 3618193783
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
-Window Z-Order = 3
-Source Window State = "1,87,99,99,0,2,2,0,0,80,0,0,0,0,0,25,54,0,87,0,427,718,1,0,"
+Window Z-Order = 4
+Source Window State = "1,15,15,15,0,23,23,1,0,83,0,0,0,0,0,25,0,0,14,22,323,559,1,0,"
 
-<<<<<<< HEAD
 [File 0041]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/V_I_Panel.c"
-=======
-[File 0039]
-Path = "/e/SA3102/SA3102_Software/Src/V_I_Panel.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3617658734
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Source Window State = "1,50,51,50,0,8160,8,1,3,107,0,0,0,0,0,25,38,0,51,17,323,703,1,0,"
 
-<<<<<<< HEAD
 [File 0042]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/V_T_Panel.c"
 File Type = "CSource"
 Disk Date = 3618191236
-=======
-[File 0040]
-Path = "/e/SA3102/SA3102_Software/Src/V_T_Panel.c"
-File Type = "CSource"
-Disk Date = 3617659663
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 In Projects = "1,"
 Window Top = 272
 Window Left = 138
-Window Z-Order = 3
+Window Z-Order = 9
 Source Window State = "1,38,38,38,121,135,135,1,0,83,0,0,0,0,0,25,0,0,38,137,323,559,1,0,"
 
-<<<<<<< HEAD
 [File 0043]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Instrument Files/a"
 Path Line0002 = "synctmr.c"
-=======
-[File 0041]
-Path = "/e/SA3102/SA3102_Software/Instrument Files/asynctmr.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 62
 Window Left = 26
 Source Window State = "1,0,0,0,0,0,0,0,0,107,0,0,0,0,0,25,743,0,755,7,323,703,0,0,"
 
 [File 0044]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/File.c"
-=======
-Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
-
-[File 0042]
-Path = "/e/SA3102/SA3102_Software/Src/Curve.c"
 File Type = "CSource"
-Disk Date = 3617659663
-In Projects = "1,"
-Window Top = 272
-Window Left = 138
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,25,0,55,0,427,718,1,0,"
-
-[File 0043]
-Path = "/e/SA3102/SA3102_Software/Src/File.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
-File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Window Top = 362
 Window Left = 186
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,703,1,0,"
 
-<<<<<<< HEAD
 [File 0045]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Graph.c"
-=======
-[File 0044]
-Path = "/e/SA3102/SA3102_Software/Src/Graph.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "CSource"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
-<<<<<<< HEAD
 Window Top = 152
 Window Left = 74
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,703,1,0,"
@@ -814,7 +478,7 @@ Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,703,1,0,"
 [File 0046]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Plot.c"
 File Type = "CSource"
-Disk Date = 3617919443
+Disk Date = 3618193482
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
@@ -832,7 +496,7 @@ Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,48,0,116,18,323,541,1,0,"
 [File 0048]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Timer.c"
 File Type = "CSource"
-Disk Date = 3617782681
+Disk Date = 3618193482
 In Projects = "1,"
 Window Top = 32
 Window Left = 10
@@ -841,762 +505,425 @@ Source Window State = "1,49,65,49,0,5,0,1,0,0,0,0,0,0,0,0,8,0,58,62,323,703,1,0,
 [File 0049]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/0b5f76e63"
 Path Line0002 = "04de51436b2a3c882ad751.bmp"
-=======
-Window Top = 62
-Window Left = 26
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,65,45,427,718,1,0,"
-
-[File 0045]
-Path = "/e/SA3102/SA3102_Software/Src/Plot.c"
-File Type = "CSource"
-Disk Date = 3617768718
-In Projects = "1,"
-Window Top = 92
-Window Left = 42
-Source Window State = "1,212,212,212,144,157,157,0,3,0,0,0,0,0,0,0,11,0,212,144,427,718,1,0,"
-
-[File 0046]
-Path = "/e/SA3102/SA3102_Software/Src/Protocol.c"
-File Type = "CSource"
-Disk Date = 3617659663
-In Projects = "1,"
-Window Top = 92
-Window Left = 42
-Source Window State = "1,85,85,85,24,31,31,0,3,0,0,0,0,0,0,0,56,0,85,24,323,541,1,0,"
-
-[File 0047]
-Path = "/e/SA3102/SA3102_Software/Src/Timer.c"
-File Type = "CSource"
-Disk Date = 3617770646
-In Projects = "1,"
-Window Top = 362
-Window Left = 186
-Source Window State = "1,44,44,44,48,64,64,0,3,0,0,0,0,0,0,0,12,0,44,48,427,718,1,0,"
-
-[File 0048]
-Path = "/e/SA3102/SA3102_Software/Resource/0b5f76e6304de51436b2a3c882ad751.bmp"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
 Disk Date = 0
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0050]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/analyze.i"
 Path Line0002 = "co"
-=======
-[File 0049]
-Path = "/e/SA3102/SA3102_Software/Resource/analyze.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0051]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Analyze_p"
 Path Line0002 = "ressed.ico"
-=======
-[File 0050]
-Path = "/e/SA3102/SA3102_Software/Resource/Analyze_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0052]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Arrow.ico"
-=======
-[File 0051]
-Path = "/e/SA3102/SA3102_Software/Resource/Arrow.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0053]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/bg.ico"
-=======
-[File 0052]
-Path = "/e/SA3102/SA3102_Software/Resource/bg.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
 Disk Date = 0
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0054]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/bg_presse"
 Path Line0002 = "d.ico"
-=======
-[File 0053]
-Path = "/e/SA3102/SA3102_Software/Resource/bg_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
 Disk Date = 0
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0055]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Configure"
 Path Line0002 = ".ico"
-=======
-[File 0054]
-Path = "/e/SA3102/SA3102_Software/Resource/Configure.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0056]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Configure"
 Path Line0002 = "_pressed.ico"
-=======
-[File 0055]
-Path = "/e/SA3102/SA3102_Software/Resource/Configure_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0057]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/FET.ico"
-=======
-[File 0056]
-Path = "/e/SA3102/SA3102_Software/Resource/FET.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617658734
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0058]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/GND.ico"
-=======
-[File 0057]
-Path = "/e/SA3102/SA3102_Software/Resource/GND.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617517916
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0059]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Graph.ico"
-=======
-[File 0058]
-Path = "/e/SA3102/SA3102_Software/Resource/Graph.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0060]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Graph_pre"
 Path Line0002 = "ssed.ico"
-=======
-[File 0059]
-Path = "/e/SA3102/SA3102_Software/Resource/Graph_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0061]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/I-I.ico"
-=======
-[File 0060]
-Path = "/e/SA3102/SA3102_Software/Resource/I-I.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0062]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/I.ico"
-=======
-[File 0061]
-Path = "/e/SA3102/SA3102_Software/Resource/I.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0063]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/I_Bias.ic"
 Path Line0002 = "o"
-=======
-[File 0062]
-Path = "/e/SA3102/SA3102_Software/Resource/I_Bias.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0064]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/I_I.ico"
-=======
-[File 0063]
-Path = "/e/SA3102/SA3102_Software/Resource/I_I.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0065]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/My Projec"
 Path Line0002 = "ts.ico"
-=======
-[File 0064]
-Path = "/e/SA3102/SA3102_Software/Resource/My Projects.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0066]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/My Settin"
 Path Line0002 = "gs.ico"
-=======
-[File 0065]
-Path = "/e/SA3102/SA3102_Software/Resource/My Settings.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0067]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/no.ico"
-=======
-[File 0066]
-Path = "/e/SA3102/SA3102_Software/Resource/no.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0068]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/R.bmp"
-=======
-[File 0067]
-Path = "/e/SA3102/SA3102_Software/Resource/R.bmp"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
 Disk Date = 0
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0069]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/R.ico"
-=======
-[File 0068]
-Path = "/e/SA3102/SA3102_Software/Resource/R.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0070]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/R_Bias.ic"
 Path Line0002 = "o"
-=======
-[File 0069]
-Path = "/e/SA3102/SA3102_Software/Resource/R_Bias.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0071]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Run.ico"
-=======
-[File 0070]
-Path = "/e/SA3102/SA3102_Software/Resource/Run.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0072]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Save.ico"
-=======
-[File 0071]
-Path = "/e/SA3102/SA3102_Software/Resource/Save.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0073]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Save_pres"
 Path Line0002 = "sed.ico"
-=======
-[File 0072]
-Path = "/e/SA3102/SA3102_Software/Resource/Save_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0074]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/saveData."
 Path Line0002 = "ico"
-=======
-[File 0073]
-Path = "/e/SA3102/SA3102_Software/Resource/saveData.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0075]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/saveData_"
 Path Line0002 = "pressed.ico"
-=======
-[File 0074]
-Path = "/e/SA3102/SA3102_Software/Resource/saveData_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0076]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Select.ic"
 Path Line0002 = "o"
-=======
-[File 0075]
-Path = "/e/SA3102/SA3102_Software/Resource/Select.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0077]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Select_pr"
 Path Line0002 = "essed.ico"
-=======
-[File 0076]
-Path = "/e/SA3102/SA3102_Software/Resource/Select_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0078]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Stop.ico"
-=======
-[File 0077]
-Path = "/e/SA3102/SA3102_Software/Resource/Stop.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0079]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Table.ico"
-=======
-[File 0078]
-Path = "/e/SA3102/SA3102_Software/Resource/Table.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0080]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Table_pre"
 Path Line0002 = "ssed.ico"
-=======
-[File 0079]
-Path = "/e/SA3102/SA3102_Software/Resource/Table_pressed.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0081]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/Tools.ico"
-=======
-[File 0080]
-Path = "/e/SA3102/SA3102_Software/Resource/Tools.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0082]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/V.ico"
-=======
-[File 0081]
-Path = "/e/SA3102/SA3102_Software/Resource/V.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 0
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0083]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/V_Bias.ic"
 Path Line0002 = "o"
-=======
-[File 0082]
-Path = "/e/SA3102/SA3102_Software/Resource/V_Bias.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0084]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/V_Bias_I."
 Path Line0002 = "ico"
-=======
-[File 0083]
-Path = "/e/SA3102/SA3102_Software/Resource/V_Bias_I.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 0
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0085]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/V_I.ico"
-=======
-[File 0084]
-Path = "/e/SA3102/SA3102_Software/Resource/V_I.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 3617517916
+Disk Date = 3617658734
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0086]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/V_I.png"
-=======
-[File 0085]
-Path = "/e/SA3102/SA3102_Software/Resource/V_I.png"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
 Disk Date = 0
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0087]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Resource/vv.ico"
-=======
-[File 0086]
-Path = "/e/SA3102/SA3102_Software/Resource/vv.ico"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Unknown"
-Disk Date = 0
+Disk Date = 3617425508
 In Projects = "1,"
 
-<<<<<<< HEAD
 [File 0088]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ExpListPanel.h"
-=======
-[File 0087]
-Path = "/e/SA3102/SA3102_Software/Src/ExpListPanel.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0089]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/I_T_Panel.h"
-=======
-[File 0088]
-Path = "/e/SA3102/SA3102_Software/Src/I_T_Panel.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,559,1,0,"
 
-<<<<<<< HEAD
 [File 0090]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/IdVdsPanel.h"
-=======
-[File 0089]
-Path = "/e/SA3102/SA3102_Software/Src/IdVdsPanel.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0091]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/IdVgsPanel.h"
-=======
-[File 0090]
-Path = "/e/SA3102/SA3102_Software/Src/IdVgsPanel.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0092]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/LoadPanel.h"
-=======
-[File 0091]
-Path = "/e/SA3102/SA3102_Software/Src/LoadPanel.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617658734
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
 Source Window State = "1,29,29,29,0,31,31,1,0,83,0,0,0,0,0,25,0,0,29,17,323,559,1,0,"
 
-<<<<<<< HEAD
 [File 0093]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/MainPanelCb.h"
-=======
-[File 0092]
-Path = "/e/SA3102/SA3102_Software/Src/MainPanelCb.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0094]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ResultMenuPane"
 Path Line0002 = "l.h"
-=======
-[File 0093]
-Path = "/e/SA3102/SA3102_Software/Src/ResultMenuPanel.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617831900
+Disk Date = 3618193482
 In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Source Window State = "1,36,36,36,0,6,6,0,0,0,0,0,0,0,0,0,0,0,26,123,427,718,1,13,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0095]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/SampleCfgPanel"
 Path Line0002 = ".h"
-=======
-[File 0094]
-Path = "/e/SA3102/SA3102_Software/Src/SampleCfgPanel.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0096]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/table.h"
-=======
-[File 0095]
-Path = "/e/SA3102/SA3102_Software/Src/table.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617592836
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0097]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Instrument Files/a"
 Path Line0002 = "synctmr.h"
-=======
-[File 0096]
-Path = "/e/SA3102/SA3102_Software/Instrument Files/asynctmr.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0098]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Cgs_mt.h"
-=======
-[File 0097]
-Path = "/e/SA3102/SA3102_Software/Src/Cgs_mt.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
-Window Top = 32
-Window Left = 10
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,427,718,1,0,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0099]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Curve.h"
-=======
-[File 0098]
-Path = "/e/SA3102/SA3102_Software/Src/Curve.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Window Top = 92
 Window Left = 42
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,577,1,0,"
 
-<<<<<<< HEAD
 [File 0100]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Environment.h"
-=======
-[File 0099]
-Path = "/e/SA3102/SA3102_Software/Src/Environment.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0101]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/File.h"
-=======
-[File 0100]
-Path = "/e/SA3102/SA3102_Software/Src/File.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
-<<<<<<< HEAD
 [File 0102]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Graph.h"
-=======
-[File 0101]
-Path = "/e/SA3102/SA3102_Software/Src/Graph.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Window Top = 122
 Window Left = 58
 Source Window State = "1,46,46,46,19,30,30,1,0,83,0,0,0,0,0,25,0,0,33,46,323,559,1,0,"
 
-<<<<<<< HEAD
 [File 0103]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/main.h"
-=======
-[File 0102]
-Path = "/e/SA3102/SA3102_Software/Src/main.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Window Top = 62
 Window Left = 26
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,323,703,1,0,"
 
-<<<<<<< HEAD
 [File 0104]
 Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Plot.h"
 File Type = "Include"
 Disk Date = 3617917989
-=======
-[File 0103]
-Path = "/e/SA3102/SA3102_Software/Src/Plot.h"
-File Type = "Include"
-Disk Date = 3617659663
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 In Projects = "1,"
 Window Top = 152
 Window Left = 74
 Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,34,92,323,559,1,0,"
 
-<<<<<<< HEAD
 [File 0105]
 Path Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ProjectPanelCB"
 Path Line0002 = ".h"
-=======
-[File 0104]
-Path = "/e/SA3102/SA3102_Software/Src/ProjectPanelCB.h"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 File Type = "Include"
-Disk Date = 3617659663
-In Projects = "1,"
-Window Top = 362
-Window Left = 186
-Source Window State = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,427,718,1,0,"
-
-<<<<<<< HEAD
-=======
-[File 0105]
-Path = "/e/SA3102/SA3102_Software/Src/Protocol.h"
-File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
 [File 0106]
-Path = "/e/SA3102/SA3102_Software/Src/SetPanelCB.h"
+Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/SetPanelCB.h"
 File Type = "Include"
-Disk Date = 3617859015
+Disk Date = 3618193482
 In Projects = "1,"
-Window Top = 152
-Window Left = 74
-Source Window State = "1,40,40,40,0,6,6,0,0,0,0,22,0,0,0,0,22,0,36,7,427,718,1,0,"
+Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [File 0107]
-Path = "/e/SA3102/SA3102_Software/Src/Timer.h"
+Path = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Timer.h"
 File Type = "Include"
-Disk Date = 3617659663
+Disk Date = 3617425508
 In Projects = "1,"
 Source Window State = "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"
 
 [Tab Order]
-<<<<<<< HEAD
 Tab 0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/MainPanelCb.c"
 Tab 0002 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/V_T_Panel.c"
 Tab 0003 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/LoadPanel.c"
 Tab 0004 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/I_T_Panel.c"
 Tab 0005 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/main.c"
 Tab 0006 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/Protocol.h"
-=======
-Tab 0001 = "/e/SA3102/SA3102_Software/UI Files/Tools.uir"
-Tab 0002 = "/e/SA3102/SA3102_Software/Src/ToolsPanel.c"
-Tab 0003 = "/e/SA3102/SA3102_Software/Src/LoadPanel.c"
-Tab 0004 = "/e/SA3102/SA3102_Software/Src/main.c"
-Tab 0005 = "/e/SA3102/SA3102_Software/Src/MainPanelCb.c"
->>>>>>> 063ffe2d3ef41e22f5f1914cedaeec45ee54f04d
+Tab 0007 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/Src/ToolsPanel.c"
+Tab 0008 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Tools.uir"
+Tab 0009 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/MainPanel"
+Tab 0009 Line0002 = ".uir"
+Tab 0010 Line0001 = "/e/hebin/company/16_SA3102/Source_Code/SA3102_Software/3102新/UI Files/Experimen"
+Tab 0010 Line0002 = "t List.uir"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
