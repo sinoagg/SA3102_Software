@@ -36,6 +36,8 @@
 int graph2tempclr;
 int graph2humclr; 
 int graph2preclr; 
+int smu1Clr;
+int smu2Clr;
 //==============================================================================
 // Global functions
 int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
@@ -48,7 +50,8 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 			{
 				SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1) );
 				SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
-				pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot-1, pGraph->pCurveArray->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, VAL_BLUE);
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot-1, pGraph->pCurveArray->pDotYPlot-1, numOfDotsToPlot+1, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
 				pGraph->pCurveArray->numOfPlotDots+=numOfDotsToPlot;		//画图总点数递增
 				pGraph->pCurveArray->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
 				pGraph->pCurveArray->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
@@ -60,7 +63,8 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 			if(numOfDotsToPlot>0)																//如果有需要画图的点
 			{																			//pDotXPlot						//pDotYPlot	   numOfDotsToPlot
 
-				pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot, pGraph->pCurveArray->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, VAL_BLUE);
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot, pGraph->pCurveArray->pDotYPlot, numOfDotsToPlot, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
 			//	SetCtrlVal(graphDispPanel, GRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
 			//	SetCtrlVal(graphDispPanel, SETGRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
 
@@ -76,7 +80,8 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 	{
 		if(numOfDotsToPlot2>0)
 		{
-				pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + 1)->pDotXPlot-1, (pGraph->pCurveArray + 1)->pDotYPlot-1, numOfDotsToPlot2+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, VAL_RED);
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + 1)->pDotXPlot-1, (pGraph->pCurveArray + 1)->pDotYPlot-1, numOfDotsToPlot2+1, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu2Clr);
 			//	SetCtrlVal(graphDispPanel, GRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
 				(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
 				(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
@@ -88,7 +93,8 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 	{
 		if(numOfDotsToPlot2>0)
 		{
-				pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + 1)->pDotXPlot, (pGraph->pCurveArray + 1)->pDotYPlot, numOfDotsToPlot2, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, VAL_RED);
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + 1)->pDotXPlot, (pGraph->pCurveArray + 1)->pDotYPlot, numOfDotsToPlot2, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu2Clr);
 				//SetCtrlVal(graphDispPanel, GRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
 				(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
 				(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
@@ -115,15 +121,18 @@ int PlotCurve_Temp(Graph_TypeDef* pGraph_Temp, int graphDispPanel, int control)
 			{
 				if(temp_flag == 1)  
 				{
-					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +1)->pDotXPlot-1, (pGraph_Temp->pCurveArray +1)->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2tempclr);
+					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +1)->pDotXPlot-1, (pGraph_Temp->pCurveArray +1)->pDotYPlot-1, 
+												   numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2tempclr);
 				}
 				if(humidity_flag == 1)
 				{
-					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, pGraph_Temp->pCurveArray->pDotXPlot-1, pGraph_Temp->pCurveArray->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2humclr);
+					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, pGraph_Temp->pCurveArray->pDotXPlot-1, pGraph_Temp->pCurveArray->pDotYPlot-1, 
+												   numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2humclr);
 				}
 				if(pressure_flag == 1)
 				{
-					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +2)->pDotXPlot-1, (pGraph_Temp->pCurveArray +2)->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2preclr);
+					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +2)->pDotXPlot-1, (pGraph_Temp->pCurveArray +2)->pDotYPlot-1, 
+												   numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2preclr);
 				}
 				pGraph_Temp->pCurveArray->numOfPlotDots+=numOfDotsToPlot;				//画图总点数递增
 				pGraph_Temp->pCurveArray->pDotXPlot+=numOfDotsToPlot;					//画图点X坐标指针递增
@@ -147,16 +156,19 @@ int PlotCurve_Temp(Graph_TypeDef* pGraph_Temp, int graphDispPanel, int control)
 			{	
 				if(temp_flag == 1)
 				{
-					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +1)->pDotXPlot, (pGraph_Temp->pCurveArray +1)->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2tempclr);
+					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +1)->pDotXPlot, (pGraph_Temp->pCurveArray +1)->pDotYPlot, 
+												   numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2tempclr);
 				}
 				
 				if(humidity_flag == 1) 
 				{
-					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, pGraph_Temp->pCurveArray->pDotXPlot, pGraph_Temp->pCurveArray->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2humclr);
+					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, pGraph_Temp->pCurveArray->pDotXPlot, pGraph_Temp->pCurveArray->pDotYPlot, 
+												   numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2humclr);
 				}
 				if(pressure_flag == 1)
 				{
-					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +2)->pDotXPlot, (pGraph_Temp->pCurveArray +2)->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2preclr);
+					pGraph_Temp->plotHandle=PlotXY(graphDispPanel, control, (pGraph_Temp->pCurveArray +2)->pDotXPlot, (pGraph_Temp->pCurveArray +2)->pDotYPlot, 
+												   numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2preclr);
 				}
 				pGraph_Temp->pCurveArray->numOfPlotDots+=numOfDotsToPlot;		//画图总点数递增
 				pGraph_Temp->pCurveArray->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
@@ -197,7 +209,8 @@ void temp_hum_pre_display()
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_PEN_COLOR, graph2tempclr);			    //Temperature图例
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_PEN_WIDTH, 2);			        //线的宽度
 		CanvasDrawLine (graphDispPanel, GRAPHDISP_CANVAS, MakePoint (110,47), MakePoint (150, 47));		//canvas画线
-		PlotXY(graphDispPanel, GRAPHDISP_GRAPH2, (Graph_Temp.pCurveArray  + 1)->pDotXHead, (Graph_Temp.pCurveArray  + 1)->pDotYHead, (Graph_Temp.pCurveArray  + 1)->numOfPlotDots, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2tempclr);
+		PlotXY(graphDispPanel, GRAPHDISP_GRAPH2, (Graph_Temp.pCurveArray  + 1)->pDotXHead, (Graph_Temp.pCurveArray  + 1)->pDotYHead, 
+			   (Graph_Temp.pCurveArray  + 1)->numOfPlotDots, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2tempclr);
 	}
 	else
 	{
@@ -211,7 +224,8 @@ void temp_hum_pre_display()
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_PEN_COLOR, graph2humclr);			    //humidity图例
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_PEN_WIDTH, 2);			        //线的宽度
 		CanvasDrawLine (graphDispPanel, GRAPHDISP_CANVAS, MakePoint (110, 67), MakePoint (150, 67));		//canvas画线
-		PlotXY(graphDispPanel, GRAPHDISP_GRAPH2, Graph_Temp.pCurveArray->pDotXHead, Graph_Temp.pCurveArray->pDotYHead, Graph_Temp.pCurveArray->numOfPlotDots, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2humclr);
+		PlotXY(graphDispPanel, GRAPHDISP_GRAPH2, Graph_Temp.pCurveArray->pDotXHead, Graph_Temp.pCurveArray->pDotYHead, 
+			   Graph_Temp.pCurveArray->numOfPlotDots, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2humclr);
 	}
 	else
 	{
@@ -226,7 +240,8 @@ void temp_hum_pre_display()
 	    SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_PEN_COLOR, graph2preclr);			    //pressure图例
 	    SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_PEN_WIDTH, 2);			        //线的宽度
 	    CanvasDrawLine (graphDispPanel, GRAPHDISP_CANVAS, MakePoint (110, 87), MakePoint (150, 87));		//canvas画线
-		PlotXY(graphDispPanel, GRAPHDISP_GRAPH2, (Graph_Temp.pCurveArray  + 2)->pDotXHead, (Graph_Temp.pCurveArray  + 2)->pDotYHead, (Graph_Temp.pCurveArray  + 2)->numOfPlotDots, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2preclr);
+		PlotXY(graphDispPanel, GRAPHDISP_GRAPH2, (Graph_Temp.pCurveArray  + 2)->pDotXHead, (Graph_Temp.pCurveArray  + 2)->pDotYHead, 
+			   (Graph_Temp.pCurveArray  + 2)->numOfPlotDots, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, graph2preclr);
 	}
 	else
 	{

@@ -169,17 +169,18 @@ void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackDa
 	int status;
 	int rxNum;																							  
 	int i=0;
-	//static a = 0;
+	static a = 0;
 	Rx_CGS_DataTypeDef Rx_CGS_Data;
 	rxNum = GetInQLen(CGS_comSelect);  													//读取串口中发送来的数据数量
 	if(rxNum>500) rxNum=500;															//防止超过内存范围
 	status = ComRd(CGS_comSelect, (char *)meas_CGS_UartRxBuf, rxNum);					//Read UART Buffer to local buffer at one time 
 	while(rxNum>=14)
 	{
+		a++;
 		ProtocolGet_CGS_Data(meas_CGS_UartRxBuf, &Rx_CGS_Data);							// 从 串口中取出 环境测量参数
-		*(Graph_Temp.pCurveArray->pDotX++) = X1-1;
-		*((Graph_Temp.pCurveArray + 1)->pDotX++) = X1-1; 
-		*((Graph_Temp.pCurveArray + 2)->pDotX++) = X1-1; 
+		*(Graph_Temp.pCurveArray->pDotX++) = a;
+		*((Graph_Temp.pCurveArray + 1)->pDotX++) = a; 
+		*((Graph_Temp.pCurveArray + 2)->pDotX++) = a; 
 	    *(Graph_Temp.pCurveArray->pDotY++) = Rx_CGS_Data.environmental_humidity; 		 //环境湿度
 		*((Graph_Temp.pCurveArray + 1)->pDotY++) = Rx_CGS_Data.environmental_temp;		 //环境温度
 		*((Graph_Temp.pCurveArray + 2)->pDotY++) = Rx_CGS_Data.pressure * 0.001;		 //环境压强

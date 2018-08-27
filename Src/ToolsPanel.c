@@ -13,6 +13,10 @@
 #include <userint.h>   
 #include "Tools.h"
 #include "LoadPanel.h"
+#include "ToolsPanel.h"
+#include "Protocol.h"
+#include "main.h"
+
 //==============================================================================
 // Constants
 
@@ -35,7 +39,7 @@
 /// HIPAR x/What inputs does your function expect?
 /// HIRET What does your function return?
 
-int CVICALLBACK ToolsPanelCallback (int panel, int event, void *callbackData,
+int CVICALLBACK ToolsPanelCallback (int panel, int event, void *callbackData,			
 									int eventData1, int eventData2)
 {
 	switch (event)
@@ -64,7 +68,7 @@ int CVICALLBACK CalibrationCallback (int panel, int control, int event,
 	}
 	return 0;
 }
-int CVICALLBACK CalPanelCallback (int panel, int event, void *callbackData,
+int CVICALLBACK CaliPanelCallback (int panel, int event, void *callbackData,
 									int eventData1, int eventData2)
 {
 	switch (event)
@@ -82,27 +86,15 @@ int CVICALLBACK CalPanelCallback (int panel, int event, void *callbackData,
 	return 0;
 }
 
-int CVICALLBACK CalOkCallback (int panel, int control, int event,
-							   void *callbackData, int eventData1, int eventData2)
-{
-	switch (event)
-	{
-		case EVENT_LEFT_CLICK_UP:
-			HidePanel(hCalibrationPanel); 
-			break;
 
-	}
-	return 0;
-}
-
-int CVICALLBACK OutVoltageCallback (int panel, int control, int event,
+int CVICALLBACK OutputVoltageCaliCallback (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			SetCtrlAttribute (hCalibrationPanel, CALPANEL_OUTVOLCAL, ATTR_DIMMED, 1);
-			SetCtrlAttribute (hCalibrationPanel, CALPANEL_OUTVOLCAL, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_DIMMED, 1);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
 
 			break;
 
@@ -111,14 +103,14 @@ int CVICALLBACK OutVoltageCallback (int panel, int control, int event,
 }
 								  
 
-int CVICALLBACK ZeroCurrentCallback (int panel, int control, int event,
+int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 									 void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			SetCtrlAttribute (hCalibrationPanel, CALPANEL_ZEROCURCAL, ATTR_DIMMED, 1);
-			SetCtrlAttribute (hCalibrationPanel, CALPANEL_ZEROCURCAL, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_DIMMED, 1);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
 			break;
 
 	}

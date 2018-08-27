@@ -32,9 +32,17 @@
 
 //==============================================================================
 // External variables
+extern int smu1ClrOld;
+extern int smu2ClrOld;
+extern int graph2Color1Old;
+extern int graph2Color2Old;
+extern int graph2Color3Old;
+
 extern int graph2tempclr;
 extern int graph2humclr; 
 extern int graph2preclr;
+extern int smu1Clr;
+extern int smu2Clr;
 extern char ProjectSavePath[512];	   //本地工作目录Dir  
 //==============================================================================
 // Global functions

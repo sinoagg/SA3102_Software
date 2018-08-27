@@ -16,23 +16,19 @@
 #define  FOUR_TRML                        1
 #define  FOUR_TRML_TEXTMSG                2       /* control type: textMsg, callback function: (none) */
 #define  FOUR_TRML_PICTURE                3       /* control type: picture, callback function: (none) */
-#define  FOUR_TRML_TEXTMSG_5              4       /* control type: textMsg, callback function: (none) */
-#define  FOUR_TRML_TEXTMSG_4              5       /* control type: textMsg, callback function: (none) */
-#define  FOUR_TRML_TEXTMSG_3              6       /* control type: textMsg, callback function: (none) */
-#define  FOUR_TRML_TEXTMSG_2              7       /* control type: textMsg, callback function: (none) */
+#define  FOUR_TRML_PICTURE_4              4       /* control type: picture, callback function: (none) */
+#define  FOUR_TRML_PICTURE_3              5       /* control type: picture, callback function: (none) */
+#define  FOUR_TRML_PICTURE_5              6       /* control type: picture, callback function: (none) */
+#define  FOUR_TRML_PICTURE_2              7       /* control type: picture, callback function: (none) */
 
 #define  TWO_TRML                         2
 #define  TWO_TRML_PICTURE_4               2       /* control type: picture, callback function: (none) */
 #define  TWO_TRML_PICTURE_2               3       /* control type: picture, callback function: (none) */
-#define  TWO_TRML_DECORATION_SMU1         4       /* control type: deco, callback function: (none) */
-#define  TWO_TRML_DECORATION_SMU2         5       /* control type: deco, callback function: (none) */
-#define  TWO_TRML_TXT_SMU2                6       /* control type: textMsg, callback function: (none) */
-#define  TWO_TRML_TXT_SMU1                7       /* control type: textMsg, callback function: (none) */
-#define  TWO_TRML_BG_SMU2                 8       /* control type: canvas, callback function: (none) */
-#define  TWO_TRML_TEXTMSG                 9       /* control type: textMsg, callback function: (none) */
-#define  TWO_TRML_BG_SMU1                 10      /* control type: canvas, callback function: (none) */
-#define  TWO_TRML_PICTURE                 11      /* control type: picture, callback function: (none) */
-#define  TWO_TRML_PICTURE_6               12      /* control type: picture, callback function: (none) */
+#define  TWO_TRML_TEXTMSG                 4       /* control type: textMsg, callback function: (none) */
+#define  TWO_TRML_PICTURE                 5       /* control type: picture, callback function: (none) */
+#define  TWO_TRML_PICTURE_6               6       /* control type: picture, callback function: (none) */
+#define  TWO_TRML_PICTURE_3               7       /* control type: picture, callback function: (none) */
+#define  TWO_TRML_PICTURE_7               8       /* control type: picture, callback function: (none) */
 
 
      /* Control Arrays: */

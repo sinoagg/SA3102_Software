@@ -42,7 +42,7 @@
 int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2)
 {
 	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//»­ÇúÏßÍ¼
-	//PlotCurve_Temp(&Graph_Temp, graphDispPanel, GRAPHDISP_GRAPH2);//»­ÇúÏßÍ¼
+	PlotCurve_Temp(&Graph_Temp, graphDispPanel, GRAPHDISP_GRAPH2);//»­ÇúÏßÍ¼
 
 	ProtocolQuery( comSelect, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
 	//Read_CGS_Value(CGS_comSelect);

@@ -13,15 +13,15 @@
 
      /* Panels and Controls: */
 
-#define  CALPANEL                         1       /* callback function: CalPanelCallback */
-#define  CALPANEL_TEXTMSG                 2       /* control type: textMsg, callback function: (none) */
-#define  CALPANEL_RING                    3       /* control type: ring, callback function: (none) */
-#define  CALPANEL_TEXTMSG_2               4       /* control type: textMsg, callback function: (none) */
-#define  CALPANEL_TEXTMSG_3               5       /* control type: textMsg, callback function: CalOkCallback */
-#define  CALPANEL_OK_PIC                  6       /* control type: picture, callback function: CalOkCallback */
-#define  CALPANEL_OUTVOLCAL               7       /* control type: textMsg, callback function: OutVoltageCallback */
-#define  CALPANEL_TEXTMSG_6               8       /* control type: textMsg, callback function: (none) */
-#define  CALPANEL_ZEROCURCAL              9       /* control type: textMsg, callback function: ZeroCurrentCallback */
+#define  CALIPANEL                        1       /* callback function: CaliPanelCallback */
+#define  CALIPANEL_TEXTMSG                2       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_RING                   3       /* control type: ring, callback function: (none) */
+#define  CALIPANEL_TEXTMSG_2              4       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_TEXTMSG_3              5       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_OK_PIC                 6       /* control type: picture, callback function: (none) */
+#define  CALIPANEL_OUTVOLCALI             7       /* control type: textMsg, callback function: OutputVoltageCaliCallback */
+#define  CALIPANEL_TEXTMSG_6              8       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_ZEROCURCALI            9       /* control type: textMsg, callback function: ZeroCurrentCaliCallback */
 
 #define  TOOLSPANEL                       2       /* callback function: ToolsPanelCallback */
 #define  TOOLSPANEL_PICTURE               2       /* control type: picture, callback function: CalibrationCallback */
@@ -41,11 +41,10 @@
      /* Callback Prototypes: */
 
 int  CVICALLBACK CalibrationCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK CalOkCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK CalPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK OutVoltageCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK CaliPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK OutputVoltageCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ToolsPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
-int  CVICALLBACK ZeroCurrentCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK ZeroCurrentCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus
