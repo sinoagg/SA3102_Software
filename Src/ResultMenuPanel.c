@@ -18,6 +18,7 @@
 #include "ResultMenuPanel.h"
 #include "Graph.h"
 #include "LoadPanel.h"
+#include "Result Menu.h" 
 //==============================================================================
 // Constants
 
@@ -183,13 +184,16 @@ int CVICALLBACK SaveDataCallback (int panel, int control, int event,
 int CVICALLBACK ExitCallback (int panel, int control, int event,
 							  void *callbackData, int eventData1, int eventData2)
 {
-		if (event == EVENT_COMMIT)
-		{
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
 			RemovePopup (saveDataPanel);	 //移除、关闭savedata面板  
 			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData.ico");
 			
-		}
-			return 0;
+		break;
+			
+	}
+	return 0; 
 }
 
 //======================BrowseSheet=================================
@@ -213,7 +217,7 @@ int CVICALLBACK BrowseGraph1Callback (int panel, int control, int event,
 {
 	switch (event)
 	{
-		case EVENT_COMMIT:
+		case EVENT_LEFT_CLICK_UP:
 		     
 			if(FileSelectPopup ("C:\\SINOAGG\\SA6101\\UserData", ".jpg", "*.jpg;*.png;*.bmp;*.tif", "Select Path", VAL_OK_BUTTON, 0, 0, 1, 1, graph1SavePath)>0)
 				SetCtrlVal(panel, SAVEDATA_GRAPH1PATH, graph1SavePath);
@@ -227,7 +231,7 @@ int CVICALLBACK BrowseGraph2Callback (int panel, int control, int event,
 {
 	switch (event)
 	{
-		case EVENT_COMMIT:
+		case EVENT_LEFT_CLICK_UP:
 			if(FileSelectPopup ("C:\\SINOAGG\\SA6101\\UserData", ".jpg", "*.jpg;*.png;*.bmp;*.tif", "Select Path", VAL_OK_BUTTON, 0, 0, 1, 1, graph2SavePath)>0)
 				SetCtrlVal(panel, SAVEDATA_GRAPH2PATH, graph2SavePath);
 			break;
@@ -243,7 +247,7 @@ int CVICALLBACK SaveGraph1Callback (int panel, int control, int event,
 	int nBitmapID;
 	switch (event)
 	{
-		case EVENT_COMMIT:
+		case EVENT_LEFT_CLICK_UP:
 		if(graph1SavePath[0]=='\0')
 		{
 			
@@ -272,7 +276,7 @@ int CVICALLBACK SaveGraph2Callback (int panel, int control, int event,
 	
 	switch (event)
 	{
-		case EVENT_COMMIT:
+		case EVENT_LEFT_CLICK_UP:
 		if(graph2SavePath[0]=='\0') 
 		{
 
@@ -294,6 +298,8 @@ int CVICALLBACK SaveGraph2Callback (int panel, int control, int event,
 }
 
 //======================saveSheet==========================
+
+
 int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
 								   void *callbackData, int eventData1, int eventData2)
 {
@@ -305,7 +311,7 @@ int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
 	static ExcelObj_Worksheet         ExcelWorksheetHandle = 0;
 	switch (event)
 	{
-		case EVENT_COMMIT:
+		case EVENT_LEFT_CLICK_UP:
 			if(sheetSavePath[0]=='\0')
 			{
 
@@ -313,6 +319,11 @@ int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
 			}
 			else
 			{
+				int row,rowa;  
+				GetNumTableRows (tablePanel, TABLE_TABLE1, &row);
+				rowa=row+1;
+				char str[80];
+				sprintf(str,"%s%d","A1:D",rowa);
 				Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
 				// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
 				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
@@ -320,7 +331,7 @@ int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
 				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
 				Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
 				Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
-				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, "A1:D100", tablePanel, TABLE_TABLE1);	//write data from table control
+				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, str, tablePanel, TABLE_TABLE1);	//write data from table control
 				ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
 				Excel_AppQuit (ExcelAppHandle, NULL);
 			}
@@ -343,7 +354,7 @@ int CVICALLBACK SaveAllCallback (int panel, int control, int event,
 	static ExcelObj_Worksheet         ExcelWorksheetHandle = 0;
 	switch (event)
 	{
-		case EVENT_COMMIT:
+		case EVENT_LEFT_CLICK_UP:
 			
 			if((sheetSavePath[0]=='\0')||(graph2SavePath[0]=='\0')||(graph1SavePath[0]=='\0'))
 			{
@@ -351,6 +362,11 @@ int CVICALLBACK SaveAllCallback (int panel, int control, int event,
 			}
 			else
 			{
+				int row,rowa;  
+				GetNumTableRows (tablePanel, TABLE_TABLE1, &row);
+				rowa=row+1;
+				char str[80];
+				sprintf(str,"%s%d","A1:D",rowa);
 				Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
 				// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
 				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
@@ -358,9 +374,9 @@ int CVICALLBACK SaveAllCallback (int panel, int control, int event,
 				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
 				Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
 				Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
-				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, "A1:D100", tablePanel, TABLE_TABLE1);	//write data from table control
+				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, str, tablePanel, TABLE_TABLE1);	//write data from table control
 				ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
-				Excel_AppQuit (ExcelAppHandle, NULL);
+				Excel_AppQuit (ExcelAppHandle, NULL); 
 		
 				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
 				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
@@ -424,6 +440,20 @@ static int SaveGraph(int panel, int control, int plotHandle, const char path[])
 		if(SaveBitmapToFile(path, bitmapID)<0)		 //need check the file format
 			return -1;
 		DiscardBitmap(bitmapID);
+	}
+	return 0;
+}
+
+int CVICALLBACK SaveDataPanelCallbck (int panel, int event, void *callbackData,
+									  int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_CLOSE:
+			RemovePopup (saveDataPanel);	 //移除、关闭savedata面板  
+			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData.ico");
+
+			break;
 	}
 	return 0;
 }

@@ -14,10 +14,10 @@
      /* Panels and Controls: */
 
 #define  PANEL_R_T                        1
-#define  PANEL_R_T_START2                 2       /* control type: numeric, callback function: RTSMU2DecoCallback */
-#define  PANEL_R_T_SMU2MODE               3       /* control type: ring, callback function: RTSMU2DecoCallback */
-#define  PANEL_R_T_START1                 4       /* control type: numeric, callback function: RTSMU1DecoCallback */
-#define  PANEL_R_T_SMU1MODE               5       /* control type: ring, callback function: RTSMU1DecoCallback */
+#define  PANEL_R_T_SMU1MODE               2       /* control type: ring, callback function: RTSMU1DecoCallback */
+#define  PANEL_R_T_START1                 3       /* control type: numeric, callback function: RTSMU1DecoCallback */
+#define  PANEL_R_T_SMU2MODE               4       /* control type: ring, callback function: RTSMU2DecoCallback */
+#define  PANEL_R_T_START2                 5       /* control type: numeric, callback function: RTSMU2DecoCallback */
 #define  PANEL_R_T_START_1                6       /* control type: textMsg, callback function: RTSMU1DecoCallback */
 #define  PANEL_R_T_PICTURE_4              7       /* control type: picture, callback function: (none) */
 #define  PANEL_R_T_PICTURE_2              8       /* control type: picture, callback function: (none) */

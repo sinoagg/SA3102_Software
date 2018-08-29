@@ -1,4 +1,3 @@
-#include <userint.h>
 //==============================================================================
 //
 // Title:		LoadPanel.c
@@ -14,7 +13,7 @@
 
 #include "LoadPanel.h"
 #include "I_T_Panel.h"
-
+#include <userint.h>  
 
 
 //==============================================================================
@@ -39,6 +38,8 @@ int IVPanel;
 int VIPanel;
 int VTPanel;
 int RTPanel;
+
+int ThreeTerminalPanel;
 
 int FourTerminalPanel;
 int IdVdPanel;
@@ -161,6 +162,9 @@ int LoadInitPanel (void)
 	R_T_Panel1.panelHandle = RTPanel;
 	R_T_Panel2.panelHandle = RTPanel;
 	
+	if ((ThreeTerminalPanel = LoadPanel (mainPanel, "TerminalPanel.uir", THREE_TRML)) < 0)		//load middle panel
+		return -1;
+	
 	if ((FourTerminalPanel = LoadPanel (mainPanel, "TerminalPanel.uir", FOUR_TRML)) < 0)		//load middle panel
 		return -1;
 	
@@ -181,11 +185,9 @@ int LoadInitPanel (void)
 	
 	DisplayPanel (mainPanel);
 	SetPanelPos(expListPanel, 105, 3);  //加载面板位置 (,top,left)
-	SetPanelSize(expListPanel, 900, 300);//加载面板大小  (,height，width)
 	DisplayPanel(expListPanel);
 
 	SetPanelPos(TwoTerminalPanel, 105, 305);		
-	SetPanelSize(TwoTerminalPanel, 900, 1293);
 	DisplayPanel(TwoTerminalPanel);
 	
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1); 

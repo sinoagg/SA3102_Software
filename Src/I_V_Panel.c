@@ -1,3 +1,5 @@
+#include "Id-Vgs Configuration.h"
+
 //==============================================================================
 //
 // Title:		I_V_Panel.c
@@ -49,12 +51,10 @@ static void IVSetSMU1Disp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, PANEL_I_V_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_I_V_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, PANEL_I_V_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG); 
-		SetCtrlAttribute (panel, PANEL_I_V_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 
@@ -63,12 +63,10 @@ static void IVSetSMU2Disp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, PANEL_I_V_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_I_V_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, PANEL_I_V_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
-		SetCtrlAttribute (panel, PANEL_I_V_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 int CVICALLBACK IVSMU1DecoCallback (int panel, int control, int event,
@@ -76,6 +74,10 @@ int CVICALLBACK IVSMU1DecoCallback (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			 IVSetSMU1Disp(panel, FOCUS);
+			 IVSetSMU2Disp(panel, UNFOCUS);
+			break;
 		case EVENT_LEFT_CLICK_UP:
 			 IVSetSMU1Disp(panel, FOCUS);
 			 IVSetSMU2Disp(panel, UNFOCUS);
@@ -89,6 +91,10 @@ int CVICALLBACK IVSMU2DecoCallback (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			 IVSetSMU1Disp(panel, UNFOCUS);
+			 IVSetSMU2Disp(panel, FOCUS);
+			break;
 		case EVENT_LEFT_CLICK_UP:
 			 IVSetSMU1Disp(panel, UNFOCUS);
 			 IVSetSMU2Disp(panel, FOCUS);

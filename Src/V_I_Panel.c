@@ -49,12 +49,10 @@ static void VISetSMU1Disp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, PANEL_V_I_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_V_I_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, PANEL_V_I_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG); 
-		SetCtrlAttribute (panel, PANEL_V_I_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 
@@ -63,12 +61,10 @@ static void VISetSMU2Disp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, PANEL_V_I_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_V_I_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, PANEL_V_I_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
-		SetCtrlAttribute (panel, PANEL_V_I_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 int CVICALLBACK VISMU1DecoCallback (int panel, int control, int event,
@@ -76,6 +72,10 @@ int CVICALLBACK VISMU1DecoCallback (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			 VISetSMU1Disp(panel, FOCUS);
+			 VISetSMU2Disp(panel, UNFOCUS);
+			break;
 		case EVENT_LEFT_CLICK_UP:
 			 VISetSMU1Disp(panel, FOCUS);
 			 VISetSMU2Disp(panel, UNFOCUS);
@@ -89,6 +89,10 @@ int CVICALLBACK VISMU2DecoCallback (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			 VISetSMU1Disp(panel, UNFOCUS);
+			 VISetSMU2Disp(panel, FOCUS);
+			break;
 		case EVENT_LEFT_CLICK_UP:
 			 VISetSMU1Disp(panel, UNFOCUS);
 			 VISetSMU2Disp(panel, FOCUS);
@@ -135,6 +139,10 @@ int CVICALLBACK Start1UnitCB (int panel, int control, int event,
 			 VISetSMU1Disp(panel, FOCUS);
 			 VISetSMU2Disp(panel, UNFOCUS);
 			break;
+		case EVENT_GOT_FOCUS:
+			 VISetSMU1Disp(panel, FOCUS);
+			 VISetSMU2Disp(panel, UNFOCUS);
+			break;	
 	}
 	return 0;
 }
@@ -177,6 +185,10 @@ int CVICALLBACK Start2UnitCB (int panel, int control, int event,
 			 VISetSMU1Disp(panel, UNFOCUS);
 			 VISetSMU2Disp(panel, FOCUS);
 			break;
+		case EVENT_GOT_FOCUS:
+			 VISetSMU1Disp(panel, UNFOCUS);
+			 VISetSMU2Disp(panel, FOCUS);
+			break;	
 	}
 	return 0;
 }

@@ -56,6 +56,7 @@ extern int IVPanel;
 extern int VIPanel;
 extern int VTPanel;
 extern int RTPanel;
+extern int ThreeTerminalPanel; 
 extern int FourTerminalPanel;
 extern int hBasicSamplePanel;
 extern int hResultDispPanel;

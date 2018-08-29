@@ -83,12 +83,10 @@ static void IdVgSetGATEDisp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, IDVGS_CFG_BG_GATE, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, IDVGS_CFG_TXT_GATE, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed); // change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, IDVGS_CFG_BG_GATE, ATTR_PICT_BGCOLOR, VAL_BG); 
-		SetCtrlAttribute (panel, IDVGS_CFG_TXT_GATE, ATTR_TEXT_BGCOLOR, VAL_BG); // change text bgcolor together with picture
 	}
 }
 static void IdVgSetDRAINDisp(int panel, char focus)
@@ -96,12 +94,10 @@ static void IdVgSetDRAINDisp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, IDVGS_CFG_BG_DRAIN, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, IDVGS_CFG_TXT_DRAIN, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed); // change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, IDVGS_CFG_BG_DRAIN, ATTR_PICT_BGCOLOR, VAL_BG); 
-		SetCtrlAttribute (panel, IDVGS_CFG_TXT_DRAIN, ATTR_TEXT_BGCOLOR, VAL_BG); // change text bgcolor together with picture
 	}
 }
 
@@ -110,6 +106,10 @@ int CVICALLBACK IdVgGATEDecoCB (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			IdVgSetGATEDisp(panel,FOCUS);
+			IdVgSetDRAINDisp(panel,UNFOCUS); 
+			break;	
 		case EVENT_LEFT_CLICK_UP:
 			IdVgSetGATEDisp(panel,FOCUS);
 			IdVgSetDRAINDisp(panel,UNFOCUS); 
@@ -123,6 +123,11 @@ int CVICALLBACK IdVgDRAINDecoCB (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			IdVgSetGATEDisp(panel,UNFOCUS);
+			IdVgSetDRAINDisp(panel,FOCUS); 
+
+			break;
 		case EVENT_LEFT_CLICK_UP:
 			IdVgSetGATEDisp(panel,UNFOCUS);
 			IdVgSetDRAINDisp(panel,FOCUS); 
@@ -138,6 +143,10 @@ int CVICALLBACK IdVgDrainModeCB (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			IdVgSetGATEDisp(panel,UNFOCUS);
+			IdVgSetDRAINDisp(panel,FOCUS); 
+			break;
 		case EVENT_LEFT_CLICK_UP:
 			IdVgSetGATEDisp(panel,UNFOCUS);
 			IdVgSetDRAINDisp(panel,FOCUS); 
