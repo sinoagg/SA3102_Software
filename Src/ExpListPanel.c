@@ -34,11 +34,10 @@
 #define EXP_I_T 3
 #define EXP_V_T 4
 #define EXP_R_T 5
+#define THREE_TERMINAL 12 
 #define FOUR_TERMINAL 16
 #define EXP_ID_VDS 17
 #define EXP_ID_VGS 18
-
-
 //==============================================================================
 // Types
 
@@ -135,15 +134,19 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			else if(index==EXP_R_T)
 			{
 				SetPanelPos(RTPanel, 105, 305);
-				SetPanelSize(RTPanel, 900, 1293);
 				DisplayPanel(RTPanel);
 				ExpList(0);
 				DispRuntime(1);
 			}
+			else if(index==THREE_TERMINAL)
+			{
+				SetPanelPos(ThreeTerminalPanel, 105, 305);
+				DisplayPanel(ThreeTerminalPanel);
+				ExpList(1);
+			} 
 			else if(index==EXP_ID_VDS)
 			{
 				SetPanelPos(IdVdPanel, 105, 305);
-				SetPanelSize(IdVdPanel, 900, 1293);
 				DisplayPanel(IdVdPanel);
 				ExpList(0);
 				DispRuntime(1);
@@ -151,7 +154,6 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			else if(index==EXP_ID_VGS)
 			{
 				SetPanelPos(IdVgPanel, 105, 305);
-				SetPanelSize(IdVgPanel, 900, 1293);
 				DisplayPanel(IdVgPanel);
 				ExpList(0);
 				DispRuntime(1);
@@ -159,7 +161,6 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			else if(index==FOUR_TERMINAL)
 			{
 				SetPanelPos(FourTerminalPanel, 105, 305);
-				SetPanelSize(FourTerminalPanel, 900, 1293);
 				DisplayPanel(FourTerminalPanel);
 				ExpList(1); 
 			}

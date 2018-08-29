@@ -49,12 +49,10 @@ static void VTSetSMU1Disp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, PANEL_V_T_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_V_T_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, PANEL_V_T_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG); 
-		SetCtrlAttribute (panel, PANEL_V_T_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 
@@ -63,12 +61,10 @@ static void VTSetSMU2Disp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, PANEL_V_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_V_T_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
 		SetCtrlAttribute (panel, PANEL_V_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
-		SetCtrlAttribute (panel, PANEL_V_T_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 int CVICALLBACK VTSMU1DecoCallback (int panel, int control, int event,
@@ -80,6 +76,10 @@ int CVICALLBACK VTSMU1DecoCallback (int panel, int control, int event,
 			 VTSetSMU1Disp(panel, FOCUS);
 			 VTSetSMU2Disp(panel, UNFOCUS);
 			break;
+		case EVENT_GOT_FOCUS:
+			 VTSetSMU1Disp(panel, FOCUS);
+			 VTSetSMU2Disp(panel, UNFOCUS);
+			break;	
 	}
 	return 0;
 }
@@ -90,6 +90,10 @@ int CVICALLBACK VTSMU2DecoCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
+			 VTSetSMU1Disp(panel, UNFOCUS);
+			 VTSetSMU2Disp(panel, FOCUS);
+			break;
+		case EVENT_GOT_FOCUS:
 			 VTSetSMU1Disp(panel, UNFOCUS);
 			 VTSetSMU2Disp(panel, FOCUS);
 			break;

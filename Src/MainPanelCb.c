@@ -37,6 +37,7 @@
 #define EXP_I_T 3
 #define EXP_V_T 4
 #define EXP_R_T 5
+#define THREE_TERMINAL 12 
 #define FOUR_TERMINAL 16
 #define EXP_ID_VDS 17
 #define EXP_ID_VGS 18
@@ -114,65 +115,65 @@ void Dispgraph()
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "V(mV)");		  //graph1坐标轴
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "I(A)");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "V1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "mV");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "I1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "A");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "V2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "mV");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "A");
 	}
 	else if(index==EXP_V_I)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "I(mA)");
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "V(V)");		//graph1坐标轴
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "I1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "A");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "V1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "mV");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "I2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "A");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "V2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "mV");
 	}
 	else if(index==EXP_I_T)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "T(ms)");
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "I(A)");		   //graph1坐标轴
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "ms");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "I1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "A");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "ms");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "A");
 	}
 	else if(index==EXP_V_T)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "T(ms)");
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "V(mV)");		  //graph1坐标轴
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "ms");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "V1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "mV");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "ms");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "V2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "mV");
 	}
 	else if(index==EXP_R_T)
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "T(ms)");
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "R(Ω)");		   //graph1坐标轴
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "ms");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "R1");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "R");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "Ω");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "ms");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "R2");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "R");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "Ω");
 	}
 	else
@@ -206,7 +207,9 @@ void Runkeyaction()//运行按钮按下后产生的一系列动作
 	DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
 	DisplayImageFile (mainPanel, MAIN_PANEL_CONFIGURE, "Resource\\Configure.ico"); 
 	DisplayImageFile (mainPanel, MAIN_PANEL_ANALYZE, "Resource\\Analyze_pressed.ico");
+	DisplayImageFile (resultPanel, RESULTMENU_TABLE, "Resource\\Table.ico"); 
 	DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph_pressed.ico"); 
+	DispSingleGraph();
 	
 	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH1, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
 	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH2, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//设置曲线图可以通过鼠标键盘放大与缩小
@@ -338,18 +341,21 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			if(index==TWO_TERMINAL||index==FOUR_TERMINAL)
+			if(index==TWO_TERMINAL||index==FOUR_TERMINAL||index==THREE_TERMINAL)
 			{
 				MessagePopup ("", "Please select a experiment!");
 			}
 			else
 			{
+				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU1CLR, &smu1Clr);
+				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU2CLR, &smu2Clr);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2tempclr);				//得到温度湿度压力三条曲线的颜色
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, &graph2humclr);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2preclr);
 			
 				X1 = 0;  
 				X2 = 0;
+				
 				FlushInQ(comSelect);	   														//Clear input and output buffer
 				FlushOutQ(comSelect);
 				
@@ -538,6 +544,12 @@ int CVICALLBACK SettingsCallback (int panel, int control, int event,
 			
 			SetCtrlAttribute (setPanel, SETTINGS_ABOUTBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);         //about背景色
 	     	SetCtrlAttribute (setPanel, SETTINGS_ABOUTBTN, ATTR_TEXT_COLOR, VAL_BLACK);            //about文本颜色
+			
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU1CLR, &smu1ClrOld);
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU2CLR, &smu2ClrOld);
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2Color1Old); 
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, &graph2Color2Old); 
+			GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2Color3Old);
 			
 		break;
 	}

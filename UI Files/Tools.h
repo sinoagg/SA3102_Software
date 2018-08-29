@@ -17,11 +17,13 @@
 #define  CALIPANEL_TEXTMSG                2       /* control type: textMsg, callback function: (none) */
 #define  CALIPANEL_RING                   3       /* control type: ring, callback function: (none) */
 #define  CALIPANEL_TEXTMSG_2              4       /* control type: textMsg, callback function: (none) */
-#define  CALIPANEL_TEXTMSG_3              5       /* control type: textMsg, callback function: (none) */
-#define  CALIPANEL_OK_PIC                 6       /* control type: picture, callback function: (none) */
-#define  CALIPANEL_OUTVOLCALI             7       /* control type: textMsg, callback function: OutputVoltageCaliCallback */
-#define  CALIPANEL_TEXTMSG_6              8       /* control type: textMsg, callback function: (none) */
-#define  CALIPANEL_ZEROCURCALI            9       /* control type: textMsg, callback function: ZeroCurrentCaliCallback */
+#define  CALIPANEL_TEXTMSG_7              5       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_OK_PIC_2               6       /* control type: picture, callback function: (none) */
+#define  CALIPANEL_TEXTMSG_3              7       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_OK_PIC                 8       /* control type: picture, callback function: (none) */
+#define  CALIPANEL_OUTVOLCALI             9       /* control type: textMsg, callback function: OutputVoltageCaliCallback */
+#define  CALIPANEL_TEXTMSG_6              10      /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_ZEROCURCALI            11      /* control type: textMsg, callback function: ZeroCurrentCaliCallback */
 
 #define  TOOLSPANEL                       2       /* callback function: ToolsPanelCallback */
 #define  TOOLSPANEL_PICTURE               2       /* control type: picture, callback function: CalibrationCallback */
