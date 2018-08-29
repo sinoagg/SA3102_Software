@@ -14,15 +14,15 @@
      /* Panels and Controls: */
 
 #define  PANEL_I_V                        1
-#define  PANEL_I_V_GAP2                   2       /* control type: numeric, callback function: IVSMU2DecoCallback */
-#define  PANEL_I_V_START2                 3       /* control type: numeric, callback function: IVSMU2DecoCallback */
-#define  PANEL_I_V_STOP2                  4       /* control type: numeric, callback function: IVSMU2DecoCallback */
-#define  PANEL_I_V_SMU2MODE               5       /* control type: ring, callback function: IVSMU2DecoCallback */
-#define  PANEL_I_V_START1                 6       /* control type: numeric, callback function: IVSMU1DecoCallback */
-#define  PANEL_I_V_SMU1MODE               7       /* control type: ring, callback function: IVSMU1DecoCallback */
-#define  PANEL_I_V_GAP1                   8       /* control type: numeric, callback function: IVSMU1DecoCallback */
-#define  PANEL_I_V_START_1                9       /* control type: textMsg, callback function: (none) */
-#define  PANEL_I_V_STOP1                  10      /* control type: numeric, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_SMU1MODE               2       /* control type: ring, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_START1                 3       /* control type: numeric, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_STOP1                  4       /* control type: numeric, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_GAP1                   5       /* control type: numeric, callback function: IVSMU1DecoCallback */
+#define  PANEL_I_V_SMU2MODE               6       /* control type: ring, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_START2                 7       /* control type: numeric, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_STOP2                  8       /* control type: numeric, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_GAP2                   9       /* control type: numeric, callback function: IVSMU2DecoCallback */
+#define  PANEL_I_V_START_1                10      /* control type: textMsg, callback function: (none) */
 #define  PANEL_I_V_PICTURE_4              11      /* control type: picture, callback function: (none) */
 #define  PANEL_I_V_STOP_1                 12      /* control type: textMsg, callback function: (none) */
 #define  PANEL_I_V_PICTURE_2              13      /* control type: picture, callback function: (none) */

@@ -65,7 +65,6 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 	{
         InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
 		GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
-		
 		if(TestPara1.testMode == NO_SWEEP_IV ) //根据不同模式 选择不同的X 轴数据
 		{
 			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_voltaget;
@@ -76,7 +75,7 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 		if(TestPara1.testMode == NO_SWEEP_VI )
 		{
 			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_current;
-			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data
+			*(Graph.pCurveArray->pDotY++) = RxData1->rx_voltage.num_float;				//get y, set pointer to the next data
 		
 		}
 		if(TestPara1.testMode == NO_SWEEP_IT )

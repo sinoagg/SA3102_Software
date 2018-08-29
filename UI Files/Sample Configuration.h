@@ -19,6 +19,8 @@
 #define  SAMPLE_ADV_TEXTMSG               4       /* control type: textMsg, callback function: (none) */
 #define  SAMPLE_ADV_TEXTMSG_2             5       /* control type: textMsg, callback function: (none) */
 #define  SAMPLE_ADV_BSCSET                6       /* control type: textMsg, callback function: BasicSetCallback */
+#define  SAMPLE_ADV_OutputRelay           7       /* control type: radioButton, callback function: (none) */
+#define  SAMPLE_ADV_TEXTMSG_3             8       /* control type: textMsg, callback function: (none) */
 
 #define  SAMPLE_CFG                       2
 #define  SAMPLE_CFG_RANGESETTING          2       /* control type: ring, callback function: (none) */

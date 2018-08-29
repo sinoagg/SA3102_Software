@@ -72,6 +72,7 @@ typedef struct
 	unsigned int sampleRate;
 	unsigned int sampleNumber;
 	int rangeMode;
+	int outputRelay;
 	unsigned char maxRange;
 	unsigned char minRange;
 }TestParaTypeDef;

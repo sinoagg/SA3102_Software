@@ -165,8 +165,7 @@ int CVICALLBACK ProCallback (int panel, int control, int event,
 
 
 
-int CVICALLBACK CancelCallback (int panel, int control, int event,
-								void *callbackData, int eventData1, int eventData2)
+int CVICALLBACK CancelCallback (int panel, int control, int event,void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{

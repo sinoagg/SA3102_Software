@@ -84,7 +84,7 @@ void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,un
 	*measUartTxBuf1=devAddr1; 		//设备地址
 	*(measUartTxBuf1+1)=0x11;		//命令类型  0X11设置  0X12起始		0X13停止	0X14轮询	0X15校准	0XFF查询
 	*(measUartTxBuf1+2)=expType;	//测试类型
-	*(measUartTxBuf1+3)=0x00;		//保留 
+	*(measUartTxBuf1+3)=(unsigned char)pTestPara1->outputRelay;		//保留 
 	
 	//将源表 1 的 电压 开始 结束 间隔参数 放入数组中准备发送
 	*(measUartTxBuf1+4)=(unsigned char)(pTestPara1->Voltage_Start >> 8) ;	   
@@ -128,7 +128,7 @@ void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,un
 	*measUartTxBuf2=devAddr2; 		//设备地址
 	*(measUartTxBuf2+1)=0x11;		//命令类型  0X11设置  0X12起始		0X13停止	0X14轮询	0X15校准	0XFF查询
 	*(measUartTxBuf2+2)=expType;	//测试类型
-	*(measUartTxBuf2+3)=0x00;		//保留 
+	*(measUartTxBuf2+3)=(unsigned char)pTestPara2->outputRelay;		//保留 
 	
 	//将源表 2 的 电压 开始 结束 间隔参数 放入数组中准备发送 													  
 	*(measUartTxBuf2+4)=(unsigned char)(pTestPara2->Voltage_Start >> 8);	   
