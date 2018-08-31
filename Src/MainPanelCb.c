@@ -1,5 +1,3 @@
-#include "Tools.h"
-
 //==============================================================================
 //
 // Title:		MainPanel.c
@@ -29,6 +27,7 @@
 #include "File.h"
 #include <rs232.h>
 #include "MainPanel.h"
+#include "Tools.h"   
 //==============================================================================
 // Constants
 #define TWO_TERMINAL 0
@@ -189,19 +188,15 @@ void Runkeyaction()//运行按钮按下后产生的一系列动作
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_SETTINGS, ATTR_DIMMED,1);        //禁用 保存按钮  
 	
 	SetPanelPos(resultPanel, 105, 305);  
-    SetPanelSize(resultPanel, 65, 1293);      
 	DisplayPanel(resultPanel);  
 
-	SetPanelPos(graphDispPanel, 172, 305);  
-    SetPanelSize(graphDispPanel, 834, 1293);
+	SetPanelPos(graphDispPanel, 172, 305);
 	DisplayPanel(graphDispPanel);
 		
 	SetPanelPos(hResultDispPanel, 105, 1600);
-	SetPanelSize(hResultDispPanel, 449, 300);
 	DisplayPanel(hResultDispPanel);
 		
 	SetPanelPos(hEnvResultPanel, 556, 1600);
-	SetPanelSize(hEnvResultPanel, 449, 300);
 	DisplayPanel(hEnvResultPanel);
 	
 	DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
@@ -501,16 +496,13 @@ int CVICALLBACK AnalyzeCallback (int panel, int control, int event,
 		
 			DispResultTableGraph();
 			
-			SetPanelPos(resultPanel, 105, 305);  
-		    SetPanelSize(resultPanel, 65, 1293);      
+			SetPanelPos(resultPanel, 105, 305);       
 	 		DisplayPanel(resultPanel);  
 			
 			SetPanelPos(hResultDispPanel, 105, 1600);
-			SetPanelSize(hResultDispPanel, 449, 300);
 			DisplayPanel(hResultDispPanel);
 				
 			SetPanelPos(hEnvResultPanel, 556, 1600);
-			SetPanelSize(hEnvResultPanel, 449, 300);
 			DisplayPanel(hEnvResultPanel);
 
 			DisplayImageFile (mainPanel, MAIN_PANEL_SELECT, "Resource\\Select.ico");
@@ -533,7 +525,6 @@ int CVICALLBACK SettingsCallback (int panel, int control, int event,
 			HidePanel (hSettingsGraphPanel);
 			HidePanel (aboutPanel);
 			SetPanelPos(ENVTPanel, 5, 160);
-			SetPanelSize(ENVTPanel, 380, 660);
 			DisplayPanel(ENVTPanel);
 			
 			SetCtrlAttribute (setPanel, SETTINGS_PRJBTN, ATTR_TEXT_BGCOLOR, VAL_TEXTBG_PRESSED);   //project背景色
@@ -564,8 +555,10 @@ static int LoadAndDispPrj(FileLableTypeDef *pFileLable, char index)						//index
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_DATE, pFileLable->FileDate);
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_TIME, pFileLable->FileTime);
 	SetCtrlVal(hSinglePrjPanel, DEFPANEL_DESC, pFileLable->FileDesc);
+	
+
+	
 	SetPanelPos(hSinglePrjPanel, index*117, -10);
-	SetPanelSize(hSinglePrjPanel, 115, 1250);
 	DisplayPanel(hSinglePrjPanel);
 	return hSinglePrjPanel;
 }

@@ -127,7 +127,7 @@ static char GetPanelIndex(int panel)
 
 			SetCtrlAttribute (proPanel, PROPANEL_PIC_OPENPRJ, ATTR_DIMMED, 0);
 			SetCtrlAttribute (proPanel, PROPANEL_TXT_OPENPRJ, ATTR_DIMMED, 0);
-			SetCtrlAttribute (proPanel, PROPANEL_TXT_OPENPRJ , ATTR_TEXT_BGCOLOR,COLOR ); 
+			//SetCtrlAttribute (proPanel, PROPANEL_TXT_OPENPRJ , ATTR_TEXT_BGCOLOR,COLOR ); 
 			
 			SelectProject(panel, 1);
 			selectedPrjIndex=GetPanelIndex(panel);
@@ -153,7 +153,7 @@ int CVICALLBACK SearchCallback (int panel, int control, int event,
 			if(selectPanel)	 SelectProject(selectPanel,0);				//取消当前选中状态  
 			SetPanelAttribute(projectPanel, ATTR_BACKCOLOR, VAL_WHITE); 
 			SetCtrlAttribute (proPanel,PROPANEL_PIC_OPENPRJ , ATTR_DIMMED, 1);
-			SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_TEXT_BGCOLOR,SEARCHCOLOR );
+			//SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_TEXT_BGCOLOR,SEARCHCOLOR );
 			SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_DIMMED, 1); 
 			break;
 	}

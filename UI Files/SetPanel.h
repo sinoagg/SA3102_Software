@@ -37,14 +37,14 @@
 #define  SETGRAPH_TEXTMSG_9               15      /* control type: textMsg, callback function: (none) */
 #define  SETGRAPH_TEXTMSG_3               16      /* control type: textMsg, callback function: (none) */
 #define  SETGRAPH_TEXTMSG_4               17      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_5               18      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_2               19      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_RING_3                  20      /* control type: ring, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_7               21      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TXT_PLOT_STYLE          22      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_8               23      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_2               18      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_RING_3                  19      /* control type: ring, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_7               20      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TXT_PLOT_STYLE          21      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_8               22      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_11              23      /* control type: textMsg, callback function: (none) */
 #define  SETGRAPH_TEXTMSG_6               24      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_11              25      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_5               25      /* control type: textMsg, callback function: (none) */
 
 #define  SETTINGS                         4       /* callback function: SettingsCB */
 #define  SETTINGS_CANVAS                  2       /* control type: canvas, callback function: (none) */
