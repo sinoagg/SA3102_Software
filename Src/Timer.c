@@ -46,24 +46,24 @@ int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callb
 
 	ProtocolQuery( comSelect, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
 	//Read_CGS_Value(CGS_comSelect);
-	
-	//判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
-	if(Graph.X_Axis_Max < Graph.pCurveArray->numOfPlotDots)
-	{
-		Graph.X_Axis_Max = Graph.X_Axis_Max + 100; 			//将图中的 X 轴坐标最大值范围扩大100
-		SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
+	//
+	////判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
+	//if(Graph.X_Axis_Max < Graph.pCurveArray->numOfPlotDots)
+	//{
+	//	Graph.X_Axis_Max = Graph.X_Axis_Max + 100; 			//将图中的 X 轴坐标最大值范围扩大100
+	//	SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
 
-		//SetAxisScalingMode (panelHandle, PANEL_GRAPH2, VAL_LEFT_YAXIS , VAL_MANUAL, 0, 20);   //设置 Y 轴的范围
-	}
-	
-	//判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
-	if(Graph_Temp.X_Axis_Max < Graph_Temp.pCurveArray->numOfPlotDots)
-	{
-		Graph_Temp.X_Axis_Max = Graph_Temp.X_Axis_Max + 100; 			//将图中的 X 轴坐标最大值范围扩大100
-		SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//设置 X 轴的范围
+	//	//SetAxisScalingMode (panelHandle, PANEL_GRAPH2, VAL_LEFT_YAXIS , VAL_MANUAL, 0, 20);   //设置 Y 轴的范围
+	//}
+	//
+	////判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
+	//if(Graph_Temp.X_Axis_Max < Graph_Temp.pCurveArray->numOfPlotDots)
+	//{
+	//	Graph_Temp.X_Axis_Max = Graph_Temp.X_Axis_Max + 100; 			//将图中的 X 轴坐标最大值范围扩大100
+	//	SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//设置 X 轴的范围
 
-		//SetAxisScalingMode (panelHandle, PANEL_GRAPH2, VAL_LEFT_YAXIS , VAL_MANUAL, 0, 20);   //设置 Y 轴的范围
-	}
+	//	//SetAxisScalingMode (panelHandle, PANEL_GRAPH2, VAL_LEFT_YAXIS , VAL_MANUAL, 0, 20);   //设置 Y 轴的范围
+	//}
 	
 	
 	return 0;

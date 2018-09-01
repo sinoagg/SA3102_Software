@@ -1,6 +1,6 @@
 [PlotCurve1]
 Class="Function"
-Prototype="int PlotCurve1(Graph_TypeDef *pGraph, int graphDispPanel, int control, int indexCurveArray);"
+Prototype="int PlotCurve1(Graph_TypeDef *pGraph, int graphDispPanel, int control, int indexCurve);"
 
 [PlotCurve]
 Class="Function"

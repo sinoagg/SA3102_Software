@@ -153,9 +153,9 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 	     //ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
 		 //Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
 		 //rxNum -=UART_RX_LEN;
-		 //i++; 
+		// i++; 
 	}
-	rxNum = GetInQLen(comSelect); 
+	//rxNum = GetInQLen(comSelect); 
 	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图 
 	
 	PlotCurve1(&Graph, graphDispPanel, GRAPHDISP_GRAPH1, 0); 
@@ -171,6 +171,59 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 		SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
 	}
 }
+
+//void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
+//{
+//	int status;
+//	int rxNum;																							  
+//	int i=0;
+//	RxDataTypeDef RxData1,RxData2;
+//	RxData1.rxStopSign=0x00; 
+//	rxNum = GetInQLen(comSelect);  												//读取串口中发送来的数据数量
+//	if(rxNum>1024) rxNum=1024;													//防止超过内存范围
+
+   // rxNum-=rxNum%UART_RX_LEN;
+
+//	//status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum); 	
+//	          
+//	while(rxNum>=UART_RX_LEN)
+//	{	 
+//		
+//		 //if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
+//		 //{
+//		 //	DiscardAsyncTimer(TimerID);
+//		//	rxNum =0;
+//		 //}
+//		 //else
+//		 //{
+//			status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
+//			ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
+//			Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
+//			rxNum -=UART_RX_LEN;
+//		 //}
+//		
+//	     //status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
+//	     //ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
+//		 //Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
+//		 //rxNum -=UART_RX_LEN;
+//		// i++; 
+//	}
+//	//rxNum = GetInQLen(comSelect); 
+//	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图 
+//	
+//	PlotCurve1(&Graph, graphDispPanel, GRAPHDISP_GRAPH1, 0); 
+//	
+//	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))
+//	{
+//		DiscardAsyncTimer(TimerID);
+//		ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令  
+//		//GraphDeinit(&Graph);												//内存释放在画图之后
+//		//GraphDeinit(&Graph_Temp);
+//		SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
+//	    SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
+//		SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
+//	}
+//}
 
 void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackData)
 {
