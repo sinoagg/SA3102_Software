@@ -51,11 +51,21 @@ int PlotCurve1(Graph_TypeDef* pGraph, int graphDispPanel, int control, int index
 			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1) );
 			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
 			
+<<<<<<< HEAD
 			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + indexCurve)->pDotXPlot-1, (pGraph->pCurveArray + indexCurve)->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);  
+=======
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + indexCurveArray)->pDotXPlot-1, (pGraph->pCurveArray + indexCurveArray)->pDotYPlot-1, 
+									  numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);  
+>>>>>>> b80db9eb379214eacc067a4e274cf57b6d262b71
 		}
 		else																			//画第一个点，只在画第一个点时调用
 		{
+<<<<<<< HEAD
 			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + indexCurve)->pDotXPlot, (pGraph->pCurveArray + indexCurve)->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr); 
+=======
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + indexCurveArray)->pDotXPlot, (pGraph->pCurveArray + indexCurveArray)->pDotYPlot, 
+									  numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr); 
+>>>>>>> b80db9eb379214eacc067a4e274cf57b6d262b71
 		}
 	(pGraph->pCurveArray + indexCurve)->numOfPlotDots+=numOfDotsToPlot;			//画图总点数递增
 	(pGraph->pCurveArray + indexCurve)->pDotXPlot+=numOfDotsToPlot;				//画图点X坐标指针递增
