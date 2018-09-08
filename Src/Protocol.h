@@ -51,7 +51,8 @@ enum TestMode
 	NO_SWEEP_IV=1,
 	NO_SWEEP_VI=2,
 	NO_SWEEP_IT=3,
-	NO_SWEEP_RT=4
+	NO_SWEEP_RT=4,
+	NO_SWEEP_VT=5 
 };
 typedef struct
 {
@@ -71,6 +72,7 @@ typedef struct
 	unsigned int sampleRate;
 	unsigned int sampleNumber;
 	int rangeMode;
+	int outputRelay;
 	unsigned char maxRange;
 	unsigned char minRange;
 }TestParaTypeDef;
@@ -134,7 +136,7 @@ void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char
 void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2);
 void ProtocolCalibrate(unsigned char comSelect, unsigned char devAddr1, unsigned char* measUartTxBuf1, unsigned char devAddr2, unsigned char* measUartTxBuf2);
 void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataTypeDef* pRxData2);
-      
+unsigned char GetXorCheckVal(unsigned char* pUartBuf, unsigned char lenth);//计算校验值    
 
 #ifdef __cplusplus
     }

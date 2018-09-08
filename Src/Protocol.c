@@ -84,7 +84,7 @@ void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,un
 	*measUartTxBuf1=devAddr1; 		//设备地址
 	*(measUartTxBuf1+1)=0x11;		//命令类型  0X11设置  0X12起始		0X13停止	0X14轮询	0X15校准	0XFF查询
 	*(measUartTxBuf1+2)=expType;	//测试类型
-	*(measUartTxBuf1+3)=0x00;		//保留 
+	*(measUartTxBuf1+3)=(unsigned char)pTestPara1->outputRelay;		//保留 
 	
 	//将源表 1 的 电压 开始 结束 间隔参数 放入数组中准备发送
 	*(measUartTxBuf1+4)=(unsigned char)(pTestPara1->Voltage_Start >> 8) ;	   
@@ -116,8 +116,10 @@ void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,un
 	*(measUartTxBuf1+26)=(unsigned char)(pTestPara1->rangeMode&0xFF);
 	
 	
-	*(measUartTxBuf1+27)=9;  //量程使用最大档位    	pTestPara1->maxRange 
-	*(measUartTxBuf1+28)=1;  //量程使用最小档位 	pTestPara1->minRange 
+	*(measUartTxBuf1+27)=pTestPara1->maxRange;  //量程使用最大档位    	pTestPara1->maxRange 
+	*(measUartTxBuf1+28)=pTestPara1->minRange;  //量程使用最小档位 	    pTestPara1->minRange 
+	
+	
 	
 	*(measUartTxBuf1+SA31_UART_TX_LEN-1) = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1); 
 	}
@@ -126,7 +128,7 @@ void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,un
 	*measUartTxBuf2=devAddr2; 		//设备地址
 	*(measUartTxBuf2+1)=0x11;		//命令类型  0X11设置  0X12起始		0X13停止	0X14轮询	0X15校准	0XFF查询
 	*(measUartTxBuf2+2)=expType;	//测试类型
-	*(measUartTxBuf2+3)=0x00;		//保留 
+	*(measUartTxBuf2+3)=(unsigned char)pTestPara2->outputRelay;		//保留 
 	
 	//将源表 2 的 电压 开始 结束 间隔参数 放入数组中准备发送 													  
 	*(measUartTxBuf2+4)=(unsigned char)(pTestPara2->Voltage_Start >> 8);	   
@@ -158,8 +160,10 @@ void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,un
 	*(measUartTxBuf2+25)=(unsigned char)(pTestPara2->sampleNumber&0xFF);
 	*(measUartTxBuf2+26)=(unsigned char)(pTestPara2->rangeMode&0xFF); 
 	
-	*(measUartTxBuf2 + 27)=9;  //量程使用最大档位
-	*(measUartTxBuf2 + 28)=1;  //量程使用最小档位
+	
+	*(measUartTxBuf1+27)=pTestPara2->maxRange;  //量程使用最大档位    	pTestPara1->maxRange 
+	*(measUartTxBuf1+28)=pTestPara2->minRange;  //量程使用最小档位 	    pTestPara1->minRange 
+	
 	
 	*(measUartTxBuf2+SA31_UART_TX_LEN-1) = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1); //校验位
 	}
@@ -192,6 +196,7 @@ void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			*(measUartTxBuf2+29)=GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
 			ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
 	}
+	Delay(0.2);
 }
 /*
 
@@ -202,14 +207,17 @@ void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 
 void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
 {
+ 
 	if(devAddr1 == 0x01)
 	{
 			*measUartTxBuf1 = devAddr1;
 			*(measUartTxBuf1+1) = MSG_TYPE_STOP;
 			*(measUartTxBuf1+29) = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
 			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			//	Delay(0.05); 
+			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
 	}
-	Delay(0.2);
+	Delay(0.05);
 	if(devAddr2 == 0x02)
 	{
 		*measUartTxBuf2 = devAddr2;
@@ -235,15 +243,15 @@ void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char
 		*(measUartTxBuf1+29)=GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
 		ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
 	}
-	Delay(0.2); 
+	Delay(0.020); 
 	if(devAddr2 == 0x02) 
 	{
 		*measUartTxBuf2=devAddr2;
 		*(measUartTxBuf2+1)=0x14;
 		*(measUartTxBuf2 + 29) = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
 		ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
-	
 	}
+	Delay(0.020);
 }
 /*
 
@@ -288,7 +296,7 @@ void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataT
 		pRxData1->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
 		pRxData1->rxStopSign=*(pUartRxBuf+1);
 		
-		if(*(pUartRxBuf+2) >= 0xf0 )
+		if(*(pUartRxBuf+2) & 0x80 )
 		{
 			pRxData1->rx_Theory_voltaget = (((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3)) - 65536;
 		}
@@ -297,7 +305,7 @@ void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataT
 			pRxData1->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3); 
 		}
 	
-		if(*(pUartRxBuf+4) >= 0xf0 ) 
+		if(*(pUartRxBuf+4) & 0x80 ) 
 		{
 			pRxData1->rx_Theory_current =  (((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5)) - 65536;   
 		}

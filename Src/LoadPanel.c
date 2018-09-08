@@ -1,4 +1,3 @@
-#include <userint.h>
 //==============================================================================
 //
 // Title:		LoadPanel.c
@@ -14,7 +13,7 @@
 
 #include "LoadPanel.h"
 #include "I_T_Panel.h"
-
+#include <userint.h>  
 
 
 //==============================================================================
@@ -34,13 +33,17 @@
 int mainPanel;
 int expListPanel;
 int TwoTerminalPanel;
-int IdVdPanel;
-int IdVgPanel;
 int ITPanel;
 int IVPanel;
 int VIPanel;
 int VTPanel;
 int RTPanel;
+
+int ThreeTerminalPanel;
+
+int FourTerminalPanel;
+int IdVdPanel;
+int IdVgPanel;
 
 int hBasicSamplePanel;
 int graphDispPanel;
@@ -65,6 +68,8 @@ int hEnvResultPanel;
 int hResultDispPanel;
 int hAdvanceSamplePanel;  
 int projectPanel;
+int hToolsPanel;
+int hCalibrationPanel;
 //==============================================================================
 // Global functions
 
@@ -134,7 +139,7 @@ int LoadInitPanel (void)
 	I_T_Panel1.panelHandle = ITPanel;
 	I_T_Panel2.panelHandle = ITPanel;
 		
-	if ((TwoTerminalPanel = LoadPanel (mainPanel, "Two Terminal.uir", TWO_TRML)) < 0)		//load middle panel
+	if ((TwoTerminalPanel = LoadPanel (mainPanel, "TerminalPanel.uir", TWO_TRML)) < 0)		//load middle panel
 		return -1;
 	
 	if ((IVPanel = LoadPanel (mainPanel, "I-V Configuration.uir", PANEL_I_V)) < 0)		//load middle panel
@@ -157,6 +162,12 @@ int LoadInitPanel (void)
 	R_T_Panel1.panelHandle = RTPanel;
 	R_T_Panel2.panelHandle = RTPanel;
 	
+	if ((ThreeTerminalPanel = LoadPanel (mainPanel, "TerminalPanel.uir", THREE_TRML)) < 0)		//load middle panel
+		return -1;
+	
+	if ((FourTerminalPanel = LoadPanel (mainPanel, "TerminalPanel.uir", FOUR_TRML)) < 0)		//load middle panel
+		return -1;
+	
 	if ((chPanel = LoadPanel (mainPanel, "Result Menu.uir", CHPANEL)) < 0)		//load chPanel panel
 		return -1;
 		//弹出projects		
@@ -167,17 +178,18 @@ int LoadInitPanel (void)
 		return -1;
 	/*if ((defPanel = LoadPanel (proPanel, "ProjectPanel.uir", DEFPANEL)) < 0)		//load projects panel
 		return -1;*/
-
+	if ((hToolsPanel = LoadPanel(mainPanel,"Tools.uir",TOOLSPANEL))<0)
+		return -1;
+	if((hCalibrationPanel = LoadPanel(hToolsPanel,"Tools.uir",CALIPANEL))<0)  
+		return -1;
+	
 	DisplayPanel (mainPanel);
 	SetPanelPos(expListPanel, 105, 3);  //加载面板位置 (,top,left)
-	SetPanelSize(expListPanel, 900, 300);//加载面板大小  (,height，width)
 	DisplayPanel(expListPanel);
 
 	SetPanelPos(TwoTerminalPanel, 105, 305);		
-	SetPanelSize(TwoTerminalPanel, 900, 1293);
 	DisplayPanel(TwoTerminalPanel);
 	
-	//SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED,1);         //禁用 开始按钮
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1); 
 
 	return 0;

@@ -21,6 +21,7 @@ SampleCfgPanel.obj
 SetPanelCB.obj
 table.obj
 Timer.obj
+ToolsPanel.obj
 V_I_Panel.obj
 V_T_Panel.obj
 cvi.lib

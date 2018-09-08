@@ -15,36 +15,23 @@
 
 #define  SAMPLE                           1
 #define  SAMPLE_I_2                       2       /* control type: ring, callback function: (none) */
-//<<<<<<< HEAD
-//#define  SAMPLE_TEXTMSG_7                 3       /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_8                 4       /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_9                 5       /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_10                6       /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_11                7       /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_VG_2                      8       /* control type: numeric, callback function: (none) */
-//#define  SAMPLE_VD_2                      9       /* control type: numeric, callback function: (none) */
-//#define  SAMPLE_I                         10      /* control type: ring, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_2                 11      /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG                   12      /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_5                 13      /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_3                 14      /* control type: textMsg, callback function: (none) */
-//#define  SAMPLE_TEXTMSG_6                 15      /* control type: textMsg, callback function: (none) */
-//=======
-#define  SAMPLE_SMU2Y                     3       /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_SMU2X                     4       /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_TEXTMSG_9                 5       /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_SMU2XUNIT                 6       /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_SMU2YUNIT                 7       /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_VG_2                      8       /* control type: numeric, callback function: (none) */
-#define  SAMPLE_VD_2                      9       /* control type: numeric, callback function: (none) */
-#define  SAMPLE_I                         10      /* control type: ring, callback function: (none) */
-#define  SAMPLE_SMU1Y                     11      /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_SMU1X                     12      /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_TEXTMSG_5                 13      /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_SMU1XUNIT                 14      /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_SMU1YUNIT                 15      /* control type: textMsg, callback function: (none) */
-#define  SAMPLE_VG                        16      /* control type: numeric, callback function: (none) */
-#define  SAMPLE_VD                        17      /* control type: numeric, callback function: (none) */
+#define  SAMPLE_VG_2                      3       /* control type: numeric, callback function: (none) */
+#define  SAMPLE_VD_2                      4       /* control type: numeric, callback function: (none) */
+#define  SAMPLE_I                         5       /* control type: ring, callback function: (none) */
+#define  SAMPLE_VD                        6       /* control type: numeric, callback function: (none) */
+#define  SAMPLE_VG                        7       /* control type: numeric, callback function: (none) */
+#define  SAMPLE_TEXTMSG_10                8       /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU1X                     9       /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU1Y                     10      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_TEXTMSG_5                 11      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_TEXTMSG_9                 12      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU2Y                     13      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU2X                     14      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU1XUNIT                 15      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU1YUNIT                 16      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU2XUNIT                 17      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_TEXTMSG                   18      /* control type: textMsg, callback function: (none) */
+#define  SAMPLE_SMU2YUNIT                 19      /* control type: textMsg, callback function: (none) */
 
 
      /* Control Arrays: */

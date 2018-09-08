@@ -6,9 +6,13 @@ Prototype="int MAIN_PANEL_Callback(int panel, int event, void *callbackData, int
 Class="Function"
 Prototype="void Dispgraph();"
 
-[Runkeyaction]
+[RunKeyAction]
 Class="Function"
-Prototype="void Runkeyaction();"
+Prototype="void RunKeyAction();"
+
+[StopKeyAction]
+Class="Function"
+Prototype="void StopKeyAction();"
 
 [ProtocolCfg]
 Class="Function"
@@ -41,4 +45,24 @@ Prototype="int SettingsCallback(int panel, int control, int event, void *callbac
 [ProjectCallback]
 Class="Function"
 Prototype="int ProjectCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
+[ToolsCallback]
+Class="Function"
+Prototype="int ToolsCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
+[OutputVoltageCaliCallback]
+Class="Function"
+Prototype="int OutputVoltageCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
+[ZeroCurrentCaliCallback]
+Class="Function"
+Prototype="int ZeroCurrentCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
+[Current_Calibration]
+Class="Function"
+Prototype="int Current_Calibration(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
+[Calibration_save]
+Class="Function"
+Prototype="int Calibration_save(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 

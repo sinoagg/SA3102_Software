@@ -19,9 +19,8 @@
 //==============================================================================
 // Constants
 #define CHANGECOLOR 	0x94CEFF //浅蓝
-#define BGCOLOR 		0xFFFFFF
 #define COLOR  			0x065279 //深蓝
-#define SEARCHCOLOR 	0xb2c9d5 //不可用颜色
+#define SEARCHCOLOR 	0xB2C9D5 //不可用颜色
 //==============================================================================
 // Types
 
@@ -42,6 +41,7 @@
 /// HIRET What does your function return?
 
 int selectedPrjIndex=0;			//当前选中的项目序号 
+int selectPanel;   	
 
 static void DiscardAllPrjPanel(PrjHandleTypeDef *pSingleProject)
 {
@@ -55,10 +55,11 @@ static void DiscardAllPrjPanel(PrjHandleTypeDef *pSingleProject)
 
 static int RecallAllPanelState(char* pConfigSavePath)
 {
-	RecallPanelState(I_T_Panel1.panelHandle, pConfigSavePath, 1); //IT面板的值					
-	//RecallPanelState(IdVgPanel.panelHandle, pConfigSavePath, 2);						
-	//RecallPanelState(hIT_Panel, pConfigSavePath, 3);
-	//RecallPanelState(hRT_Panel, pConfigSavePath, 4);
+	RecallPanelState(IVPanel, pConfigSavePath, 1);
+	RecallPanelState(VIPanel, pConfigSavePath, 2);
+	RecallPanelState(I_T_Panel1.panelHandle, pConfigSavePath, 3); //IT面板的值  
+	RecallPanelState(VTPanel, pConfigSavePath, 4);
+	RecallPanelState(RTPanel, pConfigSavePath, 5);
 	RecallPanelState(hBasicSamplePanel, pConfigSavePath, 10);	   //用户设置 配置值
 	RecallPanelState(hAdvanceSamplePanel, pConfigSavePath, 11);  //高级设置面板值
 	RecallPanelState(hEnvCfgPanel, pConfigSavePath, 14);
@@ -84,6 +85,7 @@ int CVICALLBACK TXT_OpenPrjCallback (int panel, int control, int event,
 }
 static void SelectProject(int panel, int select)
 {
+	selectPanel=GetActivePanel();
 	if(select)
 	{
 		SetPanelAttribute (panel, ATTR_BACKCOLOR, CHANGECOLOR);
@@ -95,12 +97,12 @@ static void SelectProject(int panel, int select)
 	}
 	else
 	{
-		SetPanelAttribute (panel, ATTR_BACKCOLOR, BGCOLOR);
-		SetCtrlAttribute (panel, DEFPANEL_NAME, ATTR_TEXT_BGCOLOR, BGCOLOR);
-		SetCtrlAttribute (panel, DEFPANEL_DESC, ATTR_TEXT_BGCOLOR, BGCOLOR);
-		SetCtrlAttribute (panel, DEFPANEL_DATE, ATTR_TEXT_BGCOLOR, BGCOLOR);
-		SetCtrlAttribute (panel, DEFPANEL_TIME, ATTR_TEXT_BGCOLOR, BGCOLOR);
-		SetCtrlAttribute (panel, DEFPANEL_CANVAS, ATTR_PICT_BGCOLOR, BGCOLOR);
+		SetPanelAttribute (panel, ATTR_BACKCOLOR, VAL_WHITE);
+		SetCtrlAttribute (panel, DEFPANEL_NAME, ATTR_TEXT_BGCOLOR, VAL_WHITE);
+		SetCtrlAttribute (panel, DEFPANEL_DESC, ATTR_TEXT_BGCOLOR, VAL_WHITE);
+		SetCtrlAttribute (panel, DEFPANEL_DATE, ATTR_TEXT_BGCOLOR, VAL_WHITE);
+		SetCtrlAttribute (panel, DEFPANEL_TIME, ATTR_TEXT_BGCOLOR, VAL_WHITE);
+		SetCtrlAttribute (panel, DEFPANEL_CANVAS, ATTR_PICT_BGCOLOR, VAL_WHITE);
 	}
 }
 
@@ -140,17 +142,7 @@ static char GetPanelIndex(int panel)
 	}
 	return 0;
 }
-//int CVICALLBACK PIC_ExitPrjCallback (int panel, int control, int event,
-//									 void *callbackData, int eventData1, int eventData2)
-//{
-//	if(event==EVENT_LEFT_CLICK)
-//	{
-//		DiscardAllPrjPanel(SingleProject);
-//		RemovePopup (proPanel);  
-//	}
 
-//	return 0;
-//}
 
 int CVICALLBACK SearchCallback (int panel, int control, int event,
 								void *callbackData, int eventData1, int eventData2)
@@ -158,10 +150,8 @@ int CVICALLBACK SearchCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			/*SetPanelAttribute(defPanel, ATTR_BACKCOLOR, BGCOLOR);
-			SetCtrlAttribute (defPanel, DEFPANEL_CANVAS, ATTR_PICT_BGCOLOR, BGCOLOR);
-			SetCtrlAttribute (defPanel, DEFPANEL_NAME, ATTR_TEXT_BGCOLOR, BGCOLOR);
-			SetCtrlAttribute (defPanel, DEFPANEL_DESC, ATTR_TEXT_BGCOLOR, BGCOLOR);*/
+			if(selectPanel)	 SelectProject(selectPanel,0);				//取消当前选中状态  
+			SetPanelAttribute(projectPanel, ATTR_BACKCOLOR, VAL_WHITE); 
 			SetCtrlAttribute (proPanel,PROPANEL_PIC_OPENPRJ , ATTR_DIMMED, 1);
 			SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_TEXT_BGCOLOR,SEARCHCOLOR );
 			SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_DIMMED, 1); 
@@ -188,12 +178,7 @@ int CVICALLBACK PIC_ExitPrjCallback (int panel, int event, void *callbackData,
 	switch (event)
 	{
 			
-		case EVENT_GOT_FOCUS:
 
-			break;
-		case EVENT_LOST_FOCUS:
-
-			break;
 		case EVENT_CLOSE:
 
 				DiscardAllPrjPanel(SingleProject);

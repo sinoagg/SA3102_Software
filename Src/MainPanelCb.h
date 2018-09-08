@@ -46,6 +46,7 @@ extern float X2;
 //==============================================================================
 // Global functions
 static int SaveConfigToFile(char* pConfigSavePath);
+void StopKeyAction();				//停止按钮按下后产生的一系列动作 
 
 #ifdef __cplusplus
     }

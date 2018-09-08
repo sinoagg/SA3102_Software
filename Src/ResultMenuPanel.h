@@ -34,6 +34,7 @@
 
 static int SaveGraph(int panel, int control, int plotHandle, const char path[]);
 void DispResultTableGraph(void); 
+extern void DispSingleGraph(void);
 #ifdef __cplusplus
     }
 #endif

@@ -10,14 +10,13 @@
 
 //==============================================================================
 // Include files
-
-//#include "Timer.h"
 #include "Graph.h"
 #include "GraphDisp.h"
 #include "LoadPanel.h"
 #include "Plot.h"
 #include "protocol.h"
 #include "Cgs_mt.h"
+#include "main.h"
 //==============================================================================
 // Constants
 
@@ -41,13 +40,17 @@
 /// HIRET What does your function return?
 int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2)
 {
-	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图
-	//PlotCurve_Temp(&Graph_Temp, graphDispPanel, GRAPHDISP_GRAPH2);//画曲线图
+	if(queryFlag == 1)//串口接收时要屏蔽数据查询
+	{
+		ProtocolQuery( comSelect, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
 
-	ProtocolQuery( comSelect, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
+	}
+	
+	
+	//Graph.pGraphAttr->xAxisHead = 
 	//Read_CGS_Value(CGS_comSelect);
 	
-	//判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
+	////判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
 	//if(Graph.X_Axis_Max < Graph.pCurveArray->numOfPlotDots)
 	//{
 	//	Graph.X_Axis_Max = Graph.X_Axis_Max + 100; 			//将图中的 X 轴坐标最大值范围扩大100

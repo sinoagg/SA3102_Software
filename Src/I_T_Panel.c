@@ -47,12 +47,10 @@ static void ITSetSMU1Disp(int panel, char focus)
 	if(focus==FOCUS)
 	{
 		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
 	}
 	else
 	{
-		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG); 
-		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU1, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
+		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU1, ATTR_PICT_BGCOLOR, VAL_BG);  
 	}
 }
 
@@ -60,13 +58,11 @@ static void ITSetSMU2Disp(int panel, char focus)
 {
 	if(focus==FOCUS)
 	{
-		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);
-		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG_Pressed);// change text bgcolor together with picture
+		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG_Pressed);		
 	}
 	else
 	{
 		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
-		SetCtrlAttribute (panel, PANEL_I_T_TXT_SMU2, ATTR_TEXT_BGCOLOR, VAL_BG);// change text bgcolor together with picture
 	}
 }
 int CVICALLBACK ITSMU1DecoCallback (int panel, int control, int event,
@@ -74,6 +70,10 @@ int CVICALLBACK ITSMU1DecoCallback (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			 ITSetSMU1Disp(panel, FOCUS);
+			 ITSetSMU2Disp(panel, UNFOCUS);
+			break;
 		case EVENT_LEFT_CLICK_UP:
 			 ITSetSMU1Disp(panel, FOCUS);
 			 ITSetSMU2Disp(panel, UNFOCUS);
@@ -87,6 +87,10 @@ int CVICALLBACK ITSMU2DecoCallback (int panel, int control, int event,
 {
 	switch (event)
 	{
+		case EVENT_GOT_FOCUS:
+			 ITSetSMU1Disp(panel, UNFOCUS);
+			 ITSetSMU2Disp(panel, FOCUS);
+			break;		
 		case EVENT_LEFT_CLICK_UP:
 			 ITSetSMU1Disp(panel, UNFOCUS);
 			 ITSetSMU2Disp(panel, FOCUS);
@@ -111,6 +115,11 @@ static void GetTestPara(ExpPanelTypeDef* pExpPanel, TestParaTypeDef* pTestPara) 
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_SAMPLERATE, &(pTestPara->sampleRate));
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_SAMPLENUMBER, &(pTestPara->sampleNumber));
 	GetCtrlVal(hBasicSamplePanel, SAMPLE_CFG_RANGESETTING, &(pTestPara->rangeMode));
+	
+	GetCtrlVal(hAdvanceSamplePanel, SAMPLE_ADV_OutputRelay,&(pTestPara->outputRelay));
+	GetCtrlVal(hAdvanceSamplePanel, SAMPLE_ADV_MAXRANGE, &(pTestPara->maxRange));
+	GetCtrlVal(hAdvanceSamplePanel, SAMPLE_ADV_MINRANGE, &(pTestPara->minRange));
+
 }
 
 /////*

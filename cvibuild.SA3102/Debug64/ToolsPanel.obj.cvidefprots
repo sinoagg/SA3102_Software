@@ -1,0 +1,16 @@
+[ToolsPanelCallback]
+Class="Function"
+Prototype="int ToolsPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);"
+
+[CalibrationCallback]
+Class="Function"
+Prototype="int CalibrationCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
+[CaliPanelCallback]
+Class="Function"
+Prototype="int CaliPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);"
+
+[TEXTMSG_7_Callback]
+Class="Function"
+Prototype="int TEXTMSG_7_Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
