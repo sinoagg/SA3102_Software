@@ -329,7 +329,8 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	graphInit(graphIndex, 3, numOfDots + 5, &Graph_Temp);
 	PrepareCfgTxData(&TestPara1, &TestPara2, devAddr1, devAddr2, expType, pmeasUartTxBuf1,pmeasUartTxBuf2); //分别向  源表1  源表2 存储区中 放入用户输入的 设置命令 
 	if(devAddr1 == 0x01)	//判断是否为源表 1 地址，为真则发送 源表 1 设置命令
-	ComWrt(comSelect, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN); 
+	ComWrt(comSelect, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN);
+	Delay(0.5);
 	if(devAddr2 == 0x02)	//判断是否为源表 2 地址，为真则发送 源表 2 设置命令  
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf2, SA31_UART_TX_LEN);
 }

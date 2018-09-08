@@ -51,7 +51,7 @@ TestParaTypeDef TestPara1;
 TestParaTypeDef TestPara2;
 
 unsigned char select_Addr1 = 0X01;   //由用户选择是否使用此 源表 1 	  默认	0x01 为 选中，0x00为不选中，不使用源表 1 进行测量
-unsigned char select_Addr2 = 0X00;   //由用户选择是否使用此 源表 2	  默认	0x02 为 选中，0x00为不选中，不使用源表 2 进行测量
+unsigned char select_Addr2 = 0X02;   //由用户选择是否使用此 源表 2	  默认	0x02 为 选中，0x00为不选中，不使用源表 2 进行测量
 
 
 

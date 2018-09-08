@@ -95,14 +95,14 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)							//双
 	{
 		if((pGraph->pCurveArray + 1)->numOfPlotDots >=1 )//画 第二个 点  
 		{
-			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
-			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
-			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot-1, pGraph->pCurveArray->pDotYPlot-1, numOfDotsToPlot2+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
+			//SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
+			//SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray+1)->pDotXPlot-1, (pGraph->pCurveArray+1)->pDotYPlot-1, numOfDotsToPlot2+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
 		}else
 		{
-			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
-			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
-			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot, pGraph->pCurveArray->pDotYPlot, numOfDotsToPlot2, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
+			//SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
+			//SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray+1)->pDotXPlot, (pGraph->pCurveArray+1)->pDotYPlot, numOfDotsToPlot2, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
 		}
 			(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
 			(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
