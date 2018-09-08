@@ -32,7 +32,11 @@ int main (int argc, char *argv[])
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
 
+<<<<<<< HEAD
 	comSelect =7;
+=======
+	comSelect = 5;
+>>>>>>> 220d1c1aab103c5e389c3c9b130d5ece43708765
 	CGS_comSelect = 1;
 	LoadInitPanel(); 
 	CheckPortStatus(comSelect, 20, ComCallback);

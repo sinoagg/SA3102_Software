@@ -22,7 +22,8 @@
 
 //==============================================================================
 // Types
-#define VAL_TEXTBG       0xB2C9D5L  
+#define VAL_BG_ENABLE            0x065279L 
+#define VAL_BG_DISABLE           0xB2C9D5L  
 //==============================================================================
 // Static global variables
 
@@ -81,24 +82,43 @@ int CVICALLBACK CaliPanelCallback (int panel, int event, void *callbackData,
 			break;
 		case EVENT_CLOSE:
 			HidePanel(hCalibrationPanel);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);  
 			break;
 	}
 	return 0;
 }
 
+int CVICALLBACK RangeSelectCallback (int panel, int control, int event,
+									 void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_VAL_CHANGED:
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);  
+			break;
+	}
+	return 0;
+}
 
-
-
-int CVICALLBACK TEXTMSG_7_Callback (int panel, int control, int event,void *callbackData, int eventData1, int eventData2)
+int CVICALLBACK ExitCaliCallback (int panel, int control, int event,void *callbackData, int eventData1, int eventData2)
 {
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
+			HidePanel(hCalibrationPanel);
 			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_DIMMED, 0);
-			//SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);
 			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_DIMMED, 0);
-			//SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);  
 			break;
 	}
 	return 0;
