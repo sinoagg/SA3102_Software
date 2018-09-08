@@ -207,24 +207,12 @@ void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 
 void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
 {
-<<<<<<< HEAD
- 
-=======
-//	Delay(0.05); 
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 	if(devAddr1 == 0x01)
 	{
 			*measUartTxBuf1 = devAddr1;
 			*(measUartTxBuf1+1) = MSG_TYPE_STOP;
 			*(measUartTxBuf1+29) = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
 			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
-<<<<<<< HEAD
-			//	Delay(0.05); 
-			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
-=======
-				Delay(0.05); 
-			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 	}
 	Delay(0.05);
 	if(devAddr2 == 0x02)

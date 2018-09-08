@@ -24,12 +24,6 @@
 #define  THREE_TRML                       2
 #define  THREE_TRML_TEXTMSG               2       /* control type: textMsg, callback function: (none) */
 #define  THREE_TRML_PICTURE               3       /* control type: picture, callback function: (none) */
-<<<<<<< HEAD
-=======
-#define  THREE_TRML_PICTURE_2             4       /* control type: picture, callback function: (none) */
-#define  THREE_TRML_PICTURE_3             5       /* control type: picture, callback function: (none) */
-#define  THREE_TRML_PICTURE_4             6       /* control type: picture, callback function: (none) */
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 
 #define  TWO_TRML                         3
 #define  TWO_TRML_PICTURE_4               2       /* control type: picture, callback function: (none) */

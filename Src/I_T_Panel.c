@@ -62,7 +62,7 @@ static void ITSetSMU2Disp(int panel, char focus)
 	}
 	else
 	{
-		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
+		//SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
 	}
 }
 int CVICALLBACK ITSMU1DecoCallback (int panel, int control, int event,

@@ -29,11 +29,8 @@
 #include "File.h"
 #include <rs232.h>
 #include "MainPanel.h"
-<<<<<<< HEAD
 #include "main.h"
-=======
 #include "Tools.h"   
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 //==============================================================================
 // Constants
 #define TWO_TERMINAL 0
@@ -267,12 +264,6 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			GetCtrlVal(VIPanel,PANEL_V_I_START1UNIT,&(temp));
 			TestPara1.rangeMode = (temp<<4)|TestPara1.rangeMode; 
 			
-<<<<<<< HEAD
-=======
-			GetCtrlVal(VIPanel,PANEL_V_I_START1UNIT,&(temp));
-			TestPara1.rangeMode = (temp<<4)|TestPara1.rangeMode; 
-			
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 			numOfDots = abs(TestPara1.Voltage_Start - TestPara1.Voltage_Stop)/TestPara1.Voltage_Step + 1;
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pGraphAttr->xAxisHead = TestPara1.Voltage_Start;   
@@ -311,16 +302,6 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots;
-			
-<<<<<<< HEAD
-			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);     //设置 X 轴的范围
-=======
-			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
-			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
-			Graph.pCurveArray->numOfTotalDots = numOfDots;
-			
-			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);//设置 X 轴的范围
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//设置 X 轴的范围
 			break;
 		case NO_SWEEP_VT:
@@ -349,11 +330,6 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	PrepareCfgTxData(&TestPara1, &TestPara2, devAddr1, devAddr2, expType, pmeasUartTxBuf1,pmeasUartTxBuf2); //分别向  源表1  源表2 存储区中 放入用户输入的 设置命令 
 	if(devAddr1 == 0x01)	//判断是否为源表 1 地址，为真则发送 源表 1 设置命令
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN); 
-<<<<<<< HEAD
-	Delay(0.03);
-=======
-	Delay(0.02);
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 	if(devAddr2 == 0x02)	//判断是否为源表 2 地址，为真则发送 源表 2 设置命令  
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf2, SA31_UART_TX_LEN);
 }
@@ -381,52 +357,24 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2tempclr);				//得到温度湿度压力三条曲线的颜色
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, &graph2humclr);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2preclr);
-			
 				X1 = 0;  
 				X2 = 0;
-<<<<<<< HEAD
-
 				FlushInQ(comSelect);	   														//Clear input and output buffer
 				FlushOutQ(comSelect);
-				
 				GraphDeinit(&Graph);														//内存释放在画图之后
-=======
-				
-				FlushInQ(comSelect);	   														//Clear input and output buffer
-				FlushOutQ(comSelect);
-				
-				GraphDeinit(&Graph);													//内存释放在画图之后
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 				GraphDeinit(&Graph_Temp);
-	
 				Dispgraph();																//不同模式显示不同的单位
 				RunKeyAction();																//运行按钮按下后产生的一系列动作
-		
-<<<<<<< HEAD
 			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  					//每次开始之前判断一下用户选择的 测试模式
-=======
-			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  //每次开始之前判断一下用户选择的 测试模式
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 				return -1;
 			TestPara1.testMode = expType; //源表 1 测试类型
 			TestPara2.testMode = expType; //源表 1 测试类型
 			ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
 			Delay(2);//延时
-<<<<<<< HEAD
-			double temp=(double)TestPara1.timeStep * 0.001;
-			if(temp<0.03) temp=0.04;													//如果查询时间过快，会造成数据混乱，下位机响应中断过多
-			TimerID = NewAsyncTimer(temp,-1, 1, TimerCallback, 0);
-			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
-=======
-			//TimerID = NewAsyncTimer(TestPara1.timeStep * 0.001,-1, 1, TimerCallback, 0);		//Create Asynchronous (Timer time interval 1s, continue generating evernt, enabled, callback function name, passing no pointer) 
-			
 			double temp=(double)TestPara1.timeStep * 0.001;
 			if(temp<0.03) temp=0.03;													//如果查询时间过快，会造成数据混乱，下位机响应中断过多
 			TimerID = NewAsyncTimer(temp,-1, 1, TimerCallback, 0);
 			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
-			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 1);       //开启同步定时器
-			//Delay(2);
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 			}
 			break;
 	}
@@ -444,9 +392,8 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
-<<<<<<< HEAD
 			StopKeyAction();				//停止按钮按下后产生的一系列动作
-=======
+
 			DiscardAsyncTimer(TimerID);//关闭异步定时器  停止曲线显示
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
@@ -454,11 +401,8 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_SETTINGS, ATTR_DIMMED,0); 
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
 			ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
-		
 			FlushInQ(comSelect);	   														//Clear input and output buffer
 			FlushOutQ(comSelect);
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
-			
 			break;
 	}
 	return 0;
@@ -676,7 +620,6 @@ int CVICALLBACK ToolsCallback (int panel, int control, int event,
 	}
 	return 0;
 }
-<<<<<<< HEAD
 //////////////////////////////////校准//////////////////////////////////
 int CVICALLBACK OutputVoltageCaliCallback (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)	//电压校准
@@ -758,7 +701,5 @@ int CVICALLBACK Calibration_save (int panel, int control, int event,
 	}
 	return 0;
 }
-=======
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 
 

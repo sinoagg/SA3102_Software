@@ -90,12 +90,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			GetCtrlIndex(expListPanel, EXP_LIST_EXPLIST, &index);
 			if(index==TWO_TERMINAL)
 			{
-<<<<<<< HEAD
-				SetPanelPos(TwoTerminalPanel, 105, 305);		
-				SetPanelSize(TwoTerminalPanel, 900, 1293);																								
-=======
-				SetPanelPos(TwoTerminalPanel, 105, 305);																								
->>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
+				SetPanelPos(TwoTerminalPanel, 105, 305);
 				DisplayPanel(TwoTerminalPanel);
 				ExpList(1);
 			}
@@ -109,7 +104,6 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			else if(index==EXP_V_I)
 			{
 				SetPanelPos(VIPanel, 105, 305);
-				SetPanelSize(VIPanel, 900, 1293);
 				DisplayPanel(VIPanel);
 				ExpList(0);
 				DispRuntime(0);
