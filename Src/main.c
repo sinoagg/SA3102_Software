@@ -12,7 +12,7 @@
 #include "MainPanelCb.h"
 #include "Graph.h"
 #include "Cgs_mt.h"
-#include  "Plot.h"
+#include "Plot.h"
 unsigned char comSelect;					//Serial Com Number
 unsigned char CGS_comSelect;				//Serial Com Number
 unsigned char measUartTxBuf1[32]={0};
@@ -31,7 +31,7 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
-	comSelect = 6;
+	comSelect = 5;
 	CGS_comSelect = 1;
 	LoadInitPanel(); 
 	CheckPortStatus(comSelect, 20, ComCallback);
@@ -70,7 +70,7 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_voltaget;
 			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
 			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		if(TestPara1.testMode == NO_SWEEP_VI )
 		{
@@ -83,21 +83,21 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 			*(Graph.pCurveArray->pDotX++) = X1++;
 			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
 			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		if(TestPara1.testMode == NO_SWEEP_VT )
 		{
 			*(Graph.pCurveArray->pDotX++) = X1++;
 			*(Graph.pCurveArray->pDotY++) = RxData1->rx_voltage.num_float;				//get y, set pointer to the next data 
 			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		if(TestPara1.testMode == NO_SWEEP_RT )
 		{
 			*(Graph.pCurveArray->pDotX++) = X1++;		
 			*(Graph.pCurveArray->pDotY++) = (TestPara1.Voltage_Start*0.001)/RxData1->rx_current.num_float;				//get y, set pointer to the next data
 			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row),*(Graph.pCurveArray->pDotY-1)); 
 		}
 		Graph.pCurveArray->numOfDotsToPlot++;				 						//number of dots to plot increase 
 	}
