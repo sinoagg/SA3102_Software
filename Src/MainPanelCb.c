@@ -681,7 +681,7 @@ int CVICALLBACK CurrentCaliCallback (int panel, int control, int event,
 			measUartTxBuf1[0] = select_Addr1;
 			measUartTxBuf1[1] = 0x15;
 			measUartTxBuf1[2] = 0x02;
-			measUartTxBuf1[3] = temp;
+			measUartTxBuf1[3] = (unsigned char)temp;
 			measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
 			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
 			break;
