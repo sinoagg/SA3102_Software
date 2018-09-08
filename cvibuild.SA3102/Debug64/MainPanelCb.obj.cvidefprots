@@ -58,11 +58,11 @@ Prototype="int OutputVoltageCaliCallback(int panel, int control, int event, void
 Class="Function"
 Prototype="int ZeroCurrentCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 
-[Current_Calibration]
+[CurrentCaliCallback]
 Class="Function"
-Prototype="int Current_Calibration(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+Prototype="int CurrentCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 
-[Calibration_save]
+[SaveCaliCallback]
 Class="Function"
-Prototype="int Calibration_save(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+Prototype="int SaveCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 

@@ -62,7 +62,7 @@ static void ITSetSMU2Disp(int panel, char focus)
 	}
 	else
 	{
-		//SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
+		SetCtrlAttribute (panel, PANEL_I_T_BG_SMU2, ATTR_PICT_BGCOLOR, VAL_BG);
 	}
 }
 int CVICALLBACK ITSMU1DecoCallback (int panel, int control, int event,
@@ -71,12 +71,12 @@ int CVICALLBACK ITSMU1DecoCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			 ITSetSMU1Disp(panel, FOCUS);
-			 ITSetSMU2Disp(panel, UNFOCUS);
+			 ITSetSMU1Disp(ITPanel, FOCUS);
+			 ITSetSMU2Disp(ITPanel, UNFOCUS);
 			break;
 		case EVENT_LEFT_CLICK_UP:
-			 ITSetSMU1Disp(panel, FOCUS);
-			 ITSetSMU2Disp(panel, UNFOCUS);
+			 ITSetSMU1Disp(ITPanel, FOCUS);
+			 ITSetSMU2Disp(ITPanel, UNFOCUS);
 			break;
 	}
 	return 0;
@@ -88,12 +88,12 @@ int CVICALLBACK ITSMU2DecoCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_GOT_FOCUS:
-			 ITSetSMU1Disp(panel, UNFOCUS);
-			 ITSetSMU2Disp(panel, FOCUS);
+			 ITSetSMU1Disp(ITPanel, UNFOCUS);
+			 ITSetSMU2Disp(ITPanel, FOCUS);
 			break;		
 		case EVENT_LEFT_CLICK_UP:
-			 ITSetSMU1Disp(panel, UNFOCUS);
-			 ITSetSMU2Disp(panel, FOCUS);
+			 ITSetSMU1Disp(ITPanel, UNFOCUS);
+			 ITSetSMU2Disp(ITPanel, FOCUS);
 			break;
 	}
 	return 0;

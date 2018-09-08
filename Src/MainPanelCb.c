@@ -1,5 +1,3 @@
-#include "Tools.h"
-
 //==============================================================================
 //
 // Title:		MainPanel.c
@@ -43,8 +41,10 @@
 #define FOUR_TERMINAL 16
 #define EXP_ID_VDS 17
 #define EXP_ID_VGS 18
-#define VAL_TEXTBG                        0xF0F0F0L    //未被选中背景色
-#define VAL_TEXTBG_PRESSED                0x065279L    //被选中背景
+#define VAL_TEXTBG               0xF0F0F0L    //未被选中背景色
+#define VAL_TEXTBG_PRESSED       0x065279L    //被选中背景
+#define VAL_BG_ENABLE            0x065279L 
+#define VAL_BG_DISABLE           0xB2C9D5L 
 //==============================================================================
 // Types
 
@@ -628,7 +628,7 @@ int CVICALLBACK OutputVoltageCaliCallback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_DIMMED, 1);
-			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_TEXT_BGCOLOR, VAL_BG_DISABLE);
 			
 			
 			measUartTxBuf1[0] = select_Addr1;
@@ -652,8 +652,8 @@ int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
-			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_DIMMED, 1);
-			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_TEXTBG);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_DIMMED, 1);   //禁用
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_BG_DISABLE);
 			
 			measUartTxBuf1[0] = select_Addr1;
 			measUartTxBuf1[1] = 0x15;
@@ -665,14 +665,17 @@ int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK Current_Calibration (int panel, int control, int event,
+int CVICALLBACK CurrentCaliCallback (int panel, int control, int event,
 									 void *callbackData, int eventData1, int eventData2)//电流校准
 { 	int temp;
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
-			GetCtrlVal (hCalibrationPanel,CALIPANEL_RING,&temp);  
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_DIMMED, 1);   //禁用
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_TEXT_BGCOLOR, VAL_BG_DISABLE);
+			
+			GetCtrlVal (hCalibrationPanel,CALIPANEL_RANGESELECT,&temp);  
 			
 			measUartTxBuf1[0] = select_Addr1;
 			measUartTxBuf1[1] = 0x15;
@@ -685,7 +688,7 @@ int CVICALLBACK Current_Calibration (int panel, int control, int event,
 	return 0;
 }
 
-int CVICALLBACK Calibration_save (int panel, int control, int event,
+int CVICALLBACK SaveCaliCallback (int panel, int control, int event,
 								  void *callbackData, int eventData1, int eventData2)	//保存校准数据
 {
 	switch (event)

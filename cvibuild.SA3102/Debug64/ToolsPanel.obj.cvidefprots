@@ -10,7 +10,11 @@ Prototype="int CalibrationCallback(int panel, int control, int event, void *call
 Class="Function"
 Prototype="int CaliPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);"
 
-[TEXTMSG_7_Callback]
+[RangeSelectCallback]
 Class="Function"
-Prototype="int TEXTMSG_7_Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+Prototype="int RangeSelectCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
+
+[ExitCaliCallback]
+Class="Function"
+Prototype="int ExitCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);"
 
