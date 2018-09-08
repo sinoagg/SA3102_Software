@@ -71,7 +71,6 @@ int CVICALLBACK AdvancSetCallback (int panel, int control, int event,
 	
 		case EVENT_LEFT_CLICK_UP:
 			SetPanelPos(hAdvanceSamplePanel, 105, 1600);
-			SetPanelSize(hAdvanceSamplePanel, 449, 300);
 			DisplayPanel(hAdvanceSamplePanel);
 			break;
 	}
@@ -84,7 +83,6 @@ int CVICALLBACK BasicSetCallback (int panel, int control, int event,
 	switch(event){
 		case EVENT_LEFT_CLICK_UP:
 			    SetPanelPos(hBasicSamplePanel, 105, 1600);
-				SetPanelSize(hBasicSamplePanel, 449, 300);
 				DisplayPanel(hBasicSamplePanel);
 			break;
 	}

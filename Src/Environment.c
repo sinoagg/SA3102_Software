@@ -1,6 +1,3 @@
-#include "GraphDisp.h"
-#include "EnvironmentDisp.h"
-
 //==============================================================================
 //
 // Title:		Environment.c
@@ -20,10 +17,8 @@
 #include "Graph.h"
 #include "Plot.h"
 #include "utility.h"
-
-
-//#include "Environment.h"
-
+#include "GraphDisp.h"
+#include "EnvironmentDisp.h"
 //==============================================================================
 // Constants
 

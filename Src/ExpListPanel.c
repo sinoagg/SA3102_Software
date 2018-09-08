@@ -1,7 +1,3 @@
-#include <ansi_c.h>
-#include <userint.h>
-#include "Experiment List.h"
-
 //==============================================================================
 //
 // Title:		ExperimentList.c
@@ -14,7 +10,9 @@
 
 //==============================================================================
 // Include files
-
+#include <ansi_c.h>
+#include <userint.h>
+#include "Experiment List.h"
 #include "ExpListPanel.h"
 #include "Id-Vds Configuration.h"
 #include "Id-Vgs Configuration.h"
@@ -67,11 +65,9 @@ static void ExpList(int display)
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,display);	   //禁用analyze
 	
 	SetPanelPos(hBasicSamplePanel, 105, 1600);
-	SetPanelSize(hBasicSamplePanel, 449, 300);
 	SetPanelAttribute (hBasicSamplePanel, ATTR_VISIBLE, !(display));
 	
 	SetPanelPos(hEnvCfgPanel, 556, 1600);
-	SetPanelSize(hEnvCfgPanel, 449, 300);
 	SetPanelAttribute (hEnvCfgPanel, ATTR_VISIBLE, !(display));
 	
 	HidePanel(hEnvResultPanel);						//隐藏analyze下的面板
@@ -94,15 +90,18 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			GetCtrlIndex(expListPanel, EXP_LIST_EXPLIST, &index);
 			if(index==TWO_TERMINAL)
 			{
+<<<<<<< HEAD
 				SetPanelPos(TwoTerminalPanel, 105, 305);		
 				SetPanelSize(TwoTerminalPanel, 900, 1293);																								
+=======
+				SetPanelPos(TwoTerminalPanel, 105, 305);																								
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 				DisplayPanel(TwoTerminalPanel);
 				ExpList(1);
 			}
 			else if(index==EXP_I_V)
 			{
 				SetPanelPos(IVPanel, 105, 305);
-				SetPanelSize(IVPanel, 900, 1293);
 				DisplayPanel(IVPanel);
 				ExpList(0);
 				DispRuntime(0);
@@ -118,7 +117,6 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			else if(index==EXP_I_T)
 			{
 				SetPanelPos(ITPanel, 105, 305);
-				SetPanelSize(ITPanel, 900, 1293);
 				DisplayPanel(ITPanel);
 				ExpList(0); 
 				DispRuntime(1);
@@ -126,7 +124,6 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			else if(index==EXP_V_T)
 			{
 				SetPanelPos(VTPanel, 105, 305);
-				SetPanelSize(VTPanel, 900, 1293);
 				DisplayPanel(VTPanel);
 				ExpList(0);
 				DispRuntime(1);

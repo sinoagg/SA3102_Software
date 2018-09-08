@@ -40,16 +40,25 @@
 /// HIRET What does your function return?
 int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2)
 {
+<<<<<<< HEAD
 	if(queryFlag == 1)//串口接收时要屏蔽数据查询
 	{
 		ProtocolQuery( comSelect, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
+=======
+	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图
+	PlotCurve_Temp(&Graph_Temp, graphDispPanel, GRAPHDISP_GRAPH2);//画曲线图
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 
 	}
 	
 	
 	//Graph.pGraphAttr->xAxisHead = 
 	//Read_CGS_Value(CGS_comSelect);
+<<<<<<< HEAD
 	
+=======
+	//
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 	////判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
 	//if(Graph.X_Axis_Max < Graph.pCurveArray->numOfPlotDots)
 	//{

@@ -17,12 +17,21 @@
 #define  CALIPANEL_TEXTMSG                2       /* control type: textMsg, callback function: (none) */
 #define  CALIPANEL_RING                   3       /* control type: ring, callback function: (none) */
 #define  CALIPANEL_TEXTMSG_2              4       /* control type: textMsg, callback function: (none) */
+<<<<<<< HEAD
 #define  CALIPANEL_TEXTMSG_7              5       /* control type: textMsg, callback function: TEXTMSG_7_Callback */
 #define  CALIPANEL_OK_PIC_2               6       /* control type: picture, callback function: TEXTMSG_7_Callback */
 #define  CALIPANEL_TEXTMSG_3              7       /* control type: textMsg, callback function: Calibration_save */
 #define  CALIPANEL_OK_PIC                 8       /* control type: picture, callback function: Calibration_save */
 #define  CALIPANEL_OUTVOLCALI             9       /* control type: textMsg, callback function: OutputVoltageCaliCallback */
 #define  CALIPANEL_TEXTMSG_6              10      /* control type: textMsg, callback function: Current_Calibration */
+=======
+#define  CALIPANEL_TEXTMSG_7              5       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_OK_PIC_2               6       /* control type: picture, callback function: (none) */
+#define  CALIPANEL_TEXTMSG_3              7       /* control type: textMsg, callback function: (none) */
+#define  CALIPANEL_OK_PIC                 8       /* control type: picture, callback function: (none) */
+#define  CALIPANEL_OUTVOLCALI             9       /* control type: textMsg, callback function: OutputVoltageCaliCallback */
+#define  CALIPANEL_TEXTMSG_6              10      /* control type: textMsg, callback function: (none) */
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 #define  CALIPANEL_ZEROCURCALI            11      /* control type: textMsg, callback function: ZeroCurrentCaliCallback */
 
 #define  TOOLSPANEL                       2       /* callback function: ToolsPanelCallback */
@@ -42,12 +51,18 @@
 
      /* Callback Prototypes: */
 
+<<<<<<< HEAD
 int  CVICALLBACK Calibration_save(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK CalibrationCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK CaliPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK Current_Calibration(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OutputVoltageCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK TEXTMSG_7_Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+=======
+int  CVICALLBACK CalibrationCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK CaliPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK OutputVoltageCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 int  CVICALLBACK ToolsPanelCallback(int panel, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ZeroCurrentCaliCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 

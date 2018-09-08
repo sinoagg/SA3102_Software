@@ -249,6 +249,7 @@ Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "UI Files/V-I Configuration.uir"
 Path = "/e/SA3102/SA3102_Software/UI Files/V-I Configuration.uir"
+<<<<<<< HEAD
 Exclude = False
 Project Flags = 0
 Folder = "UI Files"
@@ -261,23 +262,30 @@ Path Is Rel = True
 Path Rel To = "Project"
 Path Rel Path = "UI Files/V-T Configuration.uir"
 Path = "/e/SA3102/SA3102_Software/UI Files/V-T Configuration.uir"
+=======
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 Exclude = False
 Project Flags = 0
 Folder = "UI Files"
 Folder Id = 0
 
+<<<<<<< HEAD
 [File 0020]
 File Type = "CSource"
 Res Id = 20
+=======
+[File 0019]
+File Type = "User Interface Resource"
+Res Id = 19
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "Src/Cgs_mt.c"
-Path = "/e/SA3102/SA3102_Software/Src/Cgs_mt.c"
+Path Rel Path = "UI Files/V-T Configuration.uir"
+Path = "/e/SA3102/SA3102_Software/UI Files/V-T Configuration.uir"
 Exclude = False
-Compile Into Object File = False
 Project Flags = 0
-Folder = "Src/Panel"
-Folder Id = 2
+Folder = "UI Files"
+Folder Id = 0
 
 [File 0021]
 File Type = "CSource"
@@ -479,8 +487,8 @@ File Type = "CSource"
 Res Id = 36
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "Src/V_I_Panel.c"
-Path = "/e/SA3102/SA3102_Software/Src/V_I_Panel.c"
+Path Rel Path = "Src/ToolsPanel.c"
+Path = "/e/SA3102/SA3102_Software/Src/ToolsPanel.c"
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -492,8 +500,8 @@ File Type = "CSource"
 Res Id = 37
 Path Is Rel = True
 Path Rel To = "Project"
-Path Rel Path = "Src/V_T_Panel.c"
-Path = "/e/SA3102/SA3102_Software/Src/V_T_Panel.c"
+Path Rel Path = "Src/V_I_Panel.c"
+Path = "/e/SA3102/SA3102_Software/Src/V_I_Panel.c"
 Exclude = False
 Compile Into Object File = False
 Project Flags = 0
@@ -505,6 +513,19 @@ File Type = "CSource"
 Res Id = 38
 Path Is Rel = True
 Path Rel To = "Project"
+Path Rel Path = "Src/V_T_Panel.c"
+Path = "/e/SA3102/SA3102_Software/Src/V_T_Panel.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Src/Panel"
+Folder Id = 2
+
+[File 0037]
+File Type = "CSource"
+Res Id = 37
+Path Is Rel = True
+Path Rel To = "Project"
 Path Rel Path = "Instrument Files/asynctmr.c"
 Path = "/e/SA3102/SA3102_Software/Instrument Files/asynctmr.c"
 Exclude = False
@@ -513,8 +534,26 @@ Project Flags = 0
 Folder = "Src"
 Folder Id = 1
 
+<<<<<<< HEAD
 [File 0039]
 File Type = "CSource"
+=======
+[File 0038]
+File Type = "CSource"
+Res Id = 38
+Path Is Rel = True
+Path Rel To = "Project"
+Path Rel Path = "Src/Cgs_mt.c"
+Path = "/e/SA3102/SA3102_Software/Src/Cgs_mt.c"
+Exclude = False
+Compile Into Object File = False
+Project Flags = 0
+Folder = "Src"
+Folder Id = 1
+
+[File 0039]
+File Type = "CSource"
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 Res Id = 39
 Path Is Rel = True
 Path Rel To = "Project"

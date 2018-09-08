@@ -40,6 +40,7 @@ int smu1Clr;
 int smu2Clr;
 //==============================================================================
 // Global functions
+<<<<<<< HEAD
 int PlotCurve1(Graph_TypeDef* pGraph, int graphDispPanel, int control, int indexCurveArray) 
 {
 	int numOfDotsToPlot=(pGraph->pCurveArray + indexCurveArray)->numOfDotsToPlot;		//防止中断端去写入这个数据 
@@ -61,6 +62,72 @@ int PlotCurve1(Graph_TypeDef* pGraph, int graphDispPanel, int control, int index
 	(pGraph->pCurveArray + indexCurveArray)->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
 	(pGraph->pCurveArray + indexCurveArray)->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
 	(pGraph->pCurveArray + indexCurveArray)->numOfDotsToPlot-=numOfDotsToPlot;		//防止中断端在画图期间接收到新的数据.
+=======
+int PlotCurve1(Graph_TypeDef* pGraph, int graphDispPanel, int control, int indexCurve) 
+{
+	int numOfDotsToPlot=(pGraph->pCurveArray + indexCurve)->numOfDotsToPlot;		//防止中断端去写入这个数据 
+	if(numOfDotsToPlot>0)
+	{
+		if((pGraph->pCurveArray + indexCurve)->numOfPlotDots >= 1)					//
+		{
+			
+			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1) );
+			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
+			
+
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + indexCurve)->pDotXPlot-1, (pGraph->pCurveArray + indexCurve)->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);  
+		}
+		else																			//画第一个点，只在画第一个点时调用
+		{
+
+			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + indexCurve)->pDotXPlot, (pGraph->pCurveArray + indexCurve)->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr); 
+		}
+	(pGraph->pCurveArray + indexCurve)->numOfPlotDots+=numOfDotsToPlot;			//画图总点数递增
+	(pGraph->pCurveArray + indexCurve)->pDotXPlot+=numOfDotsToPlot;				//画图点X坐标指针递增
+	(pGraph->pCurveArray + indexCurve)->pDotYPlot+=numOfDotsToPlot;				//画图点Y坐标指针递增
+	(pGraph->pCurveArray + indexCurve)->numOfDotsToPlot-=numOfDotsToPlot;			//防止中断端在画图期间接收到新的数据.
+	}
+	if(pGraph->plotHandle<0)
+		return -1;
+	else
+		return 0;
+}
+
+int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
+{
+	int numOfDotsToPlot=pGraph->pCurveArray->numOfDotsToPlot;									//防止中断端去写入这个数据 
+	int numOfDotsToPlot2=(pGraph->pCurveArray + 1)->numOfDotsToPlot;							//防止中断端去写入这个数据  
+	if(Graph.pCurveArray->numOfPlotDots >=1 )//画 第二个 点
+	{
+			if(numOfDotsToPlot>0)																
+			{
+				SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1) );
+				SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot-1, pGraph->pCurveArray->pDotYPlot-1, numOfDotsToPlot+1, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
+				pGraph->pCurveArray->numOfPlotDots+=numOfDotsToPlot;		//画图总点数递增
+				pGraph->pCurveArray->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
+				pGraph->pCurveArray->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
+				pGraph->pCurveArray->numOfDotsToPlot-=numOfDotsToPlot;		//防止中断端在画图期间接收到新的数据.
+			}
+    }
+	else //画第一个点
+	{
+			if(numOfDotsToPlot>0)																//如果有需要画图的点
+			{																			//pDotXPlot						//pDotYPlot	   numOfDotsToPlot
+
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot, pGraph->pCurveArray->pDotYPlot, numOfDotsToPlot, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
+			//	SetCtrlVal(graphDispPanel, GRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
+			//	SetCtrlVal(graphDispPanel, SETGRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
+
+				pGraph->pCurveArray->numOfPlotDots+=numOfDotsToPlot;		//画图总点数递增
+				pGraph->pCurveArray->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
+				pGraph->pCurveArray->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
+				pGraph->pCurveArray->numOfDotsToPlot-=numOfDotsToPlot;		//防止中断端在画图期间接收到新的数据.
+
+			}
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 	}
 	if(pGraph->plotHandle<0)
 		return -1;
@@ -77,6 +144,7 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 	{
 		if(Graph.pCurveArray->numOfPlotDots >=1 )//画 第二个 点  
 		{
+<<<<<<< HEAD
 			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
 			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
 			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot-1, pGraph->pCurveArray->pDotYPlot-1, numOfDotsToPlot+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
@@ -85,6 +153,15 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
 			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
 			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot, pGraph->pCurveArray->pDotYPlot, numOfDotsToPlot, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
+=======
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + 1)->pDotXPlot-1, (pGraph->pCurveArray + 1)->pDotYPlot-1, numOfDotsToPlot2+1, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu2Clr);
+			//	SetCtrlVal(graphDispPanel, GRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
+				(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
+				(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
+				(pGraph->pCurveArray + 1)->pDotYPlot+=numOfDotsToPlot2;			//画图点Y坐标指针递增
+				(pGraph->pCurveArray + 1)->numOfDotsToPlot-=numOfDotsToPlot2;		//防止中断端在画图期间接收到新的数据.
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 		}
 			pGraph->pCurveArray->numOfPlotDots+=numOfDotsToPlot;		//画图总点数递增
 			pGraph->pCurveArray->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
@@ -95,6 +172,7 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 	{
 		if((pGraph->pCurveArray + 1)->numOfPlotDots >=1 )//画 第二个 点  
 		{
+<<<<<<< HEAD
 			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
 			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
 			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot-1, pGraph->pCurveArray->pDotYPlot-1, numOfDotsToPlot2+1, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
@@ -103,6 +181,15 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)
 			SetCtrlVal (hResultDispPanel, SAMPLE_VD, *(Graph.pCurveArray->pDotX-1));
 			SetCtrlVal (hResultDispPanel, SAMPLE_VG, *(Graph.pCurveArray->pDotY-1));
 			pGraph->plotHandle=PlotXY(graphDispPanel, control, pGraph->pCurveArray->pDotXPlot, pGraph->pCurveArray->pDotYPlot, numOfDotsToPlot2, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu1Clr);
+=======
+				pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray + 1)->pDotXPlot, (pGraph->pCurveArray + 1)->pDotYPlot, numOfDotsToPlot2, 
+										  VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu2Clr);
+				//SetCtrlVal(graphDispPanel, GRAPHDISP_NUMERIC ,pGraph->pCurveArray->pDotXHead[pGraph->pCurveArray->numOfPlotDots ); 
+				(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
+				(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
+				(pGraph->pCurveArray + 1)->pDotYPlot+=numOfDotsToPlot2;			//画图点Y坐标指针递增																																				     
+				(pGraph->pCurveArray + 1)->numOfDotsToPlot-=numOfDotsToPlot2;		//防止中断端在画图期间接收到新的数据.
+>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
 		}
 			(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
 			(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
