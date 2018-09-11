@@ -188,7 +188,7 @@ void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			*(measUartTxBuf1+SA31_UART_TX_LEN-1) = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
 			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
 	}
-	Delay(0.2);
+	Delay(0.05);
 	if(devAddr2 == 0x02)
 	{
 			*measUartTxBuf2=devAddr2;
@@ -196,7 +196,7 @@ void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			*(measUartTxBuf2+29)=GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
 			ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
 	}
-	Delay(0.2);
+	Delay(0.05);
 }
 /*
 
@@ -222,6 +222,7 @@ void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char
 		*(measUartTxBuf2+29) = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
 		ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
 	}
+	Delay(0.05);
 }
 /*
 
@@ -240,7 +241,7 @@ void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char
 		*(measUartTxBuf1+29)=GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
 		ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
 	}
-	Delay(0.020); 
+	Delay(0.050); 
 	if(devAddr2 == 0x02) 
 	{
 		*measUartTxBuf2=devAddr2;
@@ -248,7 +249,7 @@ void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char
 		*(measUartTxBuf2 + 29) = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
 		ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
 	}
-	Delay(0.020);
+	Delay(0.050);
 }
 /*
 
@@ -287,7 +288,6 @@ void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataT
 {
 	unsigned char Addr;
 	Addr = *pUartRxBuf;  //读取 设备 地址  0X01 1号板子   0X02  2号板子
-	
 	if(Addr == 0x01)
 	{
 		pRxData1->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
@@ -334,10 +334,22 @@ void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataT
 		pRxData2->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
 		pRxData2->rxStopSign=*(pUartRxBuf+1);
 	
-		pRxData2->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3);
-		pRxData2->rx_Theory_current =  ((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5);
-	
-	
+		if(*(pUartRxBuf+2) & 0x80 )
+		{
+			pRxData2->rx_Theory_voltaget = (((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3)) - 65536;
+		}
+		else
+		{
+			pRxData2->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3); 
+		}
+		if(*(pUartRxBuf+4) & 0x80 ) 
+		{
+			pRxData2->rx_Theory_current =  (((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5)) - 65536;   
+		}
+		else
+		{
+			pRxData2->rx_Theory_current =  ((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5);
+		}
 		pRxData2->rx_voltage.num_uchar[3] = *(pUartRxBuf+6);
 		pRxData2->rx_voltage.num_uchar[2] = *(pUartRxBuf+7); 
 		pRxData2->rx_voltage.num_uchar[1] = *(pUartRxBuf+8); 

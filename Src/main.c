@@ -22,6 +22,7 @@ unsigned char measUartRxBuf2[500]={0};
 unsigned char queryFlag = 1;
 float X1 = 0;
 float X2 = 0; 
+RxDataTypeDef RxData1,RxData2;
 void CVICALLBACK ComCallback(int portNumber ,int eventMask, void * callbackData);
 void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackData); 																		 
 int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2);
@@ -31,7 +32,7 @@ int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
 		return -1;	/* out of memory */
-	comSelect =7;
+	comSelect =6;
 	CGS_comSelect = 1;
 	LoadInitPanel(); 
 	CheckPortStatus(comSelect, 20, ComCallback);
@@ -101,7 +102,7 @@ void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* 
 		}
 		Graph.pCurveArray->numOfDotsToPlot++;				 						//number of dots to plot increase 
 	}
-	if(*measUartRxBuf  == 0x02) //判断是否是 02 地址传来 的数据
+	else if(*measUartRxBuf  == 0x02) //判断是否是 02 地址传来 的数据
 	{
 		if(TestPara2.testMode == NO_SWEEP_IV )
 			*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_voltaget;
@@ -128,30 +129,32 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 	int rxNum;																							  
 	int i=0;
 	queryFlag = 0;																//接收时屏蔽查询，不在查询数据
-	RxDataTypeDef RxData1,RxData2;
-	RxData1.rxStopSign=0x00; 
+	//RxDataTypeDef RxData1,RxData2;
+	//RxData1.rxStopSign=0x00;
+	//RxData2.rxStopSign=0x00;
 	rxNum = GetInQLen(comSelect);  												//读取串口中发送来的数据数量
 	if(rxNum>500) rxNum=500;													//防止超过内存范围
 	while(rxNum>=UART_RX_LEN)
 	{	 
-		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
-		 {
-		 	DiscardAsyncTimer(TimerID);
-			rxNum =0;
-		 }
-		 else
-		 {
+		 //if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
+		 //{
+		 //	DiscardAsyncTimer(TimerID);
+		//	rxNum =0;
+		 //}
+		 //else
+		 //{
 			status = ComRd(comSelect, (char *)measUartRxBuf1, UART_RX_LEN); 				
 			ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
 			Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
 			rxNum -=UART_RX_LEN;
-		 }
+		 //}
 	}
-
+							
 	//PlotCurve1(&Graph, graphDispPanel, GRAPHDISP_GRAPH1, 0);	//  增加参数    曲线总数目   第一条曲线标号												//画图   电学测量曲线图
 	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);		//  liangt  
 	
-	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))	//判断是否有曲线结束标志位 与，画图总点数与已画点数是否相等
+	//if(((RxData1.rxStopSign == 0x01)&&(RxData2.rxStopSign == 0x01)) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))	//判断是否有曲线结束标志位 与，画图总点数与已画点数是否相等 
+	if((RxData1.rxStopSign == 0x01)&&(RxData2.rxStopSign == 0x01))	//判断是否有曲线结束标志位 与，画图总点数与已画点数是否相等
 	{
 		StopKeyAction();				//停止按钮按下后产生的一系列动作      
 	}

@@ -37,6 +37,8 @@
 #define  MAIN_PANEL_ANALYZE               22      /* control type: picture, callback function: AnalyzeCallback */
 #define  MAIN_PANEL_CANVAS_2              23      /* control type: canvas, callback function: (none) */
 #define  MAIN_PANEL_SAVE                  24      /* control type: picture, callback function: SaveCallback */
+#define  MAIN_PANEL_SMU1                  25      /* control type: radioButton, callback function: (none) */
+#define  MAIN_PANEL_SMU2                  26      /* control type: radioButton, callback function: (none) */
 
 
      /* Control Arrays: */

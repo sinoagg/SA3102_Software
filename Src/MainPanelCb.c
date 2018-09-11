@@ -330,7 +330,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	PrepareCfgTxData(&TestPara1, &TestPara2, devAddr1, devAddr2, expType, pmeasUartTxBuf1,pmeasUartTxBuf2); //分别向  源表1  源表2 存储区中 放入用户输入的 设置命令 
 	if(devAddr1 == 0x01)	//判断是否为源表 1 地址，为真则发送 源表 1 设置命令
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN);
-	Delay(0.5);
+	Delay(0.05);
 	if(devAddr2 == 0x02)	//判断是否为源表 2 地址，为真则发送 源表 2 设置命令  
 	ComWrt(comSelect, (const char*)pmeasUartTxBuf2, SA31_UART_TX_LEN);
 }
@@ -366,16 +366,33 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				GraphDeinit(&Graph_Temp);
 				Dispgraph();																//不同模式显示不同的单位
 				RunKeyAction();																//运行按钮按下后产生的一系列动作
+				
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//判断是否选中SMU1板子测试
+			if(expType>0)
+				select_Addr1=0x01;
+			else
+				select_Addr1=0x00;
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU2, &expType);							//判断是否选中SMU2板子测试
+			if(expType>0)
+				select_Addr2=0x02;
+			else
+				select_Addr2=0x00;
+			
+				
+				
+			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  					//每次开始之前判断一下用户选择的 测试模式 
+				
 			if(GetCtrlVal(expListPanel, EXP_LIST_EXPLIST, &expType)<0)  					//每次开始之前判断一下用户选择的 测试模式
 				return -1;
 			TestPara1.testMode = expType; //源表 1 测试类型
 			TestPara2.testMode = expType; //源表 1 测试类型
 			ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
 			Delay(2);//延时
+			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART 
 			double temp=(double)TestPara1.timeStep * 0.001;
 			if(temp<0.03) temp=0.03;													//如果查询时间过快，会造成数据混乱，下位机响应中断过多
 			TimerID = NewAsyncTimer(temp,-1, 1, TimerCallback, 0);
-			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART
+			
 			}
 			break;
 	}
