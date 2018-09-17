@@ -30,6 +30,8 @@
 // External variables
 extern int TimerID; 
 extern unsigned char queryFlag; 
+extern int rowIndex; 
+extern int rowIndex2; 
 //==============================================================================
 // Global functions
 

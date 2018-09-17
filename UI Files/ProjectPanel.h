@@ -17,9 +17,9 @@
 #define  DEFPANEL_NAME                    2       /* control type: textMsg, callback function: (none) */
 #define  DEFPANEL_CANVAS                  3       /* control type: canvas, callback function: (none) */
 #define  DEFPANEL_DESC                    4       /* control type: textMsg, callback function: (none) */
-#define  DEFPANEL_TIME                    5       /* control type: textMsg, callback function: (none) */
-#define  DEFPANEL_DATE                    6       /* control type: textMsg, callback function: (none) */
-#define  DEFPANEL_PICS                    7       /* control type: picture, callback function: (none) */
+#define  DEFPANEL_PICS                    5       /* control type: picture, callback function: (none) */
+#define  DEFPANEL_TIME                    6       /* control type: textMsg, callback function: (none) */
+#define  DEFPANEL_DATE                    7       /* control type: textMsg, callback function: (none) */
 
 #define  PROJECT                          2
 

@@ -27,6 +27,8 @@ void CVICALLBACK ComCallback(int portNumber ,int eventMask, void * callbackData)
 void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackData); 																		 
 int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2);
 int CheckPortStatus(unsigned char portNumber, unsigned char uartRxLen, void (*pFunc)(int, int, void*));
+int rowIndex=2;
+int rowIndex2=2;
 
 int main (int argc, char *argv[])
 {
@@ -61,66 +63,130 @@ static int CheckPortStatus(unsigned char portNumber, unsigned char uartRxLen, vo
 }
 void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef* RxData1, RxDataTypeDef* RxData2) //判断接收源表1 源表2的数据
 {
-	int row;
-	if( *measUartRxBuf  == 0x01) //判断是否是 01 地址传来 的数据
-	{
-        InsertTableRows (tablePanel,TABLE_TABLE1 ,-1, 1, VAL_CELL_NUMERIC);				          //插入1行 
-		GetNumTableRows (tablePanel, TABLE_TABLE1, &row); 										  //得到当前行数
-		if(TestPara1.testMode == NO_SWEEP_IV ) //根据不同模式 选择不同的X 轴数据
+		if((*measUartRxBuf  == 0x01) &&(Graph.pCurveArray->numofSmu1RxDots <= Graph.pCurveArray->numOfTotalDots-1)) //判断是否是 01 地址传来 的数据
 		{
-			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_voltaget;
-			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row ),*(Graph.pCurveArray->pDotY-1)); 
-		}
-		else if(TestPara1.testMode == NO_SWEEP_VI )
-		{
-			*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_current;
-			*(Graph.pCurveArray->pDotY++) = RxData1->rx_voltage.num_float;				//get y, set pointer to the next data
+			if(TestPara1.testMode == NO_SWEEP_IV ) //根据不同模式 选择不同的X 轴数据
+			{
+				*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_voltaget;
+				*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
+				SetTableCellRangeAttribute (tablePanel, TABLE_TABLE1, MakeRect (rowIndex, 1, 1, 2), ATTR_CELL_TYPE, VAL_CELL_NUMERIC);
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,rowIndex), *(Graph.pCurveArray->pDotX-1));
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,rowIndex),*(Graph.pCurveArray->pDotY-1)); 
+				rowIndex++; 
+			}
+			else if(TestPara1.testMode == NO_SWEEP_VI )
+			{
+				*(Graph.pCurveArray->pDotX++) = RxData1->rx_Theory_current;
+				*(Graph.pCurveArray->pDotY++) = RxData1->rx_voltage.num_float;				//get y, set pointer to the next data
 		
+			}
+			else if(TestPara1.testMode == NO_SWEEP_IT )
+			{
+				*(Graph.pCurveArray->pDotX++) = X1++;
+				*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
+				SetTableCellRangeAttribute (tablePanel, TABLE_TABLE1, MakeRect (rowIndex, 1, 1, 2), ATTR_CELL_TYPE, VAL_CELL_NUMERIC);
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,rowIndex), *(Graph.pCurveArray->pDotX-1));
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,rowIndex),*(Graph.pCurveArray->pDotY-1)); 
+				rowIndex++;
+			}
+			if(TestPara1.testMode == NO_SWEEP_VT )
+			{
+				*(Graph.pCurveArray->pDotX++) = X1++;
+				*(Graph.pCurveArray->pDotY++) = RxData1->rx_voltage.num_float;				//get y, set pointer to the next data 
+
+			}
+			if(TestPara1.testMode == NO_SWEEP_RT )
+			{
+				*(Graph.pCurveArray->pDotX++) = X1++;		
+				*(Graph.pCurveArray->pDotY++) = (TestPara1.Voltage_Start*0.001)/RxData1->rx_current.num_float;				//get y, set pointer to the next data
+				SetTableCellRangeAttribute (tablePanel, TABLE_TABLE1, MakeRect (rowIndex, 1, 1, 2), ATTR_CELL_TYPE, VAL_CELL_NUMERIC);
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,rowIndex), *(Graph.pCurveArray->pDotX-1));
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,rowIndex),*(Graph.pCurveArray->pDotY-1)); 
+				rowIndex++; 
+			}
+			Graph.pCurveArray->numOfDotsToPlot++;				//number of dots to plot increase 
+			Graph.pCurveArray->numofSmu1RxDots++;
 		}
-		else if(TestPara1.testMode == NO_SWEEP_IT )
+		else if((*measUartRxBuf  == 0x02) && ((Graph.pCurveArray + 1)->numofSmu2RxDots <= (Graph.pCurveArray + 1)->numOfTotalDots-1)) //判断是否是 02 地址传来 的数据
 		{
-			*(Graph.pCurveArray->pDotX++) = X1++;
-			*(Graph.pCurveArray->pDotY++) = RxData1->rx_current.num_float;				//get y, set pointer to the next data 
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row),*(Graph.pCurveArray->pDotY-1)); 
-		}
-		if(TestPara1.testMode == NO_SWEEP_VT )
-		{
-			*(Graph.pCurveArray->pDotX++) = X1++;
-			*(Graph.pCurveArray->pDotY++) = RxData1->rx_voltage.num_float;				//get y, set pointer to the next data 
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row),*(Graph.pCurveArray->pDotY-1)); 
-		}
-		if(TestPara1.testMode == NO_SWEEP_RT )
-		{
-			*(Graph.pCurveArray->pDotX++) = X1++;		
-			*(Graph.pCurveArray->pDotY++) = (TestPara1.Voltage_Start*0.001)/RxData1->rx_current.num_float;				//get y, set pointer to the next data
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (1,row), *(Graph.pCurveArray->pDotX-1));
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (2,row),*(Graph.pCurveArray->pDotY-1)); 
-		}
-		Graph.pCurveArray->numOfDotsToPlot++;				 						//number of dots to plot increase 
-	}
-	else if(*measUartRxBuf  == 0x02) //判断是否是 02 地址传来 的数据
-	{
-		if(TestPara2.testMode == NO_SWEEP_IV )
-			*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_voltaget;
+			if(TestPara2.testMode == NO_SWEEP_IV )
+			{
+				*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_voltaget;
+				*((Graph.pCurveArray + 1)->pDotY++) = RxData2->rx_current.num_float;
+				SetTableCellRangeAttribute (tablePanel, TABLE_TABLE1, MakeRect (rowIndex2, 3, 1, 2), ATTR_CELL_TYPE, VAL_CELL_NUMERIC);
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (3,rowIndex2), *((Graph.pCurveArray + 1)->pDotX-1));
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (4,rowIndex2), *((Graph.pCurveArray + 1)->pDotY-1)); 
+				rowIndex2++; 
+			}
+			
+			if(TestPara2.testMode == NO_SWEEP_VI )
+				*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_current;
 		
-		if(TestPara2.testMode == NO_SWEEP_VI )
-			*((Graph.pCurveArray + 1)->pDotX++) = RxData2->rx_Theory_current;
-		
-		if(TestPara2.testMode == NO_SWEEP_IT )
+			if(TestPara2.testMode == NO_SWEEP_IT )
+			{
 				*((Graph.pCurveArray + 1)->pDotX++) = X2++;
+				*((Graph.pCurveArray + 1)->pDotY++) = RxData2->rx_current.num_float;
+				SetTableCellRangeAttribute (tablePanel, TABLE_TABLE1, MakeRect (rowIndex2, 3, 1, 2), ATTR_CELL_TYPE, VAL_CELL_NUMERIC);    
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (3,rowIndex2), *((Graph.pCurveArray + 1)->pDotX-1));
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (4,rowIndex2), *((Graph.pCurveArray + 1)->pDotY-1)); 
+				rowIndex2++; 
+			}
+			//if(TestPara2.testMode == NO_SWEEP_VT )
+			//*(Graph.pCurveArray->pDotX++) = RxData2.rx_Theory_voltaget;
 		
-		//if(TestPara2.testMode == NO_SWEEP_VT )
-		//	*(Graph.pCurveArray->pDotX++) = RxData2.rx_Theory_voltaget;
-		
-		if(TestPara2.testMode == NO_SWEEP_RT )
-			*((Graph.pCurveArray + 1)->pDotX++) = X2++;
-		
-		*((Graph.pCurveArray+1)->pDotY++) = RxData2->rx_current.num_float;
-		(Graph.pCurveArray+1)->numOfDotsToPlot++;				 					//number of dots to plot increase
+			if(TestPara2.testMode == NO_SWEEP_RT )
+			{
+				*((Graph.pCurveArray + 1)->pDotX++) = X2++;
+				*((Graph.pCurveArray + 1)->pDotY++) = (TestPara2.Voltage_Start*0.001)/RxData2->rx_current.num_float;
+				SetTableCellRangeAttribute (tablePanel, TABLE_TABLE1, MakeRect (rowIndex2, 3, 1, 2), ATTR_CELL_TYPE, VAL_CELL_NUMERIC);    
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (3,rowIndex2), *((Graph.pCurveArray + 1)->pDotX-1));
+				SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (4,rowIndex2), *((Graph.pCurveArray + 1)->pDotY-1)); 
+				rowIndex2++; 
+			}
+			(Graph.pCurveArray+1)->numOfDotsToPlot++;				 					//number of dots to plot increase
+			(Graph.pCurveArray+1)->numofSmu2RxDots++;
+		}
+
+}
+void TestStop(enum TestMode testMode)
+{
+	if((RxData1.rxStopSign == 0x01) || (RxData2.rxStopSign == 0x01) || (Graph.pCurveArray->numofSmu1RxDots > Graph.pCurveArray->numOfTotalDots-1) || ((Graph.pCurveArray + 1)->numofSmu2RxDots > (Graph.pCurveArray + 1)->numOfTotalDots-1))
+	{
+		switch(TestPara1.testMode)
+		{
+			case CALIBRATION:
+				
+				break;
+			case NO_SWEEP_IV:
+				if((RxData1.rxStopSign == 0x01)&&(RxData2.rxStopSign == 0x01))	//判断是否有曲线结束标志位 与，
+					{
+						StopKeyAction();										//停止按钮按下后产生的一系列动作
+					}
+				break;
+			case NO_SWEEP_VI:
+				
+				break;
+			case NO_SWEEP_IT:
+					if((Graph.pCurveArray->numofSmu1RxDots > Graph.pCurveArray->numOfTotalDots-1) && ((Graph.pCurveArray + 1)->numofSmu2RxDots > (Graph.pCurveArray + 1)->numOfTotalDots-1) == 1)
+					{
+						StopKeyAction();																		//停止按钮按下后产生的一系列动作
+					}
+					else if(Graph.pCurveArray->numOfPlotDots >= Graph.pCurveArray->numOfTotalDots)				//板子1
+					{
+						ProtocolStop(comSelect, select_Addr1, 0x00, measUartTxBuf1, measUartTxBuf2);  			//发送地址1停止指令
+					}
+					else if((Graph.pCurveArray + 1)->numOfPlotDots >= (Graph.pCurveArray + 1)->numOfTotalDots)  //板子2
+					{
+						ProtocolStop(comSelect, 0x00, select_Addr2, measUartTxBuf1, measUartTxBuf2);  			//发送地址2停止指令 
+					}
+				break;
+			case NO_SWEEP_RT:
+				
+				break;
+			case NO_SWEEP_VT:
+				
+				break;
+		}
 	}
 }
 void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
@@ -136,13 +202,13 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 	if(rxNum>500) rxNum=500;													//防止超过内存范围
 	while(rxNum>=UART_RX_LEN)
 	{	 
-		 //if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
-		 //{
-		 //	DiscardAsyncTimer(TimerID);
-		//	rxNum =0;
-		 //}
-		 //else
-		 //{
+	/*	 if((Graph.pCurveArray->numOfPlotDots >= Graph.pCurveArray->numOfTotalDots) && ((Graph.pCurveArray + 1)->numOfPlotDots >= (Graph.pCurveArray + 1)->numOfTotalDots))//if complete the test, stop the timer
+		 {
+		 	//DiscardAsyncTimer(TimerID);
+			rxNum =0;
+		 }
+		 else
+		 {*/
 			status = ComRd(comSelect, (char *)measUartRxBuf1, UART_RX_LEN); 				
 			ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
 			Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
@@ -152,89 +218,9 @@ void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
 							
 	//PlotCurve1(&Graph, graphDispPanel, GRAPHDISP_GRAPH1, 0);	//  增加参数    曲线总数目   第一条曲线标号												//画图   电学测量曲线图
 	PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);		//  liangt  
-	
-	//if(((RxData1.rxStopSign == 0x01)&&(RxData2.rxStopSign == 0x01)) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))	//判断是否有曲线结束标志位 与，画图总点数与已画点数是否相等 
-	if((RxData1.rxStopSign == 0x01)&&(RxData2.rxStopSign == 0x01))	//判断是否有曲线结束标志位 与，画图总点数与已画点数是否相等
-	{
-		StopKeyAction();				//停止按钮按下后产生的一系列动作      
-	}
+	TestStop(TestPara1.testMode);
 	queryFlag = 1; 																				//开启查询数据
-}
-
-//void CVICALLBACK ComCallback(int portNumber, int eventMask, void * callbackData)
-//{
-//	int status;
-//	int rxNum;																							  
-//	int i=0;
-
-//	queryFlag = 0;
-//	RxDataTypeDef RxData1,RxData2;
-//	RxData1.rxStopSign=0x00; 
-//	rxNum = GetInQLen(comSelect);  												//读取串口中发送来的数据数量
-//	if(rxNum>1024) rxNum=1024;													//防止超过内存范围
-
-   // rxNum-=rxNum%UART_RX_LEN;
-
-//	//status = ComRd(comSelect, (char *)measUartRxBuf1, rxNum); 	
-//	          
-//	while(rxNum>=UART_RX_LEN)
-//	{	 
-//		
-//		 //if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
-//		 //{
-//		 //	DiscardAsyncTimer(TimerID);
-//		//	rxNum =0;
-//		 //}
-//>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
-//		 //else
-//		 //{
-//			status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
-//			ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
-//			Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
-//			rxNum -=UART_RX_LEN;
-//		 //}
-//<<<<<<< HEAD
-//		 if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))//if complete the test, stop the timer
-//		 {
-//		 	DiscardAsyncTimer(TimerID);
-//			//rxNum =0;
-//		 }
-//	}
-//	rxNum = GetInQLen(comSelect); 
-//	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图 
-//	PlotCurve1(&Graph, graphDispPanel, GRAPHDISP_GRAPH1, 0); 
-//=======
-//		
-//	     //status = ComRd(comSelect, (char *)measUartRxBuf1, 20); 				
-//	     //ProtocolGetData(measUartRxBuf1+i*UART_RX_LEN, &RxData1,&RxData2);					//get data from uart buffer ,并且判断是否是源表1或2 数据，分别放入相应的缓存里
-//		 //Getxy(&measUartRxBuf1[i*UART_RX_LEN], &RxData1, &RxData2);							//从串口传来的数据中取出  X与Y轴 的数据
-//		 //rxNum -=UART_RX_LEN;
-//		// i++; 
-//	}
-//	//rxNum = GetInQLen(comSelect); 
-//	//PlotCurve(&Graph, graphDispPanel, GRAPHDISP_GRAPH1);//画曲线图 
-//	
-//	PlotCurve1(&Graph, graphDispPanel, GRAPHDISP_GRAPH1, 0); 
-//	
-//>>>>>>> 60731950687cb7b8b744a8e5d654e7bb290c0afb
-//	if((RxData1.rxStopSign == 0x01) || (Graph.pCurveArray->numOfPlotDots == Graph.pCurveArray->numOfTotalDots))
-//	{
-//		DiscardAsyncTimer(TimerID);
-//		ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令  
-//		//GraphDeinit(&Graph);												//内存释放在画图之后
-//		//GraphDeinit(&Graph_Temp);
-//		SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      //禁用 停止按钮      
-//	    SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      //恢复 开始按钮
-//		SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
-//	}
-//<<<<<<< HEAD
-//	 queryFlag = 1; 
-//}
-
-
-//=======
-//}
-void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackData)
+}void CVICALLBACK ComCallbackCGS(int portNumber, int eventMask, void * callbackData)
 {
 	int status;
 	int rxNum;																							  

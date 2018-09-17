@@ -139,8 +139,8 @@ int CVICALLBACK SearchCallback (int panel, int control, int event,
 		case EVENT_LEFT_CLICK_UP:    
 			if(selectPanel)	 
 			{
-				SelectProject(selectPanel,0);				//取消当前选中状态  
-				SetCtrlAttribute (proPanel,PROPANEL_PIC_OPENPRJ , ATTR_DIMMED, 1);	  //禁用openproject
+				SelectProject(selectPanel,0);											//取消当前选中状态  
+				SetCtrlAttribute (proPanel,PROPANEL_PIC_OPENPRJ , ATTR_DIMMED, 1);	    //禁用openproject
 				SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_DIMMED, 1); 
 				selectPanel=0;
 			}

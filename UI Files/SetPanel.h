@@ -15,6 +15,7 @@
 
 #define  ABOUT                            1
 #define  ABOUT_PICTURE                    2       /* control type: picture, callback function: (none) */
+#define  ABOUT_COMMANDBUTTON              3       /* control type: command, callback function: COMMANDBUTTON_Callback */
 
 #define  ENVT                             2
 #define  ENVT_PROPATH                     2       /* control type: string, callback function: (none) */
@@ -37,25 +38,25 @@
 #define  SETGRAPH_TEXTMSG_9               15      /* control type: textMsg, callback function: (none) */
 #define  SETGRAPH_TEXTMSG_3               16      /* control type: textMsg, callback function: (none) */
 #define  SETGRAPH_TEXTMSG_4               17      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_2               18      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_RING_3                  19      /* control type: ring, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_7               20      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TXT_PLOT_STYLE          21      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_8               22      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_11              23      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_5               18      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_2               19      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_RING_3                  20      /* control type: ring, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_7               21      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TXT_PLOT_STYLE          22      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_8               23      /* control type: textMsg, callback function: (none) */
 #define  SETGRAPH_TEXTMSG_6               24      /* control type: textMsg, callback function: (none) */
-#define  SETGRAPH_TEXTMSG_5               25      /* control type: textMsg, callback function: (none) */
+#define  SETGRAPH_TEXTMSG_11              25      /* control type: textMsg, callback function: (none) */
 
 #define  SETTINGS                         4       /* callback function: SettingsCB */
 #define  SETTINGS_CANVAS                  2       /* control type: canvas, callback function: (none) */
 #define  SETTINGS_DECORATION              3       /* control type: deco, callback function: (none) */
 #define  SETTINGS_ABOUTBTN                4       /* control type: textMsg, callback function: AboutBtnCallback */
-#define  SETTINGS_GRAPHBTN                5       /* control type: textMsg, callback function: GraphBtnCallback */
-#define  SETTINGS_PRJBTN                  6       /* control type: textMsg, callback function: PrjBtnCallback */
-#define  SETTINGS_TEXTMSG                 7       /* control type: textMsg, callback function: OkCallback */
-#define  SETTINGS_Cancel                  8       /* control type: textMsg, callback function: CancelCallback */
+#define  SETTINGS_PRJBTN                  5       /* control type: textMsg, callback function: PrjBtnCallback */
+#define  SETTINGS_TEXTMSG                 6       /* control type: textMsg, callback function: OkCallback */
+#define  SETTINGS_Cancel                  7       /* control type: textMsg, callback function: CancelCallback */
+#define  SETTINGS_CANCEL_PIC              8       /* control type: picture, callback function: CancelCallback */
 #define  SETTINGS_OK_PIC                  9       /* control type: picture, callback function: OkCallback */
-#define  SETTINGS_CANCEL_PIC              10      /* control type: picture, callback function: CancelCallback */
+#define  SETTINGS_GRAPHBTN                10      /* control type: textMsg, callback function: GraphBtnCallback */
 
 
      /* Control Arrays: */
@@ -72,6 +73,7 @@
 
 int  CVICALLBACK AboutBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK CancelCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK COMMANDBUTTON_Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK GraphBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK OkCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK PrjBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);

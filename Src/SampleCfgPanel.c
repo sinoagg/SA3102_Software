@@ -1,4 +1,3 @@
-#include <userint.h>
 //==============================================================================
 //
 // Title:		SampleCfgPanel.c
@@ -11,7 +10,7 @@
 
 //==============================================================================
 // Include files
-
+#include <userint.h> 
 #include "SampleCfgPanel.h"
 #include "Sample Configuration.h"
 #include "LoadPanel.h" 

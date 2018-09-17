@@ -90,6 +90,7 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)							//双
 			pGraph->pCurveArray->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
 			pGraph->pCurveArray->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
 			pGraph->pCurveArray->numOfDotsToPlot-=numOfDotsToPlot;		//防止中断端在画图期间接收到新的数据.
+			SetGraphX_Axis(pGraph,pGraph->pCurveArray ->numOfPlotDots);
 	}
 	if(numOfDotsToPlot2>0)//如果有需要画的点
 	{
@@ -104,10 +105,11 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)							//双
 			SetCtrlVal (hResultDispPanel, SAMPLE_VG_2, *((pGraph->pCurveArray+1)->pDotY-1));
 			pGraph->plotHandle=PlotXY(graphDispPanel, control, (pGraph->pCurveArray+1)->pDotXPlot, (pGraph->pCurveArray+1)->pDotYPlot, numOfDotsToPlot2, VAL_FLOAT, VAL_FLOAT, VAL_CONNECTED_POINTS, VAL_DOTTED_SOLID_SQUARE, VAL_SOLID, 1, smu2Clr);
 		}
-			(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
-			(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
-			(pGraph->pCurveArray + 1)->pDotYPlot+=numOfDotsToPlot2;			//画图点Y坐标指针递增
-			(pGraph->pCurveArray + 1)->numOfDotsToPlot-=numOfDotsToPlot2;		//防止中断端在画图期间接收到新的数据.
+		(pGraph->pCurveArray + 1)->numOfPlotDots+=numOfDotsToPlot2;		//画图总点数递增
+		(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
+		(pGraph->pCurveArray + 1)->pDotYPlot+=numOfDotsToPlot2;			//画图点Y坐标指针递增
+		(pGraph->pCurveArray + 1)->numOfDotsToPlot-=numOfDotsToPlot2;		//防止中断端在画图期间接收到新的数据.
+		SetGraphX_Axis(pGraph,(pGraph->pCurveArray +1)->numOfPlotDots);
 	}
 	if(pGraph->plotHandle<0)
 		return -1;
@@ -201,9 +203,7 @@ void temp_hum_pre_display()
 	GetCtrlVal(hEnvResultPanel,ENVIRPANEL_CHECKBOX,&temp_flag);		//然后读取用户要选中的曲线
 	GetCtrlVal(hEnvResultPanel,ENVIRPANEL_CHECKBOX_2,&humidity_flag); 
 	GetCtrlVal(hEnvResultPanel,ENVIRPANEL_CHECKBOX_3,&pressure_flag);
-	/*GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2tempclr);
-	GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR2, &graph2humclr);
-	GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2preclr);*/
+
 	if((temp_flag == 1)&&((Graph_Temp.pCurveArray  + 1)->numOfPlotDots>0))
 	{
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_CANVAS, ATTR_PEN_FILL_COLOR, VAL_WHITE);    //text背景色(与canvas颜色相同)

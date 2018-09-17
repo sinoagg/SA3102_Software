@@ -36,7 +36,7 @@ typedef struct
 
 extern Table_TypeDef Table_Date;
 //extern Table_TypeDef Table_ATTR; 
-extern char ABC[11][20];
+extern char ABC1[11][20];
 		
 //==============================================================================
 // External variables
@@ -44,7 +44,7 @@ extern char ABC[11][20];
 //==============================================================================
 // Global functions
 
-void Table_init(char table_title_IV[][20], int column, column_width);
+void Table_init(char table_title_IV[][20], int column, int column_width,int row);
 
 #ifdef __cplusplus
     }

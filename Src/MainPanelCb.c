@@ -1,3 +1,5 @@
+#include "SetPanel.h"
+
 //==============================================================================
 //
 // Title:		MainPanel.c
@@ -10,6 +12,7 @@
 
 //==============================================================================
 // Include files
+#include <windows.h>
 #include <utility.h>
 #include "asynctmr.h"
 #include "MainPanelCb.h"
@@ -28,7 +31,10 @@
 #include <rs232.h>
 #include "MainPanel.h"
 #include "main.h"
-#include "Tools.h"   
+#include "Tools.h"
+#include "systemUpdate_Client.h"
+
+
 //==============================================================================
 // Constants
 #define TWO_TERMINAL 0
@@ -62,11 +68,11 @@ FileLableTypeDef *pFileLable[64];									//¥ÊÀ˘”–FileLableµƒ÷∏’Î£¨◊Ó∂‡÷ªƒ‹º”‘ÿ“
 PrjHandleTypeDef SingleProject[64];									
 Graph_TypeDef Graph;
 Graph_TypeDef Graph_Temp;
-char ABC[11][20] ={"A","B","C","D","E","F","G","H","I","J","K"};
-char Table_title_IV[11][20] ={"Voltage(mV)","Current(A)","Voltage(mV)","Current(A)"};
-char Table_title_VI[11][20] ={"Voltage(mV)","Current(A)","Voltage(mV)","Current(A)"}; 
-char Table_title_IT[11][20] ={"Time(S)","Current(A)","Time(S)","Current(A)"};
-char Table_title_RT[11][20] ={"Time(S)","Resistance(¶∏)","Time(S)","Resistance(¶∏)"};
+char ABC1[11][20] ={"A","B","C","D","E","F","G","H","I","J","K"};
+char Table_title_IV[11][20] ={"V1(mV)","I1(A)","V2(mV)","I2(A)"};
+char Table_title_VI[11][20] ={"V1(mV)","I1(A)","V2(mV)","I2(A)"}; 
+char Table_title_IT[11][20] ={"Time(s)","I1(A)","Time(s)","I2(A)"};
+char Table_title_RT[11][20] ={"Time(s)","R1(¶∏)","Time(s)","R2(¶∏)"};
 
 //==============================================================================
 // Global functions
@@ -78,7 +84,6 @@ static void DispRuntime(int display)
 }
 //===================================================
 //   MAIN_PANEL_Callback
-
 int CVICALLBACK MAIN_PANEL_Callback (int panel, int event, void *callbackData,
 									 int eventData1, int eventData2)
 {
@@ -108,7 +113,6 @@ static void InitSingleProject(PrjHandleTypeDef *pSingleProject)
 		(pSingleProject+i)->index=-1;	
 	}
 }
-
 void Dispgraph()
 {
 	int index;
@@ -141,40 +145,40 @@ void Dispgraph()
 	}
 	else if(index==EXP_I_T)
 	{
-		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "T(ms)");
+		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "t(s)");
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "I(A)");		   //graph1◊¯±Í÷·
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "ms");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "t");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "s");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "A");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "ms");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "t");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "s");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "I");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "A");
 	}
 	else if(index==EXP_V_T)
 	{
-		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "T(ms)");
+		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "t(s)");
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "V(mV)");		  //graph1◊¯±Í÷·
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "ms");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "t");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "s");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "mV");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "ms");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "t");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "s");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "V");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "mV");
 	}
 	else if(index==EXP_R_T)
 	{
-		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "T(ms)");
+		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_XNAME, "t(s)");
 		SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_YNAME, "R(¶∏)");		   //graph1◊¯±Í÷·
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "T");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "ms");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1X, "t");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1XUNIT, "s");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1Y, "R");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU1YUNIT, "¶∏");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "T");
-		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "ms");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2X, "t");
+		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2XUNIT, "s");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2Y, "R");
 		SetCtrlVal (hResultDispPanel, SAMPLE_SMU2YUNIT, "¶∏");
 	}
@@ -208,23 +212,27 @@ void RunKeyAction()					//‘À––∞¥≈•∞¥œ¬∫Û≤˙…˙µƒ“ªœµ¡–∂Ø◊˜
 	DisplayImageFile (resultPanel, RESULTMENU_GRAPH, "Resource\\Graph_pressed.ico"); 
 	DispSingleGraph();
 	
-	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH1, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//…Ë÷√«˙œﬂÕºø…“‘Õ®π˝ Û±Íº¸≈Ã∑≈¥Û”ÎÀı–°
-	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH2, ATTR_ENABLE_ZOOM_AND_PAN, 1 );	//…Ë÷√«˙œﬂÕºø…“‘Õ®π˝ Û±Íº¸≈Ã∑≈¥Û”ÎÀı–°
+	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH1, ATTR_ENABLE_ZOOM_AND_PAN, 1 );			//…Ë÷√«˙œﬂÕºø…“‘Õ®π˝ Û±Íº¸≈Ã∑≈¥Û”ÎÀı–°
+	SetCtrlAttribute(graphDispPanel, GRAPHDISP_GRAPH2, ATTR_ENABLE_ZOOM_AND_PAN, 1 );			//…Ë÷√«˙œﬂÕºø…“‘Õ®π˝ Û±Íº¸≈Ã∑≈¥Û”ÎÀı–°
 	
-	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH1,-1 , VAL_IMMEDIATE_DRAW); 		//«Âø’«˙œﬂÕº…œµƒÀ˘”–«˙œﬂ
-	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH2,-1 , VAL_IMMEDIATE_DRAW); 		//«Âø’«˙œﬂÕº…œµƒÀ˘”–«˙œﬂ 
-	DeleteTableRows (tablePanel, TABLE_TABLE1, 1, -1);									//«Â≥˝±Ì∏Ò 
+	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH1,-1 , VAL_IMMEDIATE_DRAW); 				//«Âø’«˙œﬂÕº…œµƒÀ˘”–«˙œﬂ
+	DeleteGraphPlot (graphDispPanel, GRAPHDISP_GRAPH2,-1 , VAL_IMMEDIATE_DRAW); 				//«Âø’«˙œﬂÕº…œµƒÀ˘”–«˙œﬂ 
+	DeleteTableRows (tablePanel, TABLE_TABLE1, 1, -1);											//«Â≥˝±Ì∏Ò 
 	DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);
+
 }
-void StopKeyAction()				//Õ£÷π∞¥≈•∞¥œ¬∫Û≤˙…˙µƒ“ªœµ¡–∂Ø◊˜
+void StopKeyAction()																			//Õ£÷π∞¥≈•∞¥œ¬∫Û≤˙…˙µƒ“ªœµ¡–∂Ø◊˜
 {
-	DiscardAsyncTimer(TimerID);																//πÿ±’“Ï≤Ω∂® ±∆˜  Õ£÷π«˙œﬂœ‘ æ
-	SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      						//Ω˚”√ Õ£÷π∞¥≈•      
-	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      						//ª÷∏¥ ø™ º∞¥≈•
-	SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     						//ª÷∏¥ ±£¥Ê∞¥≈•
+	DiscardAsyncTimer(TimerID);									 							 	//πÿ±’“Ï≤Ω∂® ±∆˜  Õ£÷π«˙œﬂœ‘ æ 
+	Graph.pCurveArray->numOfPlotDots=0;
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_STOP, ATTR_DIMMED,1);      							//Ω˚”√ Õ£÷π∞¥≈•      
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      							//ª÷∏¥ ø™ º∞¥≈•
+	SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     							//ª÷∏¥ ±£¥Ê∞¥≈•
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_SETTINGS, ATTR_DIMMED,0); 
-	ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  	//∑¢ÀÕÕ£÷π÷∏¡Ó
-	FlushInQ(comSelect);	   																//Clear input and output buffer
+	ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  		//∑¢ÀÕÕ£÷π÷∏¡Ó
+	Delay(0.050);																				
+	ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  		//∑¢ÀÕÕ£÷π÷∏¡Ó
+	FlushInQ(comSelect);	   																	//Clear input and output buffer
 	FlushOutQ(comSelect);
 }
 void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2)
@@ -233,18 +241,22 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	int numOfCurve=2;
 	int numOfDots=100;
 	int temp = 0;
+	int numOfDots1,numOfDots2;
 	Table_TypeDef Table_ATTR;
 	switch((enum ExpType)expType)
 	{
 		case NO_SWEEP_IV:
-			Table_ATTR.column = 2 ;   				//¡– ˝
-			Table_ATTR.column_width = 300;  		//¡–øÌ
-			Table_init(Table_title_IV, Table_ATTR.column, Table_ATTR.column_width );
+			Table_ATTR.column = 4 ;   				//¡– ˝
+			Table_ATTR.column_width = 200;  		//¡–øÌ
 			
 			GetTestPara(&I_V_Panel1, &TestPara1);  //µ√µΩ‘¥±Ì 1 ”√ªß…Ë÷√≤Œ ˝
 			GetTestPara(&I_V_Panel2, &TestPara2);  //µ√µΩ‘¥±Ì 2 ”√ªß…Ë÷√≤Œ ˝
 			
-			numOfDots = abs(TestPara1.Current_Start - TestPara1.Current_Stop)/TestPara1.Current_Step +1;
+			numOfDots1 = abs(TestPara1.Current_Start - TestPara1.Current_Stop)/TestPara1.Current_Step +1;
+			numOfDots2 = abs(TestPara2.Current_Start - TestPara2.Current_Stop)/TestPara2.Current_Step +1;
+			numOfDots = numOfDots1 >= numOfDots2 ? numOfDots1:numOfDots2;
+			Table_ATTR.row=numOfDots; 
+			Table_init(Table_title_IV, Table_ATTR.column, Table_ATTR.column_width,Table_ATTR.row);  
 			
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots; 
@@ -254,9 +266,9 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			
 			break;
 		case NO_SWEEP_VI:
-			Table_ATTR.column = 2 ;   				//¡– ˝
-			Table_ATTR.column_width = 300;  		//¡–øÌ
-			Table_init(Table_title_VI, Table_ATTR.column, Table_ATTR.column_width );
+			Table_ATTR.column = 4 ;   				//¡– ˝
+			Table_ATTR.column_width = 200;  		//¡–øÌ
+			
 			
 			GetTestPara(&V_I_Panel1, &TestPara1);  //µ√µΩ‘¥±Ì 1 ”√ªß…Ë÷√≤Œ ˝
 			GetTestPara(&V_I_Panel2, &TestPara2);  //µ√µΩ‘¥±Ì 2 ”√ªß…Ë÷√≤Œ ˝
@@ -264,7 +276,14 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			GetCtrlVal(VIPanel,PANEL_V_I_START1UNIT,&(temp));
 			TestPara1.rangeMode = (temp<<4)|TestPara1.rangeMode; 
 			
-			numOfDots = abs(TestPara1.Voltage_Start - TestPara1.Voltage_Stop)/TestPara1.Voltage_Step + 1;
+			
+			
+			numOfDots1 = abs(TestPara1.Voltage_Start - TestPara1.Voltage_Stop)/TestPara1.Voltage_Step + 1;
+			numOfDots2 = abs(TestPara2.Voltage_Start - TestPara2.Voltage_Stop)/TestPara2.Voltage_Step + 1; 
+			numOfDots = numOfDots1 >= numOfDots2 ? numOfDots1:numOfDots2;
+			Table_ATTR.row=numOfDots; 
+			Table_init(Table_title_VI, Table_ATTR.column, Table_ATTR.column_width,Table_ATTR.row);
+			
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pGraphAttr->xAxisHead = TestPara1.Voltage_Start;   
 			Graph.pGraphAttr->xAxisTail = TestPara1.Voltage_Stop;
@@ -274,18 +293,26 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 		case NO_SWEEP_IT:
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
-			Table_ATTR.column = 2 ;   				//¡– ˝
-			Table_ATTR.column_width = 300;			//¡–øÌ
-			Table_init(Table_title_IT, Table_ATTR.column, Table_ATTR.column_width );
+			Table_ATTR.column = 4 ;   				//¡– ˝
+			Table_ATTR.column_width = 200;			//¡–øÌ
 			
 			GetTestPara(&I_T_Panel1, &TestPara1);  //µ√µΩ‘¥±Ì 1 ”√ªß…Ë÷√≤Œ ˝
 			GetTestPara(&I_T_Panel2, &TestPara2);  //µ√µΩ‘¥±Ì 2 ”√ªß…Ë÷√≤Œ ˝
 			
-			numOfDots = (TestPara1.runTime*1000)/TestPara1.timeStep + 1; 
+			numOfDots1 = (TestPara1.runTime*1000)/TestPara1.timeStep + 1;
+			numOfDots2 = (TestPara2.runTime*1000)/TestPara2.timeStep + 1;
+			numOfDots = numOfDots1 >= numOfDots2 ? numOfDots1:numOfDots2;
+			Table_ATTR.row=numOfDots+2; 
+			Table_init(Table_title_IT, Table_ATTR.column, Table_ATTR.column_width,Table_ATTR.row);  
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots;
 			
-			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.X_Axis_Max);     //…Ë÷√ X ÷·µƒ∑∂Œß
+			Graph.pGraphAttr->xAxisTail=100;
+			Graph.pGraphAttr->yAxisHead=1.008e-7;
+	   		Graph.pGraphAttr->yAxisTail=1.0134e-7; 
+			
+			SetAxisScalingMode(graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0,Graph.pGraphAttr->xAxisTail); 
+			//SetAxisScalingMode(graphDispPanel, GRAPHDISP_GRAPH1, VAL_LEFT_YAXIS, VAL_MANUAL, Graph.pGraphAttr->yAxisHead,Graph.pGraphAttr->yAxisTail);
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//…Ë÷√ X ÷·µƒ∑∂Œß
 			
 			break;
@@ -293,24 +320,29 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			expType = 3;
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
-			Table_ATTR.column = 2 ;   				//¡– ˝
-			Table_ATTR.column_width = 300;  		//¡–øÌ
-			Table_init(Table_title_RT, Table_ATTR.column, Table_ATTR.column_width );
-			GetTestPara(&R_T_Panel1, &TestPara1);  //µ√µΩ‘¥±Ì 1 ”√ªß…Ë÷√≤Œ ˝
-			GetTestPara(&R_T_Panel2, &TestPara2);  //µ√µΩ‘¥±Ì 2 ”√ªß…Ë÷√≤Œ ˝
+			Table_ATTR.column = 4 ;   				//¡– ˝
+			Table_ATTR.column_width = 200;  		//¡–øÌ
+			GetTestPara(&R_T_Panel1, &TestPara1);   //µ√µΩ‘¥±Ì 1 ”√ªß…Ë÷√≤Œ ˝
+			GetTestPara(&R_T_Panel2, &TestPara2);   //µ√µΩ‘¥±Ì 2 ”√ªß…Ë÷√≤Œ ˝
 			
-			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
+			numOfDots1 =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
+			numOfDots2 =(TestPara2.runTime*1000)/TestPara2.timeStep + 1;
+			numOfDots = numOfDots1 >= numOfDots2 ? numOfDots1:numOfDots2;
+			Table_ATTR.row=numOfDots; 
+			Table_init(Table_title_IV, Table_ATTR.column, Table_ATTR.column_width,Table_ATTR.row);  
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots;
+			
+			Graph.pGraphAttr->xAxisTail=100;
+			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph.pGraphAttr->xAxisTail);     //…Ë÷√ X ÷·µƒ∑∂Œß
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//…Ë÷√ X ÷·µƒ∑∂Œß
 			break;
 		case NO_SWEEP_VT:
 			expType = 4;	//≤‚ ‘¿‡–Õ
 			Graph.X_Axis_Max = 100;
 			Graph_Temp.X_Axis_Max=100;
-			Table_ATTR.column = 2 ;   				//¡– ˝
-			Table_ATTR.column_width = 300;  		//¡–øÌ
-			Table_init(Table_title_RT, Table_ATTR.column, Table_ATTR.column_width );
+			Table_ATTR.column = 4 ;   				//¡– ˝
+			Table_ATTR.column_width = 200;  		//¡–øÌ
 			
 			GetTestPara(&V_T_Panel1, &TestPara1);  //µ√µΩ‘¥±Ì 1 ”√ªß…Ë÷√≤Œ ˝
 			GetTestPara(&V_T_Panel2, &TestPara2);  //µ√µΩ‘¥±Ì 2 ”√ªß…Ë÷√≤Œ ˝
@@ -318,7 +350,11 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			GetCtrlVal(VTPanel,PANEL_V_T_VTSTART1UNIT,&(temp));
 			TestPara1.rangeMode = (temp<<4)|TestPara1.rangeMode; 
 			
-			numOfDots =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
+			numOfDots1 =(TestPara1.runTime*1000)/TestPara1.timeStep + 1;
+			numOfDots2 =(TestPara2.runTime*1000)/TestPara2.timeStep + 1;
+			numOfDots = numOfDots1 >= numOfDots2 ? numOfDots1:numOfDots2;
+			Table_ATTR.row=numOfDots; 
+			Table_init(Table_title_IV, Table_ATTR.column, Table_ATTR.column_width,Table_ATTR.row);  
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots;
 			
@@ -326,6 +362,10 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			SetAxisScalingMode (graphDispPanel, GRAPHDISP_GRAPH2, VAL_BOTTOM_XAXIS, VAL_MANUAL, 0, Graph_Temp.X_Axis_Max);//…Ë÷√ X ÷·µƒ∑∂Œß
 			break;
 	}
+	Graph.pCurveArray->numofSmu1RxDots = 0;
+	Graph.pCurveArray->numofSmu2RxDots = 0;
+	(Graph.pCurveArray+1)->numofSmu1RxDots = 0;
+	(Graph.pCurveArray+1)->numofSmu2RxDots = 0;
 	graphInit(graphIndex, 3, numOfDots + 5, &Graph_Temp);
 	PrepareCfgTxData(&TestPara1, &TestPara2, devAddr1, devAddr2, expType, pmeasUartTxBuf1,pmeasUartTxBuf2); //∑÷±œÚ  ‘¥±Ì1  ‘¥±Ì2 ¥Ê¥¢«¯÷– ∑≈»Î”√ªß ‰»Îµƒ …Ë÷√√¸¡Ó 
 	if(devAddr1 == 0x01)	//≈–∂œ «∑ÒŒ™‘¥±Ì 1 µÿ÷∑£¨Œ™’Ê‘Ú∑¢ÀÕ ‘¥±Ì 1 …Ë÷√√¸¡Ó
@@ -353,6 +393,9 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 			}
 			else
 			{
+				
+				rowIndex=2;
+				rowIndex2=2;
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU1CLR, &smu1Clr);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU2CLR, &smu2Clr);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2tempclr);				//µ√µΩŒ¬∂» ™∂»—π¡¶»˝Ãı«˙œﬂµƒ—’…´
@@ -399,6 +442,17 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 	return 0;
 }
 
+int CVICALLBACK RunAgainCallback (int panel, int control, int event,
+								  void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+			
+			break;
+	}
+	return 0;
+}
 
 //===================================================
 //   StopCallback
@@ -622,6 +676,8 @@ int CVICALLBACK ProjectCallback (int panel, int control, int event,
 			SetPanelSize(projectPanel, 380, 1250);
 			DisplayPanel(projectPanel);
 			LoadAllProject(ProjectSavePath);
+			SetCtrlAttribute (proPanel,PROPANEL_PIC_OPENPRJ , ATTR_DIMMED, 1);	  //Ω˚”√openproject
+			SetCtrlAttribute (proPanel,PROPANEL_TXT_OPENPRJ , ATTR_DIMMED, 1); 
 		break;
 	}	 
 	return 0;
@@ -667,17 +723,46 @@ int CVICALLBACK OutputVoltageCaliCallback (int panel, int control, int event,
 int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 									 void *callbackData, int eventData1, int eventData2)//¡„µ„–£◊º
 {
+	int expType;
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_DIMMED, 1);   //Ω˚”√
 			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_BG_DISABLE);
 			
-			measUartTxBuf1[0] = select_Addr1;
-			measUartTxBuf1[1] = 0x15;
-			measUartTxBuf1[2] = 0x01;
-			measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			//measUartTxBuf1[0] = select_Addr1;
+			//measUartTxBuf1[1] = 0x15;
+			//measUartTxBuf1[2] = 0x01;
+			//measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
+			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//≈–∂œ «∑Ò—°÷–SMU1∞Â◊”≤‚ ‘
+			if(expType>0)
+				select_Addr1=0x01;
+			else
+				select_Addr1=0x00;
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU2, &expType);							//≈–∂œ «∑Ò—°÷–SMU2∞Â◊”≤‚ ‘
+			if(expType>0)
+				select_Addr2=0x02;
+			else
+				select_Addr2=0x00;
+			
+			if(select_Addr1 == 0x01)
+			{
+				measUartTxBuf1[0] = select_Addr1;
+				measUartTxBuf1[1] = 0x15;
+				measUartTxBuf1[2] = 0x01;
+				measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
+				ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			}
+			if(select_Addr2 == 0x02)
+			{
+				measUartTxBuf2[0] = select_Addr2;
+				measUartTxBuf2[1] = 0x15;
+				measUartTxBuf2[2] = 0x01;
+				measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
+				ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+			}
 			break;
 	}
 	return 0;
@@ -686,6 +771,7 @@ int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 int CVICALLBACK CurrentCaliCallback (int panel, int control, int event,
 									 void *callbackData, int eventData1, int eventData2)//µÁ¡˜–£◊º
 { 	int temp;
+int expType; 
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
@@ -695,12 +781,42 @@ int CVICALLBACK CurrentCaliCallback (int panel, int control, int event,
 			
 			GetCtrlVal (hCalibrationPanel,CALIPANEL_RANGESELECT,&temp);  
 			
-			measUartTxBuf1[0] = select_Addr1;
-			measUartTxBuf1[1] = 0x15;
-			measUartTxBuf1[2] = 0x02;
-			measUartTxBuf1[3] = (unsigned char)temp;
-			measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			//measUartTxBuf1[0] = select_Addr1;
+			//measUartTxBuf1[1] = 0x15;
+			//measUartTxBuf1[2] = 0x02;
+			//measUartTxBuf1[3] = (unsigned char)temp;
+			//measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
+			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//≈–∂œ «∑Ò—°÷–SMU1∞Â◊”≤‚ ‘
+			if(expType>0)
+				select_Addr1=0x01;
+			else
+				select_Addr1=0x00;
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU2, &expType);							//≈–∂œ «∑Ò—°÷–SMU2∞Â◊”≤‚ ‘
+			if(expType>0)
+				select_Addr2=0x02;
+			else
+				select_Addr2=0x00;
+			
+			if(select_Addr1 == 0x01)
+			{
+				measUartTxBuf1[0] = select_Addr1;
+				measUartTxBuf1[1] = 0x15;
+				measUartTxBuf1[2] = 0x02;
+				measUartTxBuf1[3] = (unsigned char)temp; 
+				measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
+				ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			}
+			if(select_Addr2 == 0x02)
+			{
+				measUartTxBuf2[0] = select_Addr2;
+				measUartTxBuf2[1] = 0x15;
+				measUartTxBuf2[2] = 0x02;
+				measUartTxBuf2[3] = (unsigned char)temp; 
+				measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
+				ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+			}
 			break;
 	}
 	return 0;
@@ -709,18 +825,99 @@ int CVICALLBACK CurrentCaliCallback (int panel, int control, int event,
 int CVICALLBACK SaveCaliCallback (int panel, int control, int event,
 								  void *callbackData, int eventData1, int eventData2)	//±£¥Ê–£◊º ˝æ›
 {
+	int expType; 
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
+			//measUartTxBuf1[0] = select_Addr1;
+			//measUartTxBuf1[1] = 0x15;
+			//measUartTxBuf1[2] = 0xff;
+			//measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
+			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
 			
-			measUartTxBuf1[0] = select_Addr1;
-			measUartTxBuf1[1] = 0x15;
-			measUartTxBuf1[2] = 0xff;
-			measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//≈–∂œ «∑Ò—°÷–SMU1∞Â◊”≤‚ ‘
+			if(expType>0)
+				select_Addr1=0x01;
+			else
+				select_Addr1=0x00;
+			GetCtrlVal(mainPanel, MAIN_PANEL_SMU2, &expType);							//≈–∂œ «∑Ò—°÷–SMU2∞Â◊”≤‚ ‘
+			if(expType>0)
+				select_Addr2=0x02;
+			else
+				select_Addr2=0x00;
+			
+			if(select_Addr1 == 0x01)
+			{
+				measUartTxBuf1[0] = select_Addr1;
+				measUartTxBuf1[1] = 0x15;
+				measUartTxBuf1[2] = 0xff;
+				measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
+				ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			}
+			if(select_Addr2 == 0x02)
+			{
+				measUartTxBuf2[0] = select_Addr2;
+				measUartTxBuf2[1] = 0x15;
+				measUartTxBuf2[2] = 0xff;
+				measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
+				ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+			}
+
+			HidePanel(hCalibrationPanel);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_ZEROCURCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_OUTVOLCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_DIMMED, 0);
+			SetCtrlAttribute (hCalibrationPanel, CALIPANEL_CURRENTCALI, ATTR_TEXT_BGCOLOR, VAL_BG_ENABLE);
 			break;
 	}
 	return 0;
 }
+//ºÏ≤È∏¸–¬¥˙¬Î£¨¥”∑˛ŒÒ∆˜…œœ¬‘ÿ¥˙¬Î
+int CVICALLBACK COMMANDBUTTON_Callback (int panel, int control, int event,
+										void *callbackData, int eventData1, int eventData2)
+{
+	int expType;
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+			
+			//GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//≈–∂œ «∑Ò—°÷–SMU1∞Â◊”≤‚ ‘
+			//if(expType>0)
+			//	select_Addr1=0x01;
+			//else
+			//	select_Addr1=0x00;
+			//GetCtrlVal(mainPanel, MAIN_PANEL_SMU2, &expType);							//≈–∂œ «∑Ò—°÷–SMU2∞Â◊”≤‚ ‘
+			//if(expType>0)
+			//	select_Addr2=0x02;
+			//else
+			//	select_Addr2=0x00;
+			//
+			//if(select_Addr1 == 0x01)
+			//{
+			//	measUartTxBuf1[0] = select_Addr1;
+			//	measUartTxBuf1[1] = 0x15;
+			//	measUartTxBuf1[2] = 0xff;
+			//	measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
+			//	ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			//}
+			//if(select_Addr2 == 0x02)
+			//{
+			//	measUartTxBuf2[0] = select_Addr2;
+			//	measUartTxBuf2[1] = 0x15;
+			//	measUartTxBuf2[2] = 0xff;
+			//	measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
+			//	ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+			//}
+			
+			
+			SystemUpdate_CompareVer();
+			SystemUpdate_Download();
+			
 
-
+			
+			break;
+	}
+	return 0;
+}

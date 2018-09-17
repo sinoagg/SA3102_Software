@@ -50,15 +50,13 @@ enum GraphDispSelect graphDispSelect=DISP_SINGLE_GRAPH;
 
 static void DispTable(void)
 {
-	SetPanelPos(tablePanel, 172, 305);  
- 	SetPanelSize(tablePanel, 833, 1293);      
+	SetPanelPos(tablePanel, 172, 305);        
 	DisplayPanel(tablePanel);
 }
 
 static void DispSingleGraph(void)
 {
 	SetPanelPos(graphDispPanel, 172, 305);  
-	SetPanelSize(graphDispPanel, 833, 1293);
 	SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1 , ATTR_HEIGHT, 700);
 	SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_VISIBLE, 0);
 	DisplayPanel(graphDispPanel);
@@ -69,8 +67,7 @@ static void DispSingleGraph(void)
 
 static void DispDoubleGraph(void)
 {
-	SetPanelPos(graphDispPanel, 172, 305);  
-	SetPanelSize(graphDispPanel, 833, 1293);
+	SetPanelPos(graphDispPanel, 172, 305); 
 	SetCtrlAttribute (graphDispPanel,GRAPHDISP_GRAPH1 , ATTR_HEIGHT, 380); //如果CheckBox是选中状态则显示两个graph     
 	SetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_VISIBLE, 1);
 	DisplayPanel(graphDispPanel);
@@ -96,8 +93,7 @@ static void DispGraphSelectCheckBox(void)
 		SetCtrlVal(chPanel, CHPANEL_CHECKBOX, 1);
 	 
 	}
-	SetPanelPos(chPanel, 172, 1457);  
-	SetPanelSize(chPanel, 26, 140);      
+	SetPanelPos(chPanel, 172, 1457);      
  	DisplayPanel(chPanel);
 }
 

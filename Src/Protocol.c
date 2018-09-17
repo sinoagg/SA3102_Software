@@ -288,82 +288,82 @@ void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataT
 {
 	unsigned char Addr;
 	Addr = *pUartRxBuf;  //读取 设备 地址  0X01 1号板子   0X02  2号板子
-	if(Addr == 0x01)
-	{
-		pRxData1->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
-		pRxData1->rxStopSign=*(pUartRxBuf+1);
+
+		if(Addr == 0x01)
+		{
+			pRxData1->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
+			pRxData1->rxStopSign=*(pUartRxBuf+1);
 		
-		if(*(pUartRxBuf+2) & 0x80 )
-		{
-			pRxData1->rx_Theory_voltaget = (((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3)) - 65536;
-		}
-		else
-		{
-			pRxData1->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3); 
-		}
+			if(*(pUartRxBuf+2) & 0x80 )
+			{
+				pRxData1->rx_Theory_voltaget = (((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3)) - 65536;
+			}
+			else
+			{
+				pRxData1->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3); 
+			}
 	
-		if(*(pUartRxBuf+4) & 0x80 ) 
-		{
-			pRxData1->rx_Theory_current =  (((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5)) - 65536;   
+			if(*(pUartRxBuf+4) & 0x80 ) 
+			{
+				pRxData1->rx_Theory_current =  (((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5)) - 65536;   
+			}
+			else
+			{
+				pRxData1->rx_Theory_current =  ((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5);
+			}
+			pRxData1->rx_voltage.num_uchar[3] = *(pUartRxBuf+6);
+			pRxData1->rx_voltage.num_uchar[2] = *(pUartRxBuf+7); 
+			pRxData1->rx_voltage.num_uchar[1] = *(pUartRxBuf+8); 
+			pRxData1->rx_voltage.num_uchar[0] = *(pUartRxBuf+9);
+	
+			pRxData1->rx_current.num_uchar[3] = *(pUartRxBuf+10); 
+			pRxData1->rx_current.num_uchar[2] = *(pUartRxBuf+11);
+			pRxData1->rx_current.num_uchar[1] = *(pUartRxBuf+12);
+			pRxData1->rx_current.num_uchar[0] = *(pUartRxBuf+13);
+	
+			pRxData1->rx_Default.num_uchar[3] = *(pUartRxBuf+14); 
+			pRxData1->rx_Default.num_uchar[2] = *(pUartRxBuf+15);
+			pRxData1->rx_Default.num_uchar[1] = *(pUartRxBuf+16);
+			pRxData1->rx_Default.num_uchar[0] = *(pUartRxBuf+17);
+		
+			pRxData1->rangeSelect = *(pUartRxBuf+18);
 		}
-		else
+		if(Addr == 0x02)
 		{
-			pRxData1->rx_Theory_current =  ((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5);
+			pRxData2->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
+			pRxData2->rxStopSign=*(pUartRxBuf+1);
+	
+			if(*(pUartRxBuf+2) & 0x80 )
+			{
+				pRxData2->rx_Theory_voltaget = (((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3)) - 65536;
+			}
+			else
+			{
+				pRxData2->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3); 
+			}
+			if(*(pUartRxBuf+4) & 0x80 ) 
+			{
+				pRxData2->rx_Theory_current =  (((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5)) - 65536;   
+			}
+			else
+			{
+				pRxData2->rx_Theory_current =  ((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5);
+			}
+			pRxData2->rx_voltage.num_uchar[3] = *(pUartRxBuf+6);
+			pRxData2->rx_voltage.num_uchar[2] = *(pUartRxBuf+7); 
+			pRxData2->rx_voltage.num_uchar[1] = *(pUartRxBuf+8); 
+			pRxData2->rx_voltage.num_uchar[0] = *(pUartRxBuf+9);
+	
+			pRxData2->rx_current.num_uchar[3] = *(pUartRxBuf+10); 
+			pRxData2->rx_current.num_uchar[2] = *(pUartRxBuf+11);
+			pRxData2->rx_current.num_uchar[1] = *(pUartRxBuf+12);
+			pRxData2->rx_current.num_uchar[0] = *(pUartRxBuf+13);
+	
+			pRxData2->rx_Default.num_uchar[3] = *(pUartRxBuf+14); 
+			pRxData2->rx_Default.num_uchar[2] = *(pUartRxBuf+15);
+			pRxData2->rx_Default.num_uchar[1] = *(pUartRxBuf+16);
+			pRxData2->rx_Default.num_uchar[0] = *(pUartRxBuf+17);
+			pRxData2->rangeSelect = *(pUartRxBuf+18);
 		}
 
-	
-		pRxData1->rx_voltage.num_uchar[3] = *(pUartRxBuf+6);
-		pRxData1->rx_voltage.num_uchar[2] = *(pUartRxBuf+7); 
-		pRxData1->rx_voltage.num_uchar[1] = *(pUartRxBuf+8); 
-		pRxData1->rx_voltage.num_uchar[0] = *(pUartRxBuf+9);
-	
-		pRxData1->rx_current.num_uchar[3] = *(pUartRxBuf+10); 
-		pRxData1->rx_current.num_uchar[2] = *(pUartRxBuf+11);
-		pRxData1->rx_current.num_uchar[1] = *(pUartRxBuf+12);
-		pRxData1->rx_current.num_uchar[0] = *(pUartRxBuf+13);
-	
-		pRxData1->rx_Default.num_uchar[3] = *(pUartRxBuf+14); 
-		pRxData1->rx_Default.num_uchar[2] = *(pUartRxBuf+15);
-		pRxData1->rx_Default.num_uchar[1] = *(pUartRxBuf+16);
-		pRxData1->rx_Default.num_uchar[0] = *(pUartRxBuf+17);
-		
-		pRxData1->rangeSelect = *(pUartRxBuf+18);
-	}
-	if(Addr == 0x02)
-	{
-		pRxData2->rxDevAddr=*pUartRxBuf; //1号板子设备地址 
-		pRxData2->rxStopSign=*(pUartRxBuf+1);
-	
-		if(*(pUartRxBuf+2) & 0x80 )
-		{
-			pRxData2->rx_Theory_voltaget = (((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3)) - 65536;
-		}
-		else
-		{
-			pRxData2->rx_Theory_voltaget = ((int)(*(pUartRxBuf+2) << 8))|*(pUartRxBuf+3); 
-		}
-		if(*(pUartRxBuf+4) & 0x80 ) 
-		{
-			pRxData2->rx_Theory_current =  (((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5)) - 65536;   
-		}
-		else
-		{
-			pRxData2->rx_Theory_current =  ((int)(*(pUartRxBuf+4) << 8))|*(pUartRxBuf+5);
-		}
-		pRxData2->rx_voltage.num_uchar[3] = *(pUartRxBuf+6);
-		pRxData2->rx_voltage.num_uchar[2] = *(pUartRxBuf+7); 
-		pRxData2->rx_voltage.num_uchar[1] = *(pUartRxBuf+8); 
-		pRxData2->rx_voltage.num_uchar[0] = *(pUartRxBuf+9);
-	
-		pRxData2->rx_current.num_uchar[3] = *(pUartRxBuf+10); 
-		pRxData2->rx_current.num_uchar[2] = *(pUartRxBuf+11);
-		pRxData2->rx_current.num_uchar[1] = *(pUartRxBuf+12);
-		pRxData2->rx_current.num_uchar[0] = *(pUartRxBuf+13);
-	
-		pRxData2->rx_Default.num_uchar[3] = *(pUartRxBuf+14); 
-		pRxData2->rx_Default.num_uchar[2] = *(pUartRxBuf+15);
-		pRxData2->rx_Default.num_uchar[1] = *(pUartRxBuf+16);
-		pRxData2->rx_Default.num_uchar[0] = *(pUartRxBuf+17);
-		pRxData2->rangeSelect = *(pUartRxBuf+18);
-	}
 }

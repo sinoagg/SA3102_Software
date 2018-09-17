@@ -30,8 +30,8 @@ typedef struct
 {
 	int xAxisHead;
 	int xAxisTail;
-	int yAxisHead;
-	int yAxisTail;
+	float yAxisHead;
+	float yAxisTail;
 }GraphAttrTypeDef;		
 typedef struct
 {
@@ -56,6 +56,8 @@ extern Graph_TypeDef Graph_Temp;
 // Global functions
 int graphInit(int graphIndex, int numOfCurve, int numOfDots, Graph_TypeDef* pGraph);
 int GraphDeinit(Graph_TypeDef* pGraph);
+
+void SetGraphX_Axis(Graph_TypeDef* pGraph, float currentX_Val); 
 
 #ifdef __cplusplus
     }

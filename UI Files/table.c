@@ -61,18 +61,18 @@ void DeleteTabble_Row_Columns()
 	 DeleteTableColumns (tablePanel, TABLE_TABLE1, 1, -1);		//删除所有行列
 }
 
-void Table_init(char table_title_IV[][20], int column, column_width)
+void Table_init(char table_title_IV[][20], int column, int column_width,int row)
 {						    
 	InsertTableColumns(tablePanel,TABLE_TABLE1,1,column,VAL_CELL_STRING);              //向表中插入多少列 
-	InsertTableRows (tablePanel,TABLE_TABLE1 ,-1 , 1, VAL_CELL_STRING);				      		  //插入1行 
+	InsertTableRows (tablePanel,TABLE_TABLE1 , -1, 1, VAL_CELL_STRING);//插入1行 
 	for(int i=1;i<column+1;i++)
 		{
 			SetTableColumnAttribute(tablePanel,TABLE_TABLE1,i,ATTR_USE_LABEL_TEXT,1);                     //启用列首
 			SetTableColumnAttribute(tablePanel,TABLE_TABLE1,i,ATTR_COLUMN_WIDTH,column_width); 			  //设置列宽
-			SetTableColumnAttribute(tablePanel, TABLE_TABLE1, i, ATTR_LABEL_TEXT, ABC[i-1]);             //列标号
-			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint (i, 1), table_title_IV[i-1]);	          //分别设置标题 
-			//SetTableColumnAttribute(tablePanel, TABLE_TABLE1, i, ATTR_LABEL_TEXT, table_title_IV[i-1]); 
+			SetTableColumnAttribute(tablePanel, TABLE_TABLE1, i, ATTR_LABEL_TEXT, ABC1[i-1]);
+			SetTableCellVal (tablePanel, TABLE_TABLE1, MakePoint(i,1), table_title_IV[i-1]);  //列标号
 		}
+		InsertTableRows (tablePanel,TABLE_TABLE1 , -1, row, VAL_CELL_STRING);//插入1行
 }
 int CVICALLBACK COMMANDBUTTON_Back (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)

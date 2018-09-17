@@ -98,6 +98,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			{
 				SetPanelPos(IVPanel, 105, 305);
 				DisplayPanel(IVPanel);
+				SetCtrlAttribute (hBasicSamplePanel, SAMPLE_ADV_CURRENTMODE, ATTR_VISIBLE, 1);
 				ExpList(0);
 				DispRuntime(0);
 			}
@@ -105,6 +106,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			{
 				SetPanelPos(VIPanel, 105, 305);
 				DisplayPanel(VIPanel);
+				SetCtrlAttribute (hBasicSamplePanel, SAMPLE_ADV_CURRENTMODE, ATTR_VISIBLE, 0); 
 				ExpList(0);
 				DispRuntime(0);
 			}
@@ -112,6 +114,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			{
 				SetPanelPos(ITPanel, 105, 305);
 				DisplayPanel(ITPanel);
+				SetCtrlAttribute (hBasicSamplePanel, SAMPLE_ADV_CURRENTMODE, ATTR_VISIBLE, 1);  
 				ExpList(0); 
 				DispRuntime(1);
 			}
@@ -119,6 +122,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			{
 				SetPanelPos(VTPanel, 105, 305);
 				DisplayPanel(VTPanel);
+				SetCtrlAttribute (hBasicSamplePanel, SAMPLE_ADV_CURRENTMODE, ATTR_VISIBLE, 0); 
 				ExpList(0);
 				DispRuntime(1);
 			}
@@ -126,6 +130,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			{
 				SetPanelPos(RTPanel, 105, 305);
 				DisplayPanel(RTPanel);
+				SetCtrlAttribute (hBasicSamplePanel, SAMPLE_ADV_CURRENTMODE, ATTR_VISIBLE, 0); 
 				ExpList(0);
 				DispRuntime(1);
 			}
@@ -139,6 +144,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			{
 				SetPanelPos(IdVdPanel, 105, 305);
 				DisplayPanel(IdVdPanel);
+				SetCtrlAttribute (hBasicSamplePanel, SAMPLE_ADV_CURRENTMODE, ATTR_VISIBLE, 0); 
 				ExpList(0);
 				DispRuntime(1);
 			}
@@ -146,6 +152,7 @@ int CVICALLBACK ExpListCallback (int panel, int control, int event,
 			{
 				SetPanelPos(IdVgPanel, 105, 305);
 				DisplayPanel(IdVgPanel);
+				SetCtrlAttribute (hBasicSamplePanel, SAMPLE_ADV_CURRENTMODE, ATTR_VISIBLE, 0); 
 				ExpList(0);
 				DispRuntime(1);
 			}

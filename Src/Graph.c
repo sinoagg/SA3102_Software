@@ -10,10 +10,12 @@
 
 //==============================================================================
 // Include files
+#include <userint.h>
 #include <ansi_c.h>
 #include "Curve.h"
 #include "Graph.h"
-
+#include "protocol.h" 
+#include "LoadPanel.h"
 //==============================================================================
 // Constants
 
@@ -63,3 +65,18 @@ int GraphDeinit(Graph_TypeDef* pGraph)
 	}
 	return 0;
 }
+void SetGraphX_Axis(Graph_TypeDef* pGraph, float currentX_Val)		   
+{					 
+	if(TestPara1.testMode == NO_SWEEP_IT||TestPara1.testMode == NO_SWEEP_RT)
+	{
+		if(pGraph->pGraphAttr->xAxisTail < currentX_Val) //已画点数*Step ===》实际x轴长度
+			{  	
+				Graph.pGraphAttr->xAxisTail=Graph.pGraphAttr->xAxisTail + Graph.pGraphAttr->xAxisTail*0.1;
+				SetAxisScalingMode(graphDispPanel, GRAPHDISP_GRAPH1, VAL_BOTTOM_XAXIS, VAL_MANUAL, 
+								   0, Graph.pGraphAttr->xAxisTail);//设置 X  轴的范围
+			}
+	}
+	else if(TestPara1.testMode == NO_SWEEP_IV)
+	{
+	
+	}}
