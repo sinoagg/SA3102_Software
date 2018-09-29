@@ -10,6 +10,7 @@
 
 //==============================================================================
 // Include files
+#include <utility.h>
 #include "Graph.h"
 #include "GraphDisp.h"
 #include "LoadPanel.h"
@@ -40,13 +41,22 @@
 /// HIRET What does your function return?
 int CVICALLBACK TimerCallback (int reserved, int timerId, int event, void *callbackData, int eventData1, int eventData2)
 {
-	if(queryFlag == 1)//串口接收时要屏蔽数据查询
+	if(measure_Uart_Flag == 1)//串口接收时要屏蔽数据查询
 	{
-		ProtocolQuery( comSelect, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
+		ProtocolQuery( measureComPort, select_Addr1, select_Addr2, measUartTxBuf1,  measUartTxBuf2);
+		Delay(0.020); 
 		//PlotCurve_Temp(&Graph_Temp, graphDispPanel, GRAPHDISP_GRAPH2);//画曲线图
 	}
+	if(control_Uart_Flag == 1)
+	{
+		Read_CGS_Value(controlComPort);
+		Delay(0.020);
+	}
+
+	
+	
 	//Graph.pGraphAttr->xAxisHead = 
-	//Read_CGS_Value(CGS_comSelect);
+	//Read_CGS_Value(controlComPort);
 	////判断显示的 X 轴范围， X 轴范围要大于 实时显示的数据点
 	//if(Graph.X_Axis_Max < Graph.pCurveArray->numOfPlotDots)
 	//{

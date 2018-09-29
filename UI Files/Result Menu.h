@@ -28,22 +28,14 @@
 #define  SAVEDATA_TEXTMSG                 5       /* control type: textMsg, callback function: (none) */
 #define  SAVEDATA_TEXTMSG_3               6       /* control type: textMsg, callback function: (none) */
 #define  SAVEDATA_TEXTMSG_2               7       /* control type: textMsg, callback function: (none) */
-#define  SAVEDATA_TEXTMSG_4               8       /* control type: textMsg, callback function: SaveSheetCallback */
-#define  SAVEDATA_PICTURE_2               9       /* control type: picture, callback function: SaveSheetCallback */
-#define  SAVEDATA_TEXTMSG_6               10      /* control type: textMsg, callback function: SaveGraph1Callback */
-#define  SAVEDATA_PICTURE_3               11      /* control type: picture, callback function: SaveGraph1Callback */
-#define  SAVEDATA_TEXTMSG_7               12      /* control type: textMsg, callback function: SaveGraph2Callback */
-#define  SAVEDATA_PICTURE_4               13      /* control type: picture, callback function: SaveGraph2Callback */
-#define  SAVEDATA_TEXTMSG_5               14      /* control type: textMsg, callback function: SaveAllCallback */
-#define  SAVEDATA_PICTURE                 15      /* control type: picture, callback function: SaveAllCallback */
-#define  SAVEDATA_TEXTMSG_11              16      /* control type: textMsg, callback function: ExitCallback */
-#define  SAVEDATA_PICTURE_8               17      /* control type: picture, callback function: ExitCallback */
-#define  SAVEDATA_TEXTMSG_9               18      /* control type: textMsg, callback function: BrowseGraph2Callback */
-#define  SAVEDATA_TEXTMSG_10              19      /* control type: textMsg, callback function: BrowseGraph1Callback */
-#define  SAVEDATA_PICTURE_7               20      /* control type: picture, callback function: BrowseGraph1Callback */
-#define  SAVEDATA_TEXTMSG_8               21      /* control type: textMsg, callback function: BrowseSheetCallback */
-#define  SAVEDATA_PICTURE_6               22      /* control type: picture, callback function: BrowseGraph2Callback */
-#define  SAVEDATA_PICTURE_5               23      /* control type: picture, callback function: BrowseSheetCallback */
+#define  SAVEDATA_SAVEGRAPH2              8       /* control type: command, callback function: SaveGraph2Callback */
+#define  SAVEDATA_COMMANDBUTTON_2         9       /* control type: command, callback function: SaveGraph1Callback */
+#define  SAVEDATA_COMMANDBUTTON           10      /* control type: command, callback function: SaveSheetCallback */
+#define  SAVEDATA_COMMANDBUTTON_4         11      /* control type: command, callback function: SaveAllCallback */
+#define  SAVEDATA_COMMANDBUTTON_5         12      /* control type: command, callback function: ExitCallback */
+#define  SAVEDATA_COMMANDBUTTON_8         13      /* control type: command, callback function: BrowseSheetCallback */
+#define  SAVEDATA_COMMANDBUTTON_7         14      /* control type: command, callback function: BrowseGraph1Callback */
+#define  SAVEDATA_BROWSEGRAPH2            15      /* control type: command, callback function: BrowseGraph2Callback */
 
 
      /* Control Arrays: */

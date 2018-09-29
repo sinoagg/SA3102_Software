@@ -57,7 +57,7 @@ extern Graph_TypeDef Graph_Temp;
 int graphInit(int graphIndex, int numOfCurve, int numOfDots, Graph_TypeDef* pGraph);
 int GraphDeinit(Graph_TypeDef* pGraph);
 
-void SetGraphX_Axis(Graph_TypeDef* pGraph, float currentX_Val); 
+void SetGraphX_Axis(int control,Graph_TypeDef* pGraph);
 
 #ifdef __cplusplus
     }

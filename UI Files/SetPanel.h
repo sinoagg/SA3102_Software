@@ -15,7 +15,9 @@
 
 #define  ABOUT                            1
 #define  ABOUT_PICTURE                    2       /* control type: picture, callback function: (none) */
-#define  ABOUT_COMMANDBUTTON              3       /* control type: command, callback function: COMMANDBUTTON_Callback */
+#define  ABOUT_UPDATESMU2                 3       /* control type: command, callback function: UpdateSMU2Callback */
+#define  ABOUT_UPDATESMU1                 4       /* control type: command, callback function: UpdateSMU1Callback */
+#define  ABOUT_COMMANDBUTTON              5       /* control type: command, callback function: COMMANDBUTTON_Callback */
 
 #define  ENVT                             2
 #define  ENVT_PROPATH                     2       /* control type: string, callback function: (none) */
@@ -79,6 +81,8 @@ int  CVICALLBACK OkCallback(int panel, int control, int event, void *callbackDat
 int  CVICALLBACK PrjBtnCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK ProCallback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 int  CVICALLBACK SettingsCB(int panel, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK UpdateSMU1Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
+int  CVICALLBACK UpdateSMU2Callback(int panel, int control, int event, void *callbackData, int eventData1, int eventData2);
 
 
 #ifdef __cplusplus

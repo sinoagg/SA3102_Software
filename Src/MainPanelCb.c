@@ -1,5 +1,3 @@
-#include "SetPanel.h"
-
 //==============================================================================
 //
 // Title:		MainPanel.c
@@ -13,6 +11,8 @@
 //==============================================================================
 // Include files
 #include <windows.h>
+#include "AbnormalDataCache.h"
+#include <cvintwrk.h>
 #include <utility.h>
 #include "asynctmr.h"
 #include "MainPanelCb.h"
@@ -32,8 +32,8 @@
 #include "MainPanel.h"
 #include "main.h"
 #include "Tools.h"
-#include "systemUpdate_Client.h"
-
+#include "SetPanel.h"
+#include "cvixml.h"
 
 //==============================================================================
 // Constants
@@ -62,6 +62,9 @@
 
 //==============================================================================
 // Global variables
+
+CmtThreadFunctionID  abnmDCthreadFunctionID; 
+
 int TimerID;
 char configSavePath[512]={0};
 FileLableTypeDef *pFileLable[64];									//存所有FileLable的指针，最多只能加载一个文件夹下的64个文件
@@ -82,6 +85,8 @@ static void DispRuntime(int display)
 	SetCtrlAttribute (hBasicSamplePanel, SAMPLE_CFG_RUNTIME, ATTR_VISIBLE, display); 
 	SetCtrlAttribute (hBasicSamplePanel, SAMPLE_CFG_TXT_S, ATTR_VISIBLE, display);
 }
+
+int CVICALLBACK AbnmDCThreadFunction (void *functionData);
 //===================================================
 //   MAIN_PANEL_Callback
 int CVICALLBACK MAIN_PANEL_Callback (int panel, int event, void *callbackData,
@@ -96,10 +101,11 @@ int CVICALLBACK MAIN_PANEL_Callback (int panel, int event, void *callbackData,
 
 			break;
 		case EVENT_CLOSE:
-			if(CGS_comSelect>0)
-			CloseCom(CGS_comSelect);
-			if(comSelect>0)
-			CloseCom(comSelect);
+			if(controlComPort>0)
+			CloseCom(controlComPort);
+			if(measureComPort>0)
+			CloseCom(measureComPort);
+			ShutDownExcelCB(); 
 			QuitUserInterface(0); 
 		break;
 	}
@@ -229,13 +235,13 @@ void StopKeyAction()																			//停止按钮按下后产生的一系列动作
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_RUN, ATTR_DIMMED, 0);      							//恢复 开始按钮
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     							//恢复 保存按钮
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_SETTINGS, ATTR_DIMMED,0); 
-	ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  		//发送停止指令
+	ProtocolStop(measureComPort, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  		//发送停止指令
 	Delay(0.050);																				
-	ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  		//发送停止指令
-	FlushInQ(comSelect);	   																	//Clear input and output buffer
-	FlushOutQ(comSelect);
+	ProtocolStop(measureComPort, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  		//发送停止指令
+	FlushInQ(measureComPort);	   																	//Clear input and output buffer
+	FlushOutQ(measureComPort);
 }
-void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2)
+void ProtocolCfg(unsigned char measureComPort, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2)
 {
 	int graphIndex=1;
 	int numOfCurve=2;
@@ -302,7 +308,7 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			numOfDots1 = (TestPara1.runTime*1000)/TestPara1.timeStep + 1;
 			numOfDots2 = (TestPara2.runTime*1000)/TestPara2.timeStep + 1;
 			numOfDots = numOfDots1 >= numOfDots2 ? numOfDots1:numOfDots2;
-			Table_ATTR.row=numOfDots+2; 
+			Table_ATTR.row=numOfDots; 
 			Table_init(Table_title_IT, Table_ATTR.column, Table_ATTR.column_width,Table_ATTR.row);  
 			graphInit(graphIndex, numOfCurve, numOfDots, &Graph);
 			Graph.pCurveArray->numOfTotalDots = numOfDots;
@@ -369,10 +375,26 @@ void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 	graphInit(graphIndex, 3, numOfDots + 5, &Graph_Temp);
 	PrepareCfgTxData(&TestPara1, &TestPara2, devAddr1, devAddr2, expType, pmeasUartTxBuf1,pmeasUartTxBuf2); //分别向  源表1  源表2 存储区中 放入用户输入的 设置命令 
 	if(devAddr1 == 0x01)	//判断是否为源表 1 地址，为真则发送 源表 1 设置命令
-	ComWrt(comSelect, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN);
+	ComWrt(measureComPort, (const char*)pmeasUartTxBuf1, SA31_UART_TX_LEN);
 	Delay(0.05);
 	if(devAddr2 == 0x02)	//判断是否为源表 2 地址，为真则发送 源表 2 设置命令  
-	ComWrt(comSelect, (const char*)pmeasUartTxBuf2, SA31_UART_TX_LEN);
+	ComWrt(measureComPort, (const char*)pmeasUartTxBuf2, SA31_UART_TX_LEN);
+}
+
+
+int CVICALLBACK AbnmDCThreadFunction (void *functionData)
+{
+	int n = 1; 
+	while (Graph.pCurveArray->numOfPlotDots < Graph.pCurveArray->numOfTotalDots) 
+	{
+		if(Graph.pCurveArray->numOfPlotDots > 0 && Graph.pCurveArray->numOfPlotDots >= (Graph.pCurveArray->numOfTotalDots * n) / 10)
+		{
+			LaunchExcelCB();
+			SaveExcelCB(tablePanel, TABLE_TABLE1);
+			n +=1;
+		}
+	}
+	return 0;
 }
 
 //===================================================
@@ -396,6 +418,7 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				
 				rowIndex=2;
 				rowIndex2=2;
+				GetCtrlVal (hAdvanceSamplePanel, SAMPLE_ADV_CURRENTMODE, &logFlag);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU1CLR, &smu1Clr);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_SMU2CLR, &smu2Clr);
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR1, &graph2tempclr);				//得到温度湿度压力三条曲线的颜色
@@ -403,8 +426,8 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				GetCtrlVal (hSettingsGraphPanel, SETGRAPH_GRAPH2CLR3, &graph2preclr);
 				X1 = 0;  
 				X2 = 0;
-				FlushInQ(comSelect);	   														//Clear input and output buffer
-				FlushOutQ(comSelect);
+				FlushInQ(measureComPort);	   														//Clear input and output buffer
+				FlushOutQ(measureComPort);
 				GraphDeinit(&Graph);														//内存释放在画图之后
 				GraphDeinit(&Graph_Temp);
 				Dispgraph();																//不同模式显示不同的单位
@@ -429,15 +452,16 @@ int CVICALLBACK RunCallback (int panel, int control, int event,
 				return -1;
 			TestPara1.testMode = expType; //源表 1 测试类型
 			TestPara2.testMode = expType; //源表 1 测试类型
-			ProtocolCfg(comSelect, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
+			ProtocolCfg(measureComPort, select_Addr1, select_Addr2,(unsigned char)expType, measUartTxBuf1,measUartTxBuf2);//得到用户的设置参数  并发送
 			Delay(2);//延时
-			ProtocolRun(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART 
+			ProtocolRun(measureComPort, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);		//send RUN command to instrument via UART 
 			double temp=(double)TestPara1.timeStep * 0.001;
 			if(temp<0.03) temp=0.03;													//如果查询时间过快，会造成数据混乱，下位机响应中断过多
 			TimerID = NewAsyncTimer(temp,-1, 1, TimerCallback, 0);
 			
 			}
 			break;
+			CmtScheduleThreadPoolFunction (DEFAULT_THREAD_POOL_HANDLE, AbnmDCThreadFunction,  NULL, &abnmDCthreadFunctionID); 
 	}
 	return 0;
 }
@@ -472,9 +496,9 @@ int CVICALLBACK StopCallback (int panel, int control, int event,
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_SAVE, ATTR_DIMMED, 0);     //恢复 保存按钮
 			SetCtrlAttribute (mainPanel, MAIN_PANEL_SETTINGS, ATTR_DIMMED,0); 
 			//SetCtrlAttribute (mainPanel, MAIN_PANEL_TIMER, ATTR_ENABLED, 0);   //关闭同步定时器 停止发送查询命令
-			ProtocolStop(comSelect, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
-			FlushInQ(comSelect);	   														//Clear input and output buffer
-			FlushOutQ(comSelect);
+			ProtocolStop(measureComPort, select_Addr1, select_Addr2, measUartTxBuf1, measUartTxBuf2);  //发送停止指令
+			FlushInQ(measureComPort);	   														//Clear input and output buffer
+			FlushOutQ(measureComPort);
 			break;
 	}
 	return 0;
@@ -709,7 +733,7 @@ int CVICALLBACK OutputVoltageCaliCallback (int panel, int control, int event,
 			measUartTxBuf1[1] = 0x15;
 			measUartTxBuf1[2] = 0x00;
 			measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 			
 			
 
@@ -734,7 +758,7 @@ int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 			//measUartTxBuf1[1] = 0x15;
 			//measUartTxBuf1[2] = 0x01;
 			//measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			//ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 			
 			GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//判断是否选中SMU1板子测试
 			if(expType>0)
@@ -753,7 +777,7 @@ int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 				measUartTxBuf1[1] = 0x15;
 				measUartTxBuf1[2] = 0x01;
 				measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-				ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+				ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 			}
 			if(select_Addr2 == 0x02)
 			{
@@ -761,7 +785,7 @@ int CVICALLBACK ZeroCurrentCaliCallback (int panel, int control, int event,
 				measUartTxBuf2[1] = 0x15;
 				measUartTxBuf2[2] = 0x01;
 				measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-				ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+				ComWrt(measureComPort, (const char*)measUartTxBuf2, 30);
 			}
 			break;
 	}
@@ -786,7 +810,7 @@ int expType;
 			//measUartTxBuf1[2] = 0x02;
 			//measUartTxBuf1[3] = (unsigned char)temp;
 			//measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			//ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 			
 			GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//判断是否选中SMU1板子测试
 			if(expType>0)
@@ -806,7 +830,7 @@ int expType;
 				measUartTxBuf1[2] = 0x02;
 				measUartTxBuf1[3] = (unsigned char)temp; 
 				measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-				ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+				ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 			}
 			if(select_Addr2 == 0x02)
 			{
@@ -815,7 +839,7 @@ int expType;
 				measUartTxBuf2[2] = 0x02;
 				measUartTxBuf2[3] = (unsigned char)temp; 
 				measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-				ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+				ComWrt(measureComPort, (const char*)measUartTxBuf2, 30);
 			}
 			break;
 	}
@@ -833,7 +857,7 @@ int CVICALLBACK SaveCaliCallback (int panel, int control, int event,
 			//measUartTxBuf1[1] = 0x15;
 			//measUartTxBuf1[2] = 0xff;
 			//measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			//ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			//ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 			
 			GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//判断是否选中SMU1板子测试
 			if(expType>0)
@@ -852,7 +876,7 @@ int CVICALLBACK SaveCaliCallback (int panel, int control, int event,
 				measUartTxBuf1[1] = 0x15;
 				measUartTxBuf1[2] = 0xff;
 				measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-				ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+				ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 			}
 			if(select_Addr2 == 0x02)
 			{
@@ -860,7 +884,7 @@ int CVICALLBACK SaveCaliCallback (int panel, int control, int event,
 				measUartTxBuf2[1] = 0x15;
 				measUartTxBuf2[2] = 0xff;
 				measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-				ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+				ComWrt(measureComPort, (const char*)measUartTxBuf2, 30);
 			}
 
 			HidePanel(hCalibrationPanel);
@@ -878,45 +902,186 @@ int CVICALLBACK SaveCaliCallback (int panel, int control, int event,
 int CVICALLBACK COMMANDBUTTON_Callback (int panel, int control, int event,
 										void *callbackData, int eventData1, int eventData2)
 {
-	int expType;
+switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+		int len;
+		char getProjectDir[MAX_PATHNAME_LEN];
+		char updateInfoPath[MAX_PATHNAME_LEN];
+		CVIXMLDocument    hUpDocument = 0;
+		CVIXMLElement	 hCurrElem = 0;
+		CVIXMLElement    hChildElem = 0;
+		CVIXMLAttribute  hCurrAttr = 0;
+		char *serversSoftVersion = NULL;
+		char attrName[5];
+		int handle;
+		
+		CheckUpdate();//检查更新软件是否为最新
+		
+		LaunchExecutableEx ("..\\..\\updates\\SystemUpdate.exe", LE_SHOWNA, &handle);
+		while((ExecutableHasTerminated (handle)) == 0)
+		{
+		}
+		GetProjectDir (getProjectDir);
+		MakePathname(getProjectDir, "..\\..\\updates\\updateInfo.xml", updateInfoPath);
+		CVIXMLLoadDocument (updateInfoPath, &hUpDocument);
+		CVIXMLGetRootElement (hUpDocument, &hCurrElem);
+		CVIXMLGetChildElementByTag(hCurrElem, "SoftwareVersion", &hChildElem); //获得标签SoftwareVersion 子元素
+		CVIXMLGetAttributeByIndex(hChildElem, 0, &hCurrAttr);
+		CVIXMLGetAttributeNameLength(hCurrAttr, &len);
+		CVIXMLGetAttributeName(hCurrAttr, attrName);
+		CVIXMLGetAttributeValueLength (hCurrAttr, &len);
+		serversSoftVersion = malloc (len + 1); 
+		CVIXMLGetAttributeValue(hCurrAttr,serversSoftVersion);   //从服务器下载.xml文件到本地目录下，再从该XML文件中获取最新软硬件版本号
+		if(serversSoftVersion[0] != '0')
+		{
+			QuitUserInterface (0);
+			LaunchExecutable ("..\\..\\updates\\replace.exe");
+		}
+			break;
+	}
+	return 0;
+}
+
+void CheckUpdate()
+{
+	int len;
+	static int ftp_handle = -1;
+	static int error; 
+	static char getProjectDir[MAX_PATHNAME_LEN];
+	static char getProjectDirs[MAX_PATHNAME_LEN];
+	static char updateInfoPath[MAX_PATHNAME_LEN];
+	static char localInfoPath[MAX_PATHNAME_LEN];
+	static char updateUpdateFilePath[MAX_PATHNAME_LEN]; 
+	static char *serversUpdateVersion = NULL;
+	static char *currentUpdateVersion = NULL;
+	static CVIXMLDocument	 hLoDocument = 0;
+	static CVIXMLDocument    hUpDocument = 0;
+	static CVIXMLElement	 hRootElem = 0;
+	static CVIXMLElement    hChildElem = 0;
+	static CVIXMLAttribute  hUpdateCurrAttr = 0;
+
+	    GetProjectDir (getProjectDir);
+		MakePathname(getProjectDir, "..\\..\\updates\\", getProjectDirs);
+		MakePathname(getProjectDirs, "updateInfo.xml", updateInfoPath);
+		MakePathname(getProjectDirs, "localInfo.xml", localInfoPath);
+	    if ((ftp_handle = InetFTPLogin ("106.15.183.58", "anonymous", "")) < 0)           //用户匿名登陆服务器
+		{
+			MessagePopup ("An Error Occurred", "Can't Connect To Server");
+		}
+		if ((InetFTPSetPassiveMode (ftp_handle, 0)) <0)                                   //ftp通信方式为主动模式
+			MessagePopup ("An Error Occurred", "Current communication mode is active mode");
+		 if ((InetFTPChangeDir (ftp_handle, "SA3102//")) < 0)							
+			MessagePopup ("An Error Occurred", "Server current directory error");
+		if((error = InetFTPRetrieveFile (ftp_handle, updateInfoPath, "updateInfo.xml", INET_FTP_FILE_TYPE_BINARY)))  //下载服务器当前列表中的更新信息文件
+			MessagePopup ("An Error Occurred", "The server version number could not be found");
+		InetFTPClose(ftp_handle);
+	
+		CVIXMLLoadDocument (updateInfoPath, &hUpDocument);
+		CVIXMLGetRootElement (hUpDocument, &hRootElem);
+		CVIXMLGetChildElementByTag(hRootElem, "UpdateVersion", &hChildElem); //获得标签UpdateVersion 子元素
+		CVIXMLGetAttributeByIndex(hChildElem, 0, &hUpdateCurrAttr);
+		CVIXMLGetAttributeNameLength(hUpdateCurrAttr, &len);
+		CVIXMLGetAttributeValueLength (hUpdateCurrAttr, &len);
+		serversUpdateVersion = malloc (len + 1); 
+		CVIXMLGetAttributeValue(hUpdateCurrAttr,serversUpdateVersion);   //从服务器下载.xml文件到本地目录下，再从该XML文件中获取最新更新版本号
+         
+	    CVIXMLLoadDocument (localInfoPath, &hLoDocument);
+		CVIXMLGetRootElement (hLoDocument, &hRootElem);
+		CVIXMLGetChildElementByTag(hRootElem, "UpdateVersion", &hChildElem); //获得标签version 子元素
+		CVIXMLGetAttributeByIndex(hChildElem, 0, &hUpdateCurrAttr);
+		CVIXMLGetAttributeNameLength(hUpdateCurrAttr, &len);
+		CVIXMLGetAttributeValueLength (hUpdateCurrAttr, &len);
+		currentUpdateVersion = malloc (len + 1); 
+		CVIXMLGetAttributeValue(hUpdateCurrAttr,currentUpdateVersion);   //从本地目录下XML文件中获取软件当前版本号
+	    int i;
+		for(i=0;i<=len;i++)
+		{
+			 if(serversUpdateVersion[i] != currentUpdateVersion[i])
+			 {
+					int	num, i;
+					char **files = NULL;
+					if ((ftp_handle = InetFTPLogin ("106.15.183.58", "anonymous", "")) < 0)           //用户匿名登陆服务器
+					MessagePopup ("An Error Occurred", "Can't Connect To Server");
+					if ((InetFTPSetPassiveMode (ftp_handle, 0)) <0)                                   //ftp通信方式为主动模式
+					MessagePopup ("An Error Occurred", "Current communication mode is active mode");
+					if ((InetFTPChangeDir (ftp_handle, ".//SA3102//updates//")) < 0)							
+					MessagePopup ("An Error Occurred", "Server current directory error");
+					if ((error = InetFTPGetDirList (ftp_handle, &files, &num)) < 0) 
+					MessagePopup ("An Error Occurred", "Failed to get directory list");    
+					for(i = 2;i<num;i++)
+					{    
+						MakePathname(getProjectDir, "..\\..\\updates\\", getProjectDirs);
+						MakePathname(getProjectDirs, files[i], updateUpdateFilePath);
+						InetFTPRetrieveFile (ftp_handle, updateUpdateFilePath, files[i], INET_FTP_FILE_TYPE_BINARY);  //下载服务器当前列表中的更新文件
+					}
+					InetFTPClose(ftp_handle);
+					CVIXMLSetAttributeValue (hUpdateCurrAttr, serversUpdateVersion);  //将修改本地xml文件中的更新版本号  
+					CVIXMLSaveDocument (hLoDocument, 0, NULL);
+			  	
+			 }
+
+	     }
+}
+
+int ReadFromConfigFile(char* temp,char* temp1)
+{
+	
+	FILE* fp;
+	char buf[40*1024]={0};
+	int size;
+	//temp1[0]=0X35;
+	ComWrt(measureComPort,temp1, 30);
+    Delay(1);
+    temp1[0]='Y';
+	ComWrt(measureComPort,temp1, 1);
+	Delay(0.1);
+	fp=fopen(temp,"rb");
+	size=fread(buf, 1,40*1024,fp);
+	ComWrt(measureComPort,buf,size);
+	Delay(4);
+	*temp1 = 0;
+	*(temp1+1) = 0; 
+	*(temp1+29) = 0;
+	ComWrt(measureComPort,temp1, 30);
+	Delay(0.3); 
+	ComWrt(measureComPort,temp1, 30);
+	Delay(0.3); 
+	fclose(fp);
+	return 0;
+}
+
+
+int CVICALLBACK UpdateSMU1Callback (int panel, int control, int event,
+									void *callbackData, int eventData1, int eventData2)
+{   
+	char temp[MAX_PATHNAME_LEN]=".//hardFileBackups//SMU2.0_Code1.bin";
+	char temp1[MAX_PATHNAME_LEN]={0x01,0x16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+								  0,0,0,0,0,0,0,0,0,0,0x17};
+	switch (event)
+	{
+		case EVENT_LEFT_CLICK_UP:
+			ReadFromConfigFile(temp,temp1);
+			//ReadFromConfigFile(); 
+			break;
+
+	}
+	return 0;
+}
+
+
+int CVICALLBACK UpdateSMU2Callback (int panel, int control, int event,
+									void *callbackData, int eventData1, int eventData2)
+{
+	char temp[MAX_PATHNAME_LEN]=".//hardFileBackups//SMU2.0_Code2.bin";
+	char temp1[MAX_PATHNAME_LEN]={0x02,0x16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+								  0,0,0,0,0,0,0,0,0,0,0x14};
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
-			//GetCtrlVal(mainPanel, MAIN_PANEL_SMU1, &expType);							//判断是否选中SMU1板子测试
-			//if(expType>0)
-			//	select_Addr1=0x01;
-			//else
-			//	select_Addr1=0x00;
-			//GetCtrlVal(mainPanel, MAIN_PANEL_SMU2, &expType);							//判断是否选中SMU2板子测试
-			//if(expType>0)
-			//	select_Addr2=0x02;
-			//else
-			//	select_Addr2=0x00;
-			//
-			//if(select_Addr1 == 0x01)
-			//{
-			//	measUartTxBuf1[0] = select_Addr1;
-			//	measUartTxBuf1[1] = 0x15;
-			//	measUartTxBuf1[2] = 0xff;
-			//	measUartTxBuf1[29] = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			//	ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
-			//}
-			//if(select_Addr2 == 0x02)
-			//{
-			//	measUartTxBuf2[0] = select_Addr2;
-			//	measUartTxBuf2[1] = 0x15;
-			//	measUartTxBuf2[2] = 0xff;
-			//	measUartTxBuf2[29] = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-			//	ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
-			//}
-			
-			
-			SystemUpdate_CompareVer();
-			SystemUpdate_Download();
-			
+			ReadFromConfigFile(temp,temp1);
 
-			
 			break;
 	}
 	return 0;

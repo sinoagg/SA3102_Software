@@ -46,7 +46,7 @@ extern unsigned char meas_CGS_UartTxBuf[];
 extern unsigned char meas_CGS_UartRxBuf[];
 //==============================================================================
 // Global functions
-void Read_CGS_Value(unsigned char comSelect);
+void Read_CGS_Value(unsigned char measureComPort);
 void ProtocolGet_CGS_Data(unsigned char* meas_CGS_UartRxBuf, Rx_CGS_DataTypeDef* Rx_CGS_Data);	//Get data from UART Rx Buffer
 #ifdef __cplusplus
     }

@@ -43,9 +43,9 @@ unsigned char meas_CGS_UartRxBuf[500];
 /// HIRET What does your function return?
 
 //
-void Read_CGS_Value(unsigned char comSelect)
+void Read_CGS_Value(unsigned char measureComPort)
 {
-	 ComWrt(comSelect, (const char*)meas_CGS_UartTxBuf, UART_CGS_RX_LEN);
+	 ComWrt(measureComPort, (const char*)meas_CGS_UartTxBuf, UART_CGS_RX_LEN);
 	
 }
 void ProtocolGet_CGS_Data(unsigned char* meas_CGS_UartRxBuf, Rx_CGS_DataTypeDef* Rx_CGS_Data)	//Get data from UART Rx Buffer

@@ -43,13 +43,14 @@ extern FileLableTypeDef *pFileLable[];
 extern PrjHandleTypeDef SingleProject[];
 extern float X1;
 extern float X2;
+extern int logFlag;
 //==============================================================================
 // Global functions
 static int SaveConfigToFile(char* pConfigSavePath);
 void StopKeyAction();				//停止按钮按下后产生的一系列动作 
-
+ void CheckUpdate();
 #ifdef __cplusplus
     }
-#endif
+#endif						 
 
 #endif  /* ndef __MainPanel_H__ */

@@ -1,0 +1,24 @@
+[main]
+Class="Function"
+Prototype="int main(int argc, char **argv);"
+
+[Getxy]
+Class="Function"
+Prototype="void Getxy(unsigned char *measUartRxBuf, RxDataTypeDef *RxData1, RxDataTypeDef *RxData2);"
+
+[TestStop]
+Class="Function"
+Prototype="void TestStop(enum TestMode testMode);"
+
+[ComCallback]
+Class="Function"
+Prototype="void ComCallback(int portNumber, int eventMask, void *callbackData);"
+
+[ComCallbackCGS]
+Class="Function"
+Prototype="void ComCallbackCGS(int portNumber, int eventMask, void *callbackData);"
+
+[DeviceQuery]
+Class="Function"
+Prototype="void DeviceQuery();"
+

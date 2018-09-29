@@ -10,10 +10,12 @@
 
 //==============================================================================
 // Include files
-
+#include <userint.h>
+#include "AbnormalDataCache.h" 
 #include "LoadPanel.h"
 #include "I_T_Panel.h"
-#include <userint.h>  
+#include "system_ini.h"
+
 
 
 //==============================================================================
@@ -192,5 +194,14 @@ int LoadInitPanel (void)
 	
 	SetCtrlAttribute (mainPanel, MAIN_PANEL_ANALYZE, ATTR_DIMMED,1); 
 
+	
+	int temp = CheckSystemClose();		 //检查系统是否正常关闭
+	if(temp == 1)
+	{
+	   LaunchExcelCB();
+	   ShowAndOpenExcelCB();
+	}
+	InitSystemClose(1); 
+	
 	return 0;
 }

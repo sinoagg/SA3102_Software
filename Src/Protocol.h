@@ -122,19 +122,19 @@ extern unsigned char select_Addr1;   //由用户选择是否使用此 源表 1 	  默认	0x01 
 extern unsigned char select_Addr2;   //由用户选择是否使用此 源表 2	  默认	0x02 为 选中，0x00为不选中，不使用源表 2 进行测量
 
 
-extern unsigned char comSelect;				//Serial Com Number
-extern unsigned char CGS_comSelect;				//Serial Com Number
+extern unsigned char measureComPort;				//Serial Com Number
+extern unsigned char controlComPort;				//Serial Com Number
 
 
 //==============================================================================
 // Global functions
 
 void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2);
-void ProtocolCfg(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2);
-void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2, unsigned char*  measUartTxBuf1, unsigned char* measUartTxBuf2);
-void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2); 
-void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2);
-void ProtocolCalibrate(unsigned char comSelect, unsigned char devAddr1, unsigned char* measUartTxBuf1, unsigned char devAddr2, unsigned char* measUartTxBuf2);
+void ProtocolCfg(unsigned char measureComPort, unsigned char devAddr1, unsigned char devAddr2,unsigned char expType, unsigned char* pmeasUartTxBuf1,unsigned char* pmeasUartTxBuf2);
+void ProtocolRun(unsigned char measureComPort, unsigned char devAddr1, unsigned char devAddr2, unsigned char*  measUartTxBuf1, unsigned char* measUartTxBuf2);
+void ProtocolStop(unsigned char measureComPort, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2); 
+void ProtocolQuery(unsigned char measureComPort, unsigned char devAddr1,unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2);
+void ProtocolCalibrate(unsigned char measureComPort, unsigned char devAddr1, unsigned char* measUartTxBuf1, unsigned char devAddr2, unsigned char* measUartTxBuf2);
 void ProtocolGetData(unsigned char* pUartRxBuf, RxDataTypeDef* pRxData1, RxDataTypeDef* pRxData2);
 unsigned char GetXorCheckVal(unsigned char* pUartBuf, unsigned char lenth);//计算校验值    
 

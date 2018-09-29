@@ -39,6 +39,8 @@ enum GraphDispSelect
 char sheetSavePath[512];
 char graph1SavePath[512];
 char graph2SavePath[512];
+Rect rc;
+int nBitmapID;
 //==============================================================================
 // Static functions
 //==============================================================================
@@ -172,6 +174,16 @@ int CVICALLBACK SaveDataCallback (int panel, int control, int event,
  
 			DisplayImageFile (resultPanel, RESULTMENU_SAVE, "Resource\\SaveData_pressed.ico"); 
 			InstallPopup(saveDataPanel);		//弹出savedata面板 
+			if(graphDispSelect==DISP_SINGLE_GRAPH)  
+			{
+				SetCtrlAttribute (saveDataPanel, SAVEDATA_BROWSEGRAPH2, ATTR_DIMMED, 1);
+				SetCtrlAttribute (saveDataPanel, SAVEDATA_SAVEGRAPH2, ATTR_DIMMED, 1); 
+			}
+			else if(graphDispSelect==DISP_DOUBLE_GRAPH)
+			{
+				SetCtrlAttribute (saveDataPanel, SAVEDATA_BROWSEGRAPH2, ATTR_DIMMED, 0);
+				SetCtrlAttribute (saveDataPanel, SAVEDATA_SAVEGRAPH2, ATTR_DIMMED, 0); 
+			}
 			break;
 	}	
 	return 0;
@@ -200,7 +212,9 @@ int CVICALLBACK BrowseSheetCallback (int panel, int control, int event,
 	{			
 		case EVENT_LEFT_CLICK_UP:
 			if(FileSelectPopup ("C:\\SINOAGG\\SA6101\\", ".xls", "*.xls", "Select Path", VAL_OK_BUTTON, 0, 1, 1, 1, sheetSavePath)>0)
-				SetCtrlVal(panel, SAVEDATA_SHEETPATH, sheetSavePath);
+			{
+				SetCtrlVal(panel, SAVEDATA_SHEETPATH, sheetSavePath); 
+			}
 			else 
 				return -1;
 			break;
@@ -216,7 +230,9 @@ int CVICALLBACK BrowseGraph1Callback (int panel, int control, int event,
 		case EVENT_LEFT_CLICK_UP:
 		     
 			if(FileSelectPopup ("C:\\SINOAGG\\SA6101\\UserData", ".jpg", "*.jpg;*.png;*.bmp;*.tif", "Select Path", VAL_OK_BUTTON, 0, 0, 1, 1, graph1SavePath)>0)
+			{
 				SetCtrlVal(panel, SAVEDATA_GRAPH1PATH, graph1SavePath);
+			}
 			break;
 	}
 	return 0;
@@ -229,34 +245,39 @@ int CVICALLBACK BrowseGraph2Callback (int panel, int control, int event,
 	{
 		case EVENT_LEFT_CLICK_UP:
 			if(FileSelectPopup ("C:\\SINOAGG\\SA6101\\UserData", ".jpg", "*.jpg;*.png;*.bmp;*.tif", "Select Path", VAL_OK_BUTTON, 0, 0, 1, 1, graph2SavePath)>0)
+			{
 				SetCtrlVal(panel, SAVEDATA_GRAPH2PATH, graph2SavePath);
+			}
 			break;
 	}
 	return 0;
 }
 
 //=======================saveGraph1=====================
+static void savegraph1()
+{
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_LEFT, &rc.left);
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_HEIGHT, &rc.height);
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_WIDTH, &rc.width);
+	GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
+	SaveBitmapToJPEGFile (nBitmapID, graph1SavePath, JPEG_INTERLACE, 100);
+	DiscardBitmap (nBitmapID);
+}
+
 int CVICALLBACK SaveGraph1Callback (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)
 {
-	Rect rc;
-	int nBitmapID;
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 		if(graph1SavePath[0]=='\0')
 		{
-			
+			MessagePopup ("", "Please select a path!"); 	
 		}
 		else
 		{
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_LEFT, &rc.left);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_HEIGHT, &rc.height);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_WIDTH, &rc.width);
-			GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
-			SaveBitmapToJPEGFile (nBitmapID, graph1SavePath, JPEG_INTERLACE, 100);
-			DiscardBitmap (nBitmapID);
+			savegraph1();	
 		}
 		
 			break;
@@ -264,28 +285,31 @@ int CVICALLBACK SaveGraph1Callback (int panel, int control, int event,
 	return 0;
 }
 //=======================saveGraph2=====================
+static void savegraph2()
+{
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_HEIGHT, &rc.height);
+	GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_WIDTH, &rc.width);
+	GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
+	SaveBitmapToJPEGFile (nBitmapID, graph2SavePath, JPEG_INTERLACE, 100);
+	DiscardBitmap (nBitmapID);
+}
+
 int CVICALLBACK SaveGraph2Callback (int panel, int control, int event,
 									void *callbackData, int eventData1, int eventData2)
 {
-	Rect rc;
-	int nBitmapID;
-	
+
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 		if(graph2SavePath[0]=='\0') 
 		{
-
+			MessagePopup ("", "Please select a path!");
 		}
 		else
 		{
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_HEIGHT, &rc.height);
-			GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_WIDTH, &rc.width);
-			GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
-			SaveBitmapToJPEGFile (nBitmapID, graph2SavePath, JPEG_INTERLACE, 100);
-			DiscardBitmap (nBitmapID);
+			savegraph2();	
 		}
 			
 		break;
@@ -294,42 +318,43 @@ int CVICALLBACK SaveGraph2Callback (int panel, int control, int event,
 }
 
 //======================saveSheet==========================
-
-
-int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
-								   void *callbackData, int eventData1, int eventData2)
+static void savesheet()
 {
-	
 	static ExcelObj_App               ExcelAppHandle = 0;       
 	static ExcelObj_Workbooks         ExcelWorkbooksHandle = 0; 
 	static ExcelObj_Workbook          ExcelWorkbookHandle = 0;  
 	static ExcelObj_Sheets            ExcelSheetsHandle = 0;    
 	static ExcelObj_Worksheet         ExcelWorksheetHandle = 0;
+	int row,rowa;  
+	GetNumTableRows (tablePanel, TABLE_TABLE1, &row);
+	rowa=row+1;
+	char str[80];
+	sprintf(str,"%s%d","A1:D",rowa);
+	Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
+	// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
+	Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
+	Excel_WorkbooksAdd (ExcelWorkbooksHandle, NULL, CA_DEFAULT_VAL,&ExcelWorkbookHandle);
+	Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
+	Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
+	Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
+	ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, str, tablePanel, TABLE_TABLE1);	//write data from table control
+	ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
+	Excel_AppQuit (ExcelAppHandle, NULL);
+}
+
+int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
+								   void *callbackData, int eventData1, int eventData2)
+{
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 			if(sheetSavePath[0]=='\0')
 			{
-
-			
+				MessagePopup ("", "Please select a path!"); 
 			}
 			else
 			{
-				int row,rowa;  
-				GetNumTableRows (tablePanel, TABLE_TABLE1, &row);
-				rowa=row+1;
-				char str[80];
-				sprintf(str,"%s%d","A1:D",rowa);
-				Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
-				// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
-				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
-				Excel_WorkbooksAdd (ExcelWorkbooksHandle, NULL, CA_DEFAULT_VAL,&ExcelWorkbookHandle);
-				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
-				Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
-				Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
-				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, str, tablePanel, TABLE_TABLE1);	//write data from table control
-				ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
-				Excel_AppQuit (ExcelAppHandle, NULL);
+				savesheet();	
 			}
 			
 			break;
@@ -338,59 +363,88 @@ int CVICALLBACK SaveSheetCallback (int panel, int control, int event,
 }
 
 //=======================saveAll============================
+//int CVICALLBACK SaveAllCallback (int panel, int control, int event,
+//								 void *callbackData, int eventData1, int eventData2)
+//{
+//	
+//	switch (event)
+//	{
+//		case EVENT_LEFT_CLICK_UP:
+//			
+//			if((sheetSavePath[0]=='\0')||(graph2SavePath[0]=='\0')||(graph1SavePath[0]=='\0'))
+//			{
+//				
+//			}
+//			else
+//			{
+//				int row,rowa;  
+//				GetNumTableRows (tablePanel, TABLE_TABLE1, &row);
+//				rowa=row+1;
+//				char str[80];
+//				sprintf(str,"%s%d","A1:D",rowa);
+//				Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
+//				// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
+//				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
+//				Excel_WorkbooksAdd (ExcelWorkbooksHandle, NULL, CA_DEFAULT_VAL,&ExcelWorkbookHandle);
+//				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
+//				Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
+//				Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
+//				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, str, tablePanel, TABLE_TABLE1);	//write data from table control
+//				ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
+//				Excel_AppQuit (ExcelAppHandle, NULL); 
+//		
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_HEIGHT, &rc.height);
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_WIDTH, &rc.width);
+//				GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
+//				SaveBitmapToJPEGFile (nBitmapID, graph2SavePath, JPEG_INTERLACE, 100);
+//				DiscardBitmap (nBitmapID);
+//		
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_LEFT, &rc.left);
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_HEIGHT, &rc.height);
+//				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_WIDTH, &rc.width);
+//				GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
+//				SaveBitmapToJPEGFile (nBitmapID, graph1SavePath, JPEG_INTERLACE, 100);
+//				DiscardBitmap (nBitmapID);
+//			
+//			}
+//		break;
+//	}
+//	return 0;
+//}
 int CVICALLBACK SaveAllCallback (int panel, int control, int event,
 								 void *callbackData, int eventData1, int eventData2)
 {
-	Rect rc;
-	int nBitmapID;
-	static ExcelObj_App               ExcelAppHandle = 0;       
-	static ExcelObj_Workbooks         ExcelWorkbooksHandle = 0; 
-	static ExcelObj_Workbook          ExcelWorkbookHandle = 0;  
-	static ExcelObj_Sheets            ExcelSheetsHandle = 0;    
-	static ExcelObj_Worksheet         ExcelWorksheetHandle = 0;
+	
 	switch (event)
 	{
 		case EVENT_LEFT_CLICK_UP:
 			
-			if((sheetSavePath[0]=='\0')||(graph2SavePath[0]=='\0')||(graph1SavePath[0]=='\0'))
+			if(graphDispSelect==DISP_SINGLE_GRAPH)  
 			{
-				
+				if((sheetSavePath[0]=='\0')||(graph1SavePath[0]=='\0'))
+					MessagePopup ("", "Please select a path!");  
+				else
+				{
+					savesheet();
+					savegraph1();
+				}
 			}
-			else
+			else if(graphDispSelect==DISP_DOUBLE_GRAPH)
 			{
-				int row,rowa;  
-				GetNumTableRows (tablePanel, TABLE_TABLE1, &row);
-				rowa=row+1;
-				char str[80];
-				sprintf(str,"%s%d","A1:D",rowa);
-				Excel_NewApp (NULL, 1, LOCALE_NEUTRAL, 0, &ExcelAppHandle);	  //create a new Application object, and obtain a handle to the object.
-				// Excel_SetProperty (ExcelAppHandle, NULL, Excel_AppVisible, CAVT_BOOL, VTRUE);	  //set application visible
-				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppWorkbooks, CAVT_OBJHANDLE, &ExcelWorkbooksHandle);
-				Excel_WorkbooksAdd (ExcelWorkbooksHandle, NULL, CA_DEFAULT_VAL,&ExcelWorkbookHandle);
-				Excel_GetProperty (ExcelAppHandle, NULL, Excel_AppSheets,CAVT_OBJHANDLE, &ExcelSheetsHandle);
-				Excel_SheetsItem (ExcelSheetsHandle, NULL, CA_VariantInt(1),&ExcelWorksheetHandle);
-				Excel_WorksheetActivate (ExcelWorksheetHandle, NULL);
-				ExcelRpt_WriteDataFromTableControl (ExcelWorksheetHandle, str, tablePanel, TABLE_TABLE1);	//write data from table control
-				ExcelRpt_WorkbookSave (ExcelWorkbookHandle, sheetSavePath, ExRConst_DefaultFileFormat);
-				Excel_AppQuit (ExcelAppHandle, NULL); 
-		
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_LEFT, &rc.left);
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_HEIGHT, &rc.height);
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH2, ATTR_WIDTH, &rc.width);
-				GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
-				SaveBitmapToJPEGFile (nBitmapID, graph2SavePath, JPEG_INTERLACE, 100);
-				DiscardBitmap (nBitmapID);
-		
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_TOP, &rc.top);		//得到所要截取的波形图表坐标  
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_LEFT, &rc.left);
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_HEIGHT, &rc.height);
-				GetCtrlAttribute (graphDispPanel, GRAPHDISP_GRAPH1, ATTR_WIDTH, &rc.width);
-				GetPanelDisplayBitmap (graphDispPanel, VAL_FULL_PANEL, rc, &nBitmapID);
-				SaveBitmapToJPEGFile (nBitmapID, graph1SavePath, JPEG_INTERLACE, 100);
-				DiscardBitmap (nBitmapID);
+				if((sheetSavePath[0]=='\0')||(graph2SavePath[0]=='\0')||(graph1SavePath[0]=='\0')) 
+					MessagePopup ("", "Please select a path!"); 
+				else
+				{
+					savesheet();
+					savegraph1();
+					savegraph2();
+				}
+					
+			}
 			
-			}
 		break;
 	}
 	return 0;

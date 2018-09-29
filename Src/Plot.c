@@ -90,7 +90,6 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)							//双
 			pGraph->pCurveArray->pDotXPlot+=numOfDotsToPlot;			//画图点X坐标指针递增
 			pGraph->pCurveArray->pDotYPlot+=numOfDotsToPlot;			//画图点Y坐标指针递增
 			pGraph->pCurveArray->numOfDotsToPlot-=numOfDotsToPlot;		//防止中断端在画图期间接收到新的数据.
-			SetGraphX_Axis(pGraph,pGraph->pCurveArray ->numOfPlotDots);
 	}
 	if(numOfDotsToPlot2>0)//如果有需要画的点
 	{
@@ -109,7 +108,6 @@ int PlotCurve(Graph_TypeDef* pGraph, int graphDispPanel, int control)							//双
 		(pGraph->pCurveArray + 1)->pDotXPlot+=numOfDotsToPlot2;			//画图点X坐标指针递增
 		(pGraph->pCurveArray + 1)->pDotYPlot+=numOfDotsToPlot2;			//画图点Y坐标指针递增
 		(pGraph->pCurveArray + 1)->numOfDotsToPlot-=numOfDotsToPlot2;		//防止中断端在画图期间接收到新的数据.
-		SetGraphX_Axis(pGraph,(pGraph->pCurveArray +1)->numOfPlotDots);
 	}
 	if(pGraph->plotHandle<0)
 		return -1;

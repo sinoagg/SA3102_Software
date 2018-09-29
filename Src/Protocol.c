@@ -179,14 +179,14 @@ void PrepareCfgTxData(TestParaTypeDef* pTestPara1,TestParaTypeDef* pTestPara2,un
 
 
 */
-void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
+void ProtocolRun(unsigned char measureComPort, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
 {
 	if(devAddr1 == 0x01)
 	{
 			*measUartTxBuf1 = devAddr1;
 			*(measUartTxBuf1+1) = MSG_TYPE_RUN;
 			*(measUartTxBuf1+SA31_UART_TX_LEN-1) = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 	}
 	Delay(0.05);
 	if(devAddr2 == 0x02)
@@ -194,7 +194,7 @@ void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 			*measUartTxBuf2=devAddr2;
 			*(measUartTxBuf2+1)=MSG_TYPE_RUN;
 			*(measUartTxBuf2+29)=GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-			ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+			ComWrt(measureComPort, (const char*)measUartTxBuf2, 30);
 	}
 	Delay(0.05);
 }
@@ -205,14 +205,14 @@ void ProtocolRun(unsigned char comSelect, unsigned char devAddr1, unsigned char 
 
 */
 
-void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
+void ProtocolStop(unsigned char measureComPort, unsigned char devAddr1, unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
 {
 	if(devAddr1 == 0x01)
 	{
 			*measUartTxBuf1 = devAddr1;
 			*(measUartTxBuf1+1) = MSG_TYPE_STOP;
 			*(measUartTxBuf1+29) = GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-			ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+			ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 	}
 	Delay(0.05);
 	if(devAddr2 == 0x02)
@@ -220,7 +220,7 @@ void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char
 		*measUartTxBuf2 = devAddr2;
 		*(measUartTxBuf2+1) = MSG_TYPE_STOP;
 		*(measUartTxBuf2+29) = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-		ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+		ComWrt(measureComPort, (const char*)measUartTxBuf2, 30);
 	}
 	Delay(0.05);
 }
@@ -232,14 +232,14 @@ void ProtocolStop(unsigned char comSelect, unsigned char devAddr1, unsigned char
 
 
 */
-void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
+void ProtocolQuery(unsigned char measureComPort, unsigned char devAddr1,unsigned char devAddr2, unsigned char* measUartTxBuf1, unsigned char* measUartTxBuf2)
 {
 	if(devAddr1 == 0x01) 
 	{
 		*measUartTxBuf1=devAddr1;
 		*(measUartTxBuf1+1)=0x14;
 		*(measUartTxBuf1+29)=GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-		ComWrt(comSelect, (const char*)measUartTxBuf1, 30);
+		ComWrt(measureComPort, (const char*)measUartTxBuf1, 30);
 	}
 	Delay(0.050); 
 	if(devAddr2 == 0x02) 
@@ -247,7 +247,7 @@ void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char
 		*measUartTxBuf2=devAddr2;
 		*(measUartTxBuf2+1)=0x14;
 		*(measUartTxBuf2 + 29) = GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-		ComWrt(comSelect, (const char*)measUartTxBuf2, 30);
+		ComWrt(measureComPort, (const char*)measUartTxBuf2, 30);
 	}
 	Delay(0.050);
 }
@@ -259,21 +259,21 @@ void ProtocolQuery(unsigned char comSelect, unsigned char devAddr1,unsigned char
 
 
 */
-void ProtocolCalibrate(unsigned char comSelect, unsigned char devAddr1, unsigned char* measUartTxBuf1, unsigned char devAddr2, unsigned char* measUartTxBuf2)
+void ProtocolCalibrate(unsigned char measureComPort, unsigned char devAddr1, unsigned char* measUartTxBuf1, unsigned char devAddr2, unsigned char* measUartTxBuf2)
 {
 	if(devAddr1 == 0x01) 
 	{
 		*measUartTxBuf1=devAddr1;
 		*(measUartTxBuf1+1)=0x15;
 		*(measUartTxBuf1+27)=GetXorCheckVal(measUartTxBuf1, SA31_UART_TX_LEN-1);
-		ComWrt(comSelect, (const char*)measUartTxBuf1, 28);
+		ComWrt(measureComPort, (const char*)measUartTxBuf1, 28);
 	}
 	if(devAddr2 == 0x02) 
 	{
 		*measUartTxBuf2=devAddr2;
 		*(measUartTxBuf2+1)=0x15;
 		*(measUartTxBuf2 + 27)=GetXorCheckVal(measUartTxBuf2, SA31_UART_TX_LEN-1);
-		ComWrt(comSelect, (const char*)measUartTxBuf2, 28);
+		ComWrt(measureComPort, (const char*)measUartTxBuf2, 28);
 	}
 }
 /*

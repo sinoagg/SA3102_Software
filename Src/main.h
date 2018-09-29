@@ -29,9 +29,10 @@
 //==============================================================================
 // External variables
 extern int TimerID; 
-extern unsigned char queryFlag; 
 extern int rowIndex; 
-extern int rowIndex2; 
+extern int rowIndex2;
+extern unsigned char measure_Uart_Flag; 					//电学测量串口接收时要屏蔽数据查询 
+extern unsigned char control_Uart_Flag; 					//环境参数串口接收时要屏蔽数据查询
 //==============================================================================
 // Global functions
 
